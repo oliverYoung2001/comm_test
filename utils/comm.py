@@ -10,6 +10,7 @@ import time
 
 from utils.comm_async import gather_async, gather_async_opp
 from utils.utils import calc_comm_vol_a2a, calc_comm_vol_ag
+import random
 
 def ensure_divisibility(numerator, denominator):
     """Ensure that numerator is divisible by the denominator."""
@@ -204,14 +205,22 @@ def a2a_p2p_direct(output_tensor_list, input_tensor_list, async_op=True):
     if async_op:
         # works = []
         ops = []
-        for i in range(1, world_size):
-            src = (local_rank + i) % world_size
-            # works.append(dist.irecv(output_tensor_list[src], src))#, tag=src*world_size+local_rank))
+        # for i in range(1, world_size):
+        #     src = (local_rank + i) % world_size
+        #     ops.append(dist.P2POp(dist.irecv, output_tensor_list[src], src))
+        # for i in range(1, world_size):
+        #     dst = (local_rank + i) % world_size
+        #     ops.append(dist.P2POp(dist.isend, input_tensor_list[dst], dst))
+        for i in range(1, world_size):          # scheduling like 3 rounds, but no effect !!!
+            src = (local_rank + world_size - i) % world_size
             ops.append(dist.P2POp(dist.irecv, output_tensor_list[src], src))
-        for i in range(1, world_size):
             dst = (local_rank + i) % world_size
-            # dist.isend(input_tensor_list[dst], dst)#, tag=local_rank*world_size+dst)
             ops.append(dist.P2POp(dist.isend, input_tensor_list[dst], dst))
+            
+        # random.shuffle(ops) # aim to check whether the order of `ops` affects the comm performance
+        # conclusion: no influence !!!
+        # print(f'local_rank: {local_rank}, ops: {ops[0].peer}, {ops[0].op}')  
+        works = dist.batch_isend_irecv(ops)
         # output_tensor_list[local_rank] = input_tensor_list[local_rank]            # copy reference
         output_tensor_list[local_rank].data.copy_(input_tensor_list[local_rank])    # copy value
         # next = (local_rank + 1) % world_size
@@ -230,7 +239,6 @@ def a2a_p2p_direct(output_tensor_list, input_tensor_list, async_op=True):
         # # works.append(work)
         # ops.append(dist.P2POp(dist.isend, input_tensor_list[next], next))
         # print(f'local_rank: {local_rank}, isend done !!!')
-        works = dist.batch_isend_irecv(ops)
         # batch_isend_irecv
         for work in works:
             work.wait()
@@ -238,22 +246,26 @@ def a2a_p2p_direct(output_tensor_list, input_tensor_list, async_op=True):
         # [TODO]
         pass
 
-def a2a_p2p_ring(output_tensor_list, input_tensor_list, async_op=True):
+def a2a_p2p_SC0(output_tensor_list, input_tensor_list, async_op=True):
+    """
+        1	1	2	3
+        3	1	1	2
+        2	3	1	1
+        1	2	3	1
+    """
     world_size = gpc.get_world_size()
     local_rank = gpc.get_local_rank()
     assert world_size == len(output_tensor_list) == len(input_tensor_list)
     assert output_tensor_list[0].shape == input_tensor_list[0].shape
-    # print(f'local_rank: {local_rank}, in async p2p for a2a')
     group = gpc.get_group()
     if async_op:
-        # works = []
         ops = []
         last = (local_rank + world_size - 1) % world_size
         next = (local_rank + 1) % world_size
         ops.append(dist.P2POp(dist.irecv, output_tensor_list[last], last))
         ops.append(dist.P2POp(dist.isend, input_tensor_list[next], next))
-        output_tensor_list[local_rank].data.copy_(input_tensor_list[local_rank])    # overlapped with comm
         works = dist.batch_isend_irecv(ops)
+        output_tensor_list[local_rank].data.copy_(input_tensor_list[local_rank])    # overlapped with comm, 远小于一轮的通信时间！！！
         for work in works:
             work.wait()
             
@@ -269,7 +281,83 @@ def a2a_p2p_ring(output_tensor_list, input_tensor_list, async_op=True):
     else:
         # [TODO]
         pass
+
+def a2a_p2p_SC1(output_tensor_list, input_tensor_list, async_op=True):
+    """
+        1	1	2	2
+        1	1	2	2
+        2	2	1	1
+        2	2	1	1
+    """
+    world_size = gpc.get_world_size()
+    local_rank = gpc.get_local_rank()
+    assert world_size == len(output_tensor_list) == len(input_tensor_list)
+    assert output_tensor_list[0].shape == input_tensor_list[0].shape
+    group = gpc.get_group()
+    if async_op:
+        # round 1
+        ops = []
+        src = dst = local_rank ^ 0x1
+        ops.append(dist.P2POp(dist.irecv, output_tensor_list[src], src))
+        ops.append(dist.P2POp(dist.isend, input_tensor_list[dst], dst))
+        works = dist.batch_isend_irecv(ops)
+        output_tensor_list[local_rank].data.copy_(input_tensor_list[local_rank])    # overlapped with comm, 远小于一轮的通信时间！！！
+        for work in works:
+            work.wait()
+        
+        # round 2
+        ops = []
+        src = dst = local_rank ^ 0x2
+        ops.append(dist.P2POp(dist.irecv, output_tensor_list[src], src))
+        ops.append(dist.P2POp(dist.isend, input_tensor_list[dst], dst))
+        src = dst = local_rank ^ 0x2 ^ 0x1
+        ops.append(dist.P2POp(dist.irecv, output_tensor_list[src], src))
+        ops.append(dist.P2POp(dist.isend, input_tensor_list[dst], dst))
+        works = dist.batch_isend_irecv(ops)
+        for work in works:
+            work.wait()
+    else:
+        # [TODO]
+        pass
      
+def a2a_p2p_SC2(output_tensor_list, input_tensor_list, async_op=True):
+    """
+        1	1	2	2
+        2	1	1	2
+        2	2	1	1
+        1	2	2	1
+    """
+    world_size = gpc.get_world_size()
+    local_rank = gpc.get_local_rank()
+    assert world_size == len(output_tensor_list) == len(input_tensor_list)
+    assert output_tensor_list[0].shape == input_tensor_list[0].shape
+    group = gpc.get_group()
+    if async_op:
+        # round 1
+        ops = []
+        src = (local_rank + world_size - 1) % world_size
+        dst = (local_rank + 1) % world_size
+        ops.append(dist.P2POp(dist.irecv, output_tensor_list[src], src))
+        ops.append(dist.P2POp(dist.isend, input_tensor_list[dst], dst))
+        works = dist.batch_isend_irecv(ops)
+        output_tensor_list[local_rank].data.copy_(input_tensor_list[local_rank])    # overlapped with comm, 远小于一轮的通信时间！！！
+        for work in works:
+            work.wait()
+        
+        # round 2
+        ops = []
+        for r in range(2, world_size):
+            src = (local_rank + world_size - r) % world_size
+            dst = (local_rank + r) % world_size
+            ops.append(dist.P2POp(dist.irecv, output_tensor_list[src], src))
+            ops.append(dist.P2POp(dist.isend, input_tensor_list[dst], dst))
+        works = dist.batch_isend_irecv(ops)
+        for work in works:
+            work.wait()
+    else:
+        # [TODO]
+        pass
+
 def _all_to_all_p2p(tensor: Tensor, in_dim: int = -1, out_dim: int = -1, method='P2P') -> Tensor:
     world_size = gpc.get_world_size()
     if world_size == 1:
@@ -292,8 +380,12 @@ def _all_to_all_p2p(tensor: Tensor, in_dim: int = -1, out_dim: int = -1, method=
         t0 = time.time()
         if method == 'P2P':
             a2a_p2p_direct(list(output_tensor_list), input_tensor_list, async_op=True)
-        elif method == 'RIN':
-            a2a_p2p_ring(list(output_tensor_list), input_tensor_list, async_op=True)
+        elif method == 'SC0':
+            a2a_p2p_SC0(list(output_tensor_list), input_tensor_list, async_op=True)
+        elif method == 'SC1':
+            a2a_p2p_SC1(list(output_tensor_list), input_tensor_list, async_op=True)
+        elif method == 'SC2':
+            a2a_p2p_SC2(list(output_tensor_list), input_tensor_list, async_op=True)
         else:
             assert False, 'Wrong method !!!'
         torch.cuda.synchronize()
@@ -318,9 +410,9 @@ def _all_to_all(tensor: Tensor, in_dim: int = -1, out_dim: int = -1, method=None
     if method == 'P2P':
         output_p2p, bandwidth = _all_to_all_p2p(tensor, in_dim, out_dim, method)
         return output_p2p, bandwidth
-    if method == 'RIN':
-        output_rin, bandwidth = _all_to_all_p2p(tensor, in_dim, out_dim, method)
-        # return output_rin, bandwidth
+    if 'SC' in method:
+        output_SCX, bandwidth = _all_to_all_p2p(tensor, in_dim, out_dim, method)
+        return output_SCX, bandwidth
 
     if gpc.get_world_size() == 1:
         return tensor
@@ -362,16 +454,13 @@ def _all_to_all(tensor: Tensor, in_dim: int = -1, out_dim: int = -1, method=None
     # assert output_ag.shape == output.shape
     # assert output_ag.equal(output)
     # print('equal !!!')
-    # print(f'local_rank: {local_rank}, output: {output}')
-    # print(f'local_rank: {local_rank}, output_p2p: {output_p2p}')
     
     # assert output_p2p.shape == output.shape
     # assert output_p2p.equal(output)
     # print('equal !!!')
     
-    # print(f'local_rank {local_rank}: output_rin: {output_rin}')
-    # assert output_rin.shape == output.shape
-    # assert output_rin.equal(output)
+    # assert output_SCX.shape == output.shape
+    # assert output_SCX.equal(output)
     # print('equal !!!')
     return output, bandwidth
 
