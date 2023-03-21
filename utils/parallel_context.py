@@ -1,8 +1,9 @@
 import torch.distributed as dist
 
 class GlobalParallelContext():
-    def __init__(self, world_size = 0, local_rank = 0) -> None:
+    def __init__(self, world_size = 0, rank = 0, local_rank = 0) -> None:
         self.world_size = world_size
+        self.rank = rank
         self.local_rank = local_rank
         self.group = dist.GroupMember.WORLD
     
@@ -11,6 +12,12 @@ class GlobalParallelContext():
     
     def get_world_size(self):
         return self.world_size
+    
+    def set_rank(self, rank):
+        self.rank = rank
+    
+    def get_rank(self):
+        return self.rank
     
     def set_local_rank(self, local_rank):
         self.local_rank = local_rank

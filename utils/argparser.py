@@ -10,5 +10,10 @@ def get_args():
                         default=1,
                         help="""Number of GPUs with which to run inference""")
     
+    parser.add_argument("--gpuids",
+                        type=str,
+                        default='',
+                        help="""GPUIDs for p2p comm between nodes""")
+    
     args = parser.parse_args()
     return args
