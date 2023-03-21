@@ -1,1554 +1,502 @@
-Traceback (most recent call last):
-  File "binet_test.py", line 70, in <module>
-    main()
-  File "binet_test.py", line 67, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 140, in join
-    raise ProcessExitedException(
-torch.multiprocessing.spawn.ProcessExitedException: process 0 terminated with signal SIGKILL
-GPUs: 0, 2
-GPUs: 0, 1
-GPUs: 0, 1
-1 in recv
-SIZE: [1, 1024, 1024, 64]
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-0 recv done !!!
-1 recv done !!!
-0 in send !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-1 recv done !!!
-0 in send !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-time: 0.7079601287841797
-BD: 7.06254462180912 GB/s
-SIZE: [1, 1024, 1024, 128]
-0 in send !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-1 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-time: 1.0069398880004883
-BD: 9.931079421093656 GB/s
-SIZE: [1, 1024, 1024, 256]
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-1 recv done !!!
-0 in send !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-time: 2.010260820388794
-BD: 9.948957765655456 GB/s
-SIZE: [1, 1024, 1024, 512]
-0 in send !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-0 recv done !!!
-1 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-time: 4.020650386810303
-BD: 9.948639188132233 GB/s
-SIZE: [1, 1024, 1024, 1024]
-0 in send !!!
-1 in recv
-0 send done !!!
-0 recv done !!!
-1 recv done !!!
-0 in send !!!
-1 send done !!!
-0 send done !!!
-1 in recv
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-1 in recv
-0 recv done !!!
-1 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-time: 8.014991760253906
-BD: 9.981295351633111 GB/s
-SIZE: [1, 1024, 1024, 2048]
-0 in send !!!
-1 in recv
-0 send done !!!
-0 recv done !!!
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-1 in recv
-0 in send !!!
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-0 in send !!!
-1 send done !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-0 recv done !!!
-1 send done !!!
-0 in send !!!
-1 in recv
-0 send done !!!
-1 recv done !!!
-1 send done !!!
-0 recv done !!!
-0 in send !!!
-1 in recv
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-1 send done !!!
-0 recv done !!!
-1 in recv
-0 in send !!!
-1 recv done !!!
-0 send done !!!
-0 recv done !!!
-1 send done !!!
-1 in recv
-1 recv done !!!
-1 send done !!!
-GPUs: 0, 1
 GPUs: 0, 1
 SIZE: [1, 1024, 1024, 64]
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-time: 0.33914732933044434
-BD: 14.742855294986878 GB/s
+time: 1.1855592727661133
+BD: 4.217418829118634 GB/s
 SIZE: [1, 1024, 1024, 128]
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-time: 0.5260519981384277
-BD: 19.009527642490873 GB/s
+time: 2.370039224624634
+BD: 4.219339450630315 GB/s
 SIZE: [1, 1024, 1024, 256]
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-time: 1.0470821857452393
-BD: 19.10069741637846 GB/s
+time: 4.741910457611084
+BD: 4.217709334409438 GB/s
 SIZE: [1, 1024, 1024, 512]
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-time: 2.1059412956237793
-BD: 18.993881777769122 GB/s
+time: 9.478848218917847
+BD: 4.21992198589784 GB/s
 SIZE: [1, 1024, 1024, 1024]
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-time: 4.190762996673584
-BD: 19.089602552924124 GB/s
-SIZE: [1, 1024, 1024, 2048]
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-time: 8.383100032806396
-BD: 19.08601822402888 GB/s
-SIZE: [1, 1024, 1024, 4096]
-Traceback (most recent call last):
-  File "binet_test.py", line 89, in <module>
-    main()
-  File "binet_test.py", line 86, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 0; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
+time: 18.964335441589355
+BD: 4.218444682462092 GB/s
 GPUs: 0, 2
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-_ done!
-Traceback (most recent call last):
-  File "binet_test.py", line 89, in <module>
-  File "binet_test.py", line 86, in main
-    
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 1 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 1; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
+srun: job 110977 queued and waiting for resources
+srun: job 110977 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7037355899810791
+BD: 7.104941218241402 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4097425937652588
+BD: 7.093493552813185 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.824570655822754
+BD: 7.080722147548583 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.653277635574341
+BD: 7.075541407747654 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.3109450340271
+BD: 7.072795399441275 GB/s
 GPUs: 0, 3
-GPUs: 0, 1
-GPUs: 0, 1
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 28, in net_test
-    dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='net_test')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 595, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 212, in _tcp_rendezvous_handler
-    store = _create_c10d_store(result.hostname, result.port, rank, world_size, timeout)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 188, in _create_c10d_store
-    return TCPStore(
-RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-
-GPUs: 0, 2
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 28, in net_test
-    dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='net_test')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 595, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 212, in _tcp_rendezvous_handler
-    store = _create_c10d_store(result.hostname, result.port, rank, world_size, timeout)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 188, in _create_c10d_store
-    return TCPStore(
-RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-
-GPUs: 0, 3
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 28, in net_test
-    dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='net_test')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 595, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 212, in _tcp_rendezvous_handler
-    store = _create_c10d_store(result.hostname, result.port, rank, world_size, timeout)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 188, in _create_c10d_store
-    return TCPStore(
-RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-
+srun: job 110978 queued and waiting for resources
+srun: job 110978 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.691267728805542
+BD: 7.233087545746739 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4402308464050293
+BD: 6.943331358970038 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.878539562225342
+BD: 6.947967734213941 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.755697011947632
+BD: 6.949636146059861 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.51162052154541
+BD: 6.949499408034706 GB/s
 GPUs: 0, 4
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-GPUs: 0, 1
+srun: job 110980 queued and waiting for resources
+srun: job 110980 has been allocated resources
 SIZE: [1, 1024, 1024, 64]
-time: 0.33971118927001953
-BD: 14.718384786630471 GB/s
+time: 0.7293672561645508
+BD: 6.8552570159140265 GB/s
 SIZE: [1, 1024, 1024, 128]
-time: 0.5234026908874512
-BD: 19.10574816312958 GB/s
+time: 1.481337308883667
+BD: 6.750656950330901 GB/s
 SIZE: [1, 1024, 1024, 256]
-time: 1.0446290969848633
-BD: 19.14555133274236 GB/s
+time: 2.9669156074523926
+BD: 6.741007378087657 GB/s
 SIZE: [1, 1024, 1024, 512]
-time: 2.093467950820923
-BD: 19.10705152391494 GB/s
+time: 6.60088586807251
+BD: 6.059792700472822 GB/s
 SIZE: [1, 1024, 1024, 1024]
-time: 4.189467906951904
-BD: 19.09550371951767 GB/s
-SIZE: [1, 1024, 1024, 2048]
-time: 8.374639511108398
-BD: 19.10529996995939 GB/s
-SIZE: [1, 1024, 1024, 4096]
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 1 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 1; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
-GPUs: 0, 2
-SIZE: [1, 1024, 1024, 64]
-time: 0.3672456741333008
-BD: 13.614864250749834 GB/s
-SIZE: [1, 1024, 1024, 128]
-time: 0.5275952816009521
-BD: 18.953922350585998 GB/s
-SIZE: [1, 1024, 1024, 256]
-time: 1.0539698600769043
-BD: 18.975874697726816 GB/s
-SIZE: [1, 1024, 1024, 512]
-time: 2.1177306175231934
-BD: 18.888143595327662 GB/s
-SIZE: [1, 1024, 1024, 1024]
-time: 4.218437433242798
-BD: 18.964368031056082 GB/s
-SIZE: [1, 1024, 1024, 2048]
-time: 8.433557748794556
-BD: 18.971827165453334 GB/s
-SIZE: [1, 1024, 1024, 4096]
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 0; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
-GPUs: 0, 3
-SIZE: [1, 1024, 1024, 64]
-time: 0.33933234214782715
-BD: 14.734817106887483 GB/s
-SIZE: [1, 1024, 1024, 128]
-time: 0.5259878635406494
-BD: 19.011845506635307 GB/s
-SIZE: [1, 1024, 1024, 256]
-time: 1.0503969192504883
-BD: 19.04042141923933 GB/s
-SIZE: [1, 1024, 1024, 512]
-time: 2.103834629058838
-BD: 19.012901226886935 GB/s
-SIZE: [1, 1024, 1024, 1024]
-time: 4.209251403808594
-BD: 19.00575478281359 GB/s
-SIZE: [1, 1024, 1024, 2048]
-time: 8.416772365570068
-BD: 19.00966226133207 GB/s
-SIZE: [1, 1024, 1024, 4096]
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 0; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
-GPUs: 0, 4
-SIZE: [1, 1024, 1024, 64]
-time: 0.3874995708465576
-BD: 12.90324009669653 GB/s
-SIZE: [1, 1024, 1024, 128]
-time: 0.6980481147766113
-BD: 14.325660063132167 GB/s
-SIZE: [1, 1024, 1024, 256]
-time: 1.391068458557129
-BD: 14.377437628587158 GB/s
-SIZE: [1, 1024, 1024, 512]
-time: 2.784539222717285
-BD: 14.365033781411816 GB/s
-SIZE: [1, 1024, 1024, 1024]
-time: 5.56941032409668
-BD: 14.364177775494653 GB/s
-SIZE: [1, 1024, 1024, 2048]
-time: 11.140763759613037
-BD: 14.361672453734665 GB/s
-SIZE: [1, 1024, 1024, 4096]
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 0; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
+time: 11.922072887420654
+BD: 6.710242485131126 GB/s
 GPUs: 0, 5
+srun: job 110983 queued and waiting for resources
+srun: job 110983 has been allocated resources
 SIZE: [1, 1024, 1024, 64]
-time: 0.36530065536499023
-BD: 13.68735567967774 GB/s
+time: 0.7104334831237793
+BD: 7.037956569860667 GB/s
 SIZE: [1, 1024, 1024, 128]
-time: 0.6907525062561035
-BD: 14.476965207408742 GB/s
+time: 1.4804108142852783
+BD: 6.754881755459116 GB/s
 SIZE: [1, 1024, 1024, 256]
-time: 1.3766894340515137
-BD: 14.527604778037128 GB/s
+time: 2.960209846496582
+BD: 6.756277776614406 GB/s
 SIZE: [1, 1024, 1024, 512]
-time: 2.7570464611053467
-BD: 14.508279263441691 GB/s
+time: 5.919502019882202
+BD: 6.757325171213642 GB/s
 SIZE: [1, 1024, 1024, 1024]
-time: 5.514942646026611
-BD: 14.506043876564727 GB/s
-SIZE: [1, 1024, 1024, 2048]
-time: 11.031814336776733
-BD: 14.50350732123984 GB/s
-SIZE: [1, 1024, 1024, 4096]
-Traceback (most recent call last):
-  File "binet_test.py", line 90, in <module>
-    main()
-  File "binet_test.py", line 87, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 0; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
+time: 11.840139150619507
+BD: 6.756677348324423 GB/s
 GPUs: 0, 6
-GPUs: 0, 1
+srun: job 110985 queued and waiting for resources
+srun: job 110985 has been allocated resources
 SIZE: [1, 1024, 1024, 64]
-time: 0.3717622756958008
-BD: 13.44945500627211 GB/s
+time: 0.7141711711883545
+BD: 7.001122702391059 GB/s
 SIZE: [1, 1024, 1024, 128]
-time: 0.5239551067352295
-BD: 19.085604608971405 GB/s
+time: 1.4705071449279785
+BD: 6.800374982530108 GB/s
 SIZE: [1, 1024, 1024, 256]
-time: 1.046328067779541
-BD: 19.11446382437478 GB/s
+time: 2.940448522567749
+BD: 6.801683432476819 GB/s
 SIZE: [1, 1024, 1024, 512]
-time: 2.097254753112793
-BD: 19.0725518397949 GB/s
+time: 5.883922576904297
+BD: 6.798185985146862 GB/s
 SIZE: [1, 1024, 1024, 1024]
-time: 4.194952487945557
-BD: 19.07053780224799 GB/s
-SIZE: [1, 1024, 1024, 2048]
-time: 8.393146514892578
-BD: 19.0631725201151 GB/s
-SIZE: [1, 1024, 1024, 4096]
-Traceback (most recent call last):
-  File "binet_test.py", line 91, in <module>
-    main()
-  File "binet_test.py", line 88, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 41, in net_test
-    b = torch.empty(SIZE, dtype=torch.float32).cuda()
-RuntimeError: CUDA out of memory. Tried to allocate 16.00 GiB (GPU 0; 39.42 GiB total capacity; 32.00 GiB already allocated; 6.53 GiB free; 32.00 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-
-GPUs: 0, 2
-GPUs: 0, 1
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-Traceback (most recent call last):
-  File "binet_test.py", line 91, in <module>
-    main()
-  File "binet_test.py", line 88, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 28, in net_test
-    dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='net_test')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 595, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 212, in _tcp_rendezvous_handler
-    store = _create_c10d_store(result.hostname, result.port, rank, world_size, timeout)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 188, in _create_c10d_store
-    return TCPStore(
-RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-
-GPUs: 0, 2
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-Traceback (most recent call last):
-  File "binet_test.py", line 91, in <module>
-    main()
-  File "binet_test.py", line 88, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 28, in net_test
-    dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='net_test')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 595, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 212, in _tcp_rendezvous_handler
-    store = _create_c10d_store(result.hostname, result.port, rank, world_size, timeout)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 188, in _create_c10d_store
-    return TCPStore(
-RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-
-GPUs: 0, 3
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-Traceback (most recent call last):
-  File "binet_test.py", line 91, in <module>
-    main()
-  File "binet_test.py", line 88, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 28, in net_test
-    dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='net_test')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 595, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 212, in _tcp_rendezvous_handler
-    store = _create_c10d_store(result.hostname, result.port, rank, world_size, timeout)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 188, in _create_c10d_store
-    return TCPStore(
-RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-
-GPUs: 0, 4
-[W socket.cpp:401] [c10d] The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use).
-[W socket.cpp:401] [c10d] The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-[E socket.cpp:435] [c10d] The server socket has failed to listen on any local network address.
-Traceback (most recent call last):
-  File "binet_test.py", line 91, in <module>
-    main()
-  File "binet_test.py", line 88, in main
-    torch.multiprocessing.spawn(net_test, nprocs=args.gpus, args=(args.gpus, args))
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
-    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
-    while not context.join():
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 160, in join
-    raise ProcessRaisedException(msg, error_index, failed_process.pid)
-torch.multiprocessing.spawn.ProcessRaisedException: 
-
--- Process 0 terminated with the following error:
-Traceback (most recent call last):
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
-    fn(i, *args)
-  File "/home/yhy/fold/test/binet_test.py", line 28, in net_test
-    dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='net_test')
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 595, in init_process_group
-    store, rank, world_size = next(rendezvous_iterator)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 212, in _tcp_rendezvous_handler
-    store = _create_c10d_store(result.hostname, result.port, rank, world_size, timeout)
-  File "/home/yhy/.local/miniconda3/envs/fastfold/lib/python3.8/site-packages/torch/distributed/rendezvous.py", line 188, in _create_c10d_store
-    return TCPStore(
-RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:10375 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:10375 (errno: 98 - Address already in use).
-
-GPUs: 0, 1
-SIZE: [1, 1024, 1024, 4096]
-time: 16.516611576080322
-BD: 19.374433946453657 GB/s
-GPUs: 0, 2
-SIZE: [1, 1024, 1024, 4096]
-time: 16.800608158111572
-BD: 19.046929550910303 GB/s
-GPUs: 0, 3
-SIZE: [1, 1024, 1024, 4096]
-time: 16.8257896900177
-BD: 19.01842385382052 GB/s
-GPUs: 0, 4
-SIZE: [1, 1024, 1024, 4096]
-time: 22.203487396240234
-BD: 14.412150410848806 GB/s
-GPUs: 0, 5
-SIZE: [1, 1024, 1024, 4096]
-time: 21.893850564956665
-BD: 14.615976255551526 GB/s
-GPUs: 0, 6
-SIZE: [1, 1024, 1024, 4096]
-time: 22.610190629959106
-BD: 14.152910306558471 GB/s
+time: 11.929884433746338
+BD: 6.705848698223946 GB/s
+GPUs: 0, 7
+srun: job 110986 queued and waiting for resources
+srun: job 110986 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7091012001037598
+BD: 7.05117971774462 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4758391380310059
+BD: 6.775806212417922 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.952399253845215
+BD: 6.774151556213792 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.907719850540161
+BD: 6.770801766495863 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.941628456115723
+BD: 6.699253815674463 GB/s
 GPUs: 1, 2
-SIZE: [1, 1024, 1024, 4096]
-time: 16.721416234970093
-BD: 19.137135007187528 GB/s
+srun: job 110987 queued and waiting for resources
+srun: job 110987 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.6904993057250977
+BD: 7.241136896943681 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4444608688354492
+BD: 6.922998203518094 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.888864755630493
+BD: 6.923134757700006 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.777392387390137
+BD: 6.923538738221222 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.554624080657959
+BD: 6.92363502625042 GB/s
 GPUs: 1, 3
+srun: job 110988 queued and waiting for resources
+srun: job 110988 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.6923203468322754
+BD: 7.222090211384936 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4469678401947021
+BD: 6.91100363270991 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.8877131938934326
+BD: 6.925895564107075 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.774433851242065
+BD: 6.927086019246044 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.551387786865234
+BD: 6.925574785998077 GB/s
+GPUs: 1, 4
+srun: job 110989 queued and waiting for resources
+srun: job 110989 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7053008079528809
+BD: 7.08917378744026 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.481182336807251
+BD: 6.751363253193667 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9611382484436035
+BD: 6.754159489349121 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.9194066524505615
+BD: 6.757434038332287 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.841234922409058
+BD: 6.756052094583753 GB/s
+GPUs: 1, 5
+srun: job 110990 queued and waiting for resources
+srun: job 110990 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7093393802642822
+BD: 7.048812090676714 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4821927547454834
+BD: 6.74676081635358 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9625911712646484
+BD: 6.750847094255854 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.922717094421387
+BD: 6.753657039887325 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.845495223999023
+BD: 6.753622240961244 GB/s
+GPUs: 1, 6
+srun: job 110991 queued and waiting for resources
+srun: job 110991 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7102959156036377
+BD: 7.039319655598471 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4737944602966309
+BD: 6.785206668497925 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9524617195129395
+BD: 6.774008234490963 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.89677095413208
+BD: 6.783373529536628 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.882898330688477
+BD: 6.732364257749643 GB/s
+GPUs: 1, 7
+srun: job 110992 queued and waiting for resources
+srun: job 110992 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7066037654876709
+BD: 7.076101549712505 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4730472564697266
+BD: 6.788648467372178 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.946268320083618
+BD: 6.7882479893862415 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.892664909362793
+BD: 6.788100225492955 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.871301412582397
+BD: 6.738941015785175 GB/s
+GPUs: 2, 3
+srun: job 110993 queued and waiting for resources
+srun: job 110993 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 1.1805171966552734
+BD: 4.235431736332483 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 2.3579049110412598
+BD: 4.241053128636965 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 4.717806577682495
+BD: 4.239258153271833 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 9.432173490524292
+BD: 4.240804098883955 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 18.87043261528015
+BD: 4.2394364576051515 GB/s
+GPUs: 2, 4
+srun: job 110994 queued and waiting for resources
+srun: job 110994 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7063024044036865
+BD: 7.079120740387929 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.482539176940918
+BD: 6.745184313195738 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.963543653488159
+BD: 6.748677373609644 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.926764965057373
+BD: 6.749044417288241 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.847097158432007
+BD: 6.7527090332893165 GB/s
+GPUs: 2, 5
+srun: job 110995 queued and waiting for resources
+srun: job 110995 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.707871675491333
+BD: 7.063427133921562 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.481234073638916
+BD: 6.751127440265544 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9617650508880615
+BD: 6.752730097211175 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.9228198528289795
+BD: 6.753539866807594 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.843862533569336
+BD: 6.754553235758531 GB/s
+GPUs: 2, 6
+srun: job 110996 queued and waiting for resources
+srun: job 110996 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.710892915725708
+BD: 7.033408111678535 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4761052131652832
+BD: 6.774584840437302 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9509775638580322
+BD: 6.777415133530366 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.909201145172119
+BD: 6.76910448930655 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.935580015182495
+BD: 6.702648710681598 GB/s
+GPUs: 2, 7
+srun: job 110997 queued and waiting for resources
+srun: job 110997 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7067968845367432
+BD: 7.074168137112201 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.494152545928955
+BD: 6.692757059676747 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9868557453155518
+BD: 6.696004663555342 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.972539901733398
+BD: 6.6973181691747055 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.948372840881348
+BD: 6.695472351371566 GB/s
+GPUs: 3, 4
+srun: job 110999 queued and waiting for resources
+srun: job 110999 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7299234867095947
+BD: 6.850033039133163 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4727129936218262
+BD: 6.790189292352962 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9702253341674805
+BD: 6.733495863069179 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.9700026512146
+BD: 6.70016452871457 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.76726484298706
+BD: 6.79852124240049 GB/s
+GPUs: 3, 5
+srun: job 111000 queued and waiting for resources
+srun: job 111000 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7056500911712646
+BD: 7.085664782811565 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4743850231170654
+BD: 6.782488863633827 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9482576847076416
+BD: 6.783667555159196 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.899019002914429
+BD: 6.780788463342443 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.900887966156006
+BD: 6.72218747269159 GB/s
+GPUs: 3, 6
+srun: job 111001 queued and waiting for resources
+srun: job 111001 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7068624496459961
+BD: 7.073511971818634 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.475308895111084
+BD: 6.778241514802936 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.949977397918701
+BD: 6.7797129612283165 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.896710157394409
+BD: 6.783443468022664 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.890381097793579
+BD: 6.7281274958331725 GB/s
+GPUs: 3, 7
+srun: job 111002 queued and waiting for resources
+srun: job 111002 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.7083287239074707
+BD: 7.058869464473605 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4746785163879395
+BD: 6.781139000040419 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9491755962371826
+BD: 6.781556183198369 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.896950960159302
+BD: 6.783166465220092 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.8904287815094
+BD: 6.728100514289831 GB/s
+GPUs: 4, 5
+srun: job 111003 queued and waiting for resources
+srun: job 111003 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 1.1808912754058838
+BD: 4.234090050569178 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 2.358501434326172
+BD: 4.239980461515818 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 4.720276832580566
+BD: 4.2370396291071 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 9.429378747940063
+BD: 4.24206101687647 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 18.874170541763306
+BD: 4.238596860348495 GB/s
+GPUs: 4, 6
+srun: job 111006 queued and waiting for resources
+srun: job 111006 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.6944272518157959
+BD: 7.2001782575870195 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4508967399597168
+BD: 6.892289247460604 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.9027256965637207
+BD: 6.890075773841195 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.806219816207886
+BD: 6.889163908045854 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.617393016815186
+BD: 6.886226529842523 GB/s
+GPUs: 4, 7
+srun: job 111007 queued and waiting for resources
+srun: job 111007 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.6890013217926025
+BD: 7.256880127590029 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4439842700958252
+BD: 6.925283195319284 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.886241912841797
+BD: 6.929426085531403 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.772681951522827
+BD: 6.92918825875173 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.542089223861694
+BD: 6.931154182607679 GB/s
+GPUs: 5, 6
+srun: job 111008 queued and waiting for resources
+srun: job 111008 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.6916823387145996
+BD: 7.228751870825328 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.4477155208587646
+BD: 6.9074344067736035 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.8930299282073975
+BD: 6.913167335393783 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.787861347198486
+BD: 6.911015589438974 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.579138278961182
+BD: 6.9089769957542275 GB/s
+GPUs: 5, 7
+srun: job 111010 queued and waiting for resources
+srun: job 111010 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 0.6819164752960205
+BD: 7.3322762847597955 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 1.449885606765747
+BD: 6.897095849035257 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 2.8981642723083496
+BD: 6.900920072439601 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 5.796143293380737
+BD: 6.9011406335796535 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 11.612990140914917
+BD: 6.888837330374009 GB/s
+GPUs: 6, 7
+srun: job 111012 queued and waiting for resources
+srun: job 111012 has been allocated resources
+SIZE: [1, 1024, 1024, 64]
+time: 1.1851372718811035
+BD: 4.218920557669892 GB/s
+SIZE: [1, 1024, 1024, 128]
+time: 2.3678817749023438
+BD: 4.223183820236304 GB/s
+SIZE: [1, 1024, 1024, 256]
+time: 4.735153913497925
+BD: 4.223727541989383 GB/s
+SIZE: [1, 1024, 1024, 512]
+time: 9.461189985275269
+BD: 4.22779798970882 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 18.939857006072998
+BD: 4.223896726060196 GB/s
