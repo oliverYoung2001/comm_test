@@ -43,10 +43,13 @@ def comm_test(rank, world_size, SIZE, in_dim, out_dim, args):
         print(f'SIZE: {SIZE}, in/out_dim: {in_dim}/{out_dim}')
     SSIZE = copy.deepcopy(SIZE)
     SSIZE[out_dim] //= world_size   # single-node SIZE
-    for method in ['RIN', 'A2A', 'P2P', 'AGD']:
+    # for method in ['RIN', 'A2A', 'P2P', 'AGD']:
     # for method in ['AGD']:
     # for method in ['A2A', 'P2P']:
+    # for method in ['P2P']:
     # for method in ['RIN']:
+    # for method in ['SC1']:
+    for method in ['SC2']:
         # dist.ProcessGroup
         # a = torch.randn((1, 2048 // world_size, 2048, 1024), dtype=torch.float32)
         a = torch.randn(tuple(SSIZE), dtype=torch.float32)
