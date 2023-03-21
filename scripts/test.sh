@@ -1,1 +1,0 @@
-for i in 0 1; do for j in 0 1; do echo "$i, $j"; done done
