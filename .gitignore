@@ -1,2 +1,8 @@
 # cache
 **/__pycache__
+
+# results
+/results
+
+# scripts
+/scripts
