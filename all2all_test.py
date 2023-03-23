@@ -13,13 +13,14 @@ MASTER_ADDR = '127.0.0.1'
 MASTER_PORT = 10377
 
 SIZES = [
-    [1, 1024, 1024, 64],
-    [1, 1024, 1024, 128],
-    [1, 1024, 1024, 256],
-    [1, 1024, 1024, 512],
-    [1, 1024, 1024, 1024],
-    [1, 1024, 1024, 2048],
-    [1, 1024, 1024, 4096],
+    [1, 1024, 1024, 32],
+    # [1, 1024, 1024, 64],
+    # [1, 1024, 1024, 128],
+    # [1, 1024, 1024, 256],
+    # [1, 1024, 1024, 512],
+    # [1, 1024, 1024, 1024],
+    # [1, 1024, 1024, 2048],
+    # [1, 1024, 1024, 4096],
     # [1, 1024, 1024, 8192],
 ]
 TIMES = 10
@@ -30,6 +31,7 @@ def comm_test(rank, world_size, SIZE, in_dim, out_dim, args):
     dist.init_process_group(backend='nccl', init_method=init_method, world_size=world_size, rank=rank, group_name='all2all_test')
     gpc.set_world_size(world_size=world_size)
     gpc.set_local_rank(local_rank=rank)
+    gpc.set_rank(rank=rank)
     # set cuda device
     if torch.cuda.is_available():
         # if local rank is not given, calculate automatically
@@ -43,13 +45,15 @@ def comm_test(rank, world_size, SIZE, in_dim, out_dim, args):
         print(f'SIZE: {SIZE}, in/out_dim: {in_dim}/{out_dim}')
     SSIZE = copy.deepcopy(SIZE)
     SSIZE[out_dim] //= world_size   # single-node SIZE
-    # for method in ['RIN', 'A2A', 'P2P', 'AGD']:
+    for method in ['SC0', 'SC1', 'SC2', 'SC3', 'A2A', 'AGD']:
     # for method in ['AGD']:
-    # for method in ['A2A', 'P2P']:
+    # for method in ['A2A']:
     # for method in ['P2P']:
     # for method in ['RIN']:
     # for method in ['SC1']:
-    for method in ['SC2']:
+    # for method in ['SC2']:
+    # for method in ['8SC0', '8SC1']:
+    # for method in ['8SC2', '8SC3']:
         # dist.ProcessGroup
         # a = torch.randn((1, 2048 // world_size, 2048, 1024), dtype=torch.float32)
         a = torch.randn(tuple(SSIZE), dtype=torch.float32)

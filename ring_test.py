@@ -39,25 +39,27 @@ def net_test(rank, world_size, args):
         # ring p2p
         send_buf = torch.randn(SIZE, dtype=torch.float32).cuda()
         recv_buf = torch.empty(SIZE, dtype=torch.float32).cuda()
-        torch.cuda.synchronize()
-        dist.barrier()
-        t0 = time.time()
-        for _ in range(TIMES):
-            ops = []
-            for i in range(1, world_size):
-                ops.append(dist.P2POp(dist.isend, send_buf, (rank + 1) % world_size))
-                ops.append(dist.P2POp(dist.irecv, recv_buf, (rank + world_size - 1) % world_size))
-            works = dist.batch_isend_irecv(ops)
-            for work in works:
-                work.wait()
-        torch.cuda.synchronize()
-        dist.barrier()
-        t1 = time.time()
-        if rank == 0:
-            t_d = t1 - t0
-            print(f'time: {t_d}')
-            calc = 3 * send_buf.nelement() * send_buf.element_size() * TIMES / (1024 * 1024 * 1024) # GB
-            print(f'BD: {calc / t_d} GB/s')
+        
+        for offset in range(1, world_size):
+        # for offset in range(world_size - 1, 0, - 1):
+            torch.cuda.synchronize()
+            dist.barrier()
+            t0 = time.time()
+            for _ in range(TIMES):
+                ops = []
+                for i in range(1, world_size):
+                    ops.append(dist.P2POp(dist.isend, send_buf, (rank + offset) % world_size))
+                    ops.append(dist.P2POp(dist.irecv, recv_buf, (rank + world_size - offset) % world_size))
+                works = dist.batch_isend_irecv(ops)
+                for work in works:
+                    work.wait()
+            torch.cuda.synchronize()
+            dist.barrier()
+            t1 = time.time()
+            if rank == 0:
+                t_d = t1 - t0
+                calc = (world_size - 1) * send_buf.nelement() * send_buf.element_size() * TIMES / pow(1024, 3) # GB
+                print(f'Offset: {offset}: {t_d}, BD: {calc / t_d} GB/s')
         
         # del a, b
         del send_buf, recv_buf
