@@ -53,7 +53,7 @@ def mono_p2p(rank, SIZE, TIMES, GPUID):
         print(f'rank: {rank}, BD: {calc / t_d} GB/s')
         sys.stdout.flush()
 
-def bi_p2p(rank, SIZE, TIMES, GPUID):
+def bi_p2p_async(rank, SIZE, TIMES, GPUID):
     # p2p; 0 -> 1, 1 -> 0
     a = torch.randn(SIZE, dtype=torch.float32).cuda()
     b = torch.empty(SIZE, dtype=torch.float32).cuda()
@@ -81,7 +81,32 @@ def bi_p2p(rank, SIZE, TIMES, GPUID):
         calc = a.nelement() * a.element_size() * TIMES / pow(1024, 3) # GB
         print(f'rank: {rank}, BD: {calc / t_d} GB/s')
         sys.stdout.flush() 
-            
+
+def bi_p2p_sync(rank, SIZE, TIMES, GPUID):
+    # p2p; 0 -> 1, 1 -> 0
+    a = torch.randn(SIZE, dtype=torch.float32).cuda()
+    b = torch.empty(SIZE, dtype=torch.float32).cuda()
+    torch.cuda.synchronize()
+    dist.barrier(device_ids=[GPUID])
+    t0 = time.time()
+    for _ in range(TIMES):
+        if rank == 0:
+            dist.send(a, 1)
+            dist.recv(b, 1)
+        if rank == 1:
+            dist.recv(b, 0)
+            dist.send(a, 0)
+    torch.cuda.synchronize()
+    dist.barrier(device_ids=[GPUID])        # OK ! 手动指定当前进程对应的devices
+    
+    t1 = time.time()
+    if rank == 0:
+        t_d = t1 - t0
+        print(f'rank: {rank}, time: {t_d}')
+        calc = a.nelement() * a.element_size() * TIMES / pow(1024, 3) # GB
+        print(f'rank: {rank}, BD: {calc / t_d} GB/s')
+        sys.stdout.flush() 
+             
             
 def cluster_net_test(rank, local_rank, world_size, tasks_per_node, nodeid, nodes, args):
     init_method = f'tcp://[{MASTER_ADDR}]:{MASTER_PORT}'
@@ -109,7 +134,8 @@ def cluster_net_test(rank, local_rank, world_size, tasks_per_node, nodeid, nodes
             sys.stdout.flush()
             
         # mono_p2p(rank, SIZE, TIMES, GPUID)
-        bi_p2p(rank, SIZE, TIMES, GPUID)
+        # bi_p2p_async(rank, SIZE, TIMES, GPUID)
+        bi_p2p_sync(rank, SIZE, TIMES, GPUID)
         
             
     dist.destroy_process_group()
