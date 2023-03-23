@@ -6,3 +6,9 @@ results/
 
 # scripts
 scripts/
+
+# intermediate file
+*.o
+
+# executable file
+csrc/all2all_test
