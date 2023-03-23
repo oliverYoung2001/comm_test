@@ -43,32 +43,25 @@ def net_test(rank, world_size, args):
         dist.barrier()
         t0 = time.time()
         for _ in range(TIMES):
-            ops = []
+            # async
+            # ops = []
+            # if rank == 0:
+            #     ops.append(dist.P2POp(dist.isend, a, 1))
+            #     ops.append(dist.P2POp(dist.irecv, b, 1))
+            # if rank == 1:
+            #     ops.append(dist.P2POp(dist.irecv, b, 0))
+            #     ops.append(dist.P2POp(dist.isend, a, 0))
+            # works = dist.batch_isend_irecv(ops)
+            # for work in works:
+            #     work.wait()
+            
+            # sync
             if rank == 0:
-                # print(f'0 in send !!!')
-                # sys.stdout.flush()
-                ops.append(dist.P2POp(dist.isend, a, 1))
-                # works.append(dist.isend(a, 1))
-                # print(f'0 send done !!!')
-                # sys.stdout.flush()
-                ops.append(dist.P2POp(dist.irecv, b, 1))
-                # works.append(dist.irecv(b, 1))
-                # print(f'0 recv done !!!')
-                # sys.stdout.flush()
+                dist.send(a, 1)
+                dist.recv(b, 1)
             if rank == 1:
-                # print(f'1 in recv')
-                # sys.stdout.flush()
-                ops.append(dist.P2POp(dist.irecv, b, 0))
-                # works.append(dist.irecv(b, 0))
-                # print(f'1 recv done !!!')
-                # sys.stdout.flush()
-                ops.append(dist.P2POp(dist.isend, a, 0))
-                # works.append(dist.isend(a, 0))
-                # print(f'1 send done !!!')
-                # sys.stdout.flush()
-            works = dist.batch_isend_irecv(ops)
-            for work in works:
-                work.wait()
+                dist.recv(b, 0)
+                dist.send(a, 0)
         torch.cuda.synchronize()
         dist.barrier()
         t1 = time.time()
