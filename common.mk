@@ -8,4 +8,4 @@ NCCL_BUILD_PATH = $(NCCL_PATH)/build
 # NCCL_OVERLAP_BUILD_PATH = $(NCCL_OVERLAP_PATH)/build
 # MPI_CXX = /usr/bin/mpicxx
 MPI_CXX = "`which mpicxx`"
-GENCODE = "-gencode=arch=compute_70,code=sm_70"
+GENCODE = "-gencode=arch=compute_80,code=sm_80"
