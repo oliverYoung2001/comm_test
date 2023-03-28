@@ -57,13 +57,13 @@ int main(int argc, char** argv) {
     // printf("rank %d: initializing done !!!\n", rank);
     // fflush(stdout);
 
-    // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC0"}};
+    const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC0"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC1"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC4"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"BRUCK"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"RD"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"2DMESH"}};
-    const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"3DMESH"}};
+    // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"3DMESH"}};
     // const int METHOD_NUM = 2; std::string methods[METHOD_NUM] = {{"SC0"}, {"SC1"}};
     // const int ALL_METHOD_NUM = 2; const std::string ALL_METHODS[ALL_METHOD_NUM] = {{"SC0"}, {"SC1"}};
 
@@ -101,6 +101,9 @@ int main(int argc, char** argv) {
         //         exit(- 1);
         // }
         for (int i = 0; i < 7; ++ i) {
+            
+        }
+        // for (int i = 0; i < 7; ++ i) {
             LL SIZE = SIZES[i];
     #ifdef CHECK_RESULT
             SIZE = comm_size * comm_size;

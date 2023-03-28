@@ -36,9 +36,11 @@ void all2all_SC0(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
         3	1	1	2
         2	3	1	1
         1	2	3	1
-        12.0GB/s ??? torch.distributed里有17GB/s ???
+        12.0GB/s: ??? torch.distributed里有17GB/s ???
         torch.distributed: 11.8GB/s
         也许正常：网络环境变了
+        1.6GB/s: 全部包在一个Group里
+        deadlock: 没有Group
     */
     cudaStream_t stream1;
     cudaStreamCreate(&stream1);
@@ -50,19 +52,19 @@ void all2all_SC0(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
     NCCL_CHECK(ncclGroupStart());
     NCCL_CHECK(ncclSend(input_list[dst], CHUNK_SIZE, ncclDataType, dst, comm, stream));
     NCCL_CHECK(ncclRecv(output_list[src], CHUNK_SIZE, ncclDataType, src, comm, stream));
-    NCCL_CHECK(ncclGroupEnd());
+    // NCCL_CHECK(ncclGroupEnd());
     // CUDA_CHECK(cudaDeviceSynchronize());
 
     for (int r = 2; r < comm_size; ++ r) {
         dst = (rank + r) % comm_size;
         src = (rank + comm_size - r) % comm_size;
-        NCCL_CHECK(ncclGroupStart());
+        // NCCL_CHECK(ncclGroupStart());
         NCCL_CHECK(ncclSend(input_list[dst], CHUNK_SIZE, ncclDataType, dst, comm, stream));
         NCCL_CHECK(ncclRecv(output_list[src], CHUNK_SIZE, ncclDataType, src, comm, stream));
-        NCCL_CHECK(ncclGroupEnd());
+        // NCCL_CHECK(ncclGroupEnd());
         // CUDA_CHECK(cudaDeviceSynchronize());
     }
-    // NCCL_CHECK(ncclGroupEnd());
+    NCCL_CHECK(ncclGroupEnd());
     if (async_op == false) {
         CUDA_CHECK(cudaDeviceSynchronize());
     }
