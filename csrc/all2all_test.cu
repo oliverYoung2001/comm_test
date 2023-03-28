@@ -19,20 +19,64 @@
 #include <unistd.h>
 #include <string>
 #include <iostream>
+typedef long long LL;
 
 // #define CHECK_RESULT
 int TIMES = 20;
+int WARMUP = 10;
+const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
+// 62792 B
 
-typedef long long LL;
-const LL SIZES[8] = {
-    1LL * 1024 * 1024 * 64,
-    1LL * 1024 * 1024 * 128,
-    1LL * 1024 * 1024 * 256,
-    1LL * 1024 * 1024 * 512,
-    1LL * 1024 * 1024 * 1024,
-    1LL * 1024 * 1024 * 2048,
-    1LL * 1024 * 1024 * 4096,
-    1LL * 1024 * 1024 * 8192,   // OOM
+// const int SIZES_LEN = 26;
+// const LL SIZES[SIZES_LEN] = {   // int = 4B
+//     1LL * 256,                  // 1KB
+//     1LL * 512,                  // 2KB
+//     1LL * 1024 * 1,             // 4KB
+//     1LL * 1024 * 2,             // 8KB
+//     1LL * 1024 * 4,             // 16KB
+//     1LL * 1024 * 8,             // 32KB
+//     1LL * 1024 * 16,            // 64KB
+//     1LL * 1024 * 32,            // 128KB
+//     1LL * 1024 * 64,            // 256KB
+//     1LL * 1024 * 128,           // 512KB
+//     1LL * 1024 * 256,           // 1MB
+//     1LL * 1024 * 512,           // 2MB
+//     1LL * 1024 * 1024 * 1,      // 4MB
+//     1LL * 1024 * 1024 * 2,      // 8MB
+//     1LL * 1024 * 1024 * 4,      // 16MB
+//     1LL * 1024 * 1024 * 8,      // 32MB
+//     1LL * 1024 * 1024 * 16,     // 64MB
+//     1LL * 1024 * 1024 * 32,     // 128MB
+//     1LL * 1024 * 1024 * 64,     // 256MB
+//     1LL * 1024 * 1024 * 128,    // 512MB
+//     1LL * 1024 * 1024 * 256,    // 1GB
+//     1LL * 1024 * 1024 * 512,    // 2GB
+//     1LL * 1024 * 1024 * 1024,   // 4GB
+//     1LL * 1024 * 1024 * 2048,   // 8GB
+//     1LL * 1024 * 1024 * 4096,   // 16GB
+//     1LL * 1024 * 1024 * 8192,   // OOM
+// };
+
+const int SIZES_LEN = 18;
+const LL SIZES[SIZES_LEN] = {           // int = 4B
+    (LL)MAGIC_FACTOR * 1,               // 590.6KB
+    (LL)MAGIC_FACTOR * 2,               
+    (LL)MAGIC_FACTOR * 4,           
+    (LL)MAGIC_FACTOR * 8,            
+    (LL)MAGIC_FACTOR * 16,             
+    (LL)MAGIC_FACTOR * 32,
+    (LL)MAGIC_FACTOR * 64,
+    (LL)MAGIC_FACTOR * 128,
+    (LL)MAGIC_FACTOR * 256,
+    (LL)MAGIC_FACTOR * 512,
+    (LL)MAGIC_FACTOR * 1024,
+    (LL)MAGIC_FACTOR * 1024 * 2,
+    (LL)MAGIC_FACTOR * 1024 * 4,
+    (LL)MAGIC_FACTOR * 1024 * 8,
+    (LL)MAGIC_FACTOR * 1024 * 16,
+    (LL)MAGIC_FACTOR * 1024 * 32,       // 18.46GB
+    (LL)MAGIC_FACTOR * 1024 * 64,       // 36.91GB
+    (LL)MAGIC_FACTOR * 1024 * 128,      // 73.82GB
 };
 
 
@@ -57,7 +101,7 @@ int main(int argc, char** argv) {
     // printf("rank %d: initializing done !!!\n", rank);
     // fflush(stdout);
 
-    const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC0"}};
+    // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC0"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC1"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC4"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"BRUCK"}};
@@ -65,6 +109,7 @@ int main(int argc, char** argv) {
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"2DMESH"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"3DMESH"}};
     // const int METHOD_NUM = 2; std::string methods[METHOD_NUM] = {{"SC0"}, {"SC1"}};
+    const int METHOD_NUM = 7; std::string methods[METHOD_NUM] = {{"SC0"}, {"SC1"}, {"SC4"}, {"BRUCK"}, {"RD"}, {"2DMESH"}, {"3DMESH"}};
     // const int ALL_METHOD_NUM = 2; const std::string ALL_METHODS[ALL_METHOD_NUM] = {{"SC0"}, {"SC1"}};
 
     for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
@@ -100,9 +145,7 @@ int main(int argc, char** argv) {
         //         printf("Wrong method: '%s' !!!", method.c_str());
         //         exit(- 1);
         // }
-        for (int i = 0; i < 7; ++ i) {
-            
-        }
+        for (int i = 0; i < SIZES_LEN - 2; ++ i) {
         // for (int i = 0; i < 7; ++ i) {
             LL SIZE = SIZES[i];
     #ifdef CHECK_RESULT
@@ -149,6 +192,11 @@ int main(int argc, char** argv) {
             // CUDA_CHECK(cudaEventCreate(&start_a2a));
             // CUDA_CHECK(cudaEventCreate(&stop_a2a));
             
+            // WARMUP
+            for (int _ = 0; _ < WARMUP; ++ _) {
+                all2all_SCX(input_list, output_list, CHUNK_SIZE, comm_size, rank, comm, ncclFloat32, stream, true);
+            }
+
             MPI_Barrier(MPI_COMM_WORLD);
             // CUDA_CHECK(cudaEventRecord(start_a2a, stream));
             auto t0 = std::chrono::high_resolution_clock::now();
@@ -167,11 +215,10 @@ int main(int argc, char** argv) {
             if (rank == 0) {
                 // double t_d = (double)elapsedTime / 1000;    // s
                 double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-                printf("SIZE: %lf GB\n", (double)SIZE * sizeof(int) / pow(1024, 3));
                 double calc = (double)CHUNK_SIZE * (comm_size - 1) * sizeof(int) * TIMES / pow(1024, 3);   // GB
                 double avg_bd = calc / t_d;
-                printf("%s: %lf s, REAL_BD %lf GB/s, comm_vol %lf GB\n", \
-                        method.c_str(), t_d, avg_bd, calc);
+                printf("%s: %lf s, REAL_BD %lf GB/s, SIZE %lf GB, comm_vol %lf GB\n", \
+                        method.c_str(), t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
                 // printf("SC0: %lf s, REAL_BD %lf GB/s, TOTAL_BD %lf GB/s, comm_vol %lf GB\n", \
                 //         t_d, avg_bd, avg_bd, calc);
                 fflush(stdout);
