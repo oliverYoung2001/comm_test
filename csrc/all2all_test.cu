@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <string>
 #include <iostream>
+#include "json/json.h"
 typedef long long LL;
 
 // #define CHECK_RESULT
@@ -27,57 +28,57 @@ int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
-// const int SIZES_LEN = 26;
-// const LL SIZES[SIZES_LEN] = {   // int = 4B
-//     1LL * 256,                  // 1KB
-//     1LL * 512,                  // 2KB
-//     1LL * 1024 * 1,             // 4KB
-//     1LL * 1024 * 2,             // 8KB
-//     1LL * 1024 * 4,             // 16KB
-//     1LL * 1024 * 8,             // 32KB
-//     1LL * 1024 * 16,            // 64KB
-//     1LL * 1024 * 32,            // 128KB
-//     1LL * 1024 * 64,            // 256KB
-//     1LL * 1024 * 128,           // 512KB
-//     1LL * 1024 * 256,           // 1MB
-//     1LL * 1024 * 512,           // 2MB
-//     1LL * 1024 * 1024 * 1,      // 4MB
-//     1LL * 1024 * 1024 * 2,      // 8MB
-//     1LL * 1024 * 1024 * 4,      // 16MB
-//     1LL * 1024 * 1024 * 8,      // 32MB
-//     1LL * 1024 * 1024 * 16,     // 64MB
-//     1LL * 1024 * 1024 * 32,     // 128MB
-//     1LL * 1024 * 1024 * 64,     // 256MB
-//     1LL * 1024 * 1024 * 128,    // 512MB
-//     1LL * 1024 * 1024 * 256,    // 1GB
-//     1LL * 1024 * 1024 * 512,    // 2GB
-//     1LL * 1024 * 1024 * 1024,   // 4GB
-//     1LL * 1024 * 1024 * 2048,   // 8GB
-//     1LL * 1024 * 1024 * 4096,   // 16GB
-//     1LL * 1024 * 1024 * 8192,   // OOM
-// };
-
-const int SIZES_LEN = 18;
-const LL SIZES[SIZES_LEN] = {           // int = 4B
-    (LL)MAGIC_FACTOR * 1,               // 590.6KB
-    (LL)MAGIC_FACTOR * 2,               
-    (LL)MAGIC_FACTOR * 4,           
-    (LL)MAGIC_FACTOR * 8,            
-    (LL)MAGIC_FACTOR * 16,             
-    (LL)MAGIC_FACTOR * 32,
-    (LL)MAGIC_FACTOR * 64,
-    (LL)MAGIC_FACTOR * 128,
-    (LL)MAGIC_FACTOR * 256,
-    (LL)MAGIC_FACTOR * 512,
-    (LL)MAGIC_FACTOR * 1024,
-    (LL)MAGIC_FACTOR * 1024 * 2,
-    (LL)MAGIC_FACTOR * 1024 * 4,
-    (LL)MAGIC_FACTOR * 1024 * 8,
-    (LL)MAGIC_FACTOR * 1024 * 16,
-    (LL)MAGIC_FACTOR * 1024 * 32,       // 18.46GB
-    (LL)MAGIC_FACTOR * 1024 * 64,       // 36.91GB
-    (LL)MAGIC_FACTOR * 1024 * 128,      // 73.82GB
+const int SIZES_LEN = 26;
+const LL SIZES[SIZES_LEN] = {   // int = 4B
+    1LL * 256,                  // 1KB
+    1LL * 512,                  // 2KB
+    1LL * 1024 * 1,             // 4KB
+    1LL * 1024 * 2,             // 8KB
+    1LL * 1024 * 4,             // 16KB
+    1LL * 1024 * 8,             // 32KB
+    1LL * 1024 * 16,            // 64KB
+    1LL * 1024 * 32,            // 128KB
+    1LL * 1024 * 64,            // 256KB
+    1LL * 1024 * 128,           // 512KB
+    1LL * 1024 * 256,           // 1MB
+    1LL * 1024 * 512,           // 2MB
+    1LL * 1024 * 1024 * 1,      // 4MB
+    1LL * 1024 * 1024 * 2,      // 8MB
+    1LL * 1024 * 1024 * 4,      // 16MB
+    1LL * 1024 * 1024 * 8,      // 32MB
+    1LL * 1024 * 1024 * 16,     // 64MB
+    1LL * 1024 * 1024 * 32,     // 128MB
+    1LL * 1024 * 1024 * 64,     // 256MB
+    1LL * 1024 * 1024 * 128,    // 512MB
+    1LL * 1024 * 1024 * 256,    // 1GB
+    1LL * 1024 * 1024 * 512,    // 2GB
+    1LL * 1024 * 1024 * 1024,   // 4GB
+    1LL * 1024 * 1024 * 2048,   // 8GB
+    1LL * 1024 * 1024 * 4096,   // 16GB
+    1LL * 1024 * 1024 * 8192,   // OOM
 };
+
+// const int SIZES_LEN = 18;
+// const LL SIZES[SIZES_LEN] = {           // int = 4B
+//     (LL)MAGIC_FACTOR * 1,               // 590.6KB
+//     (LL)MAGIC_FACTOR * 2,               
+//     (LL)MAGIC_FACTOR * 4,           
+//     (LL)MAGIC_FACTOR * 8,            
+//     (LL)MAGIC_FACTOR * 16,             
+//     (LL)MAGIC_FACTOR * 32,
+//     (LL)MAGIC_FACTOR * 64,
+//     (LL)MAGIC_FACTOR * 128,
+//     (LL)MAGIC_FACTOR * 256,
+//     (LL)MAGIC_FACTOR * 512,
+//     (LL)MAGIC_FACTOR * 1024,
+//     (LL)MAGIC_FACTOR * 1024 * 2,
+//     (LL)MAGIC_FACTOR * 1024 * 4,
+//     (LL)MAGIC_FACTOR * 1024 * 8,
+//     (LL)MAGIC_FACTOR * 1024 * 16,
+//     (LL)MAGIC_FACTOR * 1024 * 32,       // 18.46GB
+//     (LL)MAGIC_FACTOR * 1024 * 64,       // 36.91GB
+//     (LL)MAGIC_FACTOR * 1024 * 128,      // 73.82GB
+// };
 
 
 int main(int argc, char** argv) {
@@ -112,8 +113,19 @@ int main(int argc, char** argv) {
     const int METHOD_NUM = 7; std::string methods[METHOD_NUM] = {{"SC0"}, {"SC1"}, {"SC4"}, {"BRUCK"}, {"RD"}, {"2DMESH"}, {"3DMESH"}};
     // const int ALL_METHOD_NUM = 2; const std::string ALL_METHODS[ALL_METHOD_NUM] = {{"SC0"}, {"SC1"}};
 
+    // result_json = {};
+    Json::Value root;
     for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
         std::string method = methods[m_id];
+        // result_json['method'] = {
+        //     'REAL_BD': [],
+        //     'SIZE': [],         // B
+        //     ''
+        // };
+        // root[method][]
+        // printf("%s: %lf s, REAL_BD %lf GB/s, SIZE %lf GB, comm_vol %lf GB\n", \
+        //                 method.c_str(), t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
+
         void (*all2all_SCX)(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_size, int rank, \
                             ncclComm_t comm, ncclDataType_t ncclDataType,  cudaStream_t stream, bool async_op);
         if (method.compare("SC0") == 0) {
@@ -221,6 +233,10 @@ int main(int argc, char** argv) {
                         method.c_str(), t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
                 // printf("SC0: %lf s, REAL_BD %lf GB/s, TOTAL_BD %lf GB/s, comm_vol %lf GB\n", \
                 //         t_d, avg_bd, avg_bd, calc);
+                root[method]["time"].append(Json::Value(t_d));
+                root[method]["REAL_BD"].append(Json::Value(avg_bd));
+                root[method]["SIZE"].append(Json::Value((double)SIZE * sizeof(int)));
+                root[method]["comm_vol"].append(Json::Value(calc));
                 fflush(stdout);
             }
             
@@ -260,6 +276,12 @@ int main(int argc, char** argv) {
             delete[] recv_buf_cpu;
             delete[] send_buf_cpu;
         }
+    }
+
+    if (rank == 0) {
+        std::cout << "StyledWriter:" << std::endl;
+        Json::StyledWriter sw;
+        std::cout << sw.write(root) << std::endl << std::endl;
     }
     
     MPI_Finalize();
