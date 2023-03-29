@@ -24,6 +24,7 @@
 typedef long long LL;
 
 // #define CHECK_RESULT
+#define PRINT_JSON
 int TIMES = 20;
 int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
@@ -119,6 +120,7 @@ int main(int argc, char** argv) {
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC0"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC1"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC4"}};
+    // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"SC5"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"BRUCK"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"RD"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"2DMESH"}};
@@ -140,6 +142,8 @@ int main(int argc, char** argv) {
             all2all_SCX = all2all_SC1;
         } else if (method.compare("SC4") == 0) {
             all2all_SCX = all2all_SC4;
+        } else if (method.compare("SC5") == 0) {
+            all2all_SCX = all2all_SC5;
         } else if (method.compare("BRUCK") == 0) {
             all2all_SCX = all2all_BRUCK;
         } else if (method.compare("RD") == 0) {
@@ -287,6 +291,7 @@ int main(int argc, char** argv) {
         }
     }
 
+#ifdef PRINT_JSON
     if (rank == 0) {
         Json::StyledWriter sw;
         // std::cout << "StyledWriter:" << std::endl;
@@ -301,6 +306,7 @@ int main(int argc, char** argv) {
         os << sw.write(root);
         os.close();
     }
+#endif
     
     MPI_Finalize();
     return 0;
