@@ -28,6 +28,19 @@ int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
+// const int SIZES_LEN = 9;
+// const LL SIZES[SIZES_LEN] = {   // int = 4B
+//     1LL * 1024 * 1024 * 32,     // 128MB
+//     1LL * 1024 * 1024 * 64,     // 256MB
+//     1LL * 1024 * 1024 * 128,    // 512MB
+//     1LL * 1024 * 1024 * 256,    // 1GB
+//     1LL * 1024 * 1024 * 512,    // 2GB
+//     1LL * 1024 * 1024 * 1024,   // 4GB
+//     1LL * 1024 * 1024 * 2048,   // 8GB
+//     1LL * 1024 * 1024 * 4096,   // 16GB
+//     1LL * 1024 * 1024 * 8192,   // OOM
+// };
+
 const int SIZES_LEN = 26;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
     1LL * 256,                  // 1KB

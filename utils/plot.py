@@ -17,7 +17,7 @@ def main():
     x = np.log2(np.array(results[BASELINE]['SIZE']))
     BASELINE_TIME = np.array(results[BASELINE]['time'])
     for i, method in enumerate(METHODS):
-        plt.plot(x, np.array(results[method]['time']) / BASELINE_TIME,'o-',color = COLORS[i],label=method)#o-:圆形
+        plt.plot(x, BASELINE_TIME / np.array(results[method]['time']), 'o-', color = COLORS[i], label=method)#o-:圆形
     
     plt.xlabel("message_size_log (Byte)")#横坐标名字
     plt.ylabel("speedup")#纵坐标名字
