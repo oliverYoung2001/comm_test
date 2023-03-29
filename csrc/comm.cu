@@ -52,19 +52,19 @@ void all2all_SC0(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
     NCCL_CHECK(ncclGroupStart());
     NCCL_CHECK(ncclSend(input_list[dst], CHUNK_SIZE, ncclDataType, dst, comm, stream));
     NCCL_CHECK(ncclRecv(output_list[src], CHUNK_SIZE, ncclDataType, src, comm, stream));
-    // NCCL_CHECK(ncclGroupEnd());
-    // CUDA_CHECK(cudaDeviceSynchronize());
+    NCCL_CHECK(ncclGroupEnd());
+    CUDA_CHECK(cudaDeviceSynchronize());
 
     for (int r = 2; r < comm_size; ++ r) {
         dst = (rank + r) % comm_size;
         src = (rank + comm_size - r) % comm_size;
-        // NCCL_CHECK(ncclGroupStart());
+        NCCL_CHECK(ncclGroupStart());
         NCCL_CHECK(ncclSend(input_list[dst], CHUNK_SIZE, ncclDataType, dst, comm, stream));
         NCCL_CHECK(ncclRecv(output_list[src], CHUNK_SIZE, ncclDataType, src, comm, stream));
-        // NCCL_CHECK(ncclGroupEnd());
-        // CUDA_CHECK(cudaDeviceSynchronize());
+        NCCL_CHECK(ncclGroupEnd());
+        CUDA_CHECK(cudaDeviceSynchronize());        // [WHY] 加上Sync能提高性能！！！
     }
-    NCCL_CHECK(ncclGroupEnd());
+    // NCCL_CHECK(ncclGroupEnd());
     if (async_op == false) {
         CUDA_CHECK(cudaDeviceSynchronize());
     }
@@ -107,7 +107,7 @@ void all2all_SC1(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
 
 void all2all_SC4(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_size, int rank, ncclComm_t comm, ncclDataType_t ncclDataType, cudaStream_t stream, bool async_op) {
     /*
-        PAIR
+        PAIR (just for comm_size = 2 ^ n, temporarily)
         12.1GB/s
     */
     cudaStream_t stream1;
@@ -121,7 +121,7 @@ void all2all_SC4(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
     NCCL_CHECK(ncclSend(input_list[dst], CHUNK_SIZE, ncclDataType, dst, comm, stream));
     NCCL_CHECK(ncclRecv(output_list[src], CHUNK_SIZE, ncclDataType, src, comm, stream));
     NCCL_CHECK(ncclGroupEnd());
-    // CUDA_CHECK(cudaDeviceSynchronize());
+    CUDA_CHECK(cudaDeviceSynchronize());
 
     for (int r = 2; r < comm_size; ++ r) {
         dst = src = rank ^ r;
@@ -129,7 +129,7 @@ void all2all_SC4(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
         NCCL_CHECK(ncclSend(input_list[dst], CHUNK_SIZE, ncclDataType, dst, comm, stream));
         NCCL_CHECK(ncclRecv(output_list[src], CHUNK_SIZE, ncclDataType, src, comm, stream));
         NCCL_CHECK(ncclGroupEnd());
-        // CUDA_CHECK(cudaDeviceSynchronize());
+        CUDA_CHECK(cudaDeviceSynchronize());
     }
     // NCCL_CHECK(ncclGroupEnd());
     if (async_op == false) {
@@ -338,7 +338,7 @@ void all2all_3DMESH(int** input_list, int** output_list, LL CHUNK_SIZE, int comm
                 NCCL_CHECK(ncclSend(input_list[RANK3D(z, y, dst_X)], CHUNK_SIZE, ncclDataType, RANK3D(dst_Z, dst_Y, dst_X), comm, stream));
                 NCCL_CHECK(ncclRecv(output_list[RANK3D(z, y, src_X)], CHUNK_SIZE, ncclDataType, RANK3D(src_Z, src_Y, src_X), comm, stream));
                 NCCL_CHECK(ncclGroupEnd());
-                // CUDA_CHECK(cudaDeviceSynchronize());
+                CUDA_CHECK(cudaDeviceSynchronize());        // [WHY] 加上Sync能提高性能！！！
             }
         }
     }
@@ -358,7 +358,7 @@ void all2all_3DMESH(int** input_list, int** output_list, LL CHUNK_SIZE, int comm
                 NCCL_CHECK(ncclSend(output_list[RANK3D(z, dst_Y, x)], CHUNK_SIZE, ncclDataType, RANK3D(dst_Z, dst_Y, dst_X), comm, stream));
                 NCCL_CHECK(ncclRecv(input_list[RANK3D(z, src_Y, x)], CHUNK_SIZE, ncclDataType, RANK3D(src_Z, src_Y, src_X), comm, stream));
                 NCCL_CHECK(ncclGroupEnd());
-                // CUDA_CHECK(cudaDeviceSynchronize());
+                CUDA_CHECK(cudaDeviceSynchronize());
             }
         }
     }
@@ -378,7 +378,7 @@ void all2all_3DMESH(int** input_list, int** output_list, LL CHUNK_SIZE, int comm
                 NCCL_CHECK(ncclSend(input_list[RANK3D(dst_Z, y, x)], CHUNK_SIZE, ncclDataType, RANK3D(dst_Z, dst_Y, dst_X), comm, stream));
                 NCCL_CHECK(ncclRecv(output_list[RANK3D(src_Z, y, x)], CHUNK_SIZE, ncclDataType, RANK3D(src_Z, src_Y, src_X), comm, stream));
                 NCCL_CHECK(ncclGroupEnd());
-                // CUDA_CHECK(cudaDeviceSynchronize());
+                CUDA_CHECK(cudaDeviceSynchronize());
             }
         }
     }
