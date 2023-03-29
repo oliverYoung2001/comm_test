@@ -79,16 +79,19 @@ void all2all_SC1(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
         1.6 GB/s
         random_shuffle all send/recv: 1.6GB/s
     */
-    cudaStream_t stream1;
-    cudaStreamCreate(&stream1);
-    // overlapped ???
-    CUDA_CHECK(cudaMemcpyAsync(output_list[rank], input_list[rank], CHUNK_SIZE * sizeof(ncclDataType), cudaMemcpyDefault, stream1));
+    // [WHY]: 使用cudaMemcpyAsync有轻微性能下降！！！
+    // cudaStream_t stream1;
+    // cudaStreamCreate(&stream1);
+    // // overlapped ???
+    // CUDA_CHECK(cudaMemcpyAsync(output_list[rank], input_list[rank], CHUNK_SIZE * sizeof(ncclDataType), cudaMemcpyDefault, stream1));
     NCCL_CHECK(ncclGroupStart());
     for (int i = 0; i < comm_size; ++ i) {
-        if (i != rank) {
-        // if (true) {
+        // if (i != rank) {
+        if (true) {
             NCCL_CHECK(ncclSend(input_list[i], CHUNK_SIZE, ncclDataType, i, comm, stream));
             NCCL_CHECK(ncclRecv(output_list[i], CHUNK_SIZE, ncclDataType, i, comm, stream));
+            // NCCL_CHECK(ncclRecv(output_list[i], CHUNK_SIZE, ncclDataType, i, comm, stream));
+            // NCCL_CHECK(ncclSend(input_list[i], CHUNK_SIZE, ncclDataType, i, comm, stream));
         }
     }
 
@@ -99,6 +102,7 @@ void all2all_SC1(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_si
     //     // CUDA_CHECK(cudaMemcpy(output_list[rank], input_list[rank], CHUNK_SIZE * sizeof(ncclDataType), cudaMemcpyDefault)); 
     // }
     NCCL_CHECK(ncclGroupEnd());
+    // CUDA_CHECK(cudaDeviceSynchronize());    // [WHY]: 这里添加Sync能有性能提升！！！
     if (async_op == false) {
         // CUDA_CHECK(cudaStreamSynchronize(stream));
         CUDA_CHECK(cudaDeviceSynchronize());

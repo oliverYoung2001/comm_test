@@ -17,9 +17,10 @@
 #include <cmath>
 #include <chrono>
 #include <unistd.h>
-#include <string>
 #include <iostream>
 #include "json/json.h"
+#include <fstream>
+// #include <format>    // need c++20
 typedef long long LL;
 
 // #define CHECK_RESULT
@@ -130,14 +131,6 @@ int main(int argc, char** argv) {
     Json::Value root;
     for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
         std::string method = methods[m_id];
-        // result_json['method'] = {
-        //     'REAL_BD': [],
-        //     'SIZE': [],         // B
-        //     ''
-        // };
-        // root[method][]
-        // printf("%s: %lf s, REAL_BD %lf GB/s, SIZE %lf GB, comm_vol %lf GB\n", \
-        //                 method.c_str(), t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
 
         void (*all2all_SCX)(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_size, int rank, \
                             ncclComm_t comm, ncclDataType_t ncclDataType,  cudaStream_t stream, bool async_op);
@@ -220,14 +213,17 @@ int main(int argc, char** argv) {
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
                 all2all_SCX(input_list, output_list, CHUNK_SIZE, comm_size, rank, comm, ncclFloat32, stream, true);
+                CUDA_CHECK(cudaDeviceSynchronize());
             }
 
+            CUDA_CHECK(cudaDeviceSynchronize());
             MPI_Barrier(MPI_COMM_WORLD);
             // CUDA_CHECK(cudaEventRecord(start_a2a, stream));
             auto t0 = std::chrono::high_resolution_clock::now();
 
             for (int _ = 0; _ < TIMES; ++ _) {
                 all2all_SCX(input_list, output_list, CHUNK_SIZE, comm_size, rank, comm, ncclFloat32, stream, true);
+                CUDA_CHECK(cudaDeviceSynchronize());    // [WHY]: 每一轮Sync一下会有性能提升！！！
             }
             // CUDA_CHECK(cudaEventRecord(stop_a2a, stream));
             // CUDA_CHECK(cudaEventSynchronize(stop_a2a));
@@ -292,9 +288,18 @@ int main(int argc, char** argv) {
     }
 
     if (rank == 0) {
-        std::cout << "StyledWriter:" << std::endl;
         Json::StyledWriter sw;
-        std::cout << sw.write(root) << std::endl << std::endl;
+        // std::cout << "StyledWriter:" << std::endl;
+        // std::cout << sw.write(root) << std::endl << std::endl;
+
+        // string output_file = std::format("./results/{}cu_all2all.json", comm_size);
+        std::string output_file = "results/" + std::to_string(comm_size) + "cu_all2all.json";
+        std::ofstream os(output_file.c_str(), std::ios::out);    // 覆盖写
+        if (! os.is_open()) {
+            std::cout << "error: can not find or create the file which named \" demo.json\"." << std::endl;
+        }
+        os << sw.write(root);
+        os.close();
     }
     
     MPI_Finalize();
