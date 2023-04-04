@@ -15,5 +15,9 @@ def get_args():
                         default='',
                         help="""GPUIDs for p2p comm between nodes""")
     
+    parser.add_argument("--excel_file",
+                        type=str,
+                        default='',
+                        help="""file name of excel""")
     args = parser.parse_args()
     return args
