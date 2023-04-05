@@ -1,0 +1,8 @@
+{
+    "workbench.colorTheme": "Dracula",
+    "files.associations": {
+        "*.tcc": "cpp",
+        "string": "cpp",
+        "new": "cpp"
+    }
+}
