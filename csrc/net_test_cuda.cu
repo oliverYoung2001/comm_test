@@ -205,8 +205,8 @@ int main(int argc, char** argv) {
             printf("(%d, %d)\n", src, dst);
         }
         // for (int i = 0; i < SIZES_LEN - 2; ++ i) {
-        int SIZEIDX_START = 5;
-        int SIZEIDX_END = 6;
+        int SIZEIDX_START = 4;
+        int SIZEIDX_END = 5;
         for (int i = SIZEIDX_START; i < SIZEIDX_END; ++ i) {
             LL SIZE = SIZES[i];
     #ifdef CHECK_RESULT
@@ -246,8 +246,8 @@ int main(int argc, char** argv) {
             
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
-                cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, stream[0]);
-                cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, stream[1]);
+                cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
+                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
                 devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
 
@@ -259,9 +259,8 @@ int main(int argc, char** argv) {
             auto t0 = std::chrono::high_resolution_clock::now();
 
             for (int _ = 0; _ < TIMES; ++ _) {
-                // CUDA_CHECK(cudaMemcpy(send_buf[0], recv_buf[1], SIZE * sizeof(int), cudaMemcpyDeviceToDevice));
-                cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, stream[0]);
-                cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, stream[1]);
+                cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
+                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
                 devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
@@ -372,7 +371,7 @@ int main(int argc, char** argv) {
     
     disableP2P(N_GPUs);
     for (int i = 0; i < STREAM_NUM; ++ i) {
-        CUDA_CHECK(cudaStreamDestroy(streams[i]))
+        CUDA_CHECK(cudaStreamDestroy(streams[i]));
     }
     delete[] streams;
     // MPI_Finalize();
