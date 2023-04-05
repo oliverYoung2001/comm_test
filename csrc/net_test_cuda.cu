@@ -150,6 +150,7 @@ int main(int argc, char** argv) {
     //Get number of gpus in the node
     int N_GPUs;
     CUDA_CHECK(cudaGetDeviceCount(&N_GPUs));
+    N_GPUs = 4;
     // MPI_Init(&argc, &argv);
     // int comm_size, rank;
     // MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
@@ -196,8 +197,9 @@ int main(int argc, char** argv) {
 #endif
     // for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
     for (int src = 0; src < N_GPUs; ++ src) {
+    // for (int src = 4; src < 5; ++ src) {
     for (int dst = 0; dst < N_GPUs; ++ dst) {
-        if (src == dst) {
+        if (src == dst || std::max(src, dst) >= N_GPUs) {
             continue;
         }
         if (true) {
@@ -205,8 +207,8 @@ int main(int argc, char** argv) {
             printf("(%d, %d)\n", src, dst);
         }
         // for (int i = 0; i < SIZES_LEN - 2; ++ i) {
-        int SIZEIDX_START = 4;
-        int SIZEIDX_END = 5;
+        int SIZEIDX_START = 0;
+        int SIZEIDX_END = 6;
         for (int i = SIZEIDX_START; i < SIZEIDX_END; ++ i) {
             LL SIZE = SIZES[i];
     #ifdef CHECK_RESULT
@@ -218,11 +220,17 @@ int main(int argc, char** argv) {
             int* recv_buf_cpu = new int[SIZE];
             int** send_buf = new int*[N_GPUs];
             int** recv_buf = new int*[N_GPUs];
-            for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
-                CUDA_CHECK(cudaSetDevice(gpuid));
-                CUDA_CHECK(cudaMalloc(&send_buf[gpuid], SIZE * sizeof(int)));
-                CUDA_CHECK(cudaMalloc(&recv_buf[gpuid], SIZE * sizeof(int)));
-            }
+            CUDA_CHECK(cudaSetDevice(src));
+            CUDA_CHECK(cudaMalloc(&send_buf[src], SIZE * sizeof(int)));
+            CUDA_CHECK(cudaMalloc(&recv_buf[src], SIZE * sizeof(int)));
+            CUDA_CHECK(cudaSetDevice(dst));
+            CUDA_CHECK(cudaMalloc(&send_buf[dst], SIZE * sizeof(int)));
+            CUDA_CHECK(cudaMalloc(&recv_buf[dst], SIZE * sizeof(int)));
+            // for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
+            //     CUDA_CHECK(cudaSetDevice(gpuid));
+            //     CUDA_CHECK(cudaMalloc(&send_buf[gpuid], SIZE * sizeof(int)));
+            //     CUDA_CHECK(cudaMalloc(&recv_buf[gpuid], SIZE * sizeof(int)));
+            // }
 
     #ifdef CHECK_RESULT
             TIMES = 1;
@@ -247,8 +255,8 @@ int main(int argc, char** argv) {
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
                 cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
-                devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
+                cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
+                // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
 
             // CUDA_CHECK(cudaDeviceSynchronize());
@@ -260,8 +268,8 @@ int main(int argc, char** argv) {
 
             for (int _ = 0; _ < TIMES; ++ _) {
                 cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
-                devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
+                cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
+                // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
             }
@@ -324,10 +332,16 @@ int main(int argc, char** argv) {
             fflush(stdout);
     #endif
 
-            for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
-                CUDA_CHECK(cudaFree(send_buf[gpuid]));
-                CUDA_CHECK(cudaFree(recv_buf[gpuid]));
-            }
+            CUDA_CHECK(cudaSetDevice(src));
+            CUDA_CHECK(cudaFree(send_buf[src]));
+            CUDA_CHECK(cudaFree(recv_buf[src]));
+            CUDA_CHECK(cudaSetDevice(dst));
+            CUDA_CHECK(cudaFree(send_buf[dst]));
+            CUDA_CHECK(cudaFree(recv_buf[dst]));
+            // for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
+            //     CUDA_CHECK(cudaFree(send_buf[gpuid]));
+            //     CUDA_CHECK(cudaFree(recv_buf[gpuid]));
+            // }
             delete[] recv_buf;
             delete[] send_buf;
             // CUDA_CHECK(cudaFree(recv_buf));
