@@ -25,7 +25,7 @@ typedef long long LL;
 
 // #define CHECK_RESULT
 // #define PRINT_JSON
-#define RECORD_TABLE
+// #define RECORD_TABLE
 int TIMES = 20;
 int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
@@ -102,6 +102,7 @@ void devicesSyncAll(int N_GPUs) {
         CUDA_CHECK(cudaDeviceSynchronize());
     }
 }
+
 void check_UVA(int ngpus) {
     for (int gpuid = 0; gpuid < ngpus; ++ gpuid) {
         cudaDeviceProp prop;
@@ -168,7 +169,6 @@ int main(int argc, char** argv) {
         cudaStreamCreate(&streams[i]);
     }
 
-
     check_UVA(N_GPUs);        // 我理解，统一内存编址是为了方便，而不是性能
     enableP2P(N_GPUs);
 
@@ -194,16 +194,31 @@ int main(int argc, char** argv) {
 #ifdef RECORD_TABLE
     double result_table[N_GPUs][N_GPUs];
 #endif
+    Json::Reader reader;
+	Json::Value root;
+    std::string cp_file = "csrc/configs/conflict_patterns.json";
+    std::ifstream in(cp_file.c_str(), std::ios::binary);
+    if (! in.is_open()) {
+		std::cout << "Error opening file\n";
+		return - 1;
+	}
+    if (! reader.parse(in, root)) {
+        std::cout << "Error reading file\n";
+		return - 2;
+    }
+
+
     // for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
-    for (int src = 0; src < N_GPUs; ++ src) {
-    for (int dst = 0; dst < N_GPUs; ++ dst) {
-        if (src == dst) {
-            continue;
-        }
-        if (true) {
-        // if (rank == 0) {
-            printf("(%d, %d)\n", src, dst);
-        }
+    // for (int src = 0; src < N_GPUs; ++ src) {
+    // for (int dst = 0; dst < N_GPUs; ++ dst) {
+        // if (src == dst) {
+        //     continue;
+        // }
+        // if (true) {
+        // // if (rank == 0) {
+        //     printf("(%d, %d)\n", src, dst);
+        // }
+    for (int cp = 0; cp < root.size(); ++ cp) {
         // for (int i = 0; i < SIZES_LEN - 2; ++ i) {
         int SIZEIDX_START = 5;
         int SIZEIDX_END = 6;
@@ -246,8 +261,12 @@ int main(int argc, char** argv) {
             
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
-                cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
+                // cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
+                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
+                // for (int k = 0; k < root[cp].size(); ++ k) {
+                //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1]], send_buf[root[cp][k][0]], 
+                //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
+                // }
                 devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
 
@@ -260,8 +279,12 @@ int main(int argc, char** argv) {
 
             for (int _ = 0; _ < TIMES; ++ _) {
                 // CUDA_CHECK(cudaMemcpy(send_buf[0], recv_buf[1], SIZE * sizeof(int), cudaMemcpyDeviceToDevice));
-                cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
+                // cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
+                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
+                for (int k = 0; k < root[cp].size(); ++ k) {
+                    CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1].asInt()], send_buf[root[cp][k][0].asInt()], 
+                                               SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
+                }
                 devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
@@ -340,7 +363,6 @@ int main(int argc, char** argv) {
             delete[] recv_buf_cpu;
             delete[] send_buf_cpu;
         }
-    }
     }
 
 #ifdef PRINT_JSON

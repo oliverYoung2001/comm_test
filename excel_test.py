@@ -38,7 +38,7 @@ def write_new_excel():
     with open(input_file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         
-        output_files = ['./results/net_test_cuda_nico3_8.xlsx', './results/net_test_cuda_nico4_8.xlsx']
+        output_files = ['./results/binet_test_cuda_nico3_8.xlsx', './results/binet_test_cuda_nico4_8.xlsx']
         for i, file_path in enumerate(output_files):
             result_table = np.array([
                 list(map((lambda x: float(x)), lines[l].strip('\n\r ').split(' ')))
