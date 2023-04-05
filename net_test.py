@@ -68,18 +68,18 @@ def net_test(rank, world_size, args):
             calc = reduce((lambda x,y: x*y), SIZE) * 4 * TIMES / (1024 * 1024 * 1024) # GB
             BD = calc / t_d
             print(f'SIZE {SIZE}, REAL_BD {BD} GB/s, time {t_d} s')
-            if i + 1 == len(SIZES):
-                file_path = args.excel_file
-                if not os.path.exists(file_path):
-                    df = DataFrame(
-                        np.zeros((GPU_NUM, GPU_NUM)),
-                        # index=[i for i in range(GPU_NUM)],
-                        columns=[i for i in range(GPU_NUM)],
-                    )
-                    df.to_excel(file_path, sheet_name='Sheet1')
-                df = pd.read_excel(file_path, index_col=0)
-                df[GPUIDs[1]][GPUIDs[0]] = BD
-                DataFrame(df).to_excel(file_path, sheet_name='Sheet1')
+            # if i + 1 == len(SIZES):
+            #     file_path = args.excel_file
+            #     if not os.path.exists(file_path):
+            #         df = DataFrame(
+            #             np.zeros((GPU_NUM, GPU_NUM)),
+            #             # index=[i for i in range(GPU_NUM)],
+            #             columns=[i for i in range(GPU_NUM)],
+            #         )
+            #         df.to_excel(file_path, sheet_name='Sheet1')
+            #     df = pd.read_excel(file_path, index_col=0)
+            #     df[GPUIDs[1]][GPUIDs[0]] = BD
+            #     DataFrame(df).to_excel(file_path, sheet_name='Sheet1')
         
         
 
