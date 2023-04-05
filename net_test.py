@@ -52,7 +52,7 @@ def net_test(rank, world_size, args):
             ops.append(dist.P2POp(dist.irecv, b, 0))
             
         for _ in range(WARM_UP):
-            execute_comm_ops(ops, barrier=True)
+            execute_comm_ops(ops, barrier=True)             # light-barrier: 
             
         torch.cuda.synchronize()
         dist.barrier()
@@ -69,7 +69,7 @@ def net_test(rank, world_size, args):
             BD = calc / t_d
             print(f'SIZE {SIZE}, REAL_BD {BD} GB/s, time {t_d} s')
             if i + 1 == len(SIZES):
-                file_path = r'./results/net_test.xlsx'
+                file_path = args.excel_file
                 if not os.path.exists(file_path):
                     df = DataFrame(
                         np.zeros((GPU_NUM, GPU_NUM)),
@@ -79,7 +79,6 @@ def net_test(rank, world_size, args):
                     df.to_excel(file_path, sheet_name='Sheet1')
                 df = pd.read_excel(file_path, index_col=0)
                 df[GPUIDs[1]][GPUIDs[0]] = BD
-                # print(df)
                 DataFrame(df).to_excel(file_path, sheet_name='Sheet1')
         
         

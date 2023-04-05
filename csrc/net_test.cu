@@ -24,44 +24,14 @@
 typedef long long LL;
 
 // #define CHECK_RESULT
-#define PRINT_JSON
+// #define PRINT_JSON
 int TIMES = 20;
 int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
-// const int SIZES_LEN = 9;
-// const LL SIZES[SIZES_LEN] = {   // int = 4B
-//     1LL * 1024 * 1024 * 32,     // 128MB
-//     1LL * 1024 * 1024 * 64,     // 256MB
-//     1LL * 1024 * 1024 * 128,    // 512MB
-//     1LL * 1024 * 1024 * 256,    // 1GB
-//     1LL * 1024 * 1024 * 512,    // 2GB
-//     1LL * 1024 * 1024 * 1024,   // 4GB
-//     1LL * 1024 * 1024 * 2048,   // 8GB
-//     1LL * 1024 * 1024 * 4096,   // 16GB
-//     1LL * 1024 * 1024 * 8192,   // OOM
-// };
-
-const int SIZES_LEN = 26;
+const int SIZES_LEN = 9;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
-    1LL * 256,                  // 1KB
-    1LL * 512,                  // 2KB
-    1LL * 1024 * 1,             // 4KB
-    1LL * 1024 * 2,             // 8KB
-    1LL * 1024 * 4,             // 16KB
-    1LL * 1024 * 8,             // 32KB
-    1LL * 1024 * 16,            // 64KB
-    1LL * 1024 * 32,            // 128KB
-    1LL * 1024 * 64,            // 256KB
-    1LL * 1024 * 128,           // 512KB
-    1LL * 1024 * 256,           // 1MB
-    1LL * 1024 * 512,           // 2MB
-    1LL * 1024 * 1024 * 1,      // 4MB
-    1LL * 1024 * 1024 * 2,      // 8MB
-    1LL * 1024 * 1024 * 4,      // 16MB
-    1LL * 1024 * 1024 * 8,      // 32MB
-    1LL * 1024 * 1024 * 16,     // 64MB
     1LL * 1024 * 1024 * 32,     // 128MB
     1LL * 1024 * 1024 * 64,     // 256MB
     1LL * 1024 * 1024 * 128,    // 512MB
@@ -72,6 +42,36 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
     1LL * 1024 * 1024 * 4096,   // 16GB
     1LL * 1024 * 1024 * 8192,   // OOM
 };
+
+// const int SIZES_LEN = 26;
+// const LL SIZES[SIZES_LEN] = {   // int = 4B
+//     1LL * 256,                  // 1KB
+//     1LL * 512,                  // 2KB
+//     1LL * 1024 * 1,             // 4KB
+//     1LL * 1024 * 2,             // 8KB
+//     1LL * 1024 * 4,             // 16KB
+//     1LL * 1024 * 8,             // 32KB
+//     1LL * 1024 * 16,            // 64KB
+//     1LL * 1024 * 32,            // 128KB
+//     1LL * 1024 * 64,            // 256KB
+//     1LL * 1024 * 128,           // 512KB
+//     1LL * 1024 * 256,           // 1MB
+//     1LL * 1024 * 512,           // 2MB
+//     1LL * 1024 * 1024 * 1,      // 4MB
+//     1LL * 1024 * 1024 * 2,      // 8MB
+//     1LL * 1024 * 1024 * 4,      // 16MB
+//     1LL * 1024 * 1024 * 8,      // 32MB
+//     1LL * 1024 * 1024 * 16,     // 64MB
+//     1LL * 1024 * 1024 * 32,     // 128MB
+//     1LL * 1024 * 1024 * 64,     // 256MB
+//     1LL * 1024 * 1024 * 128,    // 512MB
+//     1LL * 1024 * 1024 * 256,    // 1GB
+//     1LL * 1024 * 1024 * 512,    // 2GB
+//     1LL * 1024 * 1024 * 1024,   // 4GB
+//     1LL * 1024 * 1024 * 2048,   // 8GB
+//     1LL * 1024 * 1024 * 4096,   // 16GB
+//     1LL * 1024 * 1024 * 8192,   // OOM
+// };
 
 // const int SIZES_LEN = 18;
 // const LL SIZES[SIZES_LEN] = {           // int = 4B
@@ -94,7 +94,6 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
 //     (LL)MAGIC_FACTOR * 1024 * 64,       // 36.91GB
 //     (LL)MAGIC_FACTOR * 1024 * 128,      // 73.82GB
 // };
-
 
 int main(int argc, char** argv) {
     //Get number of gpus in the node
@@ -126,73 +125,33 @@ int main(int argc, char** argv) {
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"2DMESH"}};
     // const int METHOD_NUM = 1; std::string methods[METHOD_NUM] = {{"3DMESH"}};
     // const int METHOD_NUM = 2; std::string methods[METHOD_NUM] = {{"SC0"}, {"SC1"}};
-    const int METHOD_NUM = 7; std::string methods[METHOD_NUM] = {{"SC0"}, {"SC1"}, {"SC4"}, {"BRUCK"}, {"RD"}, {"2DMESH"}, {"3DMESH"}};
+    // const int METHOD_NUM = 7; std::string methods[METHOD_NUM] = {{"SC0"}, {"SC1"}, {"SC4"}, {"BRUCK"}, {"RD"}, {"2DMESH"}, {"3DMESH"}};
     // const int ALL_METHOD_NUM = 2; const std::string ALL_METHODS[ALL_METHOD_NUM] = {{"SC0"}, {"SC1"}};
 
     // result_json = {};
+#ifdef PRINT_JSON
     Json::Value root;
-    for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
-        std::string method = methods[m_id];
-
-        void (*all2all_SCX)(int** input_list, int** output_list, LL CHUNK_SIZE, int comm_size, int rank, \
-                            ncclComm_t comm, ncclDataType_t ncclDataType,  cudaStream_t stream, bool async_op);
-        if (method.compare("SC0") == 0) {
-            all2all_SCX = all2all_SC0;
-        } else if (method.compare("SC1") == 0) {
-            all2all_SCX = all2all_SC1;
-        } else if (method.compare("SC4") == 0) {
-            all2all_SCX = all2all_SC4;
-        } else if (method.compare("SC5") == 0) {
-            all2all_SCX = all2all_SC5;
-        } else if (method.compare("BRUCK") == 0) {
-            all2all_SCX = all2all_BRUCK;
-        } else if (method.compare("RD") == 0) {
-            all2all_SCX = all2all_RD;
-        } else if (method.compare("2DMESH") == 0) {
-            all2all_SCX = all2all_2DMESH;
-        } else if (method.compare("3DMESH") == 0) {
-            all2all_SCX = all2all_3DMESH;
-        } else {
-            printf("Wrong method: '%s' !!!\n", method.c_str());
-            exit(- 1);
+#endif
+    // for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
+    for (int src = 0; src < comm_size; ++ src) {
+    for (int dst = src + 1; dst < comm_size; ++ dst) {
+        if (rank == 0) {
+            printf("(%d, %d)\n", src, dst);
         }
-        // switch (method) {
-        //     case ALL_METHODS[0]:
-        //         all2all_SCX = all2all_SC0;
-        //         break;
-        //     case ALL_METHODS[1]:
-        //         all2all_SCX = all2all_SC1;
-        //         break;
-        //     default:
-        //         printf("Wrong method: '%s' !!!", method.c_str());
-        //         exit(- 1);
-        // }
-        for (int i = 0; i < SIZES_LEN - 2; ++ i) {
-        // for (int i = 0; i < 7; ++ i) {
+        // for (int i = 0; i < SIZES_LEN - 2; ++ i) {
+        for (int i = 3; i < 4; ++ i) {
             LL SIZE = SIZES[i];
     #ifdef CHECK_RESULT
             SIZE = comm_size * comm_size;
     #endif 
-            const LL SSIZE = SIZE / comm_size;
-            const LL CHUNK_SIZE = SIZE / (comm_size * comm_size);
-            int* send_buf_cpu = new int[SSIZE];
-            int* recv_buf_cpu = new int[SSIZE];
+            // const LL SSIZE = SIZE / comm_size;
+            // const LL CHUNK_SIZE = SIZE / (comm_size * comm_size);
+            int* send_buf_cpu = new int[SIZE];
+            int* recv_buf_cpu = new int[SIZE];
             int* send_buf;
             int* recv_buf;
-            int** input_list_cpu = new int*[comm_size];
-            int** output_list_cpu = new int*[comm_size];
-            int** input_list = new int*[comm_size];
-            int** output_list = new int*[comm_size];
-            CUDA_CHECK(cudaMalloc(&send_buf, SSIZE * sizeof(int)));
-            CUDA_CHECK(cudaMalloc(&recv_buf, SSIZE * sizeof(int)));
-            for (int j = 0; j < comm_size; ++ j) {
-                input_list_cpu[j] = send_buf_cpu + j * CHUNK_SIZE;
-                output_list_cpu[j] = recv_buf_cpu + j * CHUNK_SIZE;
-                input_list[j] = send_buf + j * CHUNK_SIZE;
-                output_list[j] = recv_buf + j * CHUNK_SIZE;
-            }
-            // printf("rank %d: malloc && pointer done !!!\n", rank);
-            // fflush(stdout);
+            CUDA_CHECK(cudaMalloc(&send_buf, SIZE * sizeof(int)));
+            CUDA_CHECK(cudaMalloc(&recv_buf, SIZE * sizeof(int)));
 
     #ifdef CHECK_RESULT
             TIMES = 1;
@@ -216,7 +175,7 @@ int main(int argc, char** argv) {
             
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
-                all2all_SCX(input_list, output_list, CHUNK_SIZE, comm_size, rank, comm, ncclFloat32, stream, true);
+                // all2all_SCX(input_list, output_list, CHUNK_SIZE, comm_size, rank, comm, ncclFloat32, stream, true);
                 CUDA_CHECK(cudaDeviceSynchronize());
             }
 
@@ -226,8 +185,17 @@ int main(int argc, char** argv) {
             auto t0 = std::chrono::high_resolution_clock::now();
 
             for (int _ = 0; _ < TIMES; ++ _) {
-                all2all_SCX(input_list, output_list, CHUNK_SIZE, comm_size, rank, comm, ncclFloat32, stream, true);
-                CUDA_CHECK(cudaDeviceSynchronize());    // [WHY]: 每一轮Sync一下会有性能提升！！！ 减少 comm contention ?
+                // all2all_SCX(input_list, output_list, CHUNK_SIZE, comm_size, rank, comm, ncclFloat32, stream, true);
+                NCCL_CHECK(ncclGroupStart());
+                if (rank == src) {
+                    NCCL_CHECK(ncclSend(send_buf, SIZE, ncclInt32, dst, comm, stream));
+                }
+                if (rank == dst) {
+                    NCCL_CHECK(ncclRecv(recv_buf, SIZE, ncclInt32, src, comm, stream));
+                }
+                NCCL_CHECK(ncclGroupEnd());
+                CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
+                MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
             }
             // CUDA_CHECK(cudaEventRecord(stop_a2a, stream));
             // CUDA_CHECK(cudaEventSynchronize(stop_a2a));
@@ -240,16 +208,19 @@ int main(int argc, char** argv) {
             if (rank == 0) {
                 // double t_d = (double)elapsedTime / 1000;    // s
                 double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-                double calc = (double)CHUNK_SIZE * (comm_size - 1) * sizeof(int) * TIMES / pow(1024, 3);   // GB
+                // double calc = (double)CHUNK_SIZE * (comm_size - 1) * sizeof(int) * TIMES / pow(1024, 3);   // GB
+                double calc = (double)SIZE * sizeof(int) * TIMES / pow(1024, 3);
                 double avg_bd = calc / t_d;
-                printf("%s: %lf s, REAL_BD %lf GB/s, SIZE %lf GB, comm_vol %lf GB\n", \
-                        method.c_str(), t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
+                printf("time %lf s, REAL_BD %lf GB/s, SIZE %lf GB, comm_vol %lf GB\n", \
+                        t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
                 // printf("SC0: %lf s, REAL_BD %lf GB/s, TOTAL_BD %lf GB/s, comm_vol %lf GB\n", \
                 //         t_d, avg_bd, avg_bd, calc);
+#ifdef PRINT_JSON
                 root[method]["time"].append(Json::Value(t_d));
                 root[method]["REAL_BD"].append(Json::Value(avg_bd));
                 root[method]["SIZE"].append(Json::Value((double)SIZE * sizeof(int)));
                 root[method]["comm_vol"].append(Json::Value(calc));
+#endif
                 fflush(stdout);
             }
             
@@ -282,13 +253,14 @@ int main(int argc, char** argv) {
 
             CUDA_CHECK(cudaFree(recv_buf));
             CUDA_CHECK(cudaFree(send_buf));
-            delete[] output_list;
-            delete[] input_list;
-            delete[] output_list_cpu;
-            delete[] input_list_cpu;
+            // delete[] output_list;
+            // delete[] input_list;
+            // delete[] output_list_cpu;
+            // delete[] input_list_cpu;
             delete[] recv_buf_cpu;
             delete[] send_buf_cpu;
         }
+    }
     }
 
 #ifdef PRINT_JSON
