@@ -47,9 +47,9 @@ def net_test(rank, world_size, args):
     # GPUIDs = [int(i) for i in args.gpuids.split(',')]
     
     GPU_pairs = [
-        (4, 3),
-        (3, 4),
-        # (0, 1),
+        (0, 2),
+        (1, 3),
+        # (6, 1),
     ]
     if rank == 0:
         print(f'GPU_pairs: {GPU_pairs}')
