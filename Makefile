@@ -1,4 +1,4 @@
-.PHONY: clean
+.PHONY: clean make_all
 all: make_all
 
 # codeGen:
@@ -6,6 +6,9 @@ all: make_all
 
 make_all:
 	${MAKE} -C csrc
+
+%:
+	${MAKE} -C csrc $@
 
 clean:
 	${MAKE} -C csrc clean
