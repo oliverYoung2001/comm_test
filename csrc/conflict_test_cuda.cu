@@ -96,6 +96,15 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
 //     (LL)MAGIC_FACTOR * 1024 * 128,      // 73.82GB
 // };
 
+bool check_pattern(Json::Value pattern, int N_GPUs) {
+    for (int k = 0; k < pattern.size(); ++ k) {
+        if (std::max(pattern[k][0].asInt(), pattern[k][1].asInt()) >= N_GPUs) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void devicesSyncAll(int N_GPUs) {
     for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
         CUDA_CHECK(cudaSetDevice(gpuid));
@@ -148,9 +157,14 @@ void disableP2P(int ngpus) {
 }
 
 int main(int argc, char** argv) {
+    if (argc < 2) {
+        printf("Need at least 2 args: \"<command> <gpus>\"\n");
+        return - 1;
+    }
     //Get number of gpus in the node
     int N_GPUs;
     CUDA_CHECK(cudaGetDeviceCount(&N_GPUs));
+    N_GPUs = std::stoi(argv[1]);
     // MPI_Init(&argc, &argv);
     // int comm_size, rank;
     // MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
@@ -219,6 +233,14 @@ int main(int argc, char** argv) {
         //     printf("(%d, %d)\n", src, dst);
         // }
     for (int cp = 0; cp < root.size(); ++ cp) {
+        if (! check_pattern(root[cp], N_GPUs)) {
+            continue;
+        }
+        // Json::StyledWriter sw;
+        Json::FastWriter sw;
+        // std::cout << sw.write(root[cp]) << std::endl;
+        std::cout << sw.write(root[cp]);
+        fflush(stdout);
         // for (int i = 0; i < SIZES_LEN - 2; ++ i) {
         int SIZEIDX_START = 5;
         int SIZEIDX_END = 6;
@@ -303,7 +325,7 @@ int main(int argc, char** argv) {
             // if (rank == 0) {
                 // double t_d = (double)elapsedTime / 1000;    // s
                 double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-                double calc = (double)SIZE * sizeof(int) * TIMES / pow(1024, 3);
+                double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES / pow(1024, 3);
                 double avg_bd = calc / t_d;
                 printf("time %lf s, REAL_BD %lf GB/s, SIZE %lf GB, comm_vol %lf GB\n", \
                         t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
