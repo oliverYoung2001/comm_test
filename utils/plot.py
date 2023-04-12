@@ -6,6 +6,8 @@ import numpy as np
 
 BASELINE = 'SC1'
 METHODS = ['SC0', 'SC1', 'SC4', 'BRUCK', 'RD', '2DMESH', '3DMESH']
+# BASELINE = 'NCCL'
+# METHODS = ['Ring light-bar', 'NCCL', 'Pair light-bar', 'BRUCK', 'RD', '2DMESH', '3DMESH']
 COLORS = ['r', 'g', 'b', 'y', 'c', 'm', 'k', 'w']
 
 def main():
@@ -19,6 +21,7 @@ def main():
     for i, method in enumerate(METHODS):
         plt.plot(x, BASELINE_TIME / np.array(results[method]['time']), 'o-', color = COLORS[i], label=method)#o-:圆形
     
+    plt.title(f"{args.gpus} A100 40G")
     plt.xlabel("message_size_log (Byte)")#横坐标名字
     plt.ylabel("speedup")#纵坐标名字
     plt.legend(loc = "best")#图例
