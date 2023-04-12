@@ -109,7 +109,6 @@ void check_UVA(int ngpus) {
         printf("GPU%d: %s unified addressing\n", gpuid, prop.unifiedAddressing ? "supports" : "does not support");
         fflush(stdout);
     }
-    
 }
 
 inline void enableP2P(int ngpus) {
