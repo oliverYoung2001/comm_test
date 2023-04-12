@@ -1,18 +1,18 @@
 #include <stdio.h>
-#include "cuda_runtime.h"
-#include "nccl.h"
+// #include "cuda_runtime.h"
+// #include "nccl.h"
 #include <assert.h>
-#include <cublas_v2.h>
+// #include <cublas_v2.h>
 #include <cstdint>
-#include <curand.h>
+// #include <curand.h>
 #include <mpi.h>
 #include <string>
 #include <vector>
 #include <time.h>
 #include <sys/time.h>
 #include <iostream>
-#include <curand_kernel.h>
-#include "comm.h"
+// #include <curand_kernel.h>
+// #include "comm.h"
 #include <assert.h>
 #include <cmath>
 #include <chrono>
@@ -20,12 +20,13 @@
 #include <iostream>
 #include "json/json.h"
 #include <fstream>
+#include <sched.h>
+// #include <topology.h>
 // #include <format>    // need c++20
 typedef long long LL;
 
 // #define CHECK_RESULT
 // #define PRINT_JSON
-// #define RECORD_TABLE
 int TIMES = 20;
 int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
@@ -38,10 +39,10 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
     1LL * 1024 * 1024 * 128,    // 512MB
     1LL * 1024 * 1024 * 256,    // 1GB
     1LL * 1024 * 1024 * 512,    // 2GB
-    1LL * 1024 * 1024 * 1024,   // 4GB      // 用cudaMemcpy，竟然有性能下降！！！
+    1LL * 1024 * 1024 * 1024,   // 4GB
     1LL * 1024 * 1024 * 2048,   // 8GB
     1LL * 1024 * 1024 * 4096,   // 16GB
-    1LL * 1024 * 1024 * 8192,   // OOM
+    1LL * 1024 * 1024 * 8192,   // 32GB
 };
 
 // const int SIZES_LEN = 26;
@@ -96,79 +97,17 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
 //     (LL)MAGIC_FACTOR * 1024 * 128,      // 73.82GB
 // };
 
-bool check_pattern(Json::Value pattern, int N_GPUs) {
-    for (int k = 0; k < pattern.size(); ++ k) {
-        if (std::max(pattern[k][0].asInt(), pattern[k][1].asInt()) >= N_GPUs) {
-            return false;
-        }
-    }
-    return true;
-}
-
-void devicesSyncAll(int N_GPUs) {
-    for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
-        CUDA_CHECK(cudaSetDevice(gpuid));
-        CUDA_CHECK(cudaDeviceSynchronize());
-    }
-}
-
-void check_UVA(int ngpus) {
-    for (int gpuid = 0; gpuid < ngpus; ++ gpuid) {
-        cudaDeviceProp prop;
-        CUDA_CHECK(cudaGetDeviceProperties(&prop, gpuid));
-        printf("GPU%d: %s unified addressing\n", gpuid, prop.unifiedAddressing ? "supports" : "does not support");
-        fflush(stdout);
-    }
-    
-}
-
-inline void enableP2P(int ngpus) {
-    for (int i = 0; i < ngpus; ++ i) {
-        CUDA_CHECK(cudaSetDevice(i));
-        for (int j = 0; j < ngpus; ++ j) {
-            if (i == j) {
-                continue;
-            }
-            int peer_access_available = 0;
-            CUDA_CHECK(cudaDeviceCanAccessPeer(&peer_access_available, i, j));
-            
-            if (peer_access_available) {
-                CUDA_CHECK(cudaDeviceEnablePeerAccess(j, 0));
-                // printf("> GPU%d enabled direct access to GPU%d\n", i, j);
-                // fflush(stdout);
-            } else {
-                printf("> GPU%d disabled direct access to GPU%d !!!\n", i, j);
-                fflush(stdout);
-            }
-        }
-    }
-}
-
-void disableP2P(int ngpus) {
-    for (int i = 0; i < ngpus; ++ i) {
-        for (int j = 0; j < ngpus; ++ j) {
-            if (i == j) {
-                continue;
-            }
-            CUDA_CHECK(cudaSetDevice(i));
-            CUDA_CHECK(cudaDeviceDisablePeerAccess(j));
-        }
-    }
-}
-
 int main(int argc, char** argv) {
-    if (argc < 2) {
-        printf("Need at least 2 args: \"<command> <gpus>\"\n");
-        return - 1;
-    }
+    int cpuid = sched_getcpu();
+    // int numaid = std::numa_node_id();
     //Get number of gpus in the node
-    int N_GPUs;
-    CUDA_CHECK(cudaGetDeviceCount(&N_GPUs));
-    N_GPUs = std::stoi(argv[1]);
-    // MPI_Init(&argc, &argv);
-    // int comm_size, rank;
-    // MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
-    // MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    // int N_GPUs;
+    // CUDA_CHECK(cudaGetDeviceCount(&N_GPUs));
+    MPI_Init(&argc, &argv);
+    // MPI_Request mpi_request[N_GPUs];
+    int comm_size, rank;
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     // ncclComm_t comm;
     // CUDA_CHECK(cudaSetDevice(rank % N_GPUs));
     //initializing NCCL
@@ -176,15 +115,14 @@ int main(int argc, char** argv) {
     // if (rank == 0) ncclGetUniqueId(&id);
     // MPI_Bcast(&id, sizeof(id), MPI_BYTE, 0, MPI_COMM_WORLD);
     // ncclCommInitRank(&comm, comm_size, id, rank);
-    
-    int STREAM_NUM = N_GPUs;
-    cudaStream_t* streams = new cudaStream_t[STREAM_NUM];
-    for (int i = 0; i < STREAM_NUM; ++ i) {
-        cudaStreamCreate(&streams[i]);
-    }
+    // cudaStream_t stream;
+    // cudaStreamCreate(&stream);
+    int MPI_REQUEST_NUM = 10;
+    MPI_Request mpi_request[MPI_REQUEST_NUM];
+    // printf("rank %d in cpu %d in numa %d\n", rank, cpuid, numaid);
+    printf("rank %d in cpu %d\n", rank, cpuid);
+    fflush(stdout);
 
-    // check_UVA(N_GPUs);        // 我理解，统一内存编址是为了方便，而不是性能
-    enableP2P(N_GPUs);
 
     // printf("rank %d: initializing done !!!\n", rank);
     // fflush(stdout);
@@ -205,44 +143,13 @@ int main(int argc, char** argv) {
 #ifdef PRINT_JSON
     Json::Value root;
 #endif
-#ifdef RECORD_TABLE
-    double result_table[N_GPUs][N_GPUs];
-#endif
-    Json::Reader reader;
-	Json::Value root;
-    std::string cp_file = "csrc/configs/conflict_patterns.json";
-    std::ifstream in(cp_file.c_str(), std::ios::binary);
-    if (! in.is_open()) {
-		std::cout << "Error opening file\n";
-		return - 1;
-	}
-    if (! reader.parse(in, root)) {
-        std::cout << "Error reading file\n";
-		return - 2;
-    }
-
-
     // for (int m_id = 0; m_id < METHOD_NUM; ++ m_id) {
-    // for (int src = 0; src < N_GPUs; ++ src) {
-    // for (int dst = 0; dst < N_GPUs; ++ dst) {
-        // if (src == dst) {
-        //     continue;
-        // }
-        // if (true) {
-        // // if (rank == 0) {
-        //     printf("(%d, %d)\n", src, dst);
-        // }
-    for (int cp = 0; cp < root.size(); ++ cp) {
-        if (! check_pattern(root[cp], N_GPUs)) {
-            continue;
+    for (int src = 0; src < comm_size; ++ src) {
+    for (int dst = src + 1; dst < comm_size; ++ dst) {
+        if (rank == 0) {
+            printf("(%d, %d)\n", src, dst);
         }
-        // Json::StyledWriter sw;
-        Json::FastWriter sw;
-        // std::cout << sw.write(root[cp]) << std::endl;
-        std::cout << sw.write(root[cp]);
-        fflush(stdout);
-        // for (int i = 0; i < SIZES_LEN - 2; ++ i) {
-        int SIZEIDX_START = 4;
+        int SIZEIDX_START = 0;
         int SIZEIDX_END = 6;
         for (int i = SIZEIDX_START; i < SIZEIDX_END; ++ i) {
             LL SIZE = SIZES[i];
@@ -251,15 +158,14 @@ int main(int argc, char** argv) {
     #endif 
             // const LL SSIZE = SIZE / comm_size;
             // const LL CHUNK_SIZE = SIZE / (comm_size * comm_size);
-            int* send_buf_cpu = new int[SIZE];
-            int* recv_buf_cpu = new int[SIZE];
-            int** send_buf = new int*[N_GPUs];
-            int** recv_buf = new int*[N_GPUs];
-            for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
-                CUDA_CHECK(cudaSetDevice(gpuid));
-                CUDA_CHECK(cudaMalloc(&send_buf[gpuid], SIZE * sizeof(int)));
-                CUDA_CHECK(cudaMalloc(&recv_buf[gpuid], SIZE * sizeof(int)));
-            }
+            // int* send_buf_cpu = new int[SIZE];
+            // int* recv_buf_cpu = new int[SIZE];
+            int* send_buf;
+            int* recv_buf;
+            // CUDA_CHECK(cudaMalloc(&send_buf, SIZE * sizeof(int)));
+            // CUDA_CHECK(cudaMalloc(&recv_buf, SIZE * sizeof(int)));
+            send_buf = (int*)malloc(SIZE * sizeof(int));
+            recv_buf = (int*)malloc(SIZE * sizeof(int));
 
     #ifdef CHECK_RESULT
             TIMES = 1;
@@ -283,57 +189,44 @@ int main(int argc, char** argv) {
             
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
-                // cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
-                // for (int k = 0; k < root[cp].size(); ++ k) {
-                //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1]], send_buf[root[cp][k][0]], 
-                //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
-                // }
-                devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
+                int req_num = 0;
+                if (rank == src) {
+                    MPI_Isend(send_buf, SIZE, MPI_INT, dst, 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
+                }
+                if (rank == dst) {
+                    MPI_Irecv(recv_buf, SIZE, MPI_INT, src, 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
+                }
+                MPI_Waitall(req_num, mpi_request , nullptr);
+                MPI_Barrier(MPI_COMM_WORLD);
             }
 
-            // CUDA_CHECK(cudaDeviceSynchronize());
-            // MPI_Barrier(MPI_COMM_WORLD);
-            devicesSyncAll(N_GPUs);
-
-            // CUDA_CHECK(cudaEventRecord(start_a2a, stream));
+            MPI_Barrier(MPI_COMM_WORLD);
             auto t0 = std::chrono::high_resolution_clock::now();
 
             for (int _ = 0; _ < TIMES; ++ _) {
-                // CUDA_CHECK(cudaMemcpy(send_buf[0], recv_buf[1], SIZE * sizeof(int), cudaMemcpyDeviceToDevice));
-                // cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
-                for (int k = 0; k < root[cp].size(); ++ k) {
-                    CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1].asInt()], send_buf[root[cp][k][0].asInt()], 
-                                               SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
+                int req_num = 0;
+                if (rank == src) {
+                    MPI_Isend(send_buf, SIZE, MPI_INT, dst, 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
                 }
-                devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
-                // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
-                // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
+                if (rank == dst) {
+                    MPI_Irecv(recv_buf, SIZE, MPI_INT, src, 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
+                }
+                MPI_Waitall(req_num, mpi_request , nullptr);
+                MPI_Barrier(MPI_COMM_WORLD);
             }
-            // CUDA_CHECK(cudaEventRecord(stop_a2a, stream));
-            // CUDA_CHECK(cudaEventSynchronize(stop_a2a));
-            // still async !!!
-            // CUDA_CHECK(cudaStreamSynchronize(stream));
-            // CUDA_CHECK(cudaDeviceSynchronize());
-            // MPI_Barrier(MPI_COMM_WORLD);
-            devicesSyncAll(N_GPUs);
-
+            MPI_Barrier(MPI_COMM_WORLD);
             auto t1 = std::chrono::high_resolution_clock::now();        // CORRECT
             // CUDA_CHECK(cudaEventElapsedTime(&elapsedTime, start_a2a, stop_a2a));    // ms
-            if (true) {
-            // if (rank == 0) {
+            if (rank == 0) {
                 // double t_d = (double)elapsedTime / 1000;    // s
                 double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-                double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES / pow(1024, 3);
+                // double calc = (double)CHUNK_SIZE * (comm_size - 1) * sizeof(int) * TIMES / pow(1024, 3);   // GB
+                double calc = (double)SIZE * sizeof(int) * TIMES / pow(1024, 3);
                 double avg_bd = calc / t_d;
                 printf("time %lf s, REAL_BD %lf GB/s, SIZE %lf GB, comm_vol %lf GB\n", \
                         t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 3), calc);
-#ifdef RECORD_TABLE
-                if (i + 1 == SIZEIDX_END) {
-                    result_table[src][dst] = avg_bd;
-                }
-#endif
+                // printf("SC0: %lf s, REAL_BD %lf GB/s, TOTAL_BD %lf GB/s, comm_vol %lf GB\n", \
+                //         t_d, avg_bd, avg_bd, calc);
 #ifdef PRINT_JSON
                 root[method]["time"].append(Json::Value(t_d));
                 root[method]["REAL_BD"].append(Json::Value(avg_bd));
@@ -370,21 +263,18 @@ int main(int argc, char** argv) {
             fflush(stdout);
     #endif
 
-            for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
-                CUDA_CHECK(cudaFree(send_buf[gpuid]));
-                CUDA_CHECK(cudaFree(recv_buf[gpuid]));
-            }
-            delete[] recv_buf;
-            delete[] send_buf;
+            free(recv_buf);
+            free(send_buf);
             // CUDA_CHECK(cudaFree(recv_buf));
             // CUDA_CHECK(cudaFree(send_buf));
             // delete[] output_list;
             // delete[] input_list;
             // delete[] output_list_cpu;
             // delete[] input_list_cpu;
-            delete[] recv_buf_cpu;
-            delete[] send_buf_cpu;
+            // delete[] recv_buf_cpu;
+            // delete[] send_buf_cpu;
         }
+    }
     }
 
 #ifdef PRINT_JSON
@@ -394,7 +284,7 @@ int main(int argc, char** argv) {
         // std::cout << sw.write(root) << std::endl << std::endl;
 
         // string output_file = std::format("./results/{}cu_all2all.json", comm_size);
-        std::string output_file = "results/" + std::to_string(comm_size) + "cu_all2all.json";
+        std::string output_file = "results/" + std::to_string(comm_size) + "mpi_all2all.json";
         std::ofstream os(output_file.c_str(), std::ios::out);    // 覆盖写
         if (! os.is_open()) {
             std::cout << "error: can not find or create the file which named \" demo.json\"." << std::endl;
@@ -403,22 +293,7 @@ int main(int argc, char** argv) {
         os.close();
     }
 #endif
-#ifdef RECORD_TABLE
-    printf("RESULT_TABLE: \n");
-    for (int src = 0; src < N_GPUs; ++ src) {
-        for (int dst = 0; dst < N_GPUs; ++ dst) {
-            printf("%lf ", result_table[src][dst]);
-        }
-        puts("");
-    }
-    puts("");
-#endif
     
-    disableP2P(N_GPUs);
-    for (int i = 0; i < STREAM_NUM; ++ i) {
-        CUDA_CHECK(cudaStreamDestroy(streams[i]));
-    }
-    delete[] streams;
-    // MPI_Finalize();
+    MPI_Finalize();
     return 0;
 }
