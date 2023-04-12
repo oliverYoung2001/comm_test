@@ -1,7 +1,7 @@
 include ../common.mk
 .PHONY: clean
 
-all: all2all_test net_test net_test_cuda conflict_test_cuda
+all: all2all_test net_test net_test_cuda conflict_test_cuda all2all_cuda
 
 %.o: %.cpp
 	gcc $< -std=c++11 -c -o $@
@@ -21,6 +21,9 @@ net_test_cuda: net_test_cuda.o comm.o jsoncpp.o
 conflict_test_cuda: conflict_test_cuda.o comm.o jsoncpp.o
 	$(MPI_CXX) $? -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -lcudart -lnccl -Wall -o $@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
 
+all2all_cuda: all2all_cuda.o comm.o jsoncpp.o
+	$(MPI_CXX) $? -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -lcudart -lnccl -Wall -o $@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
+
 clean:
-	rm all2all_test net_test net_test_cuda conflict_test_cuda
+	rm all2all_test net_test net_test_cuda conflict_test_cuda all2all_cuda
 	rm `ls *.o | grep -v jsoncpp.o`
