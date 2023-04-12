@@ -19,5 +19,10 @@ def get_args():
                         type=str,
                         default='',
                         help="""file name of excel""")
+
+    parser.add_argument("--input_file_name",
+                        type=str,
+                        default='',
+                        help="""input json file for excel building""")
     args = parser.parse_args()
     return args
