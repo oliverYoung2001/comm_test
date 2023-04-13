@@ -33,7 +33,7 @@ const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, f
 // 62792 B
 
 const int SIZEIDX_START = 0;
-const int SIZEIDX_END = 2;
+const int SIZEIDX_END = 5;
 
 const int SIZES_LEN = 10;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
@@ -220,8 +220,7 @@ void MPI_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
     // MPI_Wait(mpi_request, NULL);
     MPI_Waitall(req_num, mpi_request , nullptr);
 
-}OpenMP（Open Multi-Processing）与OpenMPI，MPI 并无任何关系。它是一个针对共享内存并行编程的API。这里特意提出，避免混淆。 而既然OpenMPI 是MPI 的一种实现，那 ...
-
+}
 
 int main(int argc, char** argv) {
     if (argc < 4) {
