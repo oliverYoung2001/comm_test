@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/home/spack/opt/spack/linux-debian11-cascadelake/gcc-10.2.1/cuda-11.3.1-ufjgm56ezd6xzo2wzmja56jev7nbolec/**",
-                "/home/spack/spack/opt/spack/linux-debian11-cascadelake/gcc-10.2.1/openmpi-4.1.4-ceo343fenjmypuctn75jjwsu76pism6a/**"
+                "/home/spack/spack/opt/spack/linux-debian11-cascadelake/gcc-10.2.1/openmpi-4.1.4-ceo343fenjmypuctn75jjwsu76pism6a/**",
+                "/home/yhy/.local/nccl/**"
             ],
             "defines": [],
             "compilerPath": "/home/yhy/.local/llvm/build/bin/clang",
