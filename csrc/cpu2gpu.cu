@@ -27,13 +27,13 @@ typedef long long LL;
 // #define CHECK_RESULT
 // #define PRINT_JSON
 // #define RECORD_TABLE
-int TIMES = 3;
-int WARMUP = 0;
+int TIMES = 20;
+int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
 const int SIZEIDX_START = 0;
-const int SIZEIDX_END = 1;
+const int SIZEIDX_END = 5;
 
 const int SIZES_LEN = 10;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
@@ -179,11 +179,11 @@ void disableP2P(int ngpus) {
 void cudaMemcpy_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
                cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request) {
     for (int k = 0; k < pairs.size(); ++ k) {
-        // CUDA_CHECK(cudaMemcpyAsync(recv_buf[pairs[k][1].asInt()], send_buf[pairs[k][0].asInt()], 
-        //                             SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
-        CUDA_CHECK(cudaMemcpyPeerAsync(recv_buf[pairs[k][1].asInt()], pairs[k][1].asInt(), \
-                                   send_buf[pairs[k][0].asInt()], pairs[k][0].asInt(), \
-                                   SIZE * sizeof(int), streams[k]));                                // 两者性能相似
+        CUDA_CHECK(cudaMemcpyAsync(recv_buf[pairs[k][1].asInt()], send_buf[pairs[k][0].asInt()], 
+                                    SIZE * sizeof(int), cudaMemcpyHostToDevice, streams[k]));
+        // CUDA_CHECK(cudaMemcpyPeerAsync(recv_buf[pairs[k][1].asInt()], pairs[k][1].asInt(), \
+        //                            send_buf[pairs[k][0].asInt()], pairs[k][0].asInt(), \
+        //                            SIZE * sizeof(int), streams[k]));                                // 两者性能相似
     }
 }
 
@@ -203,7 +203,6 @@ void NCCL_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
         }
     }
     NCCL_CHECK(ncclGroupEnd());
-    // printf("rank: %d, ncclGroupEnd!!!", rank);
 }
 
 // MPI_comm
@@ -360,8 +359,10 @@ int main(int argc, char** argv) {
     #endif 
             // const LL SSIZE = SIZE / comm_size;
             // const LL CHUNK_SIZE = SIZE / (comm_size * comm_size);
-            // int* send_buf_cpu = new int[SIZE];
-            // int* recv_buf_cpu = new int[SIZE];
+            int** send_buf_cpu = new int*[1];
+            int** recv_buf_cpu = new int*[1];
+            send_buf_cpu[0] = new int[SIZE];
+            recv_buf_cpu[0] = new int[SIZE];
             int** send_buf = new int*[N_GPUs];
             int** recv_buf = new int*[N_GPUs];
             if (BACKEND.compare("cudaMemcpy") == 0) {
@@ -405,7 +406,7 @@ int main(int argc, char** argv) {
                 //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1]], send_buf[root[cp][k][0]], 
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
-                XXX_comm(root[cp], send_buf, recv_buf, SIZE, streams, rank, comm, mpi_request);
+                XXX_comm(root[cp], send_buf_cpu, recv_buf, SIZE, streams, rank, comm, mpi_request);
                 barrier(BACKEND, N_GPUs);
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
@@ -426,7 +427,7 @@ int main(int argc, char** argv) {
                 //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1].asInt()], send_buf[root[cp][k][0].asInt()], 
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
-                XXX_comm(root[cp], send_buf, recv_buf, SIZE, streams, rank, comm, mpi_request);
+                XXX_comm(root[cp], send_buf_cpu, recv_buf, SIZE, streams, rank, comm, mpi_request);
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
@@ -518,8 +519,10 @@ int main(int argc, char** argv) {
             // delete[] input_list;
             // delete[] output_list_cpu;
             // delete[] input_list_cpu;
-            // delete[] recv_buf_cpu;
-            // delete[] send_buf_cpu;
+            delete[] recv_buf_cpu[0];
+            delete[] send_buf_cpu[0];
+            delete[] recv_buf_cpu;
+            delete[] send_buf_cpu;
         }
     }
 
