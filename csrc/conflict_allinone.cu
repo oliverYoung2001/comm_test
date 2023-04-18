@@ -256,7 +256,7 @@ int main(int argc, char** argv) {
         MPI_Comm_rank(MPI_COMM_WORLD, &rank);
         CUDA_CHECK(cudaSetDevice(rank % comm_size));
         assert(N_GPUs == comm_size);
-    }a
+    }
     // Init NCCL
     ncclComm_t comm;
     if (BACKEND.compare("NCCL") == 0) {
