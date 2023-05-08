@@ -27,7 +27,7 @@ typedef long long LL;
 // #define CHECK_RESULT
 // #define PRINT_JSON
 // #define RECORD_TABLE
-int TIMES = 20;
+int TIMES = 1000;
 int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
@@ -35,8 +35,10 @@ const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, f
 const int SIZEIDX_START = 0;
 const int SIZEIDX_END = 5;
 
-const int SIZES_LEN = 10;
+const int SIZES_LEN = 12;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
+    1LL * 1024 * 64,      // 4MB      // 打不满带宽
+    1LL * 1024 * 256,      // 4MB      // 打不满带宽
     1LL * 1024 * 1024 * 1,      // 4MB      // 打不满带宽
     1LL * 1024 * 1024 * 32,     // 128MB
     1LL * 1024 * 1024 * 64,     // 256MB
@@ -181,6 +183,12 @@ void cudaMemcpy_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE
     for (int k = 0; k < pairs.size(); ++ k) {
         CUDA_CHECK(cudaMemcpyAsync(recv_buf[pairs[k][1].asInt()], send_buf[pairs[k][0].asInt()], 
                                     SIZE * sizeof(int), cudaMemcpyHostToDevice, streams[k]));
+        // cpu2gpu
+        // CUDA_CHECK(cudaMemcpy(recv_buf[pairs[k][1].asInt()], send_buf[pairs[k][0].asInt()], 
+        //                             SIZE * sizeof(int), cudaMemcpyHostToDevice));
+        // gpu2cpu
+        // CUDA_CHECK(cudaMemcpy(send_buf[pairs[k][0].asInt()], recv_buf[pairs[k][1].asInt()], 
+        //                             SIZE * sizeof(int), cudaMemcpyDeviceToHost));
         // CUDA_CHECK(cudaMemcpyPeerAsync(recv_buf[pairs[k][1].asInt()], pairs[k][1].asInt(), \
         //                            send_buf[pairs[k][0].asInt()], pairs[k][0].asInt(), \
         //                            SIZE * sizeof(int), streams[k]));                                // 两者性能相似
@@ -393,10 +401,10 @@ int main(int argc, char** argv) {
             puts("");
             CUDA_CHECK(cudaMemcpy(send_buf, send_buf_cpu, SSIZE * sizeof(int), cudaMemcpyDefault));
     #endif
-            // cudaEvent_t start_a2a, stop_a2a;
-            // float elapsedTime;
-            // CUDA_CHECK(cudaEventCreate(&start_a2a));
-            // CUDA_CHECK(cudaEventCreate(&stop_a2a));
+            cudaEvent_t start_a2a, stop_a2a;
+            float elapsedTime;
+            CUDA_CHECK(cudaEventCreate(&start_a2a));
+            CUDA_CHECK(cudaEventCreate(&stop_a2a));
             
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
@@ -407,7 +415,8 @@ int main(int argc, char** argv) {
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
                 XXX_comm(root[cp], send_buf_cpu, recv_buf, SIZE, streams, rank, comm, mpi_request);
-                barrier(BACKEND, N_GPUs);
+                // CUDA_CHECK(cudaDeviceSynchronize());
+                // barrier(BACKEND, N_GPUs);
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
 
@@ -417,6 +426,7 @@ int main(int argc, char** argv) {
             barrier(BACKEND, N_GPUs);
 
             // CUDA_CHECK(cudaEventRecord(start_a2a, stream));
+            // CUDA_CHECK(cudaEventRecord(start_a2a));
             auto t0 = std::chrono::high_resolution_clock::now();
 
             for (int _ = 0; _ < TIMES; ++ _) {
@@ -431,9 +441,10 @@ int main(int argc, char** argv) {
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
-                barrier(BACKEND, N_GPUs);
+                // barrier(BACKEND, N_GPUs);
             }
             // CUDA_CHECK(cudaEventRecord(stop_a2a, stream));
+            // CUDA_CHECK(cudaEventRecord(stop_a2a));
             // CUDA_CHECK(cudaEventSynchronize(stop_a2a));
             // still async !!!
             // CUDA_CHECK(cudaStreamSynchronize(stream));
