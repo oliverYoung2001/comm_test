@@ -19,3 +19,6 @@ csrc/json/
 
 # benchmarks
 benchmarks/
+
+# performance_data
+performance_data/

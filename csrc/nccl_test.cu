@@ -27,13 +27,13 @@ typedef long long LL;
 // #define CHECK_RESULT
 // #define PRINT_JSON
 // #define RECORD_TABLE
-int TIMES = 3;
-int WARMUP = 0;
+int TIMES = 2;
+int WARMUP = 1;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
-const int SIZEIDX_START = 0;
-const int SIZEIDX_END = 1;
+const int SIZEIDX_START = 1;
+const int SIZEIDX_END = 2;
 
 const int SIZES_LEN = 10;
 const LL SIZES[SIZES_LEN] = {   // int = 4B

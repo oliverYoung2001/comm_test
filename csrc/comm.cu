@@ -1,6 +1,9 @@
 // #include "nccl.h"
 #include "comm.h"
+#include "utils.h"
 #include <cmath>
+#include "cuda_runtime.h"
+#include <curand_kernel.h>
 
 #define RANK2D(y, x) ((y) * BLOCK_X + (x))
 #define RANK3D(z, y, x) (((z) * BLOCK_Y + (y)) * BLOCK_X + (x))
