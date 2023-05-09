@@ -1,5 +1,5 @@
 # host-specific configuration
-common.mk
+/common.mk
 
 # cache
 **/__pycache__
