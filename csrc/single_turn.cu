@@ -36,8 +36,8 @@ PROC_PARAMS* pp;
 // #define PRINT_JSON
 // #define RECORD_TABLE
 // #define ENABLE_GPU_P2P       // 性能不一定好！！！ 单个P2P更好，但多个P2P不一定好
-int TIMES = 3;
-int WARMUP = 1;
+int TIMES = 200;
+int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 

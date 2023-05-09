@@ -25,17 +25,13 @@
 
 // #include <format>    // need c++20
 typedef long long LL;
-// int comm_size, rank;
-// int N_GPUs, GPU_VISIBLE;
-int COMM_TYPES = 3; // or 2
+
+int COMM_TYPES = 3; // or 2 or 4
 
 PROC_PARAMS* pp;
 
 // #define CHECK_RESULT
 // #define PRINT_JSON
-// #define RECORD_TABLE
-// #define ENABLE_GPU_P2P       // 性能不一定好！！！ 单个P2P更好，但多个P2P不一定好
-
 int TIMES = 10;
 int WARMUP = 5;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
@@ -127,12 +123,12 @@ bool check_pattern(Json::Value pattern, int N_GPUs) {
     return true;
 }
 
-void devicesSyncAll(int N_GPUs) {
-    for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
-        CUDA_CHECK(cudaSetDevice(gpuid));
-        CUDA_CHECK(cudaDeviceSynchronize());
-    }
-}
+// void devicesSyncAll(int N_GPUs) {
+//     for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
+//         CUDA_CHECK(cudaSetDevice(gpuid));
+//         CUDA_CHECK(cudaDeviceSynchronize());
+//     }
+// }
 
 void barrier(std::string& BACKEND, int N_GPUs) {
         CUDA_CHECK(cudaSetDevice(pp->local_rank));
@@ -149,27 +145,29 @@ void mixed_p2p_comm(Json::Value& pairs, int p2p_id, int** send_buf, int** recv_b
     CUDA_CHECK(cudaSetDevice(pp->local_rank));    // just for NCCL
     NCCL_CHECK(ncclGroupStart());
     for (int k = 0; k < pairs.size(); ++ k) {
-        if (p2p_id / (int)pow(COMM_TYPES, k) % COMM_TYPES == 0) {     // NCCL
+        int comm_type = p2p_id / (int)pow(COMM_TYPES, k) % COMM_TYPES;
+        if (comm_type == 0) {                           // NCCL
             if (rank == pairs[k][0].asInt()) {
                 NCCL_CHECK(ncclSend(send_buf[rank], SIZE, ncclInt32, pairs[k][1].asInt(), comm, streams[0]));
             }
             if (rank == pairs[k][1].asInt()) {
                 NCCL_CHECK(ncclRecv(recv_buf[rank], SIZE, ncclInt32, pairs[k][0].asInt(), comm, streams[0]));
             }
-        } else if (pp->nodes <= 1) {                                    // DMA
-            if (rank != 0) {
-                continue;
-            }
-            CUDA_CHECK(cudaMemcpyPeerAsync(recv_buf[pairs[k][1].asInt()], pairs[k][1].asInt(), \
-                                   send_buf[pairs[k][0].asInt()], pairs[k][0].asInt(), \
-                                   SIZE * sizeof(int), streams[k]));
-        } else {
+        } else if (pp->nodes > 1 || comm_type == 3) {   // MPI                                  
             if (rank == pairs[k][0].asInt()) {
                 MPI_Isend(send_buf[rank], SIZE, MPI_INT, pairs[k][1].asInt(), 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
             }
             if (rank == pairs[k][1].asInt()) {
                 MPI_Irecv(recv_buf[rank], SIZE, MPI_INT, pairs[k][0].asInt(), 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
             }
+        } else {                                        // cudaMemcpy w/o P2P
+            if (rank != 0) {
+                continue;
+            }
+            CUDA_CHECK(cudaMemcpyPeerAsync(recv_buf[pairs[k][1].asInt()], pairs[k][1].asInt(), \
+                                   send_buf[pairs[k][0].asInt()], pairs[k][0].asInt(), \
+                                   SIZE * sizeof(int), streams[k]));
+            
         }
     }
     NCCL_CHECK(ncclGroupEnd());
@@ -178,22 +176,13 @@ void mixed_p2p_comm(Json::Value& pairs, int p2p_id, int** send_buf, int** recv_b
 
 int main(int argc, char** argv) {
     if (argc < 4) {
-        printf("Need at least 2 args: \"<command> <gpus> <backend> <cp_file>\"\n");
+        printf("Need at least 4 args: \"<command> <gpus> <backend> <cp_file>\"\n");
         return - 1;
     }
-    //Get number of gpus in the node
-    int gpu_visible;
-    CUDA_CHECK(cudaGetDeviceCount(&gpu_visible));
-    int n_gpus = std::stoi(argv[1]);
-    assert(n_gpus <= gpu_visible);
-    std::string BACKEND = argv[2];
+    setup_env(pp, argc, argv);
     std::string cp_file = argv[3];
 
-    pp = new PROC_PARAMS(n_gpus);
-    pp->BACKEND = BACKEND;
-
-    setup_env(pp, argc, argv);
-    COMM_TYPES = pp->nodes <= 1 ? 3 : 2;
+    COMM_TYPES = pp->nodes <= 1 ? (pp->N_GPUs <= 4 ? 4 : 3) : 2;
 
     // Read patterns
     Json::Reader reader;
@@ -214,14 +203,11 @@ int main(int argc, char** argv) {
     for (int cp = 0; cp < root.size(); ++ cp) {
         max_pair_num = std::max(max_pair_num, (int)root[cp].size());
     }
-    int STREAM_NUM = std::max(pp->N_GPUs, max_pair_num) + pp->N_GPUs;       // for both DMA and NCCL
-    cudaStream_t* streams = new cudaStream_t[STREAM_NUM];
-    for (int i = 0; i < STREAM_NUM; ++ i) {
-        cudaStreamCreate(&streams[i]);
-    }
+    pp->init_cudaStream(std::max(pp->N_GPUs, max_pair_num) + pp->N_GPUs);
 
     // Init MPI_Request
-    MPI_Request mpi_request[std::max(pp->N_GPUs, max_pair_num)];        // for cuda-aware MPI
+    pp->init_MPI_Request(std::max(pp->N_GPUs, max_pair_num));
+
 
     for (int cp = 0; cp < root.size(); ++ cp) {
         if (! check_pattern(root[cp], pp->N_GPUs)) {
@@ -283,27 +269,27 @@ int main(int argc, char** argv) {
                 }
                 // WARMUP
                 for (int _ = 0; _ < WARMUP; ++ _) {
-                    mixed_p2p_comm(root[cp], p2p_id, send_buf, recv_buf, SIZE, streams, pp->rank, pp->comm, mpi_request);
+                    mixed_p2p_comm(root[cp], p2p_id, send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
                     // CUDA_CHECK(cudaGetLastError());
-                    barrier(BACKEND, pp->N_GPUs);
+                    barrier(pp->BACKEND, pp->N_GPUs);
                 }
 
                 // CUDA_CHECK(cudaDeviceSynchronize());
                 // MPI_Barrier(MPI_COMM_WORLD);
                 // devicesSyncAll(N_GPUs);
-                barrier(BACKEND, pp->N_GPUs);
+                barrier(pp->BACKEND, pp->N_GPUs);
 
                 // CUDA_CHECK(cudaEventRecord(start_a2a, stream));
                 auto t0 = std::chrono::high_resolution_clock::now();
 
                 for (int _ = 0; _ < TIMES; ++ _) {
-                    mixed_p2p_comm(root[cp], p2p_id, send_buf, recv_buf, SIZE, streams, pp->rank, pp->comm, mpi_request);
+                    mixed_p2p_comm(root[cp], p2p_id, send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                    barrier(pp->BACKEND, pp->N_GPUs);
                     // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                     // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
                     // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
-                    // barrier(BACKEND, N_GPUs);
                 }
-                barrier(BACKEND, pp->N_GPUs);
+                barrier(pp->BACKEND, pp->N_GPUs);
 
                 auto t1 = std::chrono::high_resolution_clock::now();        // CORRECT
                 // CUDA_CHECK(cudaEventElapsedTime(&elapsedTime, start_a2a, stop_a2a));    // ms
@@ -347,10 +333,7 @@ int main(int argc, char** argv) {
             delete[] send_buf;
         }
     }
-    for (int i = 0; i < STREAM_NUM; ++ i) {
-        CUDA_CHECK(cudaStreamDestroy(streams[i]));
-    }
-    delete[] streams;
+    delete pp;
     // MPI_Finalize();
     return 0;
 }

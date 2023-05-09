@@ -2,7 +2,7 @@ include ../common.mk
 .PHONY: clean
 
 all: all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
-	 benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p mixed_p2p_
+	 benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p
 
 %.o: %.cpp
 	gcc $< -std=c++11 -c -o $@
@@ -52,9 +52,6 @@ single_turn: single_turn.o comm.o jsoncpp.o utils.o
 mixed_p2p: mixed_p2p.o comm.o jsoncpp.o utils.o
 	$(MPI_CXX) $? -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -lcudart -lnccl -Wall -o $@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
 
-mixed_p2p_: mixed_p2p_.o comm.o jsoncpp.o utils.o
-	$(MPI_CXX) $? -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -lcudart -lnccl -Wall -o $@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
-
 %_clean:
 	rm $@.o
 	rm $@
@@ -62,4 +59,4 @@ mixed_p2p_: mixed_p2p_.o comm.o jsoncpp.o utils.o
 clean:
 	rm -f `ls *.o | grep -v jsoncpp.o`
 	rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
-	   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p mixed_p2p_
+	   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p
