@@ -30,7 +30,7 @@ PROC_PARAMS* pp;
 
 // #define CHECK_RESULT
 // #define PRINT_JSON
-int TIMES = 20;
+int TIMES = 200;
 int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
@@ -282,10 +282,10 @@ int main(int argc, char** argv) {
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
                 XXX_comm(root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                barrier(pp->BACKEND, pp->N_GPUs);
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
-                // barrier(BACKEND, N_GPUs);
             }
             // CUDA_CHECK(cudaEventRecord(stop_a2a, stream));
             // CUDA_CHECK(cudaEventSynchronize(stop_a2a));
