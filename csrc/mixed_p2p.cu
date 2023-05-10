@@ -270,7 +270,6 @@ int main(int argc, char** argv) {
                 // WARMUP
                 for (int _ = 0; _ < WARMUP; ++ _) {
                     mixed_p2p_comm(root[cp], p2p_id, send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
-                    // CUDA_CHECK(cudaGetLastError());
                     barrier(pp->BACKEND, pp->N_GPUs);
                 }
 
