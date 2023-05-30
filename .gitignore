@@ -1,3 +1,4 @@
+msccl-tools/
 # host-specific configuration
 /common.mk
 
