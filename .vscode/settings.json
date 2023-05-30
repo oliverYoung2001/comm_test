@@ -66,6 +66,9 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "barrier": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "locale": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     }
 }
