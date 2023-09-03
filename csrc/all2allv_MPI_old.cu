@@ -35,8 +35,8 @@ int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
-const int SIZEIDX_START = 0;
-const int SIZEIDX_END = 23;
+const int SIZEIDX_START = 4;
+const int SIZEIDX_END = 20;
 
 // const int SIZES_LEN = 8;
 // const LL SIZES[SIZES_LEN] = {   // int = 4B
@@ -141,6 +141,13 @@ void barrier(std::string& BACKEND, int N_GPUs) {
     }
 }
 
+void MPI_v(int** sendcounts, int** recvcounts, int** sdispls, int** rdispls, \
+              int** send_buf, int** recv_buf, LL SIZE, \
+              cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request) {
+    MPI_Alltoallv(send_buf[rank], sendcounts[rank], sdispls[rank], MPI_INT, \
+                  recv_buf[rank], recvcounts[rank], rdispls[rank], MPI_INT, MPI_COMM_WORLD);
+}
+
 int main(int argc, char** argv) {
     if (argc < 4) {
         printf("Need at least 4 args: \"<command> <gpus> <backend> <cp_file>\"\n");
@@ -148,28 +155,6 @@ int main(int argc, char** argv) {
     }
     setup_env(pp, argc, argv);
     std::string cp_file = argv[3];
-
-    void (*XXX_comm)(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
-               cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
-    if (pp->BACKEND.compare("NCCL") == 0) {
-        XXX_comm = NCCL_comm;
-    } else if (pp->BACKEND.compare("MPI") == 0) {
-        XXX_comm = MPI_comm;
-    } else if (pp->BACKEND.find("cudaMemcpy") != std::string::npos) {
-        XXX_comm = cudaMemcpy_comm;
-    } else {
-        printf("Error BACKEND !!!");
-        exit(- 1);
-    }
-
-#ifdef PRINT_JSON
-    Json::Value root;
-#endif
-
-    double result_table_si[pp->N_GPUs][pp->N_GPUs];
-    double result_table_bi[pp->N_GPUs][pp->N_GPUs];
-    memset(result_table_si, 0, sizeof(result_table_si));
-    memset(result_table_bi, 0, sizeof(result_table_bi));
 
     Json::Reader reader;
 	Json::Value root;
@@ -197,10 +182,21 @@ int main(int argc, char** argv) {
 
     // check_UVA(N_GPUs);        // 我理解，统一内存编址是为了方便，而不是性能
 
+    int** sendcounts = new int*[pp->N_GPUs];
+    int** recvcounts = new int*[pp->N_GPUs];
+    int** sdispls = new int*[pp->N_GPUs];
+    int** rdispls = new int*[pp->N_GPUs];
+    for (int i = 0; i < pp->N_GPUs; ++ i) {
+        sendcounts[i] = new int[pp->N_GPUs];
+        recvcounts[i] = new int[pp->N_GPUs];
+        sdispls[i] = new int[pp->N_GPUs];
+        rdispls[i] = new int[pp->N_GPUs];
+    }
+
     for (int cp = 0; cp < root.size(); ++ cp) {
-        if (! check_pattern(root[cp], pp->N_GPUs)) {
-            continue;
-        }
+        // if (! check_pattern(root[cp], pp->N_GPUs)) {
+        //     continue;
+        // }
         if (pp->rank == 0) {
             // Json::StyledWriter sw;
             Json::FastWriter sw;
@@ -208,15 +204,42 @@ int main(int argc, char** argv) {
             fflush(stdout);
         }
         if (pp->BACKEND.find("cudaMemcpy") != std::string::npos && pp->ENABLE_GPU_P2P) {
-            enableP2P(root[cp]);
+            // enableP2P(root[cp]);
         }
-        for (int i = SIZEIDX_START; i < SIZEIDX_END; ++ i) {
-            LL SIZE = SIZES[i];
+
+        Json::Value commv = root[cp];
+        int commv_sum = 0;
+        for (int i = 0; i < pp->N_GPUs; ++ i) {
+            for (int j = 0; j < pp->N_GPUs; ++ j) {
+                // commv_max = std::max(commv_max, commv[i][j].asInt());
+                commv_sum += commv[i][j].asInt();
+            }
+        }
+        if (pp->rank == 0) {
+            printf("commv_sum: %d\n", commv_sum);
+        }
+
+        for (int __ = SIZEIDX_START; __ < SIZEIDX_END; ++ __) {
+            LL SIZE = SIZES[__];
     #ifdef CHECK_RESULT
             SIZE = comm_size * comm_size;
     #endif 
             // const LL SSIZE = SIZE / comm_size;
             // const LL CHUNK_SIZE = SIZE / (comm_size * comm_size);
+
+            for (int i = 0; i < pp->N_GPUs; ++ i) {
+                sdispls[i][0] = 0;
+                rdispls[i][0] = 0;
+                for (int j = 0; j < pp->N_GPUs; ++ j) {
+                    sendcounts[i][j] = floor((double)commv[i][j].asInt() / commv_sum * SIZE);
+                    recvcounts[i][j] = floor((double)commv[j][i].asInt() / commv_sum * SIZE);
+                    if (j > 0) {
+                        sdispls[i][j] = sdispls[i][j - 1] + sendcounts[i][j - 1];
+                        rdispls[i][j] = rdispls[i][j - 1] + recvcounts[i][j - 1];
+                    }
+                }
+            }
+
             int** send_buf = new int*[pp->N_GPUs];
             int** recv_buf = new int*[pp->N_GPUs];
             if (pp->BACKEND.find("cudaMemcpy") != std::string::npos) {
@@ -230,70 +253,23 @@ int main(int argc, char** argv) {
                 CUDA_CHECK(cudaMalloc(&send_buf[pp->rank], SIZE * sizeof(int)));
                 CUDA_CHECK(cudaMalloc(&recv_buf[pp->rank], SIZE * sizeof(int)));
             }
-            
 
-    #ifdef CHECK_RESULT
-            TIMES = 1;
-            for (int j = 0; j < comm_size; ++ j) {
-                int v = pp->rank * comm_size + j;
-                for (int k = 0; k < CHUNK_SIZE; ++ k) {
-                    input_list_cpu[j][k] = v;
-                }
-            }
-            printf("pp->rank %d, send_buf_cpu:\n", pp->rank);
-            for (int j = 0; j < SSIZE; ++ j) {
-                printf("%d ", send_buf_cpu[j]);
-            }
-            puts("");
-            CUDA_CHECK(cudaMemcpy(send_buf, send_buf_cpu, SSIZE * sizeof(int), cudaMemcpyDefault));
-    #endif
-            // cudaEvent_t start_a2a, stop_a2a;
-            // float elapsedTime;
-            // CUDA_CHECK(cudaEventCreate(&start_a2a));
-            // CUDA_CHECK(cudaEventCreate(&stop_a2a));
-            
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
-                // cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
-                // for (int k = 0; k < root[cp].size(); ++ k) {
-                //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1]], send_buf[root[cp][k][0]], 
-                //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
-                // }
-                XXX_comm(root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                MPI_v(sendcounts, recvcounts, sdispls, rdispls, \
+                        send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
                 barrier(pp->BACKEND, pp->N_GPUs);
-                // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
 
-            // CUDA_CHECK(cudaDeviceSynchronize());
-            // MPI_Barrier(MPI_COMM_WORLD);
-            // devicesSyncAll(N_GPUs);
             barrier(pp->BACKEND, pp->N_GPUs);
 
-            // CUDA_CHECK(cudaEventRecord(start_a2a, stream));
             auto t0 = std::chrono::high_resolution_clock::now();
 
             for (int _ = 0; _ < TIMES; ++ _) {
-                // CUDA_CHECK(cudaMemcpy(send_buf[0], recv_buf[1], SIZE * sizeof(int), cudaMemcpyDeviceToDevice));
-                // cudaMemcpyAsync(recv_buf[dst], send_buf[src], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[0]);
-                // cudaMemcpyAsync(recv_buf[src], send_buf[dst], SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[1]);
-                // for (int k = 0; k < root[cp].size(); ++ k) {
-                //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1].asInt()], send_buf[root[cp][k][0].asInt()], 
-                //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
-                // }
-                XXX_comm(root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                MPI_v(sendcounts, recvcounts, sdispls, rdispls, \
+                        send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
                 barrier(pp->BACKEND, pp->N_GPUs);
-                // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
-                // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
-                // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
-            // CUDA_CHECK(cudaEventRecord(stop_a2a, stream));
-            // CUDA_CHECK(cudaEventSynchronize(stop_a2a));
-            // still async !!!
-            // CUDA_CHECK(cudaStreamSynchronize(stream));
-            // CUDA_CHECK(cudaDeviceSynchronize());
-            // MPI_Barrier(MPI_COMM_WORLD);
-            // devicesSyncAll(N_GPUs);
             barrier(pp->BACKEND, pp->N_GPUs);
 
             auto t1 = std::chrono::high_resolution_clock::now();        // CORRECT
@@ -302,57 +278,14 @@ int main(int argc, char** argv) {
             if (pp->rank == 0) {
                 // double t_d = (double)elapsedTime / 1000;    // s
                 double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-                double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES;      // B
+                // double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES;      // B
+                double calc = 1 * (double)SIZE * sizeof(int) * TIMES;      // B
                 double avg_bd = calc / t_d / pow(1024, 3);
                 printf("time %lf s, REAL_BD %lf GB/s, SIZE %lf KB, comm_vol %lf KB\n", \
                         t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 1), calc / pow(1024, 1));
-            if (pp->RECORD_P2P.size() > 0) {
-                if (i + 1 == SIZEIDX_END) {
-                    int src = root[cp][0][0].asInt();
-                    int dst = root[cp][0][1].asInt();
-                    if ((int)root[cp].size() == 1) {
-                        result_table_si[src][dst] = avg_bd;
-                    } else if ((int)root[cp].size() == 2 \
-                            && src == (int)root[cp][1][1].asInt() && dst == (int)root[cp][1][0].asInt()) {
-                        result_table_bi[src][dst] = avg_bd;
-                    }
-                }
-            }
-#ifdef PRINT_JSON
-                root[method]["time"].append(Json::Value(t_d));
-                root[method]["REAL_BD"].append(Json::Value(avg_bd));
-                root[method]["SIZE"].append(Json::Value((double)SIZE * sizeof(int)));
-                root[method]["comm_vol"].append(Json::Value(calc));
-#endif
                 fflush(stdout);
             }
             
-
-    #ifdef CHECK_RESULT
-            // CUDA_CHECK(cudaMemcpy(recv_buf_cpu, recv_buf, SSIZE * sizeof(int), cudaMemcpyDefault));
-            for (int j = 0; j < comm_size; ++ j) {
-                CUDA_CHECK(cudaMemcpy(recv_buf_cpu + j * CHUNK_SIZE, output_list[j], 
-                                      CHUNK_SIZE * sizeof(int), cudaMemcpyDefault));
-            }
-            printf("pp->rank %d, recv_buf_cpu:\n", pp->rank);
-            for (int j = 0; j < SSIZE; ++ j) {
-                printf("%d ", recv_buf_cpu[j]);
-            }
-            puts("");
-            for (int j = 0; j < comm_size; ++ j) {
-                int v = j * comm_size + pp->rank;
-                for (int k = 0; k < CHUNK_SIZE; ++ k) {
-                    if (output_list_cpu[j][k] != v) {
-                        printf("Failed: Comm(All2All) error %s:%d '%d!=%d'\n",             \
-                                __FILE__,__LINE__,output_list_cpu[j][k],v);   \
-                        exit(EXIT_FAILURE); 
-                    }
-                    // assert(output_list[j][k] == v)
-                }
-            }
-            printf("pp->rank %d: ALL2ALL CORRECT !!!\n", pp->rank);
-            fflush(stdout);
-    #endif
             if (pp->BACKEND.find("cudaMemcpy") != std::string::npos) {
                 for (int gpuid = 0; gpuid < pp->N_GPUs; ++ gpuid) {
                     CUDA_CHECK(cudaFree(recv_buf[gpuid]));
@@ -372,59 +305,17 @@ int main(int argc, char** argv) {
         }
     }
 
-#ifdef PRINT_JSON
-    if (pp->rank == 0) {
-        Json::StyledWriter sw;
-        // std::cout << "StyledWriter:" << std::endl;
-        // std::cout << sw.write(root) << std::endl << std::endl;
-
-        // string output_file = std::format("./results/{}cu_all2all.json", comm_size);
-        std::string output_file = "results/" + std::to_string(comm_size) + "cu_all2all.json";
-        std::ofstream os(output_file.c_str(), std::ios::out);    // 覆盖写
-        if (! os.is_open()) {
-            std::cout << "error: can not find or create the file which named \" demo.json\"." << std::endl;
-        }
-        os << sw.write(root);
-        os.close();
+    for (int i = 0; i < pp->N_GPUs; ++ i) {
+        delete[] sendcounts[i];
+        delete[] recvcounts[i];
+        delete[] sdispls[i];
+        delete[] rdispls[i];
     }
-#endif
-    if (pp->RECORD_P2P.size() > 0) {
-        if (pp->rank == 0) {
-            Json::Value results;
-            printf("P2P_SI: \n");
-            for (int src = 0; src < pp->N_GPUs; ++ src) {
-                Json::Value list_;
-                for (int dst = 0; dst < pp->N_GPUs; ++ dst) {
-                    printf("%lf ", result_table_si[src][dst]);
-                    list_.append(Json::Value(result_table_si[src][dst]));
-                }
-                puts("");
-                results["P2P_SI"].append(list_);
-            }
-            puts("");
-            printf("P2P_BI: \n");
-            for (int src = 0; src < pp->N_GPUs; ++ src) {
-                Json::Value list_;
-                for (int dst = 0; dst < pp->N_GPUs; ++ dst) {
-                    printf("%lf ", result_table_bi[src][dst]);
-                    list_.append(Json::Value(result_table_bi[src][dst]));
-                }
-                puts("");
-                results["P2P_BI"].append(list_);
-            }
-            puts("");
-            Json::StyledWriter sw;
-            std::string output_file = "results/P2P_" + pp->BACKEND + "_" + std::to_string(pp->N_GPUs) + "_" + \
-                                    std::string(getenv("HOST")) + ".json";
-            std::ofstream os(output_file.c_str(), std::ios::out);    // 覆盖写
-            if (! os.is_open()) {
-                std::cout << "error: can not find or create the file which named \" demo.json\"." << std::endl;
-            }
-            os << sw.write(results);
-            os.close();
-        }
-    }
-
+    delete[] sendcounts;
+    delete[] recvcounts;
+    delete[] sdispls;
+    delete[] rdispls;
+    
     delete pp;
     // MPI_Finalize();
     return 0;
