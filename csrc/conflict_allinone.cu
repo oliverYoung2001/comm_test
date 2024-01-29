@@ -30,13 +30,13 @@ PROC_PARAMS* pp;
 
 // #define CHECK_RESULT
 // #define PRINT_JSON
-int TIMES = 2000;
+int TIMES = 1;
 int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
 const int SIZEIDX_START = 0;
-const int SIZEIDX_END = 23;
+const int SIZEIDX_END = 1;
 
 // const int SIZES_LEN = 8;
 // const LL SIZES[SIZES_LEN] = {   // int = 4B
@@ -60,8 +60,9 @@ const int SIZEIDX_END = 23;
 //     // 1LL * 1024 * 1024 * 8192,   // OOM
 // };
 
-const int SIZES_LEN = 26;
+const int SIZES_LEN = 27;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
+    178956970 / 4,
     1LL * 256,                  // 1KB
     1LL * 512,                  // 2KB
     1LL * 1024 * 1,             // 4KB
