@@ -28,6 +28,7 @@
 #include <cstdio>
 #include <vector>
 #include "comm.h"
+#include "utils.h"
 
 // #include <helper_cuda.h>
 // #include <helper_timer.h>
@@ -125,39 +126,39 @@ void checkP2Paccess(int numGPUs) {
       "Bandwidth (GB/s) and unstable Latency (us) in those cases.\n\n");
 }
 
-inline void enableP2P(int ngpus) {
-    for (int i = 0; i < ngpus; ++ i) {
-        CUDA_CHECK(cudaSetDevice(i));
-        for (int j = 0; j < ngpus; ++ j) {
-            if (i == j) {
-                continue;
-            }
-            int peer_access_available = 0;
-            CUDA_CHECK(cudaDeviceCanAccessPeer(&peer_access_available, i, j));
+// inline void enableP2P(int ngpus) {
+//     for (int i = 0; i < ngpus; ++ i) {
+//         CUDA_CHECK(cudaSetDevice(i));
+//         for (int j = 0; j < ngpus; ++ j) {
+//             if (i == j) {
+//                 continue;
+//             }
+//             int peer_access_available = 0;
+//             CUDA_CHECK(cudaDeviceCanAccessPeer(&peer_access_available, i, j));
             
-            if (peer_access_available) {
-                CUDA_CHECK(cudaDeviceEnablePeerAccess(j, 0));
-                // printf("> GPU%d enabled direct access to GPU%d\n", i, j);
-                // fflush(stdout);
-            } else {
-                printf("> GPU%d disabled direct access to GPU%d !!!\n", i, j);
-                fflush(stdout);
-            }
-        }
-    }
-}
+//             if (peer_access_available) {
+//                 CUDA_CHECK(cudaDeviceEnablePeerAccess(j, 0));
+//                 // printf("> GPU%d enabled direct access to GPU%d\n", i, j);
+//                 // fflush(stdout);
+//             } else {
+//                 printf("> GPU%d disabled direct access to GPU%d !!!\n", i, j);
+//                 fflush(stdout);
+//             }
+//         }
+//     }
+// }
 
-void disableP2P(int ngpus) {
-    for (int i = 0; i < ngpus; ++ i) {
-        for (int j = 0; j < ngpus; ++ j) {
-            if (i == j) {
-                continue;
-            }
-            CUDA_CHECK(cudaSetDevice(i));
-            CUDA_CHECK(cudaDeviceDisablePeerAccess(j));
-        }
-    }
-}
+// void disableP2P(int ngpus) {
+//     for (int i = 0; i < ngpus; ++ i) {
+//         for (int j = 0; j < ngpus; ++ j) {
+//             if (i == j) {
+//                 continue;
+//             }
+//             CUDA_CHECK(cudaSetDevice(i));
+//             CUDA_CHECK(cudaDeviceDisablePeerAccess(j));
+//         }
+//     }
+// }
 
 void performP2PCopy(int *dest, int destDevice, int *src, int srcDevice,
                     int num_elems, int repeat, bool p2paccess,
