@@ -1,4 +1,12 @@
-msccl-tools/
+# reproduce sccl
+msccl-tools
+
+# reproduce taccl
+taccl/
+
+# reproduce TACOS
+TACOS/
+
 # host-specific configuration
 /common.mk
 
