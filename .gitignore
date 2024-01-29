@@ -20,7 +20,7 @@ TACOS/
 results*/
 
 # scripts
-scripts/
+# scripts/
 
 # intermediate file
 *.o

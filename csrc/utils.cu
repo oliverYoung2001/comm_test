@@ -1,9 +1,16 @@
 #include "utils.h"
+#include <set>
 
 void enableP2P(Json::Value& pairs) {
+    // deduplicate
+    std::set<std::pair<int, int> > s;
     for (int k = 0; k < pairs.size(); ++ k) {
-        int src = pairs[k][0].asInt();
-        int dst = pairs[k][1].asInt();
+        s.insert(std::make_pair(pairs[k][0].asInt(), pairs[k][1].asInt()));
+    }
+    // for (int k = 0; k < pairs.size(); ++ k) {
+    for (auto it = s.begin(); it != s.end(); ++ it) {
+        int src = it->first;
+        int dst = it->second;
         CUDA_CHECK(cudaSetDevice(src));
         int peer_access_available = 0;
         CUDA_CHECK(cudaDeviceCanAccessPeer(&peer_access_available, src, dst));
@@ -17,9 +24,15 @@ void enableP2P(Json::Value& pairs) {
 }
 
 void disableP2P(Json::Value& pairs) {
+    // deduplicate
+    std::set<std::pair<int, int> > s;
     for (int k = 0; k < pairs.size(); ++ k) {
-        int src = pairs[k][0].asInt();
-        int dst = pairs[k][1].asInt();
+        s.insert(std::make_pair(pairs[k][0].asInt(), pairs[k][1].asInt()));
+    }
+    // for (int k = 0; k < pairs.size(); ++ k) {
+    for (auto it = s.begin(); it != s.end(); ++ it) {
+        int src = it->first;
+        int dst = it->second;
         CUDA_CHECK(cudaSetDevice(src));
         CUDA_CHECK(cudaDeviceDisablePeerAccess(dst));
     }
