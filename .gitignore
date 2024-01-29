@@ -1,3 +1,6 @@
+# all executable
+csrc/build/
+
 # reproduce sccl
 msccl-tools
 

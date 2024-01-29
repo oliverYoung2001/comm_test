@@ -6,12 +6,13 @@ all: all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflic
 
 %_clean:
 	rm $@.o
-	rm $@
+	rm build/$@
 
 clean:
 	rm -f `ls *.o | grep -v jsoncpp.o`
 	rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
 	   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+	rm -rf build
 
 %.o: %.cpp
 	gcc $< -std=c++11 -c -o $@
@@ -20,7 +21,8 @@ clean:
 	nvcc $< -std=c++11 -Xcompiler -fopenmp -I$(NCCL_BUILD_PATH)/include -L$(NCCL_BUILD_PATH)/lib/ $(GENCODE) -lnccl -lcudart -c -o $@
 
 %: %.o comm.o jsoncpp.o utils.o
-	$(MPI_CXX) $? -no-pie -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -lcudart -lnccl -Wall -o $@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
+	mkdir -p build
+	$(MPI_CXX) $? -no-pie -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -lcudart -lnccl -Wall -o build/$@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
 
 
 # all2all_test: all2all_test.o comm.o jsoncpp.o utils.o
