@@ -102,8 +102,26 @@ void check_UVA(int ngpus) {
 }
 
 // cudaMemcpy_comm: 不适用于多机
-void cudaMemcpy_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
+void cudaMemcpy_comm(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
                cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request) {
+#ifdef DIFF_BUF
+    int* send_offset = new int[pp->N_GPUs];
+    int* recv_offset = new int[pp->N_GPUs];
+    memset(send_offset, 0, pp->N_GPUs * sizeof(int));
+    memset(recv_offset, 0, pp->N_GPUs * sizeof(int));
+    int src, dst;
+    for (int k = 0; k < pairs.size(); ++ k) {
+        src = pairs[k][0].asInt();
+        dst = pairs[k][1].asInt();
+        CUDA_CHECK(cudaMemcpyPeerAsync(recv_buf[dst] + recv_offset[dst], dst, \
+                                   send_buf[src] + send_offset[src], src, \
+                                   SIZE * sizeof(int), streams[k]));                                // 两者性能相似
+        send_offset[src] += SIZE;
+        recv_offset[dst] += SIZE;
+    }
+    delete[] recv_offset;
+    delete[] send_offset;
+#else
     for (int k = 0; k < pairs.size(); ++ k) {
         // CUDA_CHECK(cudaMemcpyAsync(recv_buf[pairs[k][1].asInt()], send_buf[pairs[k][0].asInt()], 
         //                             SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
@@ -111,36 +129,53 @@ void cudaMemcpy_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE
                                    send_buf[pairs[k][0].asInt()], pairs[k][0].asInt(), \
                                    SIZE * sizeof(int), streams[k]));                                // 两者性能相似
     }
+#endif
 }
 
 // NCCL_comm
-void NCCL_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
+void NCCL_comm(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
                cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request) {
     // printf("rank: %d", rank);
     // Json::FastWriter sw;
     // std::cout << sw.write(pairs);
+    int send_offset = 0;
+    int recv_offset = 0;
     NCCL_CHECK(ncclGroupStart());
     for (int k = 0; k < pairs.size(); ++ k) {
         if (rank == pairs[k][0].asInt()) {
-            NCCL_CHECK(ncclSend(send_buf[rank], SIZE, ncclInt32, pairs[k][1].asInt(), comm, streams[0]));
+            NCCL_CHECK(ncclSend(send_buf[rank] + send_offset, SIZE, ncclInt32, pairs[k][1].asInt(), comm, streams[0]));
+    #ifdef DIFF_BUF
+            send_offset += SIZE;
+    #endif
         }
         if (rank == pairs[k][1].asInt()) {
-            NCCL_CHECK(ncclRecv(recv_buf[rank], SIZE, ncclInt32, pairs[k][0].asInt(), comm, streams[0]));
+            NCCL_CHECK(ncclRecv(recv_buf[rank] + recv_offset, SIZE, ncclInt32, pairs[k][0].asInt(), comm, streams[0]));
+    #ifdef DIFF_BUF
+            recv_offset += SIZE;
+    #endif
         }
     }
     NCCL_CHECK(ncclGroupEnd());
 }
 
 // MPI_comm
-void MPI_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
+void MPI_comm(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
                cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request) {
     int req_num = 0;
+    int send_offset = 0;
+    int recv_offset = 0;
     for (int k = 0; k < pairs.size(); ++ k) {
         if (rank == pairs[k][0].asInt()) {
-            MPI_Isend(send_buf[rank], SIZE, MPI_INT, pairs[k][1].asInt(), 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
+            MPI_Isend(send_buf[rank] + send_offset, SIZE, MPI_INT, pairs[k][1].asInt(), 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
+    #ifdef DIFF_BUF
+            send_offset += SIZE;
+    #endif
         }
         if (rank == pairs[k][1].asInt()) {
-            MPI_Irecv(recv_buf[rank], SIZE, MPI_INT, pairs[k][0].asInt(), 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
+            MPI_Irecv(recv_buf[rank] + recv_offset, SIZE, MPI_INT, pairs[k][0].asInt(), 0/*tag*/, MPI_COMM_WORLD, mpi_request + (req_num ++));
+    #ifdef DIFF_BUF
+            recv_offset += SIZE;
+    #endif
         }
     }
     MPI_Waitall(req_num, mpi_request , nullptr);
