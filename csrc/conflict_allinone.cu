@@ -22,14 +22,13 @@
 #include <fstream>
 #include "assert.h" 
 #include "utils.h"
+#include "constant.h"
 
 // #include <format>    // need c++20
 typedef long long LL;
 
 PROC_PARAMS* pp;
 
-// #define CHECK_RESULT
-// #define PRINT_JSON
 int TIMES = 3;
 int WARMUP = 2;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
@@ -150,7 +149,7 @@ int main(int argc, char** argv) {
     setup_env(pp, argc, argv);
     std::string cp_file = argv[3];
 
-    void (*XXX_comm)(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
+    void (*XXX_comm)(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
                cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
     if (pp->BACKEND.compare("NCCL") == 0) {
         XXX_comm = NCCL_comm;
@@ -220,6 +219,40 @@ int main(int argc, char** argv) {
             // const LL CHUNK_SIZE = SIZE / (comm_size * comm_size);
             int** send_buf = new int*[pp->N_GPUs];
             int** recv_buf = new int*[pp->N_GPUs];
+    
+    #ifdef DIFF_BUF
+            if (pp->BACKEND.find("cudaMemcpy") != std::string::npos) {
+                for (int gpuid = 0; gpuid < pp->N_GPUs; ++ gpuid) {
+                    int local_send_buf_cnt = 0;
+                    int local_recv_buf_cnt = 0;
+                    for (int k = 0; k < root[cp].size(); ++ k) {
+                        if (root[cp][k][0].asInt() == gpuid) {
+                            ++ local_send_buf_cnt;
+                        }
+                        if (root[cp][k][1].asInt() == gpuid) {
+                            ++ local_recv_buf_cnt;
+                        }
+                    }
+                    CUDA_CHECK(cudaSetDevice(gpuid));
+                    CUDA_CHECK(cudaMalloc(&send_buf[gpuid], local_send_buf_cnt * SIZE * sizeof(int)));
+                    CUDA_CHECK(cudaMalloc(&recv_buf[gpuid], local_recv_buf_cnt * SIZE * sizeof(int)));
+                }
+            }
+            if (pp->BACKEND.compare("NCCL") == 0 || pp->BACKEND.compare("MPI") == 0) {
+                int local_send_buf_cnt = 0;
+                int local_recv_buf_cnt = 0;
+                for (int k = 0; k < root[cp].size(); ++ k) {
+                    if (root[cp][k][0].asInt() == pp->rank) {
+                        ++ local_send_buf_cnt;
+                    }
+                    if (root[cp][k][1].asInt() == pp->rank) {
+                        ++ local_recv_buf_cnt;
+                    }
+                }
+                CUDA_CHECK(cudaMalloc(&send_buf[pp->rank], local_send_buf_cnt * SIZE * sizeof(int)));
+                CUDA_CHECK(cudaMalloc(&recv_buf[pp->rank], local_recv_buf_cnt * SIZE * sizeof(int)));
+            }
+    #else
             if (pp->BACKEND.find("cudaMemcpy") != std::string::npos) {
                 for (int gpuid = 0; gpuid < pp->N_GPUs; ++ gpuid) {
                     CUDA_CHECK(cudaSetDevice(gpuid));
@@ -231,6 +264,7 @@ int main(int argc, char** argv) {
                 CUDA_CHECK(cudaMalloc(&send_buf[pp->rank], SIZE * sizeof(int)));
                 CUDA_CHECK(cudaMalloc(&recv_buf[pp->rank], SIZE * sizeof(int)));
             }
+    #endif
             
 
     #ifdef CHECK_RESULT
@@ -261,7 +295,7 @@ int main(int argc, char** argv) {
                 //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1]], send_buf[root[cp][k][0]], 
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
-                XXX_comm(root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                XXX_comm(pp, root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
                 barrier(pp->BACKEND, pp->N_GPUs);
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
@@ -282,7 +316,7 @@ int main(int argc, char** argv) {
                 //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1].asInt()], send_buf[root[cp][k][0].asInt()], 
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
-                XXX_comm(root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                XXX_comm(pp, root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
                 barrier(pp->BACKEND, pp->N_GPUs);
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义

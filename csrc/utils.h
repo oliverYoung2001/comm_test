@@ -23,6 +23,8 @@
 #include <fstream>
 #include "assert.h" 
 #include<algorithm>
+#include "constant.h"
+
 typedef long long LL;
 
 // #define CUBLASCHECK(cmd) do {                       \
@@ -53,29 +55,6 @@ typedef long long LL;
   }                                                 \
 } while(0)
 
-void enableP2P(Json::Value& pairs);
-
-void disableP2P(Json::Value& pairs);
-
-void enableP2P(int ngpus);
-
-void disableP2P(int ngpus);
-
-void enableP2P(int i, int j);
-
-void disableP2P(int i, int j);
-
-void check_UVA(int ngpus);
-
-// cudaMemcpy_comm: 不适用于多机
-void cudaMemcpy_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
-               cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
-// NCCL_comm
-void NCCL_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
-               cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
-// MPI_comm
-void MPI_comm(Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
-               cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
 
 struct PROC_PARAMS {
     std::string host;
@@ -148,6 +127,31 @@ struct PROC_PARAMS {
     //     nodename = "";
     // }
 };
+
+
+void enableP2P(Json::Value& pairs);
+
+void disableP2P(Json::Value& pairs);
+
+void enableP2P(int ngpus);
+
+void disableP2P(int ngpus);
+
+void enableP2P(int i, int j);
+
+void disableP2P(int i, int j);
+
+void check_UVA(int ngpus);
+
+// cudaMemcpy_comm: 不适用于多机
+void cudaMemcpy_comm(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
+               cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
+// NCCL_comm
+void NCCL_comm(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
+               cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
+// MPI_comm
+void MPI_comm(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_buf, LL SIZE, \
+               cudaStream_t* streams, int rank, ncclComm_t comm, MPI_Request* mpi_request);
 
 int parse_env(std::string key, std::string& value);
 
