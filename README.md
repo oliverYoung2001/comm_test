@@ -6,6 +6,7 @@ Support 4 kinds of p2p comm:
 2. MPI 
 3. cudaMemcpy-P 
 4. cudaMemcpy-nP
+
 (cudaMemcpy can enable or disable P2P mode)
 
 ## Setup Environments
@@ -20,15 +21,15 @@ Support 4 kinds of p2p comm:
 
 This tool can benchmark **together bandwidth** when multiple P2P communications execute simultaneously.
 
-##### scripts
+#### scripts
 ```shell
 ./scripts/<host_name>/conflict_allinone.sh
 ```
 
-##### externel inputs
+#### externel inputs
 Need a **conflict pattern file** as input config which descripts how P2P comms execute simultaneously.
 e.g. (ring algorithm for alltoall on a 4-GPU cluster)
-```json
+```
 [
     [[0, 1], [1, 2], [2, 3], [3, 0]],   // Ring4 + 1
     [[0, 2], [1, 3], [2, 0], [3, 1]],   // Ring4 + 2
