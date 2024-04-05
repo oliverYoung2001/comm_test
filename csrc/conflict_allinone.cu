@@ -35,9 +35,9 @@ const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, f
 // 62792 B
 
 const int SIZEIDX_START = 5;
-const int SIZEIDX_END = 8;
+const int SIZEIDX_END = 9;
 
-const int SIZES_LEN = 8;
+const int SIZES_LEN = 9;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
     1LL * 256,                  // 1KB      // 打不满带宽
     1LL * 1024 * 1,             // 4KB      // 打不满带宽
@@ -52,7 +52,7 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
     // 1LL * 1024 * 1024 * 64,     // 256MB
     1LL * 1024 * 1024 * 128,    // 512MB
     // 1LL * 1024 * 1024 * 256,    // 1GB
-    // 1LL * 1024 * 1024 * 512,    // 2GB
+    1LL * 1024 * 1024 * 512,    // 2GB
     // 1LL * 1024 * 1024 * 1024,   // 4GB      // 用cudaMemcpy，竟然有性能下降！！！
     // 1LL * 1024 * 1024 * 2048,   // 8GB
     // 1LL * 1024 * 1024 * 4096,   // 16GB

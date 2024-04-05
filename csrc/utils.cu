@@ -261,10 +261,10 @@ void setup_env(PROC_PARAMS*& pp, int argc, char** argv) {
     assert(pp->tasks_per_node <= GPU_VISIBLE);
     assert(pp->N_GPUs <= GPU_VISIBLE * pp->nodes);
 
-    if (pp->rank == 0) {
-        printf("BACKEND: %s\n", pp->BACKEND.c_str());
-        fflush(stdout);
-    }
+    // if (pp->rank == 0) {
+    //     printf("BACKEND: %s\n", pp->BACKEND.c_str());
+    //     fflush(stdout);
+    // }
 
     parse_env("RECORD_P2P", pp->RECORD_P2P);
 

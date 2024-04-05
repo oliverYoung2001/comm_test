@@ -20,7 +20,7 @@ BATCH = 1
 
 SIZES = [
     # [BATCH, 1024, 1024, 64],
-    # [BATCH, 1024, 1024, 128],
+    [BATCH, 1024, 1024, 128],
     # [BATCH, 1024, 1024, 256],
     # [BATCH, 1024, 1024, 512],
     [BATCH, 1024, 1024, 1024],
@@ -77,7 +77,7 @@ def net_test(rank, world_size, args):
         if rank == 0:
             t_d = t1 - t0
             print(f'time: {t_d}')
-            calc = reduce((lambda x,y: x*y), SIZE) * 4 * TIMES / (1024 * 1024 * 1024) # GB
+            calc = reduce((lambda x,y: x*y), SIZE) * 4 * TIMES / pow(1000, 3) # GB
             BD = calc / t_d
             print(f'BD: {BD} GB/s')
             if i + 1 == len(SIZES):

@@ -65,7 +65,7 @@ def net_test(rank, world_size, args):
         
         if rank == 0:
             t_d = t1 - t0
-            calc = reduce((lambda x,y: x*y), SIZE) * 4 * TIMES / (1024 * 1024 * 1024) # GB
+            calc = reduce((lambda x,y: x*y), SIZE) * 4 * TIMES / pow(1000, 3) # GB
             BD = calc / t_d
             print(f'SIZE {SIZE}, REAL_BD {BD} GB/s, time {t_d} s')
             # if i + 1 == len(SIZES):

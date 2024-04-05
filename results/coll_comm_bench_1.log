@@ -1,0 +1,174 @@
+PARTITION: gpu4-low
+HOST: g4004
+GPU_NUM: 4
+srun: job 8413 queued and waiting for resources
+srun: job 8413 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: broadcast
+msg_size: 16.78 MB, t_d: 0.0073 s, tput: 45.96 GB GB/s, busbw: 45.96 GB GB/s
+msg_size: 268.44 MB, t_d: 0.0322 s, tput: 166.59 GB GB/s, busbw: 166.59 GB GB/s
+msg_size: 1.07 GB, t_d: 0.1069 s, tput: 200.97 GB GB/s, busbw: 200.97 GB GB/s
+msg_size: 4.29 GB, t_d: 0.3765 s, tput: 228.13 GB GB/s, busbw: 228.13 GB GB/s
+COLL_COMM: reduce
+msg_size: 16.78 MB, t_d: 0.0075 s, tput: 44.97 GB GB/s, busbw: 44.97 GB GB/s
+msg_size: 268.44 MB, t_d: 0.0323 s, tput: 166.19 GB GB/s, busbw: 166.19 GB GB/s
+msg_size: 1.07 GB, t_d: 0.1107 s, tput: 194.08 GB GB/s, busbw: 194.08 GB GB/s
+msg_size: 4.29 GB, t_d: 0.3811 s, tput: 225.38 GB GB/s, busbw: 225.38 GB GB/s
+COLL_COMM: gather
+msg_size: 16.78 MB, t_d: 0.2103 s, tput: 1.6 GB GB/s, busbw: 1.6 GB GB/s
+msg_size: 268.44 MB, t_d: 0.2111 s, tput: 25.43 GB GB/s, busbw: 25.43 GB GB/s
+msg_size: 1.07 GB, t_d: 0.2767 s, tput: 77.61 GB GB/s, busbw: 77.61 GB GB/s
+msg_size: 4.29 GB, t_d: 1.0901 s, tput: 78.8 GB GB/s, busbw: 78.8 GB GB/s
+COLL_COMM: scatter
+msg_size: 16.78 MB, t_d: 0.2099 s, tput: 1.6 GB GB/s, busbw: 1.6 GB GB/s
+msg_size: 268.44 MB, t_d: 0.2106 s, tput: 25.49 GB GB/s, busbw: 25.49 GB GB/s
+msg_size: 1.07 GB, t_d: 0.2751 s, tput: 78.06 GB GB/s, busbw: 78.06 GB GB/s
+msg_size: 4.29 GB, t_d: 1.0846 s, tput: 79.2 GB GB/s, busbw: 79.2 GB GB/s
+COLL_COMM: allgather
+msg_size: 16.78 MB, t_d: 0.018 s, tput: 74.66 GB GB/s, busbw: 55.99 GB GB/s
+msg_size: 268.44 MB, t_d: 0.1195 s, tput: 179.78 GB GB/s, busbw: 134.83 GB GB/s
+msg_size: 1.07 GB, t_d: 0.4226 s, tput: 203.26 GB GB/s, busbw: 152.45 GB GB/s
+msg_size: 4.29 GB, t_d: 1.6412 s, tput: 209.35 GB GB/s, busbw: 157.01 GB GB/s
+COLL_COMM: reducescatter
+msg_size: 16.78 MB, t_d: 0.0115 s, tput: 116.43 GB GB/s, busbw: 87.32 GB GB/s
+msg_size: 268.44 MB, t_d: 0.1166 s, tput: 184.13 GB GB/s, busbw: 138.1 GB GB/s
+msg_size: 1.07 GB, t_d: 0.417 s, tput: 205.97 GB GB/s, busbw: 154.48 GB GB/s
+msg_size: 4.29 GB, t_d: 1.595 s, tput: 215.42 GB GB/s, busbw: 161.57 GB GB/s
+COLL_COMM: allreduce
+msg_size: 16.78 MB, t_d: 0.0063 s, tput: 106.14 GB GB/s, busbw: 79.61 GB GB/s
+msg_size: 268.44 MB, t_d: 0.0449 s, tput: 239.3 GB GB/s, busbw: 179.48 GB GB/s
+msg_size: 1.07 GB, t_d: 0.1614 s, tput: 266.19 GB GB/s, busbw: 199.64 GB GB/s
+msg_size: 4.29 GB, t_d: 0.5681 s, tput: 302.4 GB GB/s, busbw: 226.8 GB GB/s
+COLL_COMM: alltoall
+msg_size: 16.78 MB, t_d: 0.0146 s, tput: 92.21 GB GB/s, busbw: 69.16 GB GB/s
+msg_size: 268.44 MB, t_d: 0.0838 s, tput: 256.23 GB GB/s, busbw: 192.17 GB GB/s
+msg_size: 1.07 GB, t_d: 0.2967 s, tput: 289.53 GB GB/s, busbw: 217.15 GB GB/s
+msg_size: 4.29 GB, t_d: 1.1175 s, tput: 307.48 GB GB/s, busbw: 230.61 GB GB/s
+GPU_NUM: 8
+srun: job 8414 queued and waiting for resources
+srun: job 8414 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: broadcast
+msg_size: 16.78 MB, t_d: 0.0119 s, tput: 28.25 GB GB/s, busbw: 28.25 GB GB/s
+msg_size: 268.44 MB, t_d: 0.0367 s, tput: 146.41 GB GB/s, busbw: 146.41 GB GB/s
+msg_size: 1.07 GB, t_d: 0.1133 s, tput: 189.56 GB GB/s, busbw: 189.56 GB GB/s
+msg_size: 4.29 GB, t_d: 0.3842 s, tput: 223.57 GB GB/s, busbw: 223.57 GB GB/s
+COLL_COMM: reduce
+msg_size: 16.78 MB, t_d: 0.0114 s, tput: 29.42 GB GB/s, busbw: 29.42 GB GB/s
+msg_size: 268.44 MB, t_d: 0.0385 s, tput: 139.39 GB GB/s, busbw: 139.39 GB GB/s
+msg_size: 1.07 GB, t_d: 0.1147 s, tput: 187.3 GB GB/s, busbw: 187.3 GB GB/s
+msg_size: 4.29 GB, t_d: 0.3898 s, tput: 220.36 GB GB/s, busbw: 220.36 GB GB/s
+COLL_COMM: gather
+msg_size: 16.78 MB, t_d: 0.2107 s, tput: 1.59 GB GB/s, busbw: 1.59 GB GB/s
+msg_size: 268.44 MB, t_d: 0.2131 s, tput: 25.2 GB GB/s, busbw: 25.2 GB GB/s
+msg_size: 1.07 GB, t_d: 0.6004 s, tput: 35.77 GB GB/s, busbw: 35.77 GB GB/s
+msg_size: 4.29 GB, t_d: 2.3921 s, tput: 35.91 GB GB/s, busbw: 35.91 GB GB/s
+COLL_COMM: scatter
+msg_size: 16.78 MB, t_d: 0.2118 s, tput: 1.58 GB GB/s, busbw: 1.58 GB GB/s
+msg_size: 268.44 MB, t_d: 0.2139 s, tput: 25.1 GB GB/s, busbw: 25.1 GB GB/s
+msg_size: 1.07 GB, t_d: 0.6003 s, tput: 35.77 GB GB/s, busbw: 35.77 GB GB/s
+msg_size: 4.29 GB, t_d: 2.384 s, tput: 36.03 GB GB/s, busbw: 36.03 GB GB/s
+COLL_COMM: allgather
+msg_size: 16.78 MB, t_d: 0.0202 s, tput: 132.82 GB GB/s, busbw: 116.21 GB GB/s
+msg_size: 268.44 MB, t_d: 0.2423 s, tput: 177.26 GB GB/s, busbw: 155.1 GB GB/s
+msg_size: 1.07 GB, t_d: 0.8862 s, tput: 193.86 GB GB/s, busbw: 169.62 GB GB/s
+msg_size: 4.29 GB, t_d: 3.4685 s, tput: 198.12 GB GB/s, busbw: 173.36 GB GB/s
+COLL_COMM: reducescatter
+msg_size: 16.78 MB, t_d: 0.0202 s, tput: 132.56 GB GB/s, busbw: 115.99 GB GB/s
+msg_size: 268.44 MB, t_d: 0.2393 s, tput: 179.5 GB GB/s, busbw: 157.07 GB GB/s
+msg_size: 1.07 GB, t_d: 0.879 s, tput: 195.45 GB GB/s, busbw: 171.02 GB GB/s
+Traceback (most recent call last):
+  File "coll_comm_bench.py", line 196, in <module>
+    main()
+  File "coll_comm_bench.py", line 177, in main
+    COMM_FUNC(**kwargs)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/comm_impl.py", line 25, in reducescatter
+    distributed.reduce_scatter(output=tensor, input_list=tensor_list, group=group, async_op=async_op)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 3288, in reduce_scatter
+    work = default_pg.reduce_scatter([output], [input_list], opts)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 GiB. GPU 1 has a total capacty of 79.35 GiB of which 13.06 GiB is free. Including non-PyTorch memory, this process has 66.28 GiB memory in use. Of the allocated memory 36.00 GiB is allocated by PyTorch, and 28.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "coll_comm_bench.py", line 196, in <module>
+    main()
+  File "coll_comm_bench.py", line 177, in main
+    COMM_FUNC(**kwargs)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/comm_impl.py", line 25, in reducescatter
+    distributed.reduce_scatter(output=tensor, input_list=tensor_list, group=group, async_op=async_op)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 3288, in reduce_scatter
+    work = default_pg.reduce_scatter([output], [input_list], opts)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 GiB. GPU 3 has a total capacty of 79.35 GiB of which 13.06 GiB is free. Including non-PyTorch memory, this process has 66.28 GiB memory in use. Of the allocated memory 36.00 GiB is allocated by PyTorch, and 28.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "coll_comm_bench.py", line 196, in <module>
+    main()
+  File "coll_comm_bench.py", line 177, in main
+    COMM_FUNC(**kwargs)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/comm_impl.py", line 25, in reducescatter
+    distributed.reduce_scatter(output=tensor, input_list=tensor_list, group=group, async_op=async_op)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 3288, in reduce_scatter
+    work = default_pg.reduce_scatter([output], [input_list], opts)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 GiB. GPU 5 has a total capacty of 79.35 GiB of which 13.06 GiB is free. Including non-PyTorch memory, this process has 66.28 GiB memory in use. Of the allocated memory 36.00 GiB is allocated by PyTorch, and 28.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "coll_comm_bench.py", line 196, in <module>
+    main()
+  File "coll_comm_bench.py", line 177, in main
+    COMM_FUNC(**kwargs)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/comm_impl.py", line 25, in reducescatter
+    distributed.reduce_scatter(output=tensor, input_list=tensor_list, group=group, async_op=async_op)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 3288, in reduce_scatter
+    work = default_pg.reduce_scatter([output], [input_list], opts)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 GiB. GPU 6 has a total capacty of 79.35 GiB of which 13.06 GiB is free. Including non-PyTorch memory, this process has 66.28 GiB memory in use. Of the allocated memory 36.00 GiB is allocated by PyTorch, and 28.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "coll_comm_bench.py", line 196, in <module>
+    main()
+  File "coll_comm_bench.py", line 177, in main
+    COMM_FUNC(**kwargs)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/comm_impl.py", line 25, in reducescatter
+    distributed.reduce_scatter(output=tensor, input_list=tensor_list, group=group, async_op=async_op)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 3288, in reduce_scatter
+    work = default_pg.reduce_scatter([output], [input_list], opts)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 GiB. GPU 7 has a total capacty of 79.35 GiB of which 13.21 GiB is free. Including non-PyTorch memory, this process has 66.14 GiB memory in use. Of the allocated memory 36.00 GiB is allocated by PyTorch, and 28.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "coll_comm_bench.py", line 196, in <module>
+    main()
+  File "coll_comm_bench.py", line 177, in main
+    COMM_FUNC(**kwargs)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/comm_impl.py", line 25, in reducescatter
+    distributed.reduce_scatter(output=tensor, input_list=tensor_list, group=group, async_op=async_op)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 3288, in reduce_scatter
+    work = default_pg.reduce_scatter([output], [input_list], opts)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 GiB. GPU 2 has a total capacty of 79.35 GiB of which 13.06 GiB is free. Including non-PyTorch memory, this process has 66.28 GiB memory in use. Of the allocated memory 36.00 GiB is allocated by PyTorch, and 28.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "coll_comm_bench.py", line 196, in <module>
+    main()
+  File "coll_comm_bench.py", line 177, in main
+    COMM_FUNC(**kwargs)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/comm_impl.py", line 25, in reducescatter
+    distributed.reduce_scatter(output=tensor, input_list=tensor_list, group=group, async_op=async_op)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 3288, in reduce_scatter
+    work = default_pg.reduce_scatter([output], [input_list], opts)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 GiB. GPU 4 has a total capacty of 79.35 GiB of which 13.06 GiB is free. Including non-PyTorch memory, this process has 66.28 GiB memory in use. Of the allocated memory 36.00 GiB is allocated by PyTorch, and 28.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+srun: error: g4004: task 7: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=8414.0
+slurmstepd: error: *** STEP 8414.0 ON g4004 CANCELLED AT 2024-04-06T00:31:28 ***
+srun: error: g4004: task 1: Exited with exit code 1
+srun: error: g4004: task 6: Exited with exit code 1
+srun: error: g4004: task 2: Exited with exit code 1
+srun: error: g4004: task 5: Exited with exit code 1
+srun: error: g4004: task 4: Exited with exit code 1
+srun: error: g4004: task 3: Exited with exit code 1
+srun: error: g4004: task 0: Terminated
+srun: Force Terminated StepId=8414.0
