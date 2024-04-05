@@ -28,9 +28,9 @@ results*/
 # executable file
 csrc/all2all_test
 
-# third-party lib
-csrc/jsoncpp.cpp
-csrc/json/
+# # third-party lib
+# csrc/jsoncpp.cpp
+# csrc/json/
 
 # benchmarks
 benchmarks/
