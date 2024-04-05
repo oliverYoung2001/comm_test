@@ -9,7 +9,7 @@ import time
 # from colossalai.core import global_context as gpc
 
 from utils.comm_async import gather_async, gather_async_opp
-from utils.utils import calc_comm_vol_a2a, calc_comm_vol_ag
+from utils.common import calc_comm_vol_a2a, calc_comm_vol_ag
 import random
 import sys
 

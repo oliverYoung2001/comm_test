@@ -10,7 +10,7 @@ from pandas import DataFrame
 import os
 import numpy as np
 pd.options.mode.chained_assignment = None  # default='warn'
-from utils.utils import execute_comm_ops
+from utils.common import execute_comm_ops
 
 MASTER_ADDR = '127.0.0.1'
 MASTER_PORT = 10375

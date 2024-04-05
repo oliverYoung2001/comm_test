@@ -15,7 +15,7 @@ import functools as F
 
 import torch
 from utils.comm_impl import *
-from utils.utils import *
+from utils.common import *
 import torch.distributed as dist
 import time
 import os

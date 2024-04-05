@@ -17,6 +17,7 @@ echo "HOST: ${HOST}"
 
 for GPU_NUM in $GPU_NUMs; do
 echo "GPU_NUM: $GPU_NUM"
+OUTPUT=./prof_data/coll_comm_bench_${GPU_NUM}_${HOST}.json
 
 # --mem-per-cpu $MEM_PER_CPU \
 # --mem $MEM_PER_NODE \
@@ -35,6 +36,7 @@ if [ "$HOST" != "None" ]; then
 fi
 
 srun $SLURM_ARGS \
-python $EXECUBLE
+python $EXECUBLE \
+    --output $OUTPUT \
 
 done

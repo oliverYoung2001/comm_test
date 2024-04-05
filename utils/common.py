@@ -33,14 +33,15 @@ def print_rank_0(message):
         print(message, flush=True)
 
 # Helper function to pretty-print message sizes
-def convert_size(size_bytes):
+def convert_size(size_bytes, infix=' ', suffix='B'):
     if size_bytes == 0:
-        return "0B"
-    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+        return "0" + suffix
+    # size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+    size_name = ("", "K", "M", "G", "T", "P", "E", "Z", "Y")
     i = int(math.floor(math.log(size_bytes, BYTE_MULTPLE_UP)))
     p = math.pow(BYTE_MULTPLE_UP, i)
     s = int(round(size_bytes / p, 2))
-    return "%s %s" % (s, size_name[i])
+    return "%s%s%s%s" % (s, infix, size_name[i], suffix)
 
 # Helper function to pretty-print message sizes
 def convert_throughput(size_bytes):
