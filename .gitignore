@@ -1,3 +1,5 @@
+third_party/
+
 # all executable
 csrc/build/
 
@@ -17,7 +19,7 @@ TACOS/
 **/__pycache__
 
 # results
-results*/
+# results*/
 
 # scripts
 # scripts/

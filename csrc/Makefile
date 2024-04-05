@@ -22,7 +22,7 @@ clean:
 
 %: %.o comm.o jsoncpp.o utils.o
 	mkdir -p build
-	$(MPI_CXX) $? -no-pie -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -lcudart -lnccl -Wall -o build/$@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
+	$(MPI_CXX) $? -no-pie -std=c++11 -fopenmp -L$(NCCL_BUILD_PATH)/lib -L$(CUDART_LIB) -lcudart -lnccl -Wall -o build/$@ -Wl,-rpath=$(NCCL_BUILD_PATH)/lib
 
 
 # all2all_test: all2all_test.o comm.o jsoncpp.o utils.o
