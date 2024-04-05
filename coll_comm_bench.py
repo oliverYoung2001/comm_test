@@ -1,11 +1,13 @@
 import torch
 from utils.comm_impl import *
-from utils.utils import *
+from utils.common import *
 import torch.distributed as dist
 import time
 import os
 import socket
 import math
+import argparse
+import json
 
 # BYTE_MULTPLE_UP = 1024
 # BYTE_MULTPLE_DOWN = 1000
@@ -71,6 +73,15 @@ TIMES = 20
 MASTER_ADDR = 'localhost'
 MASTER_PORT = 10378             # idle port
 
+def parse_args():
+    parser = argparse.ArgumentParser(description='Conflict Benchmark Arguments',
+                                    allow_abbrev=True)
+    parser.add_argument('--backend', type=str, default='NCCL',
+                       help='Communication backend.')
+    parser.add_argument('--output', type=str, default=None,
+                       help='Prof results of json format.')
+    args = parser.parse_args()
+    return args
 
 
 def make_args(coll_comm, msg_size, src, dst, group):
@@ -191,6 +202,7 @@ def calc_bw_log(comm_op, size, duration):
 
 
 def main():
+    args = parse_args()
     global PROC_INFO
     PROC_INFO = get_proc_info()
     init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend='NCCL')
@@ -198,7 +210,13 @@ def main():
     torch.cuda.synchronize()
     dist.barrier(group=None, async_op=False)
     print_rank_0(f'[INFO]: Cluster init done !!!')
+    
+    BW_TABLE = {'meta': MSG_SIZES}
     for coll_comm in COLL_COMMs:
+        coll_table = BW_TABLE[coll_comm] = {
+            'tput': [],
+            'busbw': [],
+        }
         print_rank_0(f'COLL_COMM: {abbr2full[coll_comm]}')
         COMM_FUNC =  globals()[abbr2full[coll_comm]]
         for msg_size in MSG_SIZES:
@@ -227,9 +245,12 @@ def main():
             tput, busbw = calc_bw_log(abbr2full[coll_comm], msg_size, t_d / TIMES)  # B/s
             print_rank_0(f'msg_size: {convert_size(msg_size)}, t_d: {round(t_d, 4)} s, tput: {convert_throughput(tput)}/s, busbw: {convert_throughput(busbw)}/s')
             torch.cuda.empty_cache()
-
-        # break
-        
+            coll_table['tput'].append(tput / pow(BYTE_MULTPLE_DOWN, 3))
+            coll_table['busbw'].append(busbw / pow(BYTE_MULTPLE_DOWN, 3))
+    with open(args.output, 'w') as f:
+        f.seek(0)  #定位
+        f.truncate()
+        json.dump(BW_TABLE, f)        
 
 if __name__ == '__main__':
     main()
