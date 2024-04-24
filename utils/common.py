@@ -98,14 +98,14 @@ def get_proc_info():
 
 def init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend):
     init_method = f'tcp://[{MASTER_ADDR}]:{MASTER_PORT}'
-    # print(f'rank: {PROC_INFO["rank"]}')
     # print(f'world_size: {PROC_INFO["world_size"]}')
+    # print(f'rank: {PROC_INFO["rank"]}, local_rank: {PROC_INFO["local_rank"]}', flush=True)
     dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
                             rank=PROC_INFO['rank'], group_name='coll_comm_benchmark')
     if torch.cuda.is_available():
         # os.environ['CUDA_VISIBLE_DEVICES'] = str(GPUID)
         # torch.cuda.set_device(0)
-        torch.cuda.set_device(PROC_INFO['rank'])
+        torch.cuda.set_device(PROC_INFO['local_rank'])
     else:
         print(f'[Error]: CUDA is not available !!!')
         exit(- 1)
