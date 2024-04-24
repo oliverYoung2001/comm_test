@@ -1,17 +1,10 @@
-# set -x 
+#!/bin/bash
 
 # export RECORD_P2P=1
 EXECUBLE=conflict_bench.py
 GPU_NUMs="8"
-# BACKEND=NCCL    # Baseline
-# BACKEND=cudaMemcpy
-# BACKEND=MPI     # MPI_Isend/MPI_Irecv 时内存泄露？
-# BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
-# BACKENDs="NCCL cudaMemcpy"
-# BACKENDs="cudaMemcpy"
-# BACKENDs="NCCL MPI"
+GPU_NUMs="16"
 BACKENDs="NCCL"
-# BACKENDs="MPI NCCL"
 CP_FILE_NAMEs="p2p_si p2p_bi"
 CP_FILE_NAMEs="p2p_bi"
 CP_FILE_NAMEs="conflict_patterns"
@@ -19,8 +12,8 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="bad_patterns_3+3"
 # CP_FILE_NAMEs="bad_patterns_pcie_switch"
 # CP_FILE_NAMEs="all2all_4"
-CP_FILE_NAMEs="E2E_4 E2E_8"
-# CP_FILE_NAMEs="small"
+# CP_FILE_NAMEs="E2E_4 E2E_8"
+CP_FILE_NAMEs="small"
 
 # nico:
 # PARTITION=SXM
@@ -34,13 +27,9 @@ HOSTs="nico2"
 # qy:
 PARTITION=gpu4-low
 HOSTs="g4004"
-# HOST=None
-export MASTER_ADDR=localhost
+HOSTs="None"
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
-
-# make clean
-# make $EXECUBLE
 
 # mkdir results
 mkdir -p results
@@ -53,17 +42,12 @@ for GPU_NUM in $GPU_NUMs; do       # for cudaMemcpy
 for CP_FILE_NAME in $CP_FILE_NAMEs; do
 echo "CP_FILE_NAME: ${CP_FILE_NAME}"
 
-if [[ "$BACKEND" =~ "cudaMemcpy" ]]; then # "$str1" =~ "$str2" means whether $str1 contains $str2
-   PROC_NUM=1
-else
-   PROC_NUM=$GPU_NUM
-fi
+PROC_NUM=$GPU_NUM
 if [ $GPU_NUM -le 8 ]; then
    NNODES=1
 else
    NNODES=$(($GPU_NUM / 8))
 fi
-# NODE_NUM=2
 NTASK_PER_NODE=`expr $PROC_NUM / $NNODES`
 
 # export CUDA_VISIBLE_DEVICES=4,5,6,7
@@ -97,17 +81,13 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
+# export CUDA_LAUNCH_BLOCKING=1
+set -x
 srun $SLURM_ARGS \
+./scripts/executor.sh \
 python $EXECUBLE \
     --backend $BACKEND \
     --config ./scripts/configs/${CP_FILE_NAME}.json \
-# ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
-
-# if [ "$RECORD_P2P" ]; then
-#    python utils/build_excel.py \
-#       --input_file_name "P2P_${BACKEND}_${GPU_NUM}_${HOST}" \
-#       # --output_file_excel "results/P2P_${BACKEND}_${GPU_NUM}_${HOST}.xlsx"
-# fi
 
 done
 done

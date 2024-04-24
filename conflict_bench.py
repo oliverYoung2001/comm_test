@@ -13,6 +13,9 @@ import functools as F
 # pd.options.mode.chained_assignment = None  # default='warn'
 # from utils.utils import execute_comm_ops
 
+
+import warnings
+warnings.filterwarnings("ignore")   # [NOTE]: disable all warning
 import torch
 from utils.comm_impl import *
 from utils.common import *
@@ -24,7 +27,6 @@ import math
 import argparse
 import json
 import numpy
-
 # BATCH = 1
 
 MSG_SIZES = [
@@ -36,16 +38,39 @@ MSG_SIZES = [
     # pow(BYTE_MULTPLE_UP, 2),
     # pow(BYTE_MULTPLE_UP, 2) * 4,
     pow(BYTE_MULTPLE_UP, 2) * 16,
-    # pow(BYTE_MULTPLE_UP, 2) * 64,
+    pow(BYTE_MULTPLE_UP, 2) * 64,
     pow(BYTE_MULTPLE_UP, 2) * 256,
     pow(BYTE_MULTPLE_UP, 3),         # 1GB
     # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
+# MSG_SIZES = [
+#     # BYTE_MULTPLE_UP,
+#     # BYTE_MULTPLE_UP * 4,
+#     # BYTE_MULTPLE_UP * 16,
+#     # BYTE_MULTPLE_UP * 64,
+#     # BYTE_MULTPLE_UP * 256,
+#     pow(BYTE_MULTPLE_UP, 2),            # 1MB
+#     pow(BYTE_MULTPLE_UP, 2) * 2,
+#     pow(BYTE_MULTPLE_UP, 2) * 4,
+#     pow(BYTE_MULTPLE_UP, 2) * 8,
+#     pow(BYTE_MULTPLE_UP, 2) * 16,
+#     pow(BYTE_MULTPLE_UP, 2) * 32,
+#     pow(BYTE_MULTPLE_UP, 2) * 64,
+#     pow(BYTE_MULTPLE_UP, 2) * 128,
+#     pow(BYTE_MULTPLE_UP, 2) * 256,
+#     pow(BYTE_MULTPLE_UP, 2) * 512,
+#     pow(BYTE_MULTPLE_UP, 3),         # 1GB
+#     pow(BYTE_MULTPLE_UP, 3) * 2,
+#     pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+#     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+# ]
+
 # GPU_NUM = 8
 WARM_UP = 5
-TIMES = 10  
+TIMES = 20
+# TIMES = 100
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Conflict Benchmark Arguments',
@@ -74,20 +99,28 @@ def main():
     
     with open(args.config, 'r') as f:
         patterns = json.load(f)
+    row_a = torch.empty(max(MSG_SIZES), dtype=torch.int8).cuda()
+    row_b = torch.empty(max(MSG_SIZES), dtype=torch.int8).cuda()
+
     for pattern in patterns:
         if max(max(pattern)) >= world_size:
             continue
         print_rank_0(f'{pattern}')
+        ranks = [rank for pair in pattern for rank in pair]
+        # Use minimized ProcessGroup, deduplicate and sort
+        ranks = sorted(list(set(ranks)))
+        # print_rank_0(f'ranks: {ranks}')
+        pg = torch.distributed.new_group(ranks)
         for i, SIZE in enumerate(MSG_SIZES):
-            a = torch.randn(SIZE, dtype=torch.float32).cuda()
-            b = torch.randn(SIZE, dtype=torch.float32).cuda()
+            a = row_a[: SIZE]
+            b = row_b[: SIZE]
             
             ops = []
             for pair in pattern:
                 if rank == pair[0]:
-                    ops.append(dist.P2POp(dist.isend, a, pair[1]))        # 是否用相同的buffer对性能没有影响
+                    ops.append(dist.P2POp(dist.isend, a, pair[1], group=pg))        # 是否用相同的buffer对性能没有影响
                 if rank == pair[1]:
-                    ops.append(dist.P2POp(dist.irecv, b, pair[0]))
+                    ops.append(dist.P2POp(dist.irecv, b, pair[0], group=pg))
             
             torch.cuda.synchronize()
             dist.barrier()
@@ -101,16 +134,17 @@ def main():
                 # light-barrier 稍快一些(0.1GB/s)
                 # barrier(=light-barrier+cpu-barrier) 与light-barrier相同
                 # cpu-barrier本身没有意义
-                execute_comm_ops(ops, barrier=True, light_barrier=True)
+                execute_comm_ops(ops, barrier=False, light_barrier=False)
             torch.cuda.synchronize()
             dist.barrier()
             t1 = time.time()
         
             t_d = t1 - t0
             # calc = len(GPU_pairs) * reduce((lambda x,y: x*y), SIZE) * 4 * TIMES / pow(1024, 3) # GB
-            calc = SIZE * 4 * len(pattern) * TIMES # B
+            calc = SIZE * len(pattern) * TIMES # B
             BD = calc / t_d
-            print_rank_0(f'rank {rank}, SIZE {convert_size(SIZE)}, REAL_BD {convert_throughput(BD)}/s, time {round(t_d, 4)} s, comm_vol {convert_throughput(calc)}')
+            print_rank_0(f'SIZE {convert_size(SIZE)}, REAL_BD {convert_throughput(BD)}/s, time {round(t_d, 4)} s, comm_vol {convert_throughput(calc)}')
+            # print(f'rank:{rank}, SIZE {convert_size(SIZE)}, REAL_BD {convert_throughput(BD)}/s, time {round(t_d, 4)} s, comm_vol {convert_throughput(calc)}', flush=True)
             # if i + 1 == len(SIZES):
             #     file_path = args.excel_file
             #     if not os.path.exists(file_path):
