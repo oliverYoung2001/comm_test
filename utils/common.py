@@ -44,13 +44,13 @@ def convert_size(size_bytes, infix=' ', suffix='B'):
     return "%s%s%s%s" % (s, infix, size_name[i], suffix)
 
 # Helper function to pretty-print message sizes
-def convert_throughput(size_bytes):
+def convert_throughput(size_bytes, round_=3):
     if size_bytes == 0:
         return "0B"
     size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
     i = int(math.floor(math.log(size_bytes, BYTE_MULTPLE_DOWN)))
     p = math.pow(BYTE_MULTPLE_DOWN, i)
-    s = round(size_bytes / p, 2)
+    s = round(size_bytes / p, round_)
     return "%s %s" % (s, size_name[i])
 
 def get_proc_info():
@@ -99,9 +99,11 @@ def get_proc_info():
 def init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend):
     init_method = f'tcp://[{MASTER_ADDR}]:{MASTER_PORT}'
     # print(f'world_size: {PROC_INFO["world_size"]}')
+    # print(f'MASTER_ADDR: {MASTER_ADDR}')
+    # print(f'MASTER_PORT: {MASTER_PORT}')
     # print(f'rank: {PROC_INFO["rank"]}, local_rank: {PROC_INFO["local_rank"]}', flush=True)
     dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
-                            rank=PROC_INFO['rank'], group_name='coll_comm_benchmark')
+                            rank=PROC_INFO['rank'])
     if torch.cuda.is_available():
         # os.environ['CUDA_VISIBLE_DEVICES'] = str(GPUID)
         # torch.cuda.set_device(0)

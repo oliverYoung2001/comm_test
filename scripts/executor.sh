@@ -11,7 +11,7 @@ then
 fi
 if [ -z $MASTER_PORT ]
 then
-    export MASTER_PORT=$((RANDOM % 12000 + 10000))
+    export MASTER_PORT=12580
 fi
 
 if [ ! -z $SLURM_PROCID ]
