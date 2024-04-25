@@ -3,6 +3,9 @@
 # GPU-GPU
 nvidia-smi topo -m
 
+# ib
+ibstatus
+
 # pcie attributes
 lspci -tvv  # pcie tree
 /sys/devices/...    # pcie bus detailed info

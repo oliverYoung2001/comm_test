@@ -6,51 +6,43 @@ GPU_NUM: 16
 PROC_NUM: 16
 NNODES: 2
 NTASK_PER_NODE: 8
-+ srun -p gpu4-low -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small.json
-srun: job 11086 queued and waiting for resources
-srun: job 11086 has been allocated resources
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small.json
 [INFO]: Cluster init done !!!
 [[0, 1]]
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
-SIZE 16 MB, REAL_BD 174.12 GB/s, time 0.0019 s, comm_vol 335.54 MB
-SIZE 64 MB, REAL_BD 219.99 GB/s, time 0.0061 s, comm_vol 1.34 GB
-SIZE 256 MB, REAL_BD 244.16 GB/s, time 0.022 s, comm_vol 5.37 GB
-SIZE 1 GB, REAL_BD 254.56 GB/s, time 0.0844 s, comm_vol 21.47 GB
-SIZE 4 GB, REAL_BD 260.16 GB/s, time 0.3302 s, comm_vol 85.9 GB
+SIZE 16 MB, REAL_BD 8.51 GB/s, time 0.0394 s, comm_vol 335.54 MB
+SIZE 64 MB, REAL_BD 8.6 GB/s, time 0.156 s, comm_vol 1.34 GB
+SIZE 256 MB, REAL_BD 8.62 GB/s, time 0.6226 s, comm_vol 5.37 GB
+SIZE 1 GB, REAL_BD 8.62 GB/s, time 2.4907 s, comm_vol 21.47 GB
 [[0, 1], [1, 0]]
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
-SIZE 16 MB, REAL_BD 250.78 GB/s, time 0.0027 s, comm_vol 671.09 MB
-SIZE 64 MB, REAL_BD 334.53 GB/s, time 0.008 s, comm_vol 2.68 GB
-SIZE 256 MB, REAL_BD 376.92 GB/s, time 0.0285 s, comm_vol 10.74 GB
-SIZE 1 GB, REAL_BD 459.8 GB/s, time 0.0934 s, comm_vol 42.95 GB
-SIZE 4 GB, REAL_BD 466.83 GB/s, time 0.368 s, comm_vol 171.8 GB
+SIZE 16 MB, REAL_BD 9.02 GB/s, time 0.0744 s, comm_vol 671.09 MB
+SIZE 64 MB, REAL_BD 9.06 GB/s, time 0.2964 s, comm_vol 2.68 GB
+SIZE 256 MB, REAL_BD 9.07 GB/s, time 1.1838 s, comm_vol 10.74 GB
+SIZE 1 GB, REAL_BD 9.07 GB/s, time 4.7333 s, comm_vol 42.95 GB
 [[0, 8]]
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
-SIZE 16 MB, REAL_BD 5.95 GB/s, time 0.0564 s, comm_vol 335.54 MB
-SIZE 64 MB, REAL_BD 4.95 GB/s, time 0.2714 s, comm_vol 1.34 GB
-SIZE 256 MB, REAL_BD 6.05 GB/s, time 0.8881 s, comm_vol 5.37 GB
-SIZE 1 GB, REAL_BD 6.04 GB/s, time 3.5566 s, comm_vol 21.47 GB
-SIZE 4 GB, REAL_BD 5.59 GB/s, time 15.3724 s, comm_vol 85.9 GB
+SIZE 16 MB, REAL_BD 6.85 GB/s, time 0.049 s, comm_vol 335.54 MB
+SIZE 64 MB, REAL_BD 6.92 GB/s, time 0.1941 s, comm_vol 1.34 GB
+SIZE 256 MB, REAL_BD 6.93 GB/s, time 0.7749 s, comm_vol 5.37 GB
+SIZE 1 GB, REAL_BD 6.94 GB/s, time 3.0943 s, comm_vol 21.47 GB
 [[0, 15]]
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
-SIZE 16 MB, REAL_BD 8.25 GB/s, time 0.0407 s, comm_vol 335.54 MB
-SIZE 64 MB, REAL_BD 8.27 GB/s, time 0.1624 s, comm_vol 1.34 GB
-SIZE 256 MB, REAL_BD 5.5 GB/s, time 0.9755 s, comm_vol 5.37 GB
-SIZE 1 GB, REAL_BD 4.11 GB/s, time 5.2205 s, comm_vol 21.47 GB
-SIZE 4 GB, REAL_BD 4.65 GB/s, time 18.4858 s, comm_vol 85.9 GB
+SIZE 16 MB, REAL_BD 6.67 GB/s, time 0.0503 s, comm_vol 335.54 MB
+SIZE 64 MB, REAL_BD 6.7 GB/s, time 0.2003 s, comm_vol 1.34 GB
+SIZE 256 MB, REAL_BD 6.7 GB/s, time 0.8014 s, comm_vol 5.37 GB
+SIZE 1 GB, REAL_BD 6.7 GB/s, time 3.2045 s, comm_vol 21.47 GB
 [[0, 8], [8, 0]]
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
-SIZE 16 MB, REAL_BD 6.59 GB/s, time 0.1019 s, comm_vol 671.09 MB
-SIZE 64 MB, REAL_BD 6.33 GB/s, time 0.424 s, comm_vol 2.68 GB
-SIZE 256 MB, REAL_BD 6.64 GB/s, time 1.6162 s, comm_vol 10.74 GB
-SIZE 1 GB, REAL_BD 6.99 GB/s, time 6.1441 s, comm_vol 42.95 GB
-SIZE 4 GB, REAL_BD 6.59 GB/s, time 26.0717 s, comm_vol 171.8 GB
+SIZE 16 MB, REAL_BD 11.71 GB/s, time 0.0573 s, comm_vol 671.09 MB
+SIZE 64 MB, REAL_BD 12.01 GB/s, time 0.2235 s, comm_vol 2.68 GB
+SIZE 256 MB, REAL_BD 12.13 GB/s, time 0.8854 s, comm_vol 10.74 GB
+SIZE 1 GB, REAL_BD 12.17 GB/s, time 3.5302 s, comm_vol 42.95 GB
 [[0, 15], [15, 0]]
 [W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
-SIZE 16 MB, REAL_BD 8.4 GB/s, time 0.0799 s, comm_vol 671.09 MB
-SIZE 64 MB, REAL_BD 9.16 GB/s, time 0.2931 s, comm_vol 2.68 GB
-SIZE 256 MB, REAL_BD 7.33 GB/s, time 1.464 s, comm_vol 10.74 GB
-SIZE 1 GB, REAL_BD 6.05 GB/s, time 7.0961 s, comm_vol 42.95 GB
-SIZE 4 GB, REAL_BD 6.48 GB/s, time 26.4975 s, comm_vol 171.8 GB
+SIZE 16 MB, REAL_BD 11.3 GB/s, time 0.0594 s, comm_vol 671.09 MB
+SIZE 64 MB, REAL_BD 11.55 GB/s, time 0.2324 s, comm_vol 2.68 GB
+SIZE 256 MB, REAL_BD 11.57 GB/s, time 0.9279 s, comm_vol 10.74 GB
+SIZE 1 GB, REAL_BD 11.56 GB/s, time 3.7159 s, comm_vol 42.95 GB

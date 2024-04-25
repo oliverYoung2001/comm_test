@@ -16,10 +16,6 @@ import functools as F
 
 import warnings
 warnings.filterwarnings("ignore")   # [NOTE]: disable all warning
-import torch
-from utils.comm_impl import *
-from utils.common import *
-import torch.distributed as dist
 import time
 import os
 import socket
@@ -27,6 +23,10 @@ import math
 import argparse
 import json
 import numpy
+from utils.comm_impl import *
+from utils.common import *
+import torch
+import torch.distributed as dist
 # BATCH = 1
 
 MSG_SIZES = [

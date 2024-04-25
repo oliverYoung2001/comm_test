@@ -20,14 +20,17 @@ CP_FILE_NAMEs="small"
 # HOSTs="zoltan"
 # PARTITION=V100
 # HOSTs="nico3,nico4"
-PARTITION=Big
+PARTITION=Mix
 # HOSTs="nico1,nico2"
 HOSTs="nico2"
 
 # qy:
-PARTITION=gpu4-low
-HOSTs="g4004"
+# PARTITION=gpu4-low
+# HOSTs="g4004"
+
+
 HOSTs="None"
+
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 

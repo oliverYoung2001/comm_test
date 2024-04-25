@@ -2,19 +2,31 @@
 
 set -x
 
+# nico:
+PARTITION=Mix
+export GPU_NUM=16
+
 # qy:
-PARTITION=gpu4-low
-HOST="g4003"
+# PARTITION=gpu4-low
+# HOST="g4003"
+# GPU_NUM=8
+
 HOST=None
-MAX_GPU_NUM=8
 
+EXECUBLE=conflict_allinone
 
-if [ $MAX_GPU_NUM -le 8 ]; then
+# make clean
+# make $EXECUBLE
+
+# mkdir results
+mkdir -p results
+
+if [ $GPU_NUM -le 8 ]; then
    NNODES=1
 else
-   NNODES=$(($MAX_GPU_NUM / 8))
+   NNODES=$(($GPU_NUM / 8))
 fi
-NGPU_PER_NODE=`expr $MAX_GPU_NUM / $NNODES`
+NGPU_PER_NODE=`expr $GPU_NUM / $NNODES`
 
 
 echo "NNODES: $NNODES"
@@ -37,6 +49,6 @@ if [ "$HOST" != "None" ]; then
         -w $HOST \
     "
 fi
-# salloc -n $MAX_GPU_NUM
+# salloc -n $GPU_NUM
 srun $SLURM_ARGS \
-./scripts/conflict_allinone.sh
+./scripts/conflict_allinone.sh $NGPU_PER_NODE $EXECUBLE
