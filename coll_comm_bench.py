@@ -16,6 +16,7 @@ PROC_INFO: dict
 
 COLL_COMMs = ['b', 'r', 'g', 's', 'ag', 'rs', 'ar', 'a2a']
 COLL_COMMs = ['ag', 'rs', 'a2a']
+COLL_COMMs = ['a2a']
 abbr2full = {
     'b': 'broadcast',
     'r': 'reduce',
@@ -36,42 +37,38 @@ MSG_SIZES = [
     # pow(BYTE_MULTPLE_UP, 2),
     # pow(BYTE_MULTPLE_UP, 2) * 4,
     pow(BYTE_MULTPLE_UP, 2) * 16,
-    # pow(BYTE_MULTPLE_UP, 2) * 64,
+    pow(BYTE_MULTPLE_UP, 2) * 64,
     pow(BYTE_MULTPLE_UP, 2) * 256,
-    pow(BYTE_MULTPLE_UP, 3),         # 1GB
-    # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+    # pow(BYTE_MULTPLE_UP, 3),         # 1GB
+    pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+    pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
-MSG_SIZES = [
-    # BYTE_MULTPLE_UP,
-    # BYTE_MULTPLE_UP * 4,
-    # BYTE_MULTPLE_UP * 16,
-    # BYTE_MULTPLE_UP * 64,
-    # BYTE_MULTPLE_UP * 256,
-    pow(BYTE_MULTPLE_UP, 2),            # 1MB
-    pow(BYTE_MULTPLE_UP, 2) * 2,
-    pow(BYTE_MULTPLE_UP, 2) * 4,
-    pow(BYTE_MULTPLE_UP, 2) * 8,
-    pow(BYTE_MULTPLE_UP, 2) * 16,
-    pow(BYTE_MULTPLE_UP, 2) * 32,
-    pow(BYTE_MULTPLE_UP, 2) * 64,
-    pow(BYTE_MULTPLE_UP, 2) * 128,
-    pow(BYTE_MULTPLE_UP, 2) * 256,
-    pow(BYTE_MULTPLE_UP, 2) * 512,
-    pow(BYTE_MULTPLE_UP, 3),         # 1GB
-    pow(BYTE_MULTPLE_UP, 3) * 2,
-    pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
-]
+# MSG_SIZES = [
+#     # BYTE_MULTPLE_UP,
+#     # BYTE_MULTPLE_UP * 4,
+#     # BYTE_MULTPLE_UP * 16,
+#     # BYTE_MULTPLE_UP * 64,
+#     # BYTE_MULTPLE_UP * 256,
+#     pow(BYTE_MULTPLE_UP, 2),            # 1MB
+#     pow(BYTE_MULTPLE_UP, 2) * 2,
+#     pow(BYTE_MULTPLE_UP, 2) * 4,
+#     pow(BYTE_MULTPLE_UP, 2) * 8,
+#     pow(BYTE_MULTPLE_UP, 2) * 16,
+#     pow(BYTE_MULTPLE_UP, 2) * 32,
+#     pow(BYTE_MULTPLE_UP, 2) * 64,
+#     pow(BYTE_MULTPLE_UP, 2) * 128,
+#     pow(BYTE_MULTPLE_UP, 2) * 256,
+#     pow(BYTE_MULTPLE_UP, 2) * 512,
+#     pow(BYTE_MULTPLE_UP, 3),         # 1GB
+#     pow(BYTE_MULTPLE_UP, 3) * 2,
+#     pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+#     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+# ]
 
 
 WARMUP = 5
 TIMES = 20
-
-# MASTER_ADDR = '172.23.18.3'     # nico3 ip, ip of host of rank0
-MASTER_ADDR = 'localhost'
-MASTER_PORT = 10378             # idle port
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Conflict Benchmark Arguments',
@@ -205,6 +202,8 @@ def main():
     args = parse_args()
     global PROC_INFO
     PROC_INFO = get_proc_info()
+    MASTER_ADDR = os.getenv('MASTER_ADDR', None)
+    MASTER_PORT = os.getenv('MASTER_PORT', None)
     init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend='NCCL')
     
     torch.cuda.synchronize()
@@ -243,7 +242,8 @@ def main():
             t_e = time.time()
             t_d = t_e - t_s
             tput, busbw = calc_bw_log(abbr2full[coll_comm], msg_size, t_d / TIMES)  # B/s
-            print_rank_0(f'msg_size: {convert_size(msg_size)}, t_d: {round(t_d, 4)} s, tput: {convert_throughput(tput)}/s, busbw: {convert_throughput(busbw)}/s')
+            print_rank_0(f'msg_size: {convert_size(msg_size)}, t_d: {round(t_d, 4)} s, ' \
+                         f'tput: {convert_throughput(tput)}/s, busbw: {convert_throughput(busbw)}/s')
             torch.cuda.empty_cache()
             coll_table['tput'].append(tput / pow(BYTE_MULTPLE_DOWN, 3))
             coll_table['busbw'].append(busbw / pow(BYTE_MULTPLE_DOWN, 3))

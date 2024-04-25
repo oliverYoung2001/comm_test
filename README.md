@@ -34,6 +34,9 @@ GENCODE = "-gencode=arch=compute_80,code=sm_80"
 
 ## Tools & Usage
 
+### 0 network profiler
+`scripts/record.sh` records how to profile network topo of a machine.
+
 ### 1 conflict_allinone
 
 This tool can benchmark **together bandwidth** when multiple P2P communications execute simultaneously. (cuda level)
