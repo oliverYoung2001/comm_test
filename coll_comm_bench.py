@@ -15,8 +15,8 @@ import json
 PROC_INFO: dict
 
 COLL_COMMs = ['b', 'r', 'g', 's', 'ag', 'rs', 'ar', 'a2a']
-COLL_COMMs = ['ag', 'rs', 'a2a']
-COLL_COMMs = ['a2a']
+COLL_COMMs = ['ag', 'rs', 'ar']
+# COLL_COMMs = ['a2a']
 abbr2full = {
     'b': 'broadcast',
     'r': 'reduce',
@@ -36,12 +36,13 @@ MSG_SIZES = [
     # BYTE_MULTPLE_UP * 256,
     # pow(BYTE_MULTPLE_UP, 2),
     # pow(BYTE_MULTPLE_UP, 2) * 4,
-    pow(BYTE_MULTPLE_UP, 2) * 16,
-    pow(BYTE_MULTPLE_UP, 2) * 64,
-    pow(BYTE_MULTPLE_UP, 2) * 256,
+    # pow(BYTE_MULTPLE_UP, 2) * 16,
+    # pow(BYTE_MULTPLE_UP, 2) * 64,
+    # pow(BYTE_MULTPLE_UP, 2) * 256,
     # pow(BYTE_MULTPLE_UP, 3),         # 1GB
-    pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-    pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+    13376700416 // 16,   # 7b for 16 GPU
+    # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
 # MSG_SIZES = [
