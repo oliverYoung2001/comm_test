@@ -18,7 +18,12 @@ OPENMPI_HOME=<position to install>
 wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.6.tar.bz2
 tar jxvf openmpi-4.1.6
 cd openmpi-4.1.6
-./configure --prefix=$OPENMPI_HOME --with-slurm --with-pmix # necessary to install openmpi with slurm support
+./configure --prefix=$OPENMPI_HOME \
+--with-slurm --with-pmix  \ 
+--enable-orterun-prefix-by-default \
+--enable-mpirun-prefix-by-default \
+# necessary to install openmpi with slurm support
+
 make -j
 make install
 export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi

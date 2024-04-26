@@ -5,7 +5,7 @@ BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="cudaMemcpy"
 BACKENDs="NCCL MPI"
 BACKENDs="MPI"
-# BACKENDs="NCCL"
+BACKENDs="NCCL"
 # CP_FILE_NAMEs="p2p_si p2p_bi"
 # CP_FILE_NAMEs="p2p_si"
 CP_FILE_NAMEs="conflict_patterns"
@@ -83,10 +83,11 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
-# set -x
+set -x
 # salloc -n $GPU_NUM
-srun $SLURM_ARGS \
-./scripts/executor.sh \
+# srun $SLURM_ARGS \
+# ./scripts/executor.sh \
+mpirun --prefix $(dirname `which mpirun`)/../ -np 16 --host g3022:8,g3023:8 \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
 
 done
