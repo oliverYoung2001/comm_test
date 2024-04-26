@@ -25,7 +25,8 @@ PARTITION=Mix
 HOSTs="nico2"
 
 # qy:
-# PARTITION=gpu4-low
+PARTITION=gpu4-low
+# PARTITION=gpu3-2-low
 # HOSTs="g4004"
 
 

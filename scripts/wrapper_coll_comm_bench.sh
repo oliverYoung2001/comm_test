@@ -8,6 +8,7 @@ export GPU_NUMs="16"
 export CLUSTER_NAME=qy
 PARTITION=gpu4-low
 HOST="g4004"
+PARTITION=gpu3-2-low
 HOST=None
 
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
