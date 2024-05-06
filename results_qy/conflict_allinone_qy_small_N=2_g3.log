@@ -20,28 +20,50 @@ BACKEND: NCCL
 CP_FILE_NAME: small
 NNODES: 2
 NGPU_PER_NODE: 8
++ GPU_NUM=2
 +++ which mpirun
 ++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -np 16 --host g3022:8,g3023:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small.json
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -np 2 --host g3022:1,g3023:1 ./csrc/build/conflict_allinone 2 NCCL ./scripts/configs/small.json
 --------------------------------------------------------------------------
 WARNING: There was an error initializing an OpenFabrics device.
 
   Local host:   g3023
   Local device: mlx5_0
 --------------------------------------------------------------------------
-Failed: Cuda error utils.cu:244 'invalid device ordinal'
-Failed: Cuda error utils.cu:244 'invalid device ordinal'
-Failed: Cuda error utils.cu:244 'invalid device ordinal'
+rank: 0, local_rank: 0, comm_size: 2, tasks_per_node: 1
+rank: 1, local_rank: 0, comm_size: 2, tasks_per_node: 1
+[[0,1]]
+time 0.000498 s, REAL_BD 5.882907 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.027446 s, REAL_BD 13.663193 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.083867 s, REAL_BD 17.885462 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.337069 s, REAL_BD 17.800510 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.000533 s, REAL_BD 10.993199 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.039880 s, REAL_BD 18.806419 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.161444 s, REAL_BD 18.582295 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.631357 s, REAL_BD 19.006679 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[mngg001:2177557] 1 more process has sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:2177557] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
 --------------------------------------------------------------------------
-Primary job  terminated normally, but 1 process returned
-a non-zero exit code. Per user-direction, the job has been aborted.
---------------------------------------------------------------------------
---------------------------------------------------------------------------
-mpirun detected that one or more processes exited with non-zero status, thus causing
-the job to be terminated. The first process to do so was:
+mpirun has exited due to process rank 0 with PID 1888572 on
+node g3022 exiting improperly. There are three reasons this could occur:
 
-  Process name: [[31288,1],14]
-  Exit code:    1
+1. this process did not call "init" before exiting, but others in
+the job did. This can cause a job to hang indefinitely while it waits
+for all processes to call "init". By rule, if one process calls "init",
+then ALL processes must call "init" prior to termination.
+
+2. this process called "init", but exited without calling "finalize".
+By rule, all processes that call "init" MUST call "finalize" prior to
+exiting or it will be considered an "abnormal termination"
+
+3. this process called "MPI_Abort" or "orte_abort" and the mca parameter
+orte_create_session_dirs is set to false. In this case, the run-time cannot
+detect that the abort call was an abnormal termination. Hence, the only
+error message you will receive is this one.
+
+This may have caused other processes in the application to be
+terminated by signals sent by mpirun (as reported here).
+
+You can avoid this message by specifying -quiet on the mpirun command line.
 --------------------------------------------------------------------------
-[mngg001:1506440] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
-[mngg001:1506440] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages

@@ -1,0 +1,71 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc coll_comm_bench
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc coll_comm_bench.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o coll_comm_bench.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" coll_comm_bench.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/coll_comm_bench -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o utils.o coll_comm_bench.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+HOST: None
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -np 16 --host g4007:8,g4008:8 ./csrc/build/coll_comm_bench 16 NCCL
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4007
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[mngg001:3912778] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:3912778] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Comm_Op: ag
+msg_size 16384.000000 KB, time 0.025444 s, tput 31.650148 GB/s, busbw 29.672014 GB/s
+msg_size 65536.000000 KB, time 0.101259 s, tput 31.811745 GB/s, busbw 29.823511 GB/s
+msg_size 262144.000000 KB, time 0.403521 s, tput 31.931181 GB/s, busbw 29.935482 GB/s
+msg_size 524288.000000 KB, time 0.801927 s, tput 32.134850 GB/s, busbw 30.126422 GB/s
+Comm_Op: rs
+msg_size 16384.000000 KB, time 0.028291 s, tput 28.465108 GB/s, busbw 26.686039 GB/s
+msg_size 65536.000000 KB, time 0.111369 s, tput 28.923897 GB/s, busbw 27.116153 GB/s
+msg_size 262144.000000 KB, time 0.438710 s, tput 29.369975 GB/s, busbw 27.534352 GB/s
+msg_size 524288.000000 KB, time 0.875337 s, tput 29.439866 GB/s, busbw 27.599874 GB/s
+Comm_Op: ar
+msg_size 16384.000000 KB, time 0.054344 s, tput 29.637361 GB/s, busbw 27.785026 GB/s
+msg_size 65536.000000 KB, time 0.192504 s, tput 33.466582 GB/s, busbw 31.374921 GB/s
+msg_size 262144.000000 KB, time 0.762395 s, tput 33.801119 GB/s, busbw 31.688549 GB/s
+msg_size 524288.000000 KB, time 1.521782 s, tput 33.867931 GB/s, busbw 31.751185 GB/s
+--------------------------------------------------------------------------
+mpirun has exited due to process rank 5 with PID 40343 on
+node g4007 exiting improperly. There are three reasons this could occur:
+
+1. this process did not call "init" before exiting, but others in
+the job did. This can cause a job to hang indefinitely while it waits
+for all processes to call "init". By rule, if one process calls "init",
+then ALL processes must call "init" prior to termination.
+
+2. this process called "init", but exited without calling "finalize".
+By rule, all processes that call "init" MUST call "finalize" prior to
+exiting or it will be considered an "abnormal termination"
+
+3. this process called "MPI_Abort" or "orte_abort" and the mca parameter
+orte_create_session_dirs is set to false. In this case, the run-time cannot
+detect that the abort call was an abnormal termination. Hence, the only
+error message you will receive is this one.
+
+This may have caused other processes in the application to be
+terminated by signals sent by mpirun (as reported here).
+
+You can avoid this message by specifying -quiet on the mpirun command line.
+--------------------------------------------------------------------------
