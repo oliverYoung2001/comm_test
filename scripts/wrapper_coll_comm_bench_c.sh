@@ -6,16 +6,6 @@ BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 BACKENDs="NCCL MPI"
 BACKENDs="MPI"
 BACKENDs="NCCL"
-# CP_FILE_NAMEs="p2p_si p2p_bi"
-# CP_FILE_NAMEs="p2p_si"
-CP_FILE_NAMEs="conflict_patterns"
-# CP_FILE_NAMEs="bad_patterns_3+2"
-# CP_FILE_NAMEs="bad_patterns_3+3"
-# CP_FILE_NAMEs="bad_patterns_pcie_switch"
-# CP_FILE_NAMEs="all2all_4"
-CP_FILE_NAMEs="E2E_4 E2E_8"
-CP_FILE_NAMEs="ring_16"
-CP_FILE_NAMEs="small"
 
 
 # nico:
@@ -35,7 +25,7 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
 
-EXECUBLE=conflict_allinone
+EXECUBLE=coll_comm_bench
 
 make clean
 make $EXECUBLE
@@ -46,10 +36,8 @@ mkdir -p results
 for BACKEND in $BACKENDs; do
 echo "BACKEND: $BACKEND"
 for HOST in $HOSTs; do
-# echo "HOST: $HOST"
+echo "HOST: $HOST"
 for GPU_NUM in $GPU_NUMs; do       # for cudaMemcpy
-for CP_FILE_NAME in $CP_FILE_NAMEs; do
-echo "CP_FILE_NAME: ${CP_FILE_NAME}"
 
 
 if [ $GPU_NUM -le 8 ]; then
@@ -86,19 +74,9 @@ if [ "$HOST" != "None" ]; then
 fi
 
 set -x
-# salloc -n $GPU_NUM
-# srun $SLURM_ARGS \
-# ./scripts/executor.sh \
-# GPU_NUM=2
-# mpirun --prefix $(dirname `which mpirun`)/../ -np 2 --host g3022:2 \
-# mpirun --prefix $(dirname `which mpirun`)/../ -np 2 --host g3027:1,g3028:1 \
-# ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
-# mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np 2 --host g4007:1,g4008:1 \
-# ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
 mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np 16 --host g4007:8,g4008:8 \
-./csrc/build/${EXECUBLE} 16 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
+./csrc/build/${EXECUBLE} 16 $BACKEND
 
-done
 done
 done
 done

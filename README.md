@@ -43,7 +43,7 @@ This tool can benchmark **together bandwidth** when multiple P2P communications 
 
 #### scripts
 ```shell
-./scripts/conflict_allinone.sh
+./scripts/wrapper_conflict_allinone.sh
 ```
 
 #### externel inputs
@@ -65,11 +65,11 @@ This tool can benchmark **together bandwidth** when multiple P2P communications 
 
 #### scripts
 ```shell
-./scripts/conflict_bench.sh
+./scripts/wrapper_conflict_bench.sh
 ```
 
 #### externel inputs
-Need a **conflict pattern file** as input config which descripts how P2P comms execute simultaneously.
+Need a **conflict pattern file** as input config which descripts how P2P comms execute simultaneously. (cuda level)
 e.g. (ring algorithm for alltoall on a 4-GPU cluster)
 ```
 [
@@ -87,7 +87,19 @@ This tool can benchmark **together bandwidth** of nearly all kinds of comm in to
 
 #### scripts
 ```shell
-./scripts/coll_comm_bench.sh
+./scripts/wrapper_coll_comm_bench.sh
+```
+
+#### externel inputs
+
+
+### 4 coll_comm_bench_c
+
+This tool can benchmark **together bandwidth** of nearly all kinds of comm. (cuda level)
+
+#### scripts
+```shell
+./scripts/wrapper_coll_comm_bench_c.sh
 ```
 
 #### externel inputs

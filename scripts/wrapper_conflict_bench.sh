@@ -13,6 +13,7 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="bad_patterns_pcie_switch"
 # CP_FILE_NAMEs="all2all_4"
 # CP_FILE_NAMEs="E2E_4 E2E_8"
+CP_FILE_NAMEs="ring_16"
 CP_FILE_NAMEs="small"
 
 # nico:
@@ -28,9 +29,10 @@ HOSTs="nico2"
 PARTITION=gpu4-low
 # PARTITION=gpu3-2-low
 # HOSTs="g4004"
+HOSTs="g4007,g4008"
 
 
-HOSTs="None"
+# HOSTs="None"
 
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 

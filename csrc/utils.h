@@ -129,6 +129,8 @@ struct PROC_PARAMS {
 };
 
 
+void barrier(std::string& BACKEND, int N_GPUs);
+
 void enableP2P(Json::Value& pairs);
 
 void disableP2P(Json::Value& pairs);

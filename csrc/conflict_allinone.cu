@@ -128,19 +128,6 @@ bool check_pattern(Json::Value pattern, int N_GPUs) {
 //     }
 // }
 
-void barrier(std::string& BACKEND, int N_GPUs) {
-    if (pp->BACKEND.find("cudaMemcpy") != std::string::npos) {
-        for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
-            CUDA_CHECK(cudaSetDevice(gpuid));
-            CUDA_CHECK(cudaDeviceSynchronize());
-        }
-    }
-    if (BACKEND.compare("NCCL") == 0 || BACKEND.compare("MPI") == 0) {
-        CUDA_CHECK(cudaDeviceSynchronize());
-        MPI_Barrier(MPI_COMM_WORLD);
-    }
-}
-
 int main(int argc, char** argv) {
     if (argc < 4) {
         printf("Need at least 4 args: \"<command> <gpus> <backend> <cp_file>\"\n");

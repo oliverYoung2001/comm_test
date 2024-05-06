@@ -1,5 +1,19 @@
 #include "utils.h"
 #include <set>
+#include <unistd.h>
+
+void barrier(std::string& BACKEND, int N_GPUs) {
+    if (BACKEND.find("cudaMemcpy") != std::string::npos) {
+        for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
+            CUDA_CHECK(cudaSetDevice(gpuid));
+            CUDA_CHECK(cudaDeviceSynchronize());
+        }
+    }
+    if (BACKEND.compare("NCCL") == 0 || BACKEND.compare("MPI") == 0) {
+        CUDA_CHECK(cudaDeviceSynchronize());
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
+}
 
 void enableP2P(Json::Value& pairs) {
     // deduplicate
@@ -203,16 +217,27 @@ int parse_env2int(std::string key, int& value) {
 void get_proc_params(PROC_PARAMS* pp) {
     // parse_env();
     parse_env("HOST", pp->host);
-    parse_env2int("SLURM_PROCID", pp->rank);
-    parse_env2int("SLURM_LOCALID", pp->local_rank);
-    parse_env2int("SLURM_NTASKS", pp->comm_size);
-    parse_env("SLURM_STEP_NODELIST", pp->ip);
-    // hostname = socket.gethostname()
-    // hostip = socket.gethostbyname(hostname)
-    parse_env("SLURM_CLUSTER_NAME", pp->clustername);
-    parse_env2int("SLURM_NODEID", pp->nodeid);
-    parse_env("SLURMD_NODENAME", pp->nodename);
-    parse_env2int("SLURM_TASKS_PER_NODE", pp->tasks_per_node);
+    if (parse_env2int("SLURM_PROCID", pp->rank) >= 0) { //  Use Slurm
+        parse_env2int("SLURM_LOCALID", pp->local_rank);
+        parse_env2int("SLURM_NTASKS", pp->comm_size);
+        parse_env("SLURM_STEP_NODELIST", pp->ip);
+        // hostname = socket.gethostname()
+        // hostip = socket.gethostbyname(hostname)
+        parse_env("SLURM_CLUSTER_NAME", pp->clustername);
+        parse_env2int("SLURM_NODEID", pp->nodeid);
+        parse_env("SLURMD_NODENAME", pp->nodename);
+        parse_env2int("SLURM_TASKS_PER_NODE", pp->tasks_per_node);
+    } else {    // Use Mpirun
+        parse_env2int("OMPI_COMM_WORLD_RANK", pp->rank);
+        parse_env2int("OMPI_COMM_WORLD_LOCAL_RANK", pp->local_rank);
+        parse_env2int("OMPI_COMM_WORLD_SIZE", pp->comm_size);
+        parse_env("OMPI_COMM_WORLD_HOSTNAME", pp->ip);  // None
+        parse_env("OMPI_COMM_WORLD_CLUSTER_NAME", pp->clustername); // None
+        parse_env2int("OMPI_COMM_WORLD_NODEID", pp->nodeid);    // None
+        parse_env("OMPI_COMM_WORLD_NODENAME", pp->nodename);    // None
+        parse_env2int("OMPI_COMM_WORLD_LOCAL_SIZE", pp->tasks_per_node);
+
+    }
     pp->nodes = pp->comm_size / pp->tasks_per_node;     // default = 1
 }
 
@@ -236,10 +261,11 @@ void setup_env(PROC_PARAMS*& pp, int argc, char** argv) {
         assert(pp->N_GPUs == pp->comm_size);
     }
 
-    pp->local_rank = pp->rank;              // default
-    pp->tasks_per_node = pp->comm_size;     // default
+    // pp->local_rank = pp->rank;              // default
+    // pp->tasks_per_node = pp->comm_size;     // default
 
     get_proc_params(pp);
+    // printf("rank: %d, local_rank: %d, comm_size: %d, tasks_per_node: %d\n", pp->rank, pp->local_rank, pp->comm_size, pp->tasks_per_node);
     if (pp->BACKEND.compare("NCCL") == 0 || pp->BACKEND.compare("MPI") == 0) {
         CUDA_CHECK(cudaSetDevice(pp->local_rank));      // 至关重要！！！
     }
