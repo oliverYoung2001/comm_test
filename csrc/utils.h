@@ -76,6 +76,7 @@ struct PROC_PARAMS {
     std::string BACKEND;
     ncclComm_t comm;
     ncclComm_t cur_comm;
+    MPI_Comm cur_mpi_comm;
     std::set<int> r_s;
 
     cudaStream_t* streams;
@@ -134,7 +135,7 @@ struct PROC_PARAMS {
 
 void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs);
 
-void barrier(std::string& BACKEND, int N_GPUs);
+void barrier(std::string& BACKEND, int N_GPUs, MPI_Comm mpi_comm = MPI_COMM_WORLD);
 
 void enableP2P(Json::Value& pairs);
 

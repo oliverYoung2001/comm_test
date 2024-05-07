@@ -284,7 +284,7 @@ int main(int argc, char** argv) {
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
                 XXX_comm(pp, root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->cur_comm, pp->mpi_requests);
-                barrier(pp->BACKEND, pp->N_GPUs);
+                barrier(pp->BACKEND, pp->N_GPUs, pp->cur_mpi_comm);
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
 
@@ -451,6 +451,6 @@ int main(int argc, char** argv) {
     }
 
     delete pp;
-    // MPI_Finalize();
+    MPI_Finalize();
     return 0;
 }
