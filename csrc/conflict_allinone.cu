@@ -34,7 +34,7 @@ int WARMUP = 2;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
-const int SIZEIDX_START = 5;
+const int SIZEIDX_START = 7;
 const int SIZEIDX_END = 9;
 
 const int SIZES_LEN = 9;
@@ -183,7 +183,6 @@ int main(int argc, char** argv) {
 
 
     // check_UVA(N_GPUs);        // 我理解，统一内存编址是为了方便，而不是性能
-
     for (int cp = 0; cp < root.size(); ++ cp) {
         if (! check_pattern(root[cp], pp->N_GPUs)) {
             continue;
@@ -197,6 +196,8 @@ int main(int argc, char** argv) {
         if (pp->BACKEND.find("cudaMemcpy") != std::string::npos && pp->ENABLE_GPU_P2P) {
             enableP2P(root[cp]);
         }
+        create_comm_group_from_pattern(pp, root[cp]);
+
         for (int i = SIZEIDX_START; i < SIZEIDX_END; ++ i) {
             LL SIZE = SIZES[i];
     #ifdef CHECK_RESULT
@@ -282,7 +283,7 @@ int main(int argc, char** argv) {
                 //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1]], send_buf[root[cp][k][0]], 
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
-                XXX_comm(pp, root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                XXX_comm(pp, root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->cur_comm, pp->mpi_requests);
                 barrier(pp->BACKEND, pp->N_GPUs);
                 // devicesSyncAll(N_GPUs);                 // barrier(= light-barrier + cpu-barrier)
             }
@@ -303,7 +304,7 @@ int main(int argc, char** argv) {
                 //     CUDA_CHECK(cudaMemcpyAsync(recv_buf[root[cp][k][1].asInt()], send_buf[root[cp][k][0].asInt()], 
                 //                                SIZE * sizeof(int), cudaMemcpyDeviceToDevice, streams[k]));
                 // }
-                XXX_comm(pp, root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->comm, pp->mpi_requests);
+                XXX_comm(pp, root[cp], send_buf, recv_buf, SIZE, pp->streams, pp->rank, pp->cur_comm, pp->mpi_requests);
                 barrier(pp->BACKEND, pp->N_GPUs);
                 // CUDA_CHECK(cudaDeviceSynchronize());    // light-barrier, [WHY]: 会有性能提升！！！ 减少 comm contention ?
                 // MPI_Barrier(MPI_COMM_WORLD);            // cpu-barrier, 没有意义
@@ -389,6 +390,8 @@ int main(int argc, char** argv) {
             delete[] recv_buf;
             delete[] send_buf;
         }
+        
+        ncclCommDestroy(pp->cur_comm);
         if (pp->BACKEND.find("cudaMemcpy") != std::string::npos && pp->ENABLE_GPU_P2P) {
             disableP2P(root[cp]);
         }

@@ -24,6 +24,7 @@
 #include "assert.h" 
 #include<algorithm>
 #include "constant.h"
+#include <set>
 
 typedef long long LL;
 
@@ -60,6 +61,7 @@ struct PROC_PARAMS {
     std::string host;
     int rank;
     int local_rank;
+    int cur_rank;
     int comm_size;
     int nodes;
     int nodeid;
@@ -73,6 +75,8 @@ struct PROC_PARAMS {
 
     std::string BACKEND;
     ncclComm_t comm;
+    ncclComm_t cur_comm;
+    std::set<int> r_s;
 
     cudaStream_t* streams;
     MPI_Request* mpi_requests;
@@ -82,7 +86,7 @@ struct PROC_PARAMS {
 
     PROC_PARAMS(int _N_GPUs = 0) {
         host = "";
-        rank = local_rank = 0;
+        rank = local_rank = cur_rank = 0;
         nodes = 1;
         nodeid = 0;
         comm_size = tasks_per_node = _N_GPUs;
@@ -128,6 +132,7 @@ struct PROC_PARAMS {
     // }
 };
 
+void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs);
 
 void barrier(std::string& BACKEND, int N_GPUs);
 

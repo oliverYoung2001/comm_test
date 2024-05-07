@@ -2,6 +2,37 @@
 #include <set>
 #include <unistd.h>
 
+int get_cur_rank(PROC_PARAMS*& pp, int rank) {
+    int cur_rank = 0;
+    // get cur_rank
+    for (auto it = pp->r_s.begin(); it != pp->r_s.end(); ++ it) {
+        if (*it < rank) {
+            ++ cur_rank;
+        }
+    }
+    return cur_rank;
+}
+
+void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs) {
+    // deduplicate
+    pp->r_s.clear();
+    for (int k = 0; k < pairs.size(); ++ k) {
+        pp->r_s.insert(pairs[k][0].asInt());
+        pp->r_s.insert(pairs[k][1].asInt());
+    }
+    // ncclComm_t new_comm;
+    pp->cur_comm = NULL;
+
+    ncclUniqueId id;
+    if (pp->rank == 0) ncclGetUniqueId(&id);
+    MPI_Bcast(&id, sizeof(id), MPI_BYTE, 0, MPI_COMM_WORLD);
+    pp->cur_rank = - 1;
+    if (pp->r_s.count(pp->rank)) {
+        pp->cur_rank = get_cur_rank(pp, pp->rank);
+        ncclCommInitRank(&pp->cur_comm, pp->r_s.size(), id, pp->cur_rank);
+    }
+}
+
 void barrier(std::string& BACKEND, int N_GPUs) {
     if (BACKEND.find("cudaMemcpy") != std::string::npos) {
         for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
@@ -157,13 +188,13 @@ void NCCL_comm(PROC_PARAMS*& pp, Json::Value& pairs, int** send_buf, int** recv_
     NCCL_CHECK(ncclGroupStart());
     for (int k = 0; k < pairs.size(); ++ k) {
         if (rank == pairs[k][0].asInt()) {
-            NCCL_CHECK(ncclSend(send_buf[rank] + send_offset, SIZE, ncclInt32, pairs[k][1].asInt(), comm, streams[0]));
+            NCCL_CHECK(ncclSend(send_buf[rank] + send_offset, SIZE, ncclInt32, get_cur_rank(pp, pairs[k][1].asInt()), comm, streams[0]));
     #ifdef DIFF_BUF
             send_offset += SIZE;
     #endif
         }
         if (rank == pairs[k][1].asInt()) {
-            NCCL_CHECK(ncclRecv(recv_buf[rank] + recv_offset, SIZE, ncclInt32, pairs[k][0].asInt(), comm, streams[0]));
+            NCCL_CHECK(ncclRecv(recv_buf[rank] + recv_offset, SIZE, ncclInt32, get_cur_rank(pp, pairs[k][0].asInt()), comm, streams[0]));
     #ifdef DIFF_BUF
             recv_offset += SIZE;
     #endif

@@ -1,0 +1,48 @@
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 24 --host g4005:8,g4007:8,g4008:8 ./csrc/build/conflict_allinone 24 NCCL ./scripts/configs/small.json
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+NCCL version 2.21.5+cuda11.8
+[mngg001:2629533] 23 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:2629533] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[[0,8]]
+time 0.090196 s, REAL_BD 16.630449 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.327290 s, REAL_BD 18.332366 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,16]]
+time 0.156902 s, REAL_BD 19.120215 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.622017 s, REAL_BD 19.292077 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,16],[16,0]]
+time 0.157674 s, REAL_BD 28.539899 GB/s, SIZE 524288.000000 KB, comm_vol 4718592.000000 KB
+time 0.630395 s, REAL_BD 28.553526 GB/s, SIZE 2097152.000000 KB, comm_vol 18874368.000000 KB
+--------------------------------------------------------------------------
+mpirun has exited due to process rank 7 with PID 12416 on
+node g4005 exiting improperly. There are three reasons this could occur:
+
+1. this process did not call "init" before exiting, but others in
+the job did. This can cause a job to hang indefinitely while it waits
+for all processes to call "init". By rule, if one process calls "init",
+then ALL processes must call "init" prior to termination.
+
+2. this process called "init", but exited without calling "finalize".
+By rule, all processes that call "init" MUST call "finalize" prior to
+exiting or it will be considered an "abnormal termination"
+
+3. this process called "MPI_Abort" or "orte_abort" and the mca parameter
+orte_create_session_dirs is set to false. In this case, the run-time cannot
+detect that the abort call was an abnormal termination. Hence, the only
+error message you will receive is this one.
+
+This may have caused other processes in the application to be
+terminated by signals sent by mpirun (as reported here).
+
+You can avoid this message by specifying -quiet on the mpirun command line.
+--------------------------------------------------------------------------
