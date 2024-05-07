@@ -20,98 +20,64 @@ BACKEND: NCCL
 CP_FILE_NAME: small
 NNODES: 2
 NGPU_PER_NODE: 8
++ GPU_NUM=16
 +++ which mpirun
 ++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 16 --host g4007:8,g4008:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small.json
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 16 --host g4007:8,g4008:8,g4005:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
 --------------------------------------------------------------------------
 WARNING: There was an error initializing an OpenFabrics device.
 
-  Local host:   g4008
+  Local host:   g4007
   Local device: mlx5_0
 --------------------------------------------------------------------------
 NCCL version 2.21.5+cuda11.8
-[mngg001:2221905] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
-[mngg001:2221905] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[mngg001:258110] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:258110] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
 [[0,1]]
-time 0.006594 s, REAL_BD 227.479527 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.025375 s, REAL_BD 236.453202 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+time 0.006585 s, REAL_BD 227.790433 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.025401 s, REAL_BD 236.211173 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
 [[0,1],[1,0]]
-time 0.007492 s, REAL_BD 400.427122 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.028485 s, REAL_BD 421.274355 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.007450 s, REAL_BD 402.684564 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.028615 s, REAL_BD 419.360475 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [[0,8]]
-time 0.081839 s, REAL_BD 18.328670 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.322513 s, REAL_BD 18.603901 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,9]]
-time 0.087002 s, REAL_BD 17.240983 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.345996 s, REAL_BD 17.341241 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,10]]
-time 0.082024 s, REAL_BD 18.287331 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.326497 s, REAL_BD 18.376892 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,11]]
-time 0.087858 s, REAL_BD 17.073004 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.352381 s, REAL_BD 17.027025 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,12]]
-time 0.087559 s, REAL_BD 17.131306 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.349358 s, REAL_BD 17.174360 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,13]]
-time 0.080264 s, REAL_BD 18.688329 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.325667 s, REAL_BD 18.423727 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,14]]
-time 0.085589 s, REAL_BD 17.525617 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.342035 s, REAL_BD 17.542064 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,15]]
-time 0.082200 s, REAL_BD 18.248175 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.329997 s, REAL_BD 18.181983 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+time 0.081928 s, REAL_BD 18.308759 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.326742 s, REAL_BD 18.363112 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
 [[0,8],[8,0]]
-time 0.155646 s, REAL_BD 19.274508 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.623268 s, REAL_BD 19.253355 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.155794 s, REAL_BD 19.256197 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.625524 s, REAL_BD 19.183916 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [[0,15],[15,0]]
-time 0.155463 s, REAL_BD 19.297196 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.624172 s, REAL_BD 19.225470 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.155358 s, REAL_BD 19.310238 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.625730 s, REAL_BD 19.177601 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [[0,8],[0,15]]
-time 0.146056 s, REAL_BD 20.540067 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.583196 s, REAL_BD 20.576273 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.144197 s, REAL_BD 20.804871 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.580662 s, REAL_BD 20.666067 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [[0,8],[0,15],[8,0],[15,0]]
-time 0.275071 s, REAL_BD 21.812550 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 1.100700 s, REAL_BD 21.804306 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+time 0.273656 s, REAL_BD 21.925337 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.098491 s, REAL_BD 21.848154 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [[7,8],[15,0]]
-time 0.083937 s, REAL_BD 35.741092 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.332941 s, REAL_BD 36.042422 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.085791 s, REAL_BD 34.968703 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.343257 s, REAL_BD 34.959229 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.131334 s, REAL_BD 22.842524 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.525351 s, REAL_BD 22.841871 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.221658 s, REAL_BD 27.068727 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.889266 s, REAL_BD 26.988550 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [[0,8],[4,12]]
-time 0.087993 s, REAL_BD 34.093621 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.349530 s, REAL_BD 34.331817 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.086361 s, REAL_BD 34.737903 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.345215 s, REAL_BD 34.760946 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [[0,8],[8,0],[4,12],[12,4]]
-time 0.162468 s, REAL_BD 36.930349 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.648316 s, REAL_BD 37.018985 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+time 0.162912 s, REAL_BD 36.829699 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.651386 s, REAL_BD 36.844513 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [[0,8],[2,10],[4,12],[6,14]]
-time 0.131420 s, REAL_BD 45.655151 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.527028 s, REAL_BD 45.538377 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+time 0.131488 s, REAL_BD 45.631541 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.527460 s, REAL_BD 45.501081 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
-time 0.232737 s, REAL_BD 51.560345 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
-time 0.930554 s, REAL_BD 51.582176 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+time 0.232273 s, REAL_BD 51.663344 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.926924 s, REAL_BD 51.784181 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
 [[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
-time 0.271268 s, REAL_BD 44.236696 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
-time 1.087258 s, REAL_BD 44.147755 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
---------------------------------------------------------------------------
-mpirun has exited due to process rank 9 with PID 6554 on
-node g4008 exiting improperly. There are three reasons this could occur:
-
-1. this process did not call "init" before exiting, but others in
-the job did. This can cause a job to hang indefinitely while it waits
-for all processes to call "init". By rule, if one process calls "init",
-then ALL processes must call "init" prior to termination.
-
-2. this process called "init", but exited without calling "finalize".
-By rule, all processes that call "init" MUST call "finalize" prior to
-exiting or it will be considered an "abnormal termination"
-
-3. this process called "MPI_Abort" or "orte_abort" and the mca parameter
-orte_create_session_dirs is set to false. In this case, the run-time cannot
-detect that the abort call was an abnormal termination. Hence, the only
-error message you will receive is this one.
-
-This may have caused other processes in the application to be
-terminated by signals sent by mpirun (as reported here).
-
-You can avoid this message by specifying -quiet on the mpirun command line.
---------------------------------------------------------------------------
+time 0.270559 s, REAL_BD 44.352618 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.089173 s, REAL_BD 44.070134 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 0.477761 s, REAL_BD 50.234322 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 1.904274 s, REAL_BD 50.412913 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB

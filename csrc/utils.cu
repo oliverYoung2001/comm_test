@@ -20,9 +20,13 @@ void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs) {
         pp->r_s.insert(pairs[k][0].asInt());
         pp->r_s.insert(pairs[k][1].asInt());
     }
-    // ncclComm_t new_comm;
     pp->cur_comm = NULL;
+    pp->cur_mpi_comm = MPI_COMM_NULL;
 
+    // create mpi group
+    MPI_Comm_split(MPI_COMM_WORLD, pp->r_s.count(pp->rank) ? 0 : MPI_UNDEFINED, pp->rank, &pp->cur_mpi_comm);
+
+    // create nccl communicator
     ncclUniqueId id;
     if (pp->rank == 0) ncclGetUniqueId(&id);
     MPI_Bcast(&id, sizeof(id), MPI_BYTE, 0, MPI_COMM_WORLD);
@@ -31,9 +35,16 @@ void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs) {
         pp->cur_rank = get_cur_rank(pp, pp->rank);
         ncclCommInitRank(&pp->cur_comm, pp->r_s.size(), id, pp->cur_rank);
     }
+    int cur_rank = - 1;
+
+    if (pp->cur_mpi_comm != MPI_COMM_NULL) {
+        MPI_Comm_rank(pp->cur_mpi_comm, &cur_rank);
+        // printf("rank%d, cur_rank%d, OK !!!\n", pp->rank, cur_rank);
+    }
+    assert(cur_rank == pp->cur_rank);
 }
 
-void barrier(std::string& BACKEND, int N_GPUs) {
+void barrier(std::string& BACKEND, int N_GPUs, MPI_Comm mpi_comm) {
     if (BACKEND.find("cudaMemcpy") != std::string::npos) {
         for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
             CUDA_CHECK(cudaSetDevice(gpuid));
@@ -42,7 +53,9 @@ void barrier(std::string& BACKEND, int N_GPUs) {
     }
     if (BACKEND.compare("NCCL") == 0 || BACKEND.compare("MPI") == 0) {
         CUDA_CHECK(cudaDeviceSynchronize());
-        MPI_Barrier(MPI_COMM_WORLD);
+        if (mpi_comm != MPI_COMM_NULL) {
+            MPI_Barrier(mpi_comm);
+        }
     }
 }
 
