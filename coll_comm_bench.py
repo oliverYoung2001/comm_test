@@ -36,11 +36,11 @@ MSG_SIZES = [
     # BYTE_MULTPLE_UP * 256,
     # pow(BYTE_MULTPLE_UP, 2),
     # pow(BYTE_MULTPLE_UP, 2) * 4,
-    pow(BYTE_MULTPLE_UP, 2) * 16,
-    pow(BYTE_MULTPLE_UP, 2) * 64,
-    pow(BYTE_MULTPLE_UP, 2) * 256,
-    pow(BYTE_MULTPLE_UP, 3),         # 1GB
-    # 13376700416 // 16,   # 7b for 16 GPU
+    # pow(BYTE_MULTPLE_UP, 2) * 16,
+    # pow(BYTE_MULTPLE_UP, 2) * 64,
+    # pow(BYTE_MULTPLE_UP, 2) * 256,
+    # pow(BYTE_MULTPLE_UP, 3),         # 1GB
+    2 * 6688350208 // 16,   # 7b for 16 GPU
     # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
@@ -243,7 +243,7 @@ def main():
             t_e = time.time()
             t_d = t_e - t_s
             tput, busbw = calc_bw_log(abbr2full[coll_comm], msg_size, t_d / TIMES)  # B/s
-            print_rank_0(f'msg_size: {convert_size(msg_size)}, t_d: {round(t_d, 4)} s, ' \
+            print_rank_0(f'msg_size: {convert_size(msg_size)}, t_d: {round(t_d, 4)} s, t_d/r: {round(t_d / TIMES, 4)}, ' \
                          f'tput: {convert_throughput(tput)}/s, busbw: {convert_throughput(busbw)}/s')
             torch.cuda.empty_cache()
             coll_table['tput'].append(tput / pow(BYTE_MULTPLE_DOWN, 3))

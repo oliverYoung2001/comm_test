@@ -37,8 +37,8 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 EXECUBLE=conflict_allinone
 
-make clean
-make $EXECUBLE
+# make clean
+# make $EXECUBLE
 
 # mkdir results
 mkdir -p results
@@ -95,8 +95,9 @@ set -x
 # ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
 # mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np 2 --host g4007:1,g4008:1 \
 # ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
-mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np 16 --host g4007:8,g4008:8 \
-./csrc/build/${EXECUBLE} 16 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
+mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN \
+   -np 24 --host g4005:8,g4007:8,g4008:8 \
+./csrc/build/${EXECUBLE} 24 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
 
 done
 done
