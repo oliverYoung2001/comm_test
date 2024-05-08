@@ -1,0 +1,28 @@
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++ GPU_NUM=16
++ HOST_CONFIG=g4007:8,g4008:8
++ HOST_CONFIG=g3025:8,g3029:8
++ HOST_CONFIG=g4002:8,g4003:8
++ GPU_NUM=8
++ HOST_CONFIG=g4002:8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4002:8 ./csrc/build/conflict_allinone 8 NCCL ./scripts/configs/small_8.json
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4002
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+NCCL version 2.18.5+cuda11.8
+[mngg001:1424008] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1424008] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[[0,1]]
+time 0.201818 s, REAL_BD 7.432439 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.240584 s, REAL_BD 24.939314 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.223048 s, REAL_BD 13.450020 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.176007 s, REAL_BD 68.179107 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB

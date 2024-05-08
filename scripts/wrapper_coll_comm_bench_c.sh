@@ -27,8 +27,9 @@ PARTITION=Mix
 HOSTs="nico1,nico2"
 # qy:
 # PARTITION=gpu3-2-low
-# PARTITION=gpu4-low
-# # HOST="g4003"
+PARTITION=gpu4-low
+# # HOSTs="g4003"
+HOSTs="g4002,g4003"
 # # GPU_NUM=8
 
 GPU_NUMs="16"
@@ -85,7 +86,7 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
-# # use slurm on nico
+# # Use slurm (not support for qy)
 # MEM_PER_CPU=256G
 # MEM_PER_NODE=256G
 # # --mem-per-cpu $MEM_PER_CPU \
@@ -110,25 +111,26 @@ fi
 # ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
 
 
+# # Use mpirun
 # [NOTE]: on nico, exec:
 # srun -p Mix -N 2 -w nico[1-2] --gres=gpu:8 sleep 10000
 
-GPU_NUM=16
-HOST_CONFIG="nico1:8,nico2:8"
-set -x
-mpirun \
-   -np $GPU_NUM --host $HOST_CONFIG \
-./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
-
-# on qy
 # GPU_NUM=16
-# HOST_CONFIG="g4007:8,g4008:8"
-# HOST_CONFIG="g3025:8,g3029:8"
 # HOST_CONFIG="nico1:8,nico2:8"
 # set -x
-# mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH \
+# mpirun \
 #    -np $GPU_NUM --host $HOST_CONFIG \
 # ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
+
+# on qy
+GPU_NUM=16
+HOST_CONFIG="g4007:8,g4008:8"
+HOST_CONFIG="g3025:8,g3029:8"
+HOST_CONFIG="g4002:8,g4003:8"
+set -x
+mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH \
+   -np $GPU_NUM --host $HOST_CONFIG \
+./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
 
 
 

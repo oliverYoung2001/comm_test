@@ -8,9 +8,10 @@ export CLUSTER_NAME=nico
 PARTITION=Mix
 HOST="nico1,nico2"
 # qy:
-# export CLUSTER_NAME=qy
-# PARTITION=gpu4-low
-# HOST="g4007,g4008"
+export CLUSTER_NAME=qy
+PARTITION=gpu4-low
+HOST="g4007,g4008"
+HOST="g4002,g4003"
 # PARTITION=gpu3-2-low
 # HOST=None
 
