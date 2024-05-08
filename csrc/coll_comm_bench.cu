@@ -29,24 +29,24 @@ typedef long long LL;
 
 PROC_PARAMS* pp;
 
-int TIMES = 3;
-int WARMUP = 2;
+int WARMUP = 5;
+int TIMES = 20;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
 const int SIZEIDX_START = 6;
-const int SIZEIDX_END = 9;
+const int SIZEIDX_END = 10;
 
 const int SIZES_LEN = 10;
-const LL SIZES[SIZES_LEN] = {   // int = 4B
-    1LL * 256,                  // 1KB      // 打不满带宽
-    1LL * 1024 * 1,             // 4KB      // 打不满带宽
-    1LL * 1024 * 2,             // 8KB     // 会高一些!!! (仅在某些情况下)
-    1LL * 1024 * 4,             // 16KB     // 会高一些!!!  （最好）
-    // 1LL * 1024 * 8,             // 32KB     // 会高一些!!!  （最好）
-    1LL * 1024 * 16,            // 64KB     // 会高一些!!!  （最好）
-    // 1LL * 1024 * 64,            // 256KB    // 趋于稳定
-    1LL * 1024 * 256,           // 1MB
+const LL SIZES[SIZES_LEN] = {   // char = 1B
+    1LL * 256,                  // 256B      // 打不满带宽
+    1LL * 1024 * 1,             // 1KB      // 打不满带宽
+    1LL * 1024 * 2,             // 2KB     // 会高一些!!! (仅在某些情况下)
+    1LL * 1024 * 4,             // 4KB     // 会高一些!!!  （最好）
+    // 1LL * 1024 * 8,             // 8KB     // 会高一些!!!  （最好）
+    1LL * 1024 * 16,            // 16KB     // 会高一些!!!  （最好）
+    // 1LL * 1024 * 64,            // 64KB    // 趋于稳定
+    1LL * 1024 * 256,           // 256KB
     // 1LL * 1024 * 1024 * 1,      // 1MB      // 打不满带宽
     1LL * 1024 * 1024 * 16,     // 16MB
     // 1LL * 1024 * 1024 * 32,     // 32MB
@@ -54,11 +54,10 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
     // 1LL * 1024 * 1024 * 128,    // 128MB
     1LL * 1024 * 1024 * 256,    // 256MB
     // 1LL * 1024 * 1024 * 512,    // 512MB
-    1LL * 1024 * 1024 * 512,    // 1GB
-    // 1LL * 1024 * 1024 * 1024,   // 4GB      // 用cudaMemcpy，竟然有性能下降！！！
-    // 1LL * 1024 * 1024 * 2048,   // 8GB
-    // 1LL * 1024 * 1024 * 4096,   // 16GB
-    // 1LL * 1024 * 1024 * 8192,   // OOM
+    1LL * 1024 * 1024 * 1024,    // 1GB
+    // 1LL * 1024 * 1024 * 2048,   // 2GB
+    // 1LL * 1024 * 1024 * 4096,   // 4GB
+    // 1LL * 1024 * 1024 * 8192,   // 8GB
 };
 
 // const int SIZES_LEN = 27;
@@ -159,10 +158,7 @@ void bench_op(PROC_PARAMS*& pp, const char* op, char* tensor, char* tensor_list,
     auto t1 = std::chrono::high_resolution_clock::now();        // CORRECT
 
     if (pp->rank == 0) {
-        // double t_d = (double)elapsedTime / 1000;    // s
         double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-        // double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES;      // B
-        // double avg_bd = calc / t_d / pow(1024, 3);
         auto bw = calc_bw_log(pp, op, SIZE, t_d / TIMES);   // GB/s
         printf("msg_size %lf KB, time %lf s, tput %lf GB/s, busbw %lf GB/s\n", \
                (double)SIZE / pow(1024, 1), t_d, bw.first, bw.second);

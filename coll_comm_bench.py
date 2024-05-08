@@ -39,7 +39,7 @@ MSG_SIZES = [
     pow(BYTE_MULTPLE_UP, 2) * 16,
     pow(BYTE_MULTPLE_UP, 2) * 64,
     pow(BYTE_MULTPLE_UP, 2) * 256,
-    # pow(BYTE_MULTPLE_UP, 3),         # 1GB
+    pow(BYTE_MULTPLE_UP, 3),         # 1GB
     # 2 * 6688350208 // 16,   # 7b for 16 GPU
     # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB

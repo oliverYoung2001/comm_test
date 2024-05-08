@@ -14,7 +14,7 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="all2all_4"
 # CP_FILE_NAMEs="E2E_4 E2E_8"
 CP_FILE_NAMEs="ring_16"
-CP_FILE_NAMEs="small"
+CP_FILE_NAMEs="small_16"
 
 # nico:
 # PARTITION=SXM
@@ -30,6 +30,7 @@ PARTITION=gpu4-low
 # PARTITION=gpu3-2-low
 # HOSTs="g4004"
 HOSTs="g4007,g4008"
+HOSTs="g4002,g4003"
 
 
 # HOSTs="None"

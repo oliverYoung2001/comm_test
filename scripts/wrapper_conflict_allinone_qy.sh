@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# build nccl
-pushd ./third_party/nccl
-rm -r build
-# git checkout master   # for debug
-# git checkout v2.17.1-1
-# git checkout v2.10.3-1      # 性能弱于latest
-make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
-popd
+# # build nccl
+# pushd ./third_party/nccl
+# rm -r build
+# # git checkout master   # for debug
+# git checkout v2.18    # default
+# # git checkout v2.17.1-1
+# # git checkout v2.10.3-1      # 性能弱于latest
+# make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
+# popd
 
 # configs:
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
@@ -47,8 +48,8 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 EXECUBLE=conflict_allinone
 
-make clean
-make $EXECUBLE
+# make clean
+# make $EXECUBLE
 
 # mkdir results
 mkdir -p results
@@ -95,7 +96,6 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
-set -x
 # salloc -n $GPU_NUM
 # srun $SLURM_ARGS \
 # ./scripts/executor.sh \
@@ -106,8 +106,16 @@ set -x
 # mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np 2 --host g4007:1,g4008:1 \
 # ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
 GPU_NUM=16
+HOST_CONFIG="g4007:8,g4008:8"
+HOST_CONFIG="g3025:8,g3029:8"
+HOST_CONFIG="g4002:8,g4003:8"
+GPU_NUM=8
+HOST_CONFIG="g4002:8"
+HOST_CONFIG="g4005:8"
+
+set -x
 mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN \
-   -np $GPU_NUM --host g4007:8,g4008:8,g4005:8 \
+   -np $GPU_NUM --host $HOST_CONFIG \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
 
 done
