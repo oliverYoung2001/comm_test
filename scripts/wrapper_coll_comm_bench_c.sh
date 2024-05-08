@@ -6,8 +6,10 @@
 # git checkout master   # for debug
 # # git checkout v2.18.6-1
 # # git checkout v2.10.3-1      # 性能弱于latest
-# make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
+# make -j src.build NVCC_GENCODE="-gencode=arch=compute_70,code=sm_70"
+# # make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
 # popd
+# exit -1
 
 
 # configs:
@@ -20,18 +22,17 @@ BACKENDs="NCCL"
 
 
 # nico:
+export CLUSTER_NAME=nico
 PARTITION=Mix
-# export GPU_NUM=16
-# GPU_NUMs="8"
-
+HOSTs="nico1,nico2"
 # qy:
-PARTITION=gpu3-2-low
-PARTITION=gpu4-low
-# HOST="g4003"
-# GPU_NUM=8
+# PARTITION=gpu3-2-low
+# PARTITION=gpu4-low
+# # HOST="g4003"
+# # GPU_NUM=8
 
 GPU_NUMs="16"
-HOSTs="None"
+# HOSTs="None"
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
@@ -84,12 +85,52 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
-set -x
+# # use slurm on nico
+# MEM_PER_CPU=256G
+# MEM_PER_NODE=256G
+# # --mem-per-cpu $MEM_PER_CPU \
+# # --mem $MEM_PER_NODE \
+# SLURM_ARGS="
+# -p $PARTITION \
+# -N $NNODES \
+# --ntasks-per-node $NTASK_PER_NODE \
+# --gres=gpu:$NTASK_PER_NODE \
+# --mem $MEM_PER_NODE \
+# -K \
+# "
+# if [ "$HOST" != "None" ]; then
+#     SLURM_ARGS="$SLURM_ARGS \
+#         -w $HOST \
+#     "
+# fi
+
+# set -x
+# srun $SLURM_ARGS \
+# ./scripts/executor.sh \
+# ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
+
+
+# [NOTE]: on nico, exec:
+# srun -p Mix -N 2 -w nico[1-2] --gres=gpu:8 sleep 10000
+
 GPU_NUM=16
-HOST_CONFIG="g4007:8,g4008:8"
-HOST_CONFIG="g3025:8,g3029:8"
-mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np $GPU_NUM --host $HOST_CONFIG \
+HOST_CONFIG="nico1:8,nico2:8"
+set -x
+mpirun \
+   -np $GPU_NUM --host $HOST_CONFIG \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
+
+# on qy
+# GPU_NUM=16
+# HOST_CONFIG="g4007:8,g4008:8"
+# HOST_CONFIG="g3025:8,g3029:8"
+# HOST_CONFIG="nico1:8,nico2:8"
+# set -x
+# mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH \
+#    -np $GPU_NUM --host $HOST_CONFIG \
+# ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
+
+
 
 done
 done

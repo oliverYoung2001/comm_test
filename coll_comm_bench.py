@@ -36,11 +36,11 @@ MSG_SIZES = [
     # BYTE_MULTPLE_UP * 256,
     # pow(BYTE_MULTPLE_UP, 2),
     # pow(BYTE_MULTPLE_UP, 2) * 4,
-    # pow(BYTE_MULTPLE_UP, 2) * 16,
-    # pow(BYTE_MULTPLE_UP, 2) * 64,
-    # pow(BYTE_MULTPLE_UP, 2) * 256,
+    pow(BYTE_MULTPLE_UP, 2) * 16,
+    pow(BYTE_MULTPLE_UP, 2) * 64,
+    pow(BYTE_MULTPLE_UP, 2) * 256,
     # pow(BYTE_MULTPLE_UP, 3),         # 1GB
-    2 * 6688350208 // 16,   # 7b for 16 GPU
+    # 2 * 6688350208 // 16,   # 7b for 16 GPU
     # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
@@ -69,7 +69,7 @@ MSG_SIZES = [
 
 
 WARMUP = 5
-TIMES = 20
+TIMES = 10
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Conflict Benchmark Arguments',

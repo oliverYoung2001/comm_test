@@ -4,10 +4,13 @@ export GPU_NUMs="4 8"
 export GPU_NUMs="2 4 8"
 export GPU_NUMs="16"
 # nico:
+export CLUSTER_NAME=nico
+PARTITION=Mix
+HOST="nico1,nico2"
 # qy:
-export CLUSTER_NAME=qy
-PARTITION=gpu4-low
-HOST="g4007,g4008"
+# export CLUSTER_NAME=qy
+# PARTITION=gpu4-low
+# HOST="g4007,g4008"
 # PARTITION=gpu3-2-low
 # HOST=None
 
