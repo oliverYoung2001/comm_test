@@ -1,0 +1,26 @@
+HOST: g4002,g4003
+CP_FILE_NAME: small_8
+HOST: g4002,g4003
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 16
+PROC_NUM: 16
+NNODES: 2
+NTASK_PER_NODE: 8
++ srun -p gpu4-low -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g4002,g4003 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json
+srun: job 22171 queued and waiting for resources
+srun: job 22171 has been allocated resources
+[INFO]: Cluster init done !!!
+[[0, 1]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 165.535 GB/s, time 0.002 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 217.624 GB/s, time 0.0062 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 245.642 GB/s, time 0.0219 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 257.689 GB/s, time 0.0833 s, comm_vol 21.475 GB
+[[0, 1], [1, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 247.233 GB/s, time 0.0027 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 338.311 GB/s, time 0.0079 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 379.471 GB/s, time 0.0283 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 459.597 GB/s, time 0.0935 s, comm_vol 42.95 GB
