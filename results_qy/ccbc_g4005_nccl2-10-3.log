@@ -20,30 +20,27 @@ BACKEND: NCCL
 HOST: None
 NNODES: 2
 NGPU_PER_NODE: 8
++ GPU_NUM=8
 +++ which mpirun
 ++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -np 16 --host g4007:8,g4008:8 ./csrc/build/coll_comm_bench 16 NCCL
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -np 8 --host g4005:8 ./csrc/build/coll_comm_bench 8 NCCL
 --------------------------------------------------------------------------
 WARNING: There was an error initializing an OpenFabrics device.
 
-  Local host:   g4007
+  Local host:   g4005
   Local device: mlx5_0
 --------------------------------------------------------------------------
-[mngg001:3912778] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
-[mngg001:3912778] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[mngg001:1992273] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1992273] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
 Comm_Op: ag
-msg_size 16384.000000 KB, time 0.025444 s, tput 31.650148 GB/s, busbw 29.672014 GB/s
-msg_size 65536.000000 KB, time 0.101259 s, tput 31.811745 GB/s, busbw 29.823511 GB/s
-msg_size 262144.000000 KB, time 0.403521 s, tput 31.931181 GB/s, busbw 29.935482 GB/s
-msg_size 524288.000000 KB, time 0.801927 s, tput 32.134850 GB/s, busbw 30.126422 GB/s
+msg_size 16384.000000 KB, time 0.002212 s, tput 182.031277 GB/s, busbw 159.277367 GB/s
+msg_size 65536.000000 KB, time 0.007657 s, tput 210.345140 GB/s, busbw 184.051997 GB/s
+msg_size 262144.000000 KB, time 0.029277 s, tput 220.051609 GB/s, busbw 192.545157 GB/s
 Comm_Op: rs
-msg_size 16384.000000 KB, time 0.028291 s, tput 28.465108 GB/s, busbw 26.686039 GB/s
-msg_size 65536.000000 KB, time 0.111369 s, tput 28.923897 GB/s, busbw 27.116153 GB/s
-msg_size 262144.000000 KB, time 0.438710 s, tput 29.369975 GB/s, busbw 27.534352 GB/s
-msg_size 524288.000000 KB, time 0.875337 s, tput 29.439866 GB/s, busbw 27.599874 GB/s
+msg_size 16384.000000 KB, time 0.002470 s, tput 163.017483 GB/s, busbw 142.640298 GB/s
+msg_size 65536.000000 KB, time 0.008459 s, tput 190.402262 GB/s, busbw 166.601979 GB/s
+msg_size 262144.000000 KB, time 0.030614 s, tput 210.441332 GB/s, busbw 184.136166 GB/s
 Comm_Op: ar
-msg_size 16384.000000 KB, time 0.054344 s, tput 29.637361 GB/s, busbw 27.785026 GB/s
-msg_size 65536.000000 KB, time 0.192504 s, tput 33.466582 GB/s, busbw 31.374921 GB/s
-msg_size 262144.000000 KB, time 0.762395 s, tput 33.801119 GB/s, busbw 31.688549 GB/s
-msg_size 524288.000000 KB, time 1.521782 s, tput 33.867931 GB/s, busbw 31.751185 GB/s
---------------------------------------------------------------------------
+msg_size 16384.000000 KB, time 0.004357 s, tput 184.830472 GB/s, busbw 161.726663 GB/s
+msg_size 65536.000000 KB, time 0.014484 s, tput 222.398886 GB/s, busbw 194.599026 GB/s
+msg_size 262144.000000 KB, time 0.049385 s, tput 260.907196 GB/s, busbw 228.293797 GB/s
