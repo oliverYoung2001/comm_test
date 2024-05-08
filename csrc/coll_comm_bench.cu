@@ -35,7 +35,7 @@ const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, f
 // 62792 B
 
 const int SIZEIDX_START = 6;
-const int SIZEIDX_END = 10;
+const int SIZEIDX_END = 9;
 
 const int SIZES_LEN = 10;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
@@ -208,6 +208,6 @@ int main(int argc, char** argv) {
     }
 
     delete pp;
-    // MPI_Finalize();
+    MPI_Finalize();
     return 0;
 }

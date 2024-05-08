@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# # build nccl
+# pushd ./third_party/nccl
+# rm -r build
+# git checkout master   # for debug
+# # git checkout v2.18.6-1
+# # git checkout v2.10.3-1      # 性能弱于latest
+# make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
+# popd
+
+
+# configs:
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="NCCL cudaMemcpy"
 # BACKENDs="cudaMemcpy"
@@ -74,8 +85,11 @@ if [ "$HOST" != "None" ]; then
 fi
 
 set -x
-mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np 16 --host g4007:8,g4008:8 \
-./csrc/build/${EXECUBLE} 16 $BACKEND
+GPU_NUM=16
+HOST_CONFIG="g4007:8,g4008:8"
+HOST_CONFIG="g3025:8,g3029:8"
+mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np $GPU_NUM --host $HOST_CONFIG \
+./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
 
 done
 done
