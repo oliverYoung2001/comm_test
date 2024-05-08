@@ -1,0 +1,17 @@
+BACKEND: NCCL
+HOST: nico1,nico2
+NNODES: 2
+NGPU_PER_NODE: 8
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w nico1,nico2 ./scripts/executor.sh ./csrc/build/coll_comm_bench 16 NCCL
+Comm_Op: ag
+msg_size 16384.000000 KB, time 0.249524 s, tput 3.227370 GB/s, busbw 3.025660 GB/s
+msg_size 65536.000000 KB, time 0.986083 s, tput 3.266688 GB/s, busbw 3.062520 GB/s
+msg_size 262144.000000 KB, time 3.930401 s, tput 3.278266 GB/s, busbw 3.073375 GB/s
+Comm_Op: rs
+msg_size 16384.000000 KB, time 0.259227 s, tput 3.106568 GB/s, busbw 2.912408 GB/s
+msg_size 65536.000000 KB, time 1.025805 s, tput 3.140193 GB/s, busbw 2.943931 GB/s
+msg_size 262144.000000 KB, time 4.081548 s, tput 3.156866 GB/s, busbw 2.959562 GB/s
+Comm_Op: ar
+msg_size 16384.000000 KB, time 0.505627 s, tput 3.185377 GB/s, busbw 2.986291 GB/s
+msg_size 65536.000000 KB, time 2.007574 s, tput 3.209073 GB/s, busbw 3.008506 GB/s
+msg_size 262144.000000 KB, time 8.013286 s, tput 3.215885 GB/s, busbw 3.014892 GB/s

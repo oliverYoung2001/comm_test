@@ -1,5 +1,9 @@
 # add nccl to submodules
 # git submodule add -b v2.18 https://github.com/NVIDIA/nccl.git third_party/nccl
+# git submodule add -b v2.18.6-1 https://github.com/NVIDIA/nccl.git third_party/nccl
+
+# update submodules
+git submodule update --init --recursive
 
 # build nccl
 NCCL_PATH=./third_party/nccl
@@ -16,17 +20,15 @@ popd
 # Ref: https://yuhldr.github.io/posts/bfa79f01.html
 OPENMPI_HOME=<position to install>
 wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.6.tar.bz2
-tar jxvf openmpi-4.1.6
+tar jxvf openmpi-4.1.6.tar.bz2
 cd openmpi-4.1.6
-./configure --prefix=$OPENMPI_HOME \
---with-slurm --with-pmix  \ 
---enable-orterun-prefix-by-default \
---enable-mpirun-prefix-by-default \
+./configure --prefix=$OPENMPI_HOME --with-slurm --with-pmix --enable-orterun-prefix-by-default --enable-mpirun-prefix-by-default && make -j && make install # on nico1
 # necessary to install openmpi with slurm support
 
-make -j
-make install
-export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi
+# make -j
+# make install
+# ENV SETUP:
+export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi or /home/yhy/.local/openmpi
 export PATH="$OPENMPI_HOME/bin:$PATH"
 export LD_LIBRARY_PATH="$OPENMPI_HOME/lib/:$LD_LIBRARY_PATH"
 cd ..

@@ -10,4 +10,4 @@
 
 echo "$OMPI_COMM_WORLD_CLUSTER_NAME, $OMPI_COMM_WORLD_NODEID, $OMPI_COMM_WORLD_NODENAME, $CUDA_HOME, $LD_LIBRARY_PATH, `hostname`"
 
-./csrc/build/conflict_allinone 2 NCCL ./scripts/configs/small.json
+# ./csrc/build/conflict_allinone 2 NCCL ./scripts/configs/small.json
