@@ -40,8 +40,8 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 EXECUBLE=coll_comm_bench
 
-make clean
-make $EXECUBLE
+# make clean
+# make $EXECUBLE
 
 # mkdir results
 mkdir -p results
@@ -123,10 +123,16 @@ fi
 # ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
 
 # on qy
-GPU_NUM=16
-HOST_CONFIG="g4007:8,g4008:8"
-HOST_CONFIG="g3025:8,g3029:8"
-HOST_CONFIG="g4002:8,g4003:8"
+GPU_NUM=64
+HOST_CONFIG="g4001:8,g4002:8,g4003:8,g4004:8,g4005:8,g4006:8,g4007:8,g4008:8"
+# GPU_NUM=32
+# HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+# GPU_NUM=24
+# HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+# GPU_NUM=16
+# HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+# HOST_CONFIG="g3025:8,g3029:8"
+# HOST_CONFIG="g4002:8,g4003:8"
 set -x
 mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH \
    -np $GPU_NUM --host $HOST_CONFIG \
