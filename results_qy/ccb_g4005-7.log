@@ -1,0 +1,22 @@
+PARTITION: gpu4-low
+HOST: g4005,g4006,g4007
+GPU_NUM: 24
++ srun -p gpu4-low -N 3 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g4005,g4006,g4007 ./scripts/executor.sh python coll_comm_bench.py --output ./prof_data/coll_comm_bench_24_g4005,g4006,g4007.json
+srun: job 22535 queued and waiting for resources
+srun: job 22535 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 16 MB, t_d: 1.1729 s, t_d/r: 0.1173, tput: 3.433 GB/s, busbw: 3.29 GB/s
+msg_size: 64 MB, t_d: 4.2805 s, t_d/r: 0.428, tput: 3.763 GB/s, busbw: 3.606 GB/s
+msg_size: 256 MB, t_d: 14.5712 s, t_d/r: 1.4571, tput: 4.421 GB/s, busbw: 4.237 GB/s
+msg_size: 1 GB, t_d: 83.9052 s, t_d/r: 8.3905, tput: 3.071 GB/s, busbw: 2.943 GB/s
+COLL_COMM: reducescatter
+msg_size: 16 MB, t_d: 0.8581 s, t_d/r: 0.0858, tput: 4.693 GB/s, busbw: 4.497 GB/s
+msg_size: 64 MB, t_d: 3.5913 s, t_d/r: 0.3591, tput: 4.485 GB/s, busbw: 4.298 GB/s
+msg_size: 256 MB, t_d: 15.3188 s, t_d/r: 1.5319, tput: 4.206 GB/s, busbw: 4.03 GB/s
+msg_size: 1 GB, t_d: 48.1495 s, t_d/r: 4.815, tput: 5.352 GB/s, busbw: 5.129 GB/s
+COLL_COMM: allreduce
+msg_size: 16 MB, t_d: 1.7751 s, t_d/r: 0.1775, tput: 4.537 GB/s, busbw: 4.348 GB/s
+msg_size: 64 MB, t_d: 5.945 s, t_d/r: 0.5945, tput: 5.418 GB/s, busbw: 5.193 GB/s
+msg_size: 256 MB, t_d: 21.9658 s, t_d/r: 2.1966, tput: 5.866 GB/s, busbw: 5.621 GB/s
+msg_size: 1 GB, t_d: 103.5995 s, t_d/r: 10.3599, tput: 4.975 GB/s, busbw: 4.768 GB/s
