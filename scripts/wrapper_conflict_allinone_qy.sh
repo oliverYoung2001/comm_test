@@ -16,7 +16,7 @@ BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="cudaMemcpy"
 BACKENDs="NCCL MPI"
 # BACKENDs="MPI"
-BACKENDs="NCCL"
+# BACKENDs="NCCL"
 # CP_FILE_NAMEs="p2p_si p2p_bi"
 # CP_FILE_NAMEs="p2p_si"
 CP_FILE_NAMEs="conflict_patterns"
@@ -111,12 +111,12 @@ GPU_NUM=24
 HOST_CONFIG="g4005:8,g4007:8,g4008:8"
 GPU_NUM=16
 HOST_CONFIG="g4006:8,g4008:8"
-# HOST_CONFIG="g3025:8,g3029:8"
-HOST_CONFIG="g4003:8,g4006:8"
+HOST_CONFIG="g3027:8,g4006:8"
+# HOST_CONFIG="g4003:8,g4006:8"
 # GPU_NUM=8
 # HOST_CONFIG="g4008:8"
-# HOST_CONFIG="g4002:8"
-# HOST_CONFIG="g4005:8"
+# # HOST_CONFIG="g4002:8"
+# HOST_CONFIG="g4006:8"
 
 # # ENV for GPU Direct RDMA   # [NOTE]: not effect
 # export NCCL_NET_GDR_READ=1
@@ -124,6 +124,9 @@ HOST_CONFIG="g4003:8,g4006:8"
 # export NCCL_IB_PCI_RELAXED_ORDERING=1
 # export NCCL_NET_GDR_LEVEL=
 #    -x NCCL_SOCKET_IFNAME=eth0 \
+
+# bind core: (not effect)
+#    --map-by ppr:4:numa --bind-to core --report-bindings \
 
 set -x
 mpirun --prefix $(dirname `which mpirun`)/../ \
@@ -138,6 +141,7 @@ mpirun --prefix $(dirname `which mpirun`)/../ \
    -x NCCL_IB_QPS_PER_CONNECTION=4 \
    -x NCCL_IB_TC=160 \
    -np $GPU_NUM --host $HOST_CONFIG \
+   --map-by ppr:4:numa --bind-to core --report-bindings \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
 set +x
 
