@@ -112,16 +112,20 @@ HOST_CONFIG="g4005:8,g4007:8,g4008:8"
 GPU_NUM=16
 HOST_CONFIG="g4007:8,g4008:8"
 # HOST_CONFIG="g3025:8,g3029:8"
-# HOST_CONFIG="g4002:8,g4003:8"
+HOST_CONFIG="g4003:8,g4006:8"
 # GPU_NUM=8
 # HOST_CONFIG="g4008:8"
 # HOST_CONFIG="g4002:8"
 # HOST_CONFIG="g4005:8"
 
+# bind core: (can bring certain performance improvements in some cases)
+#    --map-by ppr:4:numa --bind-to core --report-bindings \
+
 set -x
 mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN \
    -np $GPU_NUM --host $HOST_CONFIG \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
+set +x
 
 done
 done

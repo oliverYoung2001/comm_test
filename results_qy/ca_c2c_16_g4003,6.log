@@ -1,0 +1,130 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone_c2c
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone_c2c.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o conflict_allinone_c2c.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone_c2c.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone_c2c -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o conflict_allinone_c2c.o utils.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: MPI
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 16 --host g4003:8,g4006:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/conflict_allinone_c2c 16 MPI ./scripts/configs/small_16.json
+[g4006:2644341] MCW rank 14 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4006:2644341] MCW rank 15 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4006:2644341] MCW rank 8 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4006:2644341] MCW rank 9 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4006:2644341] MCW rank 10 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4006:2644341] MCW rank 11 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4006:2644341] MCW rank 12 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4006:2644341] MCW rank 13 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4003:2336483] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4006
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[[0,1]]
+time 0.000287 s, REAL_BD 10.207970 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.068140 s, REAL_BD 5.503375 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.275989 s, REAL_BD 5.434999 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 1.054256 s, REAL_BD 5.691217 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.000308 s, REAL_BD 19.023945 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+[mngg001:2945974] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:2945974] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 0.072696 s, REAL_BD 10.316936 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.292664 s, REAL_BD 10.250663 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.110725 s, REAL_BD 10.803754 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.000138 s, REAL_BD 21.229620 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.008201 s, REAL_BD 45.726131 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.032671 s, REAL_BD 45.912277 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.131014 s, REAL_BD 45.796632 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.000115 s, REAL_BD 50.951087 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.008231 s, REAL_BD 91.118941 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.032827 s, REAL_BD 91.388187 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.190137 s, REAL_BD 63.112387 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.000114 s, REAL_BD 51.398026 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.008223 s, REAL_BD 91.207588 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.033125 s, REAL_BD 90.566038 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.191432 s, REAL_BD 62.685444 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.000171 s, REAL_BD 34.265351 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.016353 s, REAL_BD 45.863144 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.065270 s, REAL_BD 45.962923 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.260930 s, REAL_BD 45.989346 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.000179 s, REAL_BD 65.467877 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.016393 s, REAL_BD 91.502471 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.065607 s, REAL_BD 91.453656 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.275823 s, REAL_BD 87.012323 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.000117 s, REAL_BD 50.080128 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.008203 s, REAL_BD 91.429965 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.032666 s, REAL_BD 91.838609 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.130845 s, REAL_BD 91.711567 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.000171 s, REAL_BD 34.265351 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.016354 s, REAL_BD 45.860340 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.065277 s, REAL_BD 45.957994 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.265768 s, REAL_BD 45.152163 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.000183 s, REAL_BD 64.036885 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.016397 s, REAL_BD 91.480149 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.065445 s, REAL_BD 91.680037 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.349253 s, REAL_BD 68.718093 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.000116 s, REAL_BD 50.511853 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.008213 s, REAL_BD 91.318641 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.032737 s, REAL_BD 91.639429 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.131096 s, REAL_BD 91.535974 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.000126 s, REAL_BD 93.005952 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.008231 s, REAL_BD 182.237881 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.033325 s, REAL_BD 180.045011 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.191083 s, REAL_BD 125.599870 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 0.000177 s, REAL_BD 66.207627 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.016368 s, REAL_BD 91.642229 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.065294 s, REAL_BD 91.892057 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.265470 s, REAL_BD 90.405696 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 0.000189 s, REAL_BD 124.007937 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.016426 s, REAL_BD 182.637282 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.065579 s, REAL_BD 182.985407 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.343872 s, REAL_BD 139.586823 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 0.000313 s, REAL_BD 74.880192 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.032672 s, REAL_BD 91.821743 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.130515 s, REAL_BD 91.943455 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.522042 s, REAL_BD 91.946625 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 0.000322 s, REAL_BD 145.574534 GB/s, SIZE 1024.000000 KB, comm_vol 49152.000000 KB
+time 0.032758 s, REAL_BD 183.161365 GB/s, SIZE 131072.000000 KB, comm_vol 6291456.000000 KB
+time 0.130825 s, REAL_BD 183.451175 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 0.544329 s, REAL_BD 176.363927 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x
