@@ -133,9 +133,9 @@ struct PROC_PARAMS {
     // }
 };
 
-void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs);
+void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs, bool cpu_only = false);
 
-void barrier(std::string& BACKEND, int N_GPUs, MPI_Comm mpi_comm = MPI_COMM_WORLD);
+void barrier(std::string& BACKEND, int N_GPUs, MPI_Comm mpi_comm = MPI_COMM_WORLD, bool cpu_only = false);
 
 void enableP2P(Json::Value& pairs);
 
@@ -167,6 +167,6 @@ int parse_env2int(std::string key, int& value);
 
 void get_proc_params(PROC_PARAMS* pp);
 
-void setup_env(PROC_PARAMS*& pp, int argc, char** argv);
+void setup_env(PROC_PARAMS*& pp, int argc, char** argv, bool cpu_only = false);
 
 #endif

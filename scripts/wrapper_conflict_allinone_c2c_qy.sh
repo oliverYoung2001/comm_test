@@ -16,7 +16,7 @@ BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="cudaMemcpy"
 BACKENDs="NCCL MPI"
 BACKENDs="MPI"
-BACKENDs="NCCL"
+# BACKENDs="NCCL"
 # CP_FILE_NAMEs="p2p_si p2p_bi"
 # CP_FILE_NAMEs="p2p_si"
 CP_FILE_NAMEs="conflict_patterns"
@@ -46,7 +46,7 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
 
-EXECUBLE=conflict_allinone
+EXECUBLE=conflict_allinone_c2c
 
 make clean
 make $EXECUBLE
@@ -110,7 +110,7 @@ HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
 GPU_NUM=24
 HOST_CONFIG="g4005:8,g4007:8,g4008:8"
 GPU_NUM=16
-HOST_CONFIG="g4006:8,g4008:8"
+HOST_CONFIG="g4007:8,g4008:8"
 # HOST_CONFIG="g3025:8,g3029:8"
 # HOST_CONFIG="g4002:8,g4003:8"
 # GPU_NUM=8
@@ -118,18 +118,8 @@ HOST_CONFIG="g4006:8,g4008:8"
 # HOST_CONFIG="g4002:8"
 # HOST_CONFIG="g4005:8"
 
-# # ENV for GPU Direct RDMA   # [NOTE]: not effect
-# export NCCL_NET_GDR_READ=1
-# export NCCL_P2P_LEVEL=1
-# export NCCL_IB_PCI_RELAXED_ORDERING=1
-
-
 set -x
-mpirun --prefix $(dirname `which mpirun`)/../ \
-   -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN \
-   -x NCCL_NET_GDR_READ \
-   -x NCCL_P2P_LEVEL \
-   -x NCCL_IB_PCI_RELAXED_ORDERING \
+mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN \
    -np $GPU_NUM --host $HOST_CONFIG \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
 

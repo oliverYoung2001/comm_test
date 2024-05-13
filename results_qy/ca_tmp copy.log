@@ -1,0 +1,86 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o conflict_allinone.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o utils.o conflict_allinone.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 16 --host g4007:8,g4008:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4008
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[mngg001:317022] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:317022] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+NCCL version 2.18.5+cuda11.8
+[[0,1]]
+time 0.006508 s, REAL_BD 230.485556 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.024910 s, REAL_BD 240.867122 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.007671 s, REAL_BD 391.083301 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.029479 s, REAL_BD 407.069439 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.075830 s, REAL_BD 19.781089 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.300831 s, REAL_BD 19.944753 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.150350 s, REAL_BD 19.953442 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.590781 s, REAL_BD 20.312095 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.148280 s, REAL_BD 20.231994 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.593140 s, REAL_BD 20.231311 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.129152 s, REAL_BD 23.228444 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.516739 s, REAL_BD 23.222555 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.266967 s, REAL_BD 22.474688 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.071285 s, REAL_BD 22.403002 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.076559 s, REAL_BD 39.185465 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.301463 s, REAL_BD 39.805880 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.131334 s, REAL_BD 22.842524 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.525883 s, REAL_BD 22.818764 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.217689 s, REAL_BD 27.562256 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.875085 s, REAL_BD 27.425907 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.084655 s, REAL_BD 35.437954 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.335035 s, REAL_BD 35.817153 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.158120 s, REAL_BD 37.945864 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.613545 s, REAL_BD 39.116935 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 0.131395 s, REAL_BD 45.663838 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.525871 s, REAL_BD 45.638569 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 0.229820 s, REAL_BD 52.214777 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.919516 s, REAL_BD 52.201376 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 0.269855 s, REAL_BD 44.468326 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.098015 s, REAL_BD 43.715250 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 0.478842 s, REAL_BD 50.120917 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 1.912533 s, REAL_BD 50.195212 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ KEND ./scripts/configs/small_16.json
+./scripts/wrapper_conflict_allinone_qy.sh: line 134: KEND: command not found
+./scripts/wrapper_conflict_allinone_qy.sh: line 136: syntax error near unexpected token `done'
+./scripts/wrapper_conflict_allinone_qy.sh: line 136: `done'

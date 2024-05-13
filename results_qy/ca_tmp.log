@@ -1,0 +1,59 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o conflict_allinone.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o utils.o conflict_allinone.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_NET_GDR_READ -x NCCL_P2P_LEVEL -x NCCL_IB_PCI_RELAXED_ORDERING -np 16 --host g4006:8,g4008:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
+[mngg001:1186665] Warning: could not find environment variable "NCCL_NET_GDR_READ"
+[mngg001:1186665] Warning: could not find environment variable "NCCL_P2P_LEVEL"
+[mngg001:1186665] Warning: could not find environment variable "NCCL_IB_PCI_RELAXED_ORDERING"
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4006
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+NCCL version 2.18.5+cuda11.8
+[mngg001:1186665] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1186665] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[[0,1]]
+
+g4006:2547540:2547540 [0] init.cc:795 NCCL WARN Duplicate GPU detected : rank 1 and rank 0 both on CUDA device 23000
+
+g4006:2547539:2547539 [0] init.cc:795 NCCL WARN Duplicate GPU detected : rank 0 and rank 1 both on CUDA device 23000
+
+g4006:2547539:2547539 [0] misc/argcheck.cc:30 NCCL WARN Send : comm argument is NULL
+Failed, NCCL error utils.cu:207 'invalid argument (run with NCCL_DEBUG=WARN for details)'
+
+g4006:2547540:2547540 [0] misc/argcheck.cc:30 NCCL WARN Recv : comm argument is NULL
+Failed, NCCL error utils.cu:213 'invalid argument (run with NCCL_DEBUG=WARN for details)'
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[40413,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
