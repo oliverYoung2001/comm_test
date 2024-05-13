@@ -34,7 +34,7 @@ int WARMUP = 2;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
-const int SIZEIDX_START = 7;
+const int SIZEIDX_START = 5;
 const int SIZEIDX_END = 9;
 
 const int SIZES_LEN = 9;
@@ -129,17 +129,19 @@ bool check_pattern(Json::Value pattern, int N_GPUs) {
 // }
 
 int main(int argc, char** argv) {
-    if (argc < 4) {
-        printf("Need at least 4 args: \"<command> <gpus> <backend> <cp_file>\"\n");
+    if (argc < 5) {
+        printf("Need at least 5 args: \"<command> <gpus> <backend> <cp_file> <unidirection/bidirection(1/2)>\"\n");
         return - 1;
     }
     setup_env(pp, argc, argv);
     std::string cp_file = argv[3];
+    std::string dir_num = argv[4];
+    assert(dir_num == "1" || dir_num == "2");
 
-    double result_table_si[pp->N_GPUs][pp->N_GPUs];
-    double result_table_bi[pp->N_GPUs][pp->N_GPUs];
-    memset(result_table_si, 0, sizeof(result_table_si));
-    memset(result_table_bi, 0, sizeof(result_table_bi));
+    // double result_table_si[pp->N_GPUs][pp->N_GPUs];
+    // double result_table_bi[pp->N_GPUs][pp->N_GPUs];
+    // memset(result_table_si, 0, sizeof(result_table_si));
+    // memset(result_table_bi, 0, sizeof(result_table_bi));
 
     Json::Reader reader;
 	Json::Value root;
@@ -204,7 +206,10 @@ int main(int argc, char** argv) {
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
                 if (is_rank_in_pattern) {
-                    CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], send_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], recv_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    if (dir_num == "2") {
+                        CUDA_CHECK(cudaMemcpy(send_buf[pp->rank], recv_buf_cpu[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    }
                 }
                 barrier(pp->BACKEND, pp->N_GPUs);
             }
@@ -215,7 +220,10 @@ int main(int argc, char** argv) {
 
             for (int _ = 0; _ < TIMES; ++ _) {
                 if (is_rank_in_pattern) {
-                    CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], send_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], recv_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    if (dir_num == "2") {
+                        CUDA_CHECK(cudaMemcpy(send_buf[pp->rank], recv_buf_cpu[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    }
                 }
                 barrier(pp->BACKEND, pp->N_GPUs);
             }
@@ -225,7 +233,7 @@ int main(int argc, char** argv) {
             if (pp->rank == 0) {
                 // double t_d = (double)elapsedTime / 1000;    // s
                 double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-                double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES;      // B
+                double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES * (dir_num == "1" ? 1 : 2);      // B
                 double avg_bd = calc / t_d / pow(1024, 3);
                 printf("time %lf s, REAL_BD %lf GB/s, SIZE %lf KB, comm_vol %lf KB\n", \
                         t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 1), calc / pow(1024, 1));
