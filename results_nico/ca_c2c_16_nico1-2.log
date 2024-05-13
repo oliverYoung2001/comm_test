@@ -1,0 +1,105 @@
+make -C csrc clean
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone_c2c
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone_c2c.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o conflict_allinone_c2c.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o comm.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone_c2c.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/yhy/.local/nccl/build/lib -L/home/spack/spack/opt/spack/linux-debian12-cascadelake/gcc-12.2.0/cuda-12.0.1-34tfuheflqvthq3cikpjku6rigtpcsse/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone_c2c -Wl,-rpath=/home/yhy/.local/nccl/build/lib
+rm comm.o conflict_allinone_c2c.o utils.o
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+BACKEND: MPI
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 -K -w nico1,nico2 --cpu-bind=map_cpu:0,1,2,3,16,17,18,19 ./csrc/build/conflict_allinone_c2c 16 MPI ./scripts/configs/small_16.json
+[[0,1]]
+time 0.000227 s, REAL_BD 12.906112 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.069835 s, REAL_BD 5.369800 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.280140 s, REAL_BD 5.354466 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 1.119416 s, REAL_BD 5.359938 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.000216 s, REAL_BD 27.126736 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.070008 s, REAL_BD 10.713061 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.279944 s, REAL_BD 10.716429 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.119045 s, REAL_BD 10.723429 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.000552 s, REAL_BD 5.307405 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.061217 s, REAL_BD 6.125749 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.244679 s, REAL_BD 6.130481 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.979622 s, REAL_BD 6.124811 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.000639 s, REAL_BD 9.169601 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.079050 s, REAL_BD 9.487666 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.319284 s, REAL_BD 9.396024 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.354462 s, REAL_BD 8.859606 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.000677 s, REAL_BD 8.654911 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.083330 s, REAL_BD 9.000360 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.305935 s, REAL_BD 9.806005 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.319497 s, REAL_BD 9.094375 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.000985 s, REAL_BD 5.948604 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.116390 s, REAL_BD 6.443853 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.465477 s, REAL_BD 6.445002 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.876997 s, REAL_BD 6.393191 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.001127 s, REAL_BD 10.398181 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.123521 s, REAL_BD 12.143684 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.533575 s, REAL_BD 11.244905 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.070391 s, REAL_BD 11.592013 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.000681 s, REAL_BD 8.604075 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.081869 s, REAL_BD 9.160977 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.325732 s, REAL_BD 9.210025 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.338697 s, REAL_BD 8.963940 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.000987 s, REAL_BD 5.936550 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.116487 s, REAL_BD 6.438487 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.465488 s, REAL_BD 6.444849 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.866837 s, REAL_BD 6.427985 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.001160 s, REAL_BD 10.102371 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.123559 s, REAL_BD 12.139949 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.509760 s, REAL_BD 11.770245 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.129408 s, REAL_BD 11.270738 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.001019 s, REAL_BD 5.750123 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.116262 s, REAL_BD 6.450947 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.464986 s, REAL_BD 6.451807 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.865067 s, REAL_BD 6.434085 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.001181 s, REAL_BD 9.922735 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.124014 s, REAL_BD 12.095409 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.514833 s, REAL_BD 11.654265 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.123891 s, REAL_BD 11.300015 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 0.001913 s, REAL_BD 6.125849 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.233198 s, REAL_BD 6.432302 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.932488 s, REAL_BD 6.434399 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 3.722691 s, REAL_BD 6.446949 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 0.002041 s, REAL_BD 11.483341 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.245279 s, REAL_BD 12.230970 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.985236 s, REAL_BD 12.179823 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 3.959814 s, REAL_BD 12.121781 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 0.003738 s, REAL_BD 6.270064 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.466224 s, REAL_BD 6.434675 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 1.856831 s, REAL_BD 6.462624 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 7.439680 s, REAL_BD 6.451890 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 0.003972 s, REAL_BD 11.801360 GB/s, SIZE 1024.000000 KB, comm_vol 49152.000000 KB
+time 0.489030 s, REAL_BD 12.269186 GB/s, SIZE 131072.000000 KB, comm_vol 6291456.000000 KB
+time 1.973483 s, REAL_BD 12.161240 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 7.906633 s, REAL_BD 12.141704 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x
+./scripts/wrapper_conflict_allinone_c2c_nico.sh: line 113: ripts/configs/small_16.json: No such file or directory
+./scripts/wrapper_conflict_allinone_c2c_nico.sh: line 116: syntax error near unexpected token `done'
+./scripts/wrapper_conflict_allinone_c2c_nico.sh: line 116: `done'
