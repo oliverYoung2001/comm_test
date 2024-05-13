@@ -8,7 +8,8 @@ spack load cuda@11.8
 # # spack load openmpi@4.1.2
 
 # Openmpi
-export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi
+# export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi   # normal mpi
+export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy # cuda-aware mpi
 export PATH="$OPENMPI_HOME/bin:$PATH"
 export LD_LIBRARY_PATH="$OPENMPI_HOME/lib/:$LD_LIBRARY_PATH"
 

@@ -4,64 +4,964 @@ NNODES: 2
 NGPU_PER_NODE: 8
 +++ which mpirun
 ++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_NET_GDR_READ -x NCCL_P2P_LEVEL -x NCCL_IB_PCI_RELAXED_ORDERING -x NCCL_DEBUG=WARN -x NCCL_IB_GID_INDEX=3 -x NCCL_IB_DISABLE=0 -x NCCL_NET_GDR_LEVEL=2 -x NCCL_IB_QPS_PER_CONNECTION=4 -x NCCL_IB_TC=160 -np 16 --host g4003:8,g4006:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
-[mngg001:2269549] Warning: could not find environment variable "NCCL_NET_GDR_READ"
-[mngg001:2269549] Warning: could not find environment variable "NCCL_P2P_LEVEL"
-[mngg001:2269549] Warning: could not find environment variable "NCCL_IB_PCI_RELAXED_ORDERING"
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=INFO -x NCCL_NET_GDR_LEVEL=5 -x NCCL_DEBUG_SUBSYS=NET -x NCCL_IB_DISABLE=0 -np 16 --host g4007:8,g4008:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
+[g4007:11312] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4007:11312] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 14 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4007:11312] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 15 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4007:11312] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 8 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4007:11312] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 9 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4007:11312] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 10 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4007:11312] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 11 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4007:11312] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 12 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4008:50833] MCW rank 13 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
 --------------------------------------------------------------------------
 WARNING: There was an error initializing an OpenFabrics device.
 
-  Local host:   g4003
+  Local host:   g4008
   Local device: mlx5_0
 --------------------------------------------------------------------------
+g4007:11345:11345 [0] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : SC
+g4007:11345:11345 [0] NCCL INFO NET/Plugin : No plugin found, using internal implementation
 NCCL version 2.18.5+cuda11.8
-[mngg001:2269549] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
-[mngg001:2269549] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-[[0,1]]
-time 0.006712 s, REAL_BD 223.480334 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.025289 s, REAL_BD 237.257306 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
-[[0,1],[1,0]]
-time 0.007320 s, REAL_BD 409.836066 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.027587 s, REAL_BD 434.987494 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+g4007:11350:11350 [5] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4007:11350:11350 [5] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50975:50975 [3] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50975:50975 [3] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50974:50974 [2] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50974:50974 [2] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50972:50972 [0] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50972:50972 [0] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4007:11352:11352 [7] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4007:11352:11352 [7] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50973:50973 [1] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50973:50973 [1] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4007:11349:11349 [4] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4007:11349:11349 [4] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4007:11351:11351 [6] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4007:11351:11351 [6] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4007:11347:11347 [2] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4007:11347:11347 [2] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4007:11348:11348 [3] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4007:11348:11348 [3] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4007:11346:11346 [1] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4007:11346:11346 [1] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50980:50980 [6] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50980:50980 [6] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50976:50976 [4] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50976:50976 [4] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50983:50983 [7] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50983:50983 [7] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50979:50979 [5] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+g4008:50979:50979 [5] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+g4008:50975:50975 [3] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+g4008:50974:50974 [2] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+g4008:50973:50973 [1] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+g4008:50972:50972 [0] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+g4008:50983:50983 [7] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+g4008:50980:50980 [6] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+g4008:50976:50976 [4] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+g4008:50979:50979 [5] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_2:1/IB [3]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.2<0>
+[mngg001:3470651] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:3470651] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+g4007:11349:11349 [4] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11352:11352 [7] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11345:11345 [0] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11347:11347 [2] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11348:11348 [3] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11346:11346 [1] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11350:11350 [5] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11351:11351 [6] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [1]mlx5_1:1/IB [2]mlx5_3:1/IB [RO]; OOB ibs11:11.2.21.1<0>
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4008:50979:50979 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50979:50979 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50979:50979 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50979:50979 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4007:11347:11347 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11347:11347 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11347:11347 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11349:11349 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11349:11349 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11348:11348 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11349:11349 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11348:11348 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11348:11348 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11350:11350 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11350:11350 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11350:11350 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11352:11352 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11351:11351 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11352:11352 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11352:11352 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11351:11351 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11346:11346 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11351:11351 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11346:11346 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11346:11346 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50983:50983 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4008:50983:50983 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50976:50976 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50983:50983 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50976:50976 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50980:50980 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50983:50983 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4008:50976:50976 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50980:50980 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50976:50976 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4008:50974:50974 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50980:50980 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50973:50973 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50975:50975 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50974:50974 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50980:50980 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4008:50973:50973 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50975:50975 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50974:50974 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50973:50973 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50975:50975 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50974:50974 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4008:50973:50973 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4008:50975:50975 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 0 from local rank 7, transport 0
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 0 from local rank 7, transport 0
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 0 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000d00
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000d00
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000d00
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 0 from local rank 3, transport 0
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 0 from local rank 0, transport 0
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 0 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000d00
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 0 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000d00
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 0 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000d00
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000d00
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 0 from local rank 4, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000d00
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 0 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000d00
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 0 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000d00
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 0 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000d00
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 0 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000d00
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000d00
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 1 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000d50
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 1 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000d50
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 1 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000d50
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 1 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000d50
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 1 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000d50
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 1 from local rank 3, transport 0
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 2 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000da0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000d50
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 1 from local rank 6, transport 0
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 2 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000da0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000d50
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 3 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000df0
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 1 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000d50
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 1 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000d50
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 1 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000d50
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 3 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000df0
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 1 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000d50
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 1 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000d50
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 2 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000da0
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 4 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000e40
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 1 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000d50
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 5 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000e90
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 2 from local rank 6, transport 0
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 2 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000da0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000da0
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 4 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000e40
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 2 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000da0
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 2 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000da0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000d00
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 2 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000da0
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 2 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000da0
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 0 from local rank 5, transport 2
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 3 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000df0
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 0 from local rank 4, transport 2
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 3 from local rank 6, transport 0
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 5 from local rank 1, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000df0
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 6 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000ee0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000d00
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000d00
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000e90
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 3 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000df0
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 7 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000f30
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 6 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000ee0
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 3 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000df0
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 3 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000df0
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 3 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000df0
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 7 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000f30
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 3 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000df0
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 0
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 4 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000e40
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000da0
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 2 from local rank 2, transport 2
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 5 from local rank 3, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000da0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000e90
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000df0
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 4 from local rank 5, transport 0
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 4 from local rank 4, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000e40
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 6 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000ee0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000e40
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 5 from local rank 5, transport 0
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 5 from local rank 4, transport 0
+g4007:11347:11347 [2] NCCL INFO Channel 00/0 : 2[2] -> 8[0] [send] via NET/IB/1
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000e90
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 3 from local rank 2, transport 2
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000df0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000e90
+g4007:11350:11350 [5] NCCL INFO Channel 01/0 : 5[5] -> 10[2] [send] via NET/IB/2
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 1 from local rank 5, transport 2
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 7 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000f30
+g4007:11347:11347 [2] NCCL INFO Channel 02/0 : 2[2] -> 8[0] [send] via NET/IB/1
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 2 from local rank 7, transport 2
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000da0
+g4007:11349:11349 [4] NCCL INFO Channel 01/0 : 12[4] -> 4[4] [receive] via NET/IB/2
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000d50
+g4007:11350:11350 [5] NCCL INFO Channel 03/0 : 5[5] -> 10[2] [send] via NET/IB/2
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 1 from local rank 4, transport 2
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000d50
+g4007:11349:11349 [4] NCCL INFO Channel 03/0 : 12[4] -> 4[4] [receive] via NET/IB/2
+g4007:11345:11345 [0] NCCL INFO Channel 00/0 : 15[7] -> 0[0] [receive] via NET/IB/0
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000d50
+g4007:11345:11345 [0] NCCL INFO Channel 02/0 : 15[7] -> 0[0] [receive] via NET/IB/0
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 4 from local rank 2, transport 2
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000e40
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 4 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000e40
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 4 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000e40
+g4008:50983:50983 [7] NCCL INFO Channel 00/0 : 15[7] -> 0[0] [send] via NET/IB/3
+g4008:50974:50974 [2] NCCL INFO Channel 01/0 : 5[5] -> 10[2] [receive] via NET/IB/1
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 5 from local rank 2, transport 2
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000e90
+g4008:50974:50974 [2] NCCL INFO Channel 03/0 : 5[5] -> 10[2] [receive] via NET/IB/1
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 3 from local rank 7, transport 2
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000df0
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 6 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000ee0
+g4008:50972:50972 [0] NCCL INFO Channel 00/0 : 2[2] -> 8[0] [receive] via NET/IB/0
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 5 from local rank 0, transport 2
+g4008:50983:50983 [7] NCCL INFO Channel 02/0 : 15[7] -> 0[0] [send] via NET/IB/3
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 5 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000e90
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000e90
+g4008:50972:50972 [0] NCCL INFO Channel 02/0 : 2[2] -> 8[0] [receive] via NET/IB/0
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 4 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000e40
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000da0
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 4 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000e40
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 7 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000f30
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 4 from local rank 7, transport 0
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 6 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000ee0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000e40
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 6 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000ee0
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 5 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000e90
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 5 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000e90
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 7 from local rank 0, transport 0
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000df0
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 2 from local rank 5, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000f30
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 6 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000ee0
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 5 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000e90
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000da0
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 6 from local rank 6, transport 0
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 7 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000f30
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000ee0
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000e40
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 2 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000da0
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 7 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000f30
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 6 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000ee0
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 3 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000df0
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 6 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000ee0
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 5 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000e90
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 3 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000df0
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 4 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000e40
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 4 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000e40
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 5 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000e90
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 6 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000ee0
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 4 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000e40
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 5 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000e90
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 6 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000ee0
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 7 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000f30
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 5 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000e90
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 6 from local rank 4, transport 2
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 6 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000ee0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000ee0
+g4008:50976:50976 [4] NCCL INFO Channel 01/0 : 12[4] -> 4[4] [send] via NET/IB/2
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 7 from local rank 4, transport 2
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000f30
+g4008:50976:50976 [4] NCCL INFO Channel 03/0 : 12[4] -> 4[4] [send] via NET/IB/2
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 2 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000da0
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 7 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000f30
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 7 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000f30
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 6 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000ee0
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 7 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000f30
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 7 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000f30
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 3 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000df0
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 7 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000f30
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 4 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000e40
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 7 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000f30
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 5 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000e90
+g4008:50983:51326 [7] NCCL INFO NET/IB: Dev 3 Port 1 qpn 16603 mtu 5 LID 234
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 6 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000ee0
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 8 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000f80
+g4007:11347:11436 [2] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20616 mtu 5 LID 212
+g4008:50983:51326 [7] NCCL INFO NET/IB: Dev 3 Port 1 qpn 16604 mtu 5 LID 234
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 7 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000f30
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 9 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588000fd0
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 10 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588001020
+g4007:11350:11434 [5] NCCL INFO NET/IB: Dev 2 Port 1 qpn 27659 mtu 5 LID 85
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 8 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000f80
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 8 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000f80
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 8 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000f80
+g4008:50976:51329 [4] NCCL INFO NET/IB: Dev 2 Port 1 qpn 24067 mtu 5 LID 237
+g4007:11350:11434 [5] NCCL INFO NET/IB: Dev 2 Port 1 qpn 27660 mtu 5 LID 85
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 8 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000f80
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 11 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588001070
+g4008:50976:51329 [4] NCCL INFO NET/IB: Dev 2 Port 1 qpn 24075 mtu 5 LID 237
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 9 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668000fd0
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 9 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0000fd0
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 9 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8000fd0
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 9 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c000fd0
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 8 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000f80
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 8 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000f80
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 10 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668001020
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 12 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f05880010c0
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 10 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0001020
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 9 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c000fd0
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 10 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8001020
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 10 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c001020
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 9 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928000fd0
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 11 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668001070
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 13 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588001110
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 11 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0001070
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 11 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c001070
+g4007:11351:11435 [6] NCCL INFO New proxy recv connection 11 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8001070
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 8 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000f80
+g4007:11347:11436 [2] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20617 mtu 5 LID 212
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 9 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998000fd0
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 10 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998001020
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 8 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000f80
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 12 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa80010c0
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 11 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998001070
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 12 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f39980010c0
+g4008:50983:51326 [7] NCCL INFO New proxy recv connection 13 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998001110
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 9 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194000fd0
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 13 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8001110
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 8 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000f80
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 10 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194001020
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 10 from local rank 6, transport 2
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c001020
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 14 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8001160
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 9 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c000fd0
+g4007:11348:11437 [3] NCCL INFO New proxy recv connection 11 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194001070
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 15 from local rank 6, transport 0
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa80011b0
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 10 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001020
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 12 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f01940010c0
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 11 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001070
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 13 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194001110
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 12 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c0010c0
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 12 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c0010c0
+g4007:11352:11431 [7] NCCL INFO New proxy recv connection 13 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c001110
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 13 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001110
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 14 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c001160
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 14 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001160
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 15 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c0011b0
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 15 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c0011b0
+g4008:50980:50980 [6] NCCL INFO Channel 01/0 : 14[6] -> 4[4] [send] via NET/IB/2
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 16 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c001200
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 11 from local rank 6, transport 2
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c001070
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 16 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001200
+g4008:50980:50980 [6] NCCL INFO Channel 03/0 : 14[6] -> 4[4] [send] via NET/IB/2
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 17 from local rank 7, transport 0
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c001250
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 17 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001250
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 18 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c0012a0
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 19 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c0012f0
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 8 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000f80
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 8 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000f80
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 9 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c000fd0
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 20 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001340
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 10 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001020
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 11 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001070
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 12 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c0010c0
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 9 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08000fd0
+g4007:11345:11432 [0] NCCL INFO New proxy recv connection 21 from local rank 0, transport 0
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c001390
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 13 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001110
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 8 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000f80
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 14 from local rank 7, transport 0
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 14 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001160
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998001160
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 10 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08001020
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 9 from local rank 4, transport 0
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 8 from local rank 2, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c000fd0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000f80
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 15 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c0011b0
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 15 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f39980011b0
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 10 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c001020
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 8 from local rank 2, transport 0
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 16 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001200
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000f80
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 16 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998001200
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 11 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c001070
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 11 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08001070
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 9 from local rank 2, transport 0
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 8 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000f80
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038000fd0
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 9 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c000fd0
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 17 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001250
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 12 from local rank 4, transport 0
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 17 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998001250
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 10 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928001020
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c080010c0
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 12 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c0010c0
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 10 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001020
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 18 from local rank 0, transport 0
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 9 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234000fd0
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 18 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f39980012a0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c0012a0
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 13 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08001110
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 10 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001020
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 10 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234001020
+g4008:50979:51331 [5] NCCL INFO New proxy recv connection 11 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928001070
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 11 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001070
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 13 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c001110
+g4007:11350:11434 [5] NCCL INFO New proxy recv connection 11 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234001070
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 11 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001070
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 19 from local rank 0, transport 0
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 19 from local rank 7, transport 0
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f39980012f0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c0012f0
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 12 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f59280010c0
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 14 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c001160
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 20 from local rank 0, transport 0
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 12 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c0010c0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001340
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 12 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd2340010c0
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 12 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd6680010c0
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 13 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928001110
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 12 from local rank 2, transport 2
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f00380010c0
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 13 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001110
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 13 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234001110
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 12 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c00010c0
+g4008:50976:51329 [4] NCCL INFO New proxy recv connection 15 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c0011b0
+g4008:50974:50974 [2] NCCL INFO Channel 00/0 : 2[2] -> 10[2] [receive] via NET/IB/0
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 13 from local rank 2, transport 2
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001110
+g4008:50972:51327 [0] NCCL INFO New proxy recv connection 21 from local rank 0, transport 0
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c001390
+g4008:50974:50974 [2] NCCL INFO Channel 02/0 : 2[2] -> 10[2] [receive] via NET/IB/0
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 14 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234001160
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 14 from local rank 2, transport 2
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001160
+g4008:50974:50974 [2] NCCL INFO Channel 00/0 : 10[2] -> 2[2] [send] via NET/IB/0
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 15 from local rank 2, transport 2
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f00380011b0
+g4008:50974:50974 [2] NCCL INFO Channel 02/0 : 10[2] -> 2[2] [send] via NET/IB/0
+g4008:50973:51332 [1] NCCL INFO New proxy recv connection 13 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668001110
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 14 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588001160
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 14 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928001160
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 14 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194001160
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 13 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0001110
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 14 from local rank 2, transport 2
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001160
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 16 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c001200
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 15 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd2340011b0
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 14 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668001160
+g4007:11347:11347 [2] NCCL INFO Channel 00/0 : 10[2] -> 2[2] [receive] via NET/IB/0
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 15 from local rank 5, transport 0
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f59280011b0
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 15 from local rank 2, transport 2
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c0011b0
+g4007:11347:11347 [2] NCCL INFO Channel 02/0 : 10[2] -> 2[2] [receive] via NET/IB/0
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 14 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0001160
+g4007:11346:11438 [1] NCCL INFO New proxy recv connection 15 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f05880011b0
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 17 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c001250
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 16 from local rank 2, transport 2
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001200
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 15 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd6680011b0
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 15 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f01940011b0
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 16 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Channel 00/0 : 2[2] -> 10[2] [send] via NET/IB/0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001200
+g4007:11352:11431 [7] NCCL INFO New proxy send connection 18 from local rank 7, transport 2
+g4007:11352:11352 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fdd3c0012a0
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 17 from local rank 2, transport 2
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001250
+g4007:11347:11347 [2] NCCL INFO Channel 02/0 : 2[2] -> 10[2] [send] via NET/IB/0
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 14 from local rank 4, transport 2
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 16 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588001200
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 12 from local rank 6, transport 2
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08001160
+g4007:11349:11349 [4] NCCL INFO Channel 01/0 : 14[6] -> 4[4] [receive] via NET/IB/2
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 16 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194001200
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 18 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c0012a0
+g4008:50975:51328 [3] NCCL INFO New proxy recv connection 15 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c00011b0
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 15 from local rank 4, transport 2
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c080011b0
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 18 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c0012a0
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 16 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234001200
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c0010c0
+g4007:11349:11349 [4] NCCL INFO Channel 03/0 : 14[6] -> 4[4] [receive] via NET/IB/2
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 16 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668001200
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 16 from local rank 4, transport 2
+g4008:50980:50980 [6] NCCL INFO Channel 01/0 : 4[4] -> 14[6] [receive] via NET/IB/2
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 17 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001250
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08001200
+g4007:11349:11349 [4] NCCL INFO Channel 01/0 : 4[4] -> 14[6] [send] via NET/IB/2
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 17 from local rank 4, transport 2
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08001250
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 13 from local rank 6, transport 2
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c001110
+g4008:50980:50980 [6] NCCL INFO Channel 03/0 : 4[4] -> 14[6] [receive] via NET/IB/2
+g4007:11349:11349 [4] NCCL INFO Channel 03/0 : 4[4] -> 14[6] [send] via NET/IB/2
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 18 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c080012a0
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 19 from local rank 4, transport 0
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c0012f0
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 17 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588001250
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 16 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0001200
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 17 from local rank 5, transport 0
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd234001250
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 17 from local rank 1, transport 0
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd668001250
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 17 from local rank 3, transport 0
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f0194001250
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 14 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c001160
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 18 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f00380012a0
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 19 from local rank 2, transport 0
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 17 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0001250
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c0012f0
+g4008:50974:51333 [2] NCCL INFO New proxy recv connection 19 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f00380012f0
+g4008:50980:51330 [6] NCCL INFO New proxy recv connection 15 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c0011b0
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 18 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c00012a0
+g4007:11349:11433 [4] NCCL INFO New proxy recv connection 19 from local rank 4, transport 0
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c080012f0
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 18 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f05880012a0
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 20 from local rank 2, transport 0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001340
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 20 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001340
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 16 from local rank 6, transport 0
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 19 from local rank 3, transport 0
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c00012f0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c001200
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 21 from local rank 2, transport 0
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 19 from local rank 1, transport 0
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f05880012f0
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f0038001390
+g4007:11347:11436 [2] NCCL INFO New proxy recv connection 21 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001390
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 17 from local rank 6, transport 0
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c001250
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 22 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c0013e0
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 23 from local rank 2, transport 0
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001430
+g4007:11351:11435 [6] NCCL INFO New proxy send connection 16 from local rank 6, transport 2
+g4007:11351:11351 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1fa8001200
+g4007:11349:11433 [4] NCCL INFO NET/IB: Dev 2 Port 1 qpn 27663 mtu 5 LID 85
+g4008:50980:51330 [6] NCCL INFO NET/IB: Dev 2 Port 1 qpn 24076 mtu 5 LID 237
+g4007:11349:11433 [4] NCCL INFO NET/IB: Dev 2 Port 1 qpn 27664 mtu 5 LID 85
+g4008:50980:51330 [6] NCCL INFO NET/IB: Dev 2 Port 1 qpn 24084 mtu 5 LID 237
+g4008:50974:51333 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 24338 mtu 5 LID 235
+g4008:50974:51333 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 24339 mtu 5 LID 235
+g4007:11350:11434 [5] NCCL INFO New proxy send connection 18 from local rank 5, transport 2
+g4007:11350:11350 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fd2340012a0
+g4007:11347:11436 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 24394 mtu 5 LID 231
+g4008:50972:51327 [0] NCCL INFO New proxy send connection 22 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f307c0013e0
+g4007:11347:11436 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 24396 mtu 5 LID 231
+g4007:11345:11432 [0] NCCL INFO New proxy send connection 22 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda5c0013e0
+g4008:50976:51329 [4] NCCL INFO New proxy send connection 20 from local rank 4, transport 2
+g4008:50976:50976 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f1a5c001340
+g4008:50973:51332 [1] NCCL INFO New proxy send connection 18 from local rank 1, transport 2
+g4008:50973:50973 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fd6680012a0
+g4007:11348:11437 [3] NCCL INFO New proxy send connection 18 from local rank 3, transport 2
+g4007:11348:11348 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f01940012a0
+g4008:50983:51326 [7] NCCL INFO New proxy send connection 20 from local rank 7, transport 2
+g4008:50983:50983 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f3998001340
+g4007:11346:11438 [1] NCCL INFO New proxy send connection 20 from local rank 1, transport 2
+g4007:11346:11346 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f0588001340
+g4008:50975:51328 [3] NCCL INFO New proxy send connection 20 from local rank 3, transport 2
+g4008:50975:50975 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f61c0001340
+g4008:50979:51331 [5] NCCL INFO New proxy send connection 16 from local rank 5, transport 2
+g4008:50979:50979 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7f5928001200
+g4007:11349:11433 [4] NCCL INFO New proxy send connection 20 from local rank 4, transport 2
+g4007:11349:11349 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f8c08001340
+g4008:50980:51330 [6] NCCL INFO New proxy send connection 18 from local rank 6, transport 2
+g4008:50980:50980 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7fb71c0012a0
+g4007:11347:11436 [2] NCCL INFO New proxy send connection 24 from local rank 2, transport 2
+g4007:11347:11347 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f435c001480
+g4008:50974:51333 [2] NCCL INFO New proxy send connection 22 from local rank 2, transport 2
+g4008:50974:50974 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f00380013e0
 [[0,8]]
-time 0.075776 s, REAL_BD 19.795186 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-time 0.298958 s, REAL_BD 20.069709 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11345:11448 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+g4008:50972:51343 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000d70
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000d00
+g4007:11345:11345 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+g4007:11345:11448 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000dc0
+g4007:11345:11345 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+g4007:11345:11448 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000e10
+g4007:11345:11345 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/IB/1
+g4007:11345:11448 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000e60
+g4007:11345:11345 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/IB/1
+g4008:50972:50972 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/IB/1
+g4008:50972:51343 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000d50
+g4008:50972:50972 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/IB/1
+g4008:50972:51343 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000da0
+g4008:50972:50972 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/IB/1
+g4008:50972:51343 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000df0
+g4008:50972:50972 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/IB/1
+g4007:11345:11448 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20622 mtu 5 LID 212
+g4008:50972:51343 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 17757 mtu 5 LID 236
+g4008:50972:51343 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 17758 mtu 5 LID 236
+g4007:11345:11448 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20625 mtu 5 LID 212
+g4007:11345:11448 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000eb0
+g4008:50972:51343 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000e40
+g4007:11345:11448 [0] NCCL INFO New proxy send connection 5 from local rank 0, transport 2
+g4007:11345:11450 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000f00
+g4007:11345:11450 [0] NCCL INFO Channel 00/1 : 0[0] -> 1[0] [send] via NET/IB/0/Shared
+g4007:11345:11448 [0] NCCL INFO New proxy send connection 6 from local rank 0, transport 2
+g4007:11345:11450 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000f50
+g4007:11345:11450 [0] NCCL INFO Channel 01/1 : 0[0] -> 1[0] [send] via NET/IB/1/Shared
+g4008:50972:51343 [0] NCCL INFO New proxy recv connection 5 from local rank 0, transport 2
+g4008:50972:51345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000e90
+g4008:50972:51345 [0] NCCL INFO Channel 00/1 : 0[0] -> 1[0] [receive] via NET/IB/0/Shared
+g4008:50972:51343 [0] NCCL INFO New proxy recv connection 6 from local rank 0, transport 2
+g4008:50972:51345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000ee0
+g4008:50972:51345 [0] NCCL INFO Channel 01/1 : 0[0] -> 1[0] [receive] via NET/IB/1/Shared
+g4007:11345:11448 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 24405 mtu 5 LID 231
+g4007:11345:11448 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20634 mtu 5 LID 212
+time 0.081685 s, REAL_BD 18.363225 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.298007 s, REAL_BD 20.133755 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
 [[0,8],[8,0]]
-time 0.146271 s, REAL_BD 20.509876 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.587954 s, REAL_BD 20.409760 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
-[[0,15],[15,0]]
-time 0.148060 s, REAL_BD 20.262056 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.618581 s, REAL_BD 19.399238 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
-[[0,8],[0,15]]
-time 0.128788 s, REAL_BD 23.294096 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 1.013137 s, REAL_BD 11.844400 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
-[[0,8],[0,15],[8,0],[15,0]]
-time 0.273222 s, REAL_BD 21.960164 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 1.094650 s, REAL_BD 21.924816 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
-[[7,8],[15,0]]
-time 0.077706 s, REAL_BD 38.607057 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.301861 s, REAL_BD 39.753396 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
-[[0,8],[2,10]]
-time 0.132036 s, REAL_BD 22.721076 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.566759 s, REAL_BD 21.173021 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
-[[0,8],[8,0],[2,10],[10,2]]
-time 0.265305 s, REAL_BD 22.615480 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.961832 s, REAL_BD 24.952383 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
-[[0,8],[4,12]]
-time 0.092524 s, REAL_BD 32.424020 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.467091 s, REAL_BD 25.690925 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
-[[0,8],[8,0],[4,12],[12,4]]
-time 0.170008 s, REAL_BD 35.292457 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.850140 s, REAL_BD 28.230644 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
-[[0,8],[2,10],[4,12],[6,14]]
-time 0.146268 s, REAL_BD 41.020592 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.526678 s, REAL_BD 45.568640 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
-[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
-time 0.232612 s, REAL_BD 51.588052 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
-time 0.929383 s, REAL_BD 51.647168 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
-[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
-time 0.186139 s, REAL_BD 64.467951 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
-time 0.744872 s, REAL_BD 64.440602 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
-[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
-time 0.342089 s, REAL_BD 70.157181 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
-time 1.367042 s, REAL_BD 70.224616 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_2'
+g4008:50972:50972 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 3 'mlx5_3'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_1'
+g4007:11345:11345 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 2 'mlx5_3'
+g4007:11345:11453 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000da0
+g4007:11345:11345 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+g4007:11345:11453 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000df0
+g4007:11345:11345 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+g4007:11345:11453 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000e40
+g4007:11345:11345 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/IB/1
+g4007:11345:11453 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000e90
+g4007:11345:11345 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/IB/1
+g4008:50972:51387 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000d00
+g4008:50972:50972 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/IB/1
+g4008:50972:51387 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000d50
+g4008:50972:50972 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/IB/1
+g4008:50972:51387 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000da0
+g4008:50972:50972 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/IB/1
+g4008:50972:51387 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000df0
+g4008:50972:50972 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/IB/1
+g4007:11345:11453 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20635 mtu 5 LID 212
+g4008:50972:51387 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 17762 mtu 5 LID 236
+g4007:11345:11453 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20636 mtu 5 LID 212
+g4008:50972:51387 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 17764 mtu 5 LID 236
+g4007:11345:11453 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+g4007:11345:11345 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000ee0
+g4008:50972:51387 [0] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+g4008:50972:50972 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000e40
+g4007:11345:11453 [0] NCCL INFO New proxy recv connection 5 from local rank 0, transport 2
+g4007:11345:11455 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000f30
+g4007:11345:11455 [0] NCCL INFO Channel 00/1 : 1[0] -> 0[0] [receive] via NET/IB/0/Shared
+g4007:11345:11453 [0] NCCL INFO New proxy recv connection 6 from local rank 0, transport 2
+g4007:11345:11455 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000f80
+g4007:11345:11455 [0] NCCL INFO Channel 01/1 : 1[0] -> 0[0] [receive] via NET/IB/1/Shared
+g4007:11345:11453 [0] NCCL INFO New proxy send connection 7 from local rank 0, transport 2
+g4007:11345:11455 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c000fd0
+g4007:11345:11455 [0] NCCL INFO Channel 00/1 : 0[0] -> 1[0] [send] via NET/IB/0/Shared
+g4007:11345:11453 [0] NCCL INFO New proxy send connection 8 from local rank 0, transport 2
+g4007:11345:11455 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fda0c001020
+g4007:11345:11455 [0] NCCL INFO Channel 01/1 : 0[0] -> 1[0] [send] via NET/IB/1/Shared
+g4008:50972:51387 [0] NCCL INFO New proxy recv connection 5 from local rank 0, transport 2
+g4008:50972:51389 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000e90
+g4008:50972:51389 [0] NCCL INFO Channel 00/1 : 0[0] -> 1[0] [receive] via NET/IB/0/Shared
+g4008:50972:51387 [0] NCCL INFO New proxy recv connection 6 from local rank 0, transport 2
+g4008:50972:51389 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000ee0
+g4008:50972:51389 [0] NCCL INFO Channel 01/1 : 0[0] -> 1[0] [receive] via NET/IB/1/Shared
+g4008:50972:51387 [0] NCCL INFO New proxy send connection 7 from local rank 0, transport 2
+g4008:50972:51389 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000f30
+g4008:50972:51389 [0] NCCL INFO Channel 00/1 : 1[0] -> 0[0] [send] via NET/IB/0/Shared
+g4008:50972:51387 [0] NCCL INFO New proxy send connection 8 from local rank 0, transport 2
+g4008:50972:51389 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f305c000f80
+g4008:50972:51389 [0] NCCL INFO Channel 01/1 : 1[0] -> 0[0] [send] via NET/IB/1/Shared
+g4007:11345:11453 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 24406 mtu 5 LID 231
+g4008:50972:51387 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 24346 mtu 5 LID 235
+g4007:11345:11453 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 20640 mtu 5 LID 212
+g4008:50972:51387 [0] NCCL INFO NET/IB: Dev 1 Port 1 qpn 17772 mtu 5 LID 236
+time 0.145745 s, REAL_BD 20.583897 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.582120 s, REAL_BD 20.614306 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
++ set +x
