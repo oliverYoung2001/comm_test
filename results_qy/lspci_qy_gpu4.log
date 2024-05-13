@@ -61,7 +61,7 @@ srun: job 11368 has been allocated resources
  |           +-0c.2  Intel Corporation Device 344d
  |           +-0c.3  Intel Corporation Device 344d
  |           +-0c.4  Intel Corporation Device 344d
- |           +-0c.5  Intel Corporation Device 344d
+ |           +-0c.5  Intel Corporation Device xr
  |           +-0c.6  Intel Corporation Device 344d
  |           +-0c.7  Intel Corporation Device 344d
  |           +-0d.0  Intel Corporation Device 344d

@@ -16,13 +16,35 @@ pushd $NCCL_PATH
 make -j src.build NVCC_GENCODE=$NVCC_GENCODE
 popd
 
+# Q: how to build openmpi with cuda support? 
+# A: https://www.open-mpi.org/faq/?category=buildcuda (openmpi, cuda, ucx, gdrcopy)
+
+# install gdrcopy (v2.4.1)
+GDRCOPY_HOME=<position to install>  #  /home/zhaijidong/yhy/.local/gdrcopy
+git clone git@github.com:NVIDIA/gdrcopy.git
+cd gdrcopy
+git checkout v2.4.1
+
+
+# install ucx-1.4.0
+UCX_HOME=<position to install>  # /home/zhaijidong/yhy/.local/ucx
+wget https://github.com/openucx/ucx/releases/download/v1.4.0/ucx-1.4.0.tar.gz
+tar -zxvf ucx-1.4.0.tar.gz
+./configure --prefix=$UCX_HOME --with-cuda=$(dirname `which nvcc`)/../ --with-gdrcopy=/usr \
+&& make -j install
+
+
 # install openmpi
 # Ref: https://yuhldr.github.io/posts/bfa79f01.html
 OPENMPI_HOME=<position to install>
 wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.6.tar.bz2
 tar jxvf openmpi-4.1.6.tar.bz2
 cd openmpi-4.1.6
-./configure --prefix=$OPENMPI_HOME --with-slurm --with-pmix --enable-orterun-prefix-by-default --enable-mpirun-prefix-by-default && make -j && make install # on nico1
+./configure --prefix=$OPENMPI_HOME \
+--with-slurm --with-pmix \
+--enable-orterun-prefix-by-default --enable-mpirun-prefix-by-default \
+--with-cuda=$(dirname `which nvcc`)/../ --with-ucx=$UCX_HOME \    # for cuda-aware mpi
+&& make -j && make install # on nico1
 # necessary to install openmpi with slurm support
 
 # make -j

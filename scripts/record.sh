@@ -6,7 +6,12 @@ nvidia-smi topo -m
 # ib
 ibstatus
 
-# pcie attributes
+# cpu & gpu topo
+lstopo
+# visualize
+lstopo --of png > output.png    # can see how cpu & gpu are connected
+
+# pcie attributes   # [NOTE]: no cpu !!!
 lspci -tvv  # pcie tree
 /sys/devices/...    # pcie bus detailed info
 0000:47:02.0:pcie001

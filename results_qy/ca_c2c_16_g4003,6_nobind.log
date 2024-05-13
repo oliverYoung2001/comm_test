@@ -1,0 +1,114 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone_c2c
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone_c2c.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o conflict_allinone_c2c.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone_c2c.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone_c2c -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o conflict_allinone_c2c.o utils.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: MPI
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 16 --host g4003:8,g4006:8 ./csrc/build/conflict_allinone_c2c 16 MPI ./scripts/configs/small_16.json
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4006
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[[0,1]]
+time 0.000364 s, REAL_BD 8.048592 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.085291 s, REAL_BD 4.396712 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.345565 s, REAL_BD 4.340717 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+[mngg001:2985703] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:2985703] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 2.919153 s, REAL_BD 2.055391 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.000769 s, REAL_BD 7.619473 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.087338 s, REAL_BD 8.587327 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.354138 s, REAL_BD 8.471274 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 11.025093 s, REAL_BD 1.088426 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.000216 s, REAL_BD 13.563368 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.008199 s, REAL_BD 45.737285 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.032670 s, REAL_BD 45.913682 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.131234 s, REAL_BD 45.719859 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.000119 s, REAL_BD 49.238445 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.008226 s, REAL_BD 91.174325 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.032851 s, REAL_BD 91.321421 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.190774 s, REAL_BD 62.901653 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.000133 s, REAL_BD 44.055451 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.008218 s, REAL_BD 91.263081 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.043512 s, REAL_BD 68.946498 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.191433 s, REAL_BD 62.685117 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.000184 s, REAL_BD 31.844429 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.016353 s, REAL_BD 45.863144 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.065269 s, REAL_BD 45.963627 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.260936 s, REAL_BD 45.988288 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.000203 s, REAL_BD 57.727833 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.016390 s, REAL_BD 91.519219 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.065409 s, REAL_BD 91.730496 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.317366 s, REAL_BD 75.622467 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.000111 s, REAL_BD 52.787162 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.008200 s, REAL_BD 91.463415 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.032715 s, REAL_BD 91.701055 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.131043 s, REAL_BD 91.572995 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.000173 s, REAL_BD 33.869220 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.016357 s, REAL_BD 45.851929 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.065273 s, REAL_BD 45.960811 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.266164 s, REAL_BD 45.084985 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.000209 s, REAL_BD 56.070574 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.016397 s, REAL_BD 91.480149 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.065425 s, REAL_BD 91.708063 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.346437 s, REAL_BD 69.276665 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.000177 s, REAL_BD 33.103814 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.016359 s, REAL_BD 45.846323 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.065279 s, REAL_BD 45.956586 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.266164 s, REAL_BD 45.084985 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.000213 s, REAL_BD 55.017606 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.016390 s, REAL_BD 91.519219 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.065452 s, REAL_BD 91.670232 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.348040 s, REAL_BD 68.957591 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 0.000307 s, REAL_BD 38.171824 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.032660 s, REAL_BD 45.927740 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.130496 s, REAL_BD 45.978421 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.522089 s, REAL_BD 45.969174 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 0.000350 s, REAL_BD 66.964286 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.032733 s, REAL_BD 91.650628 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.130797 s, REAL_BD 91.745224 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.539328 s, REAL_BD 88.999644 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 0.000314 s, REAL_BD 74.641720 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.032673 s, REAL_BD 91.818933 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.130511 s, REAL_BD 91.946273 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.522079 s, REAL_BD 91.940109 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 0.000327 s, REAL_BD 143.348624 GB/s, SIZE 1024.000000 KB, comm_vol 49152.000000 KB
+time 0.032766 s, REAL_BD 183.116645 GB/s, SIZE 131072.000000 KB, comm_vol 6291456.000000 KB
+time 0.130809 s, REAL_BD 183.473614 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 0.543833 s, REAL_BD 176.524779 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x
