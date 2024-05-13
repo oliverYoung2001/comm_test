@@ -193,6 +193,7 @@ int main(int argc, char** argv) {
             std::cout << sw.write(root[cp]);
             fflush(stdout);
         }
+        // enableP2P(root[cp]);    // [NOTE]: error when on multi-machines ???!!!
         if (pp->BACKEND.find("cudaMemcpy") != std::string::npos && pp->ENABLE_GPU_P2P) {
             enableP2P(root[cp]);
         }

@@ -13,7 +13,7 @@ int get_cur_rank(PROC_PARAMS*& pp, int rank) {
     return cur_rank;
 }
 
-void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs) {
+void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs, bool cpu_only) {
     // deduplicate
     pp->r_s.clear();
     for (int k = 0; k < pairs.size(); ++ k) {
@@ -25,26 +25,27 @@ void create_comm_group_from_pattern(PROC_PARAMS*& pp, Json::Value& pairs) {
 
     // create mpi group
     MPI_Comm_split(MPI_COMM_WORLD, pp->r_s.count(pp->rank) ? 0 : MPI_UNDEFINED, pp->rank, &pp->cur_mpi_comm);
+    pp->cur_rank = - 1;
+    if (pp->cur_mpi_comm != MPI_COMM_NULL) {
+        MPI_Comm_rank(pp->cur_mpi_comm, &pp->cur_rank);
+        // printf("rank%d, pp->cur_rank%d, OK !!!\n", pp->rank, pp->cur_rank);
+    }
 
     // create nccl communicator
-    ncclUniqueId id;
-    if (pp->rank == 0) ncclGetUniqueId(&id);
-    MPI_Bcast(&id, sizeof(id), MPI_BYTE, 0, MPI_COMM_WORLD);
-    pp->cur_rank = - 1;
-    if (pp->r_s.count(pp->rank)) {
-        pp->cur_rank = get_cur_rank(pp, pp->rank);
-        ncclCommInitRank(&pp->cur_comm, pp->r_s.size(), id, pp->cur_rank);
+    if (! cpu_only) {
+        ncclUniqueId id;
+        if (pp->rank == 0) ncclGetUniqueId(&id);
+        MPI_Bcast(&id, sizeof(id), MPI_BYTE, 0, MPI_COMM_WORLD);
+        int cur_rank = - 1;
+        if (pp->r_s.count(pp->rank)) {
+            cur_rank = get_cur_rank(pp, pp->rank);
+            ncclCommInitRank(&pp->cur_comm, pp->r_s.size(), id, cur_rank);
+        }
+        assert(cur_rank == pp->cur_rank);
     }
-    int cur_rank = - 1;
-
-    if (pp->cur_mpi_comm != MPI_COMM_NULL) {
-        MPI_Comm_rank(pp->cur_mpi_comm, &cur_rank);
-        // printf("rank%d, cur_rank%d, OK !!!\n", pp->rank, cur_rank);
-    }
-    assert(cur_rank == pp->cur_rank);
 }
 
-void barrier(std::string& BACKEND, int N_GPUs, MPI_Comm mpi_comm) {
+void barrier(std::string& BACKEND, int N_GPUs, MPI_Comm mpi_comm, bool cpu_only) {
     if (BACKEND.find("cudaMemcpy") != std::string::npos) {
         for (int gpuid = 0; gpuid < N_GPUs; ++ gpuid) {
             CUDA_CHECK(cudaSetDevice(gpuid));
@@ -52,7 +53,9 @@ void barrier(std::string& BACKEND, int N_GPUs, MPI_Comm mpi_comm) {
         }
     }
     if (BACKEND.compare("NCCL") == 0 || BACKEND.compare("MPI") == 0) {
-        CUDA_CHECK(cudaDeviceSynchronize());
+        if (! cpu_only) {
+            CUDA_CHECK(cudaDeviceSynchronize());
+        }
         if (mpi_comm != MPI_COMM_NULL) {
             MPI_Barrier(mpi_comm);
         }
@@ -285,7 +288,7 @@ void get_proc_params(PROC_PARAMS* pp) {
     pp->nodes = pp->comm_size / pp->tasks_per_node;     // default = 1
 }
 
-void setup_env(PROC_PARAMS*& pp, int argc, char** argv) {
+void setup_env(PROC_PARAMS*& pp, int argc, char** argv, bool cpu_only) {
     assert(argc >= 3);
 
     //Get number of gpus in the node
@@ -311,7 +314,9 @@ void setup_env(PROC_PARAMS*& pp, int argc, char** argv) {
     get_proc_params(pp);
     // printf("rank: %d, local_rank: %d, comm_size: %d, tasks_per_node: %d\n", pp->rank, pp->local_rank, pp->comm_size, pp->tasks_per_node);
     if (pp->BACKEND.compare("NCCL") == 0 || pp->BACKEND.compare("MPI") == 0) {
-        CUDA_CHECK(cudaSetDevice(pp->local_rank));      // 至关重要！！！
+        if (! cpu_only) {
+            CUDA_CHECK(cudaSetDevice(pp->local_rank));      // 至关重要！！！
+        }
     }
 
     // Init NCCL
@@ -325,11 +330,12 @@ void setup_env(PROC_PARAMS*& pp, int argc, char** argv) {
         pp->comm_size = 0;
         pp->rank = 0;
     }
-
-    int GPU_VISIBLE;
-    CUDA_CHECK(cudaGetDeviceCount(&GPU_VISIBLE));
-    assert(pp->tasks_per_node <= GPU_VISIBLE);
-    assert(pp->N_GPUs <= GPU_VISIBLE * pp->nodes);
+    if (! cpu_only) {
+        int GPU_VISIBLE;
+        CUDA_CHECK(cudaGetDeviceCount(&GPU_VISIBLE));
+        assert(pp->tasks_per_node <= GPU_VISIBLE);
+        assert(pp->N_GPUs <= GPU_VISIBLE * pp->nodes);
+    }
 
     // if (pp->rank == 0) {
     //     printf("BACKEND: %s\n", pp->BACKEND.c_str());
