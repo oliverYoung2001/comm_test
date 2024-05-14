@@ -7,8 +7,7 @@ BACKENDs="NCCL MPI"
 BACKENDs="MPI"
 # BACKENDs="NCCL"
 CP_FILE_NAMEs="c2g"
-DIR_NUM="1"
-DIR_NUMs="1 2"
+DIR_MODEs="0 1 2"
 
 
 # nico:
@@ -43,8 +42,8 @@ for HOST in $HOSTs; do
 for GPU_NUM in $GPU_NUMs; do       # for cudaMemcpy
 for CP_FILE_NAME in $CP_FILE_NAMEs; do
 echo "CP_FILE_NAME: ${CP_FILE_NAME}"
-for DIR_NUM in $DIR_NUMs; do
-echo "DIR_NUM: ${DIR_NUM}"
+for DIR_MODE in $DIR_MODEs; do
+echo "DIR_MODE: ${DIR_MODE}"
 
 if [ $GPU_NUM -le 8 ]; then
    NNODES=1
@@ -98,7 +97,7 @@ set -x
 mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN \
    -np $GPU_NUM --host $HOST_CONFIG \
    --map-by ppr:4:numa --bind-to core --report-bindings \
-./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json ${DIR_NUM}
+./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json ${DIR_MODE}
 set +x
 
 # srun $SLURM_ARGS \

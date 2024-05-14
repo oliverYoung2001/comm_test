@@ -1,11 +1,22 @@
 #!/bin/bash
 
+# # build nccl
+# pushd ./third_party/nccl
+# rm -r build
+# # git checkout master   # for debug
+# git checkout v2.18    # default
+# # git checkout v2.17.1-1
+# # git checkout v2.10.3-1      # 性能弱于latest
+# make -j src.build NVCC_GENCODE="-gencode=arch=compute_70,code=sm_70"
+# popd
+
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="NCCL cudaMemcpy"
-# BACKENDs="cudaMemcpy"
-BACKENDs="NCCL MPI"
+BACKENDs="cudaMemcpy-P"
+BACKENDs="cudaMemcpy-nP"
+# BACKENDs="NCCL MPI"
 # BACKENDs="MPI"
-# BACKENDs="NCCL"
+BACKENDs="NCCL"
 # CP_FILE_NAMEs="p2p_si p2p_bi"
 # CP_FILE_NAMEs="p2p_si"
 CP_FILE_NAMEs="conflict_patterns"
@@ -19,24 +30,27 @@ CP_FILE_NAMEs="small"
 
 # nico:
 PARTITION=Mix
-# export GPU_NUM=16
-GPU_NUMs="8"
 GPU_NUMs="16"
+HOSTs="nico3,nico4"
+HOSTs="nico1,nico2"
+HOSTs="zoltan,nico1"
+# GPU_NUMs="8"
+# HOSTs="nico1"
 
 # qy:
 # PARTITION=gpu4-low
 # HOST="g4003"
 # GPU_NUM=8
 
-HOSTs="None"
+# HOSTs="None"
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
 
 EXECUBLE=conflict_allinone
 
-make clean
-make $EXECUBLE
+# make clean
+# make $EXECUBLE
 
 # mkdir results
 mkdir -p results
@@ -83,11 +97,32 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
-# set -x
+export SLURM_CPU_BIND=verbose
+# bind core: (but better without binding )
+# --cpu-bind=map_cpu:0,1,2,3,16,17,18,19 \   # for nico1,2
+# --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 \   # for nico3,4
+
+   # -x NCCL_NET_GDR_READ \
+   # -x NCCL_P2P_LEVEL \
+   # -x NCCL_IB_PCI_RELAXED_ORDERING \
+   # -x NCCL_IB_QPS_PER_CONNECTION=4 \
+   # -x NCCL_DEBUG_SUBSYS=NET \
+   # -x NCCL_IB_TC=160 \
+   # -x NCCL_IB_GID_INDEX=3 \
+   # -x NCCL_IB_DISABLE=0 \
+
+export NCCL_DEBUG=INFO
+export NCCL_DEBUG=WARN
+export NCCL_NET_GDR_LEVEL=5
+export NCCL_IB_DISABLE=0
+export NCCL_DEBUG_SUBSYS=NET
+
+set -x
 # salloc -n $GPU_NUM
 srun $SLURM_ARGS \
 ./scripts/executor.sh \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
+set +x
 
 done
 done

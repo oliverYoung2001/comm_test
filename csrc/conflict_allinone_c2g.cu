@@ -135,8 +135,11 @@ int main(int argc, char** argv) {
     }
     setup_env(pp, argc, argv);
     std::string cp_file = argv[3];
-    std::string dir_num = argv[4];
-    assert(dir_num == "1" || dir_num == "2");
+    std::string dir_mode = argv[4];
+    // 0 stands for c2g
+    // 1 stands for g2c
+    // 2 stands for c2g + g2c
+    assert(dir_mode == "0" || dir_mode == "1" || dir_mode == "2");
 
     // double result_table_si[pp->N_GPUs][pp->N_GPUs];
     // double result_table_bi[pp->N_GPUs][pp->N_GPUs];
@@ -206,8 +209,10 @@ int main(int argc, char** argv) {
             // WARMUP
             for (int _ = 0; _ < WARMUP; ++ _) {
                 if (is_rank_in_pattern) {
-                    CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], recv_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
-                    if (dir_num == "2") {
+                    if (dir_mode == "0" || dir_mode == "2") {
+                        CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], recv_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    }
+                    if (dir_mode == "1" || dir_mode == "2") {
                         CUDA_CHECK(cudaMemcpy(send_buf[pp->rank], recv_buf_cpu[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
                     }
                 }
@@ -220,8 +225,10 @@ int main(int argc, char** argv) {
 
             for (int _ = 0; _ < TIMES; ++ _) {
                 if (is_rank_in_pattern) {
-                    CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], recv_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
-                    if (dir_num == "2") {
+                    if (dir_mode == "0" || dir_mode == "2") {
+                        CUDA_CHECK(cudaMemcpy(send_buf_cpu[pp->rank], recv_buf[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
+                    }
+                    if (dir_mode == "1" || dir_mode == "2") {
                         CUDA_CHECK(cudaMemcpy(send_buf[pp->rank], recv_buf_cpu[pp->rank], SIZE * sizeof(int), cudaMemcpyDefault));
                     }
                 }
@@ -233,7 +240,7 @@ int main(int argc, char** argv) {
             if (pp->rank == 0) {
                 // double t_d = (double)elapsedTime / 1000;    // s
                 double t_d = (double)(std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count()) / pow(1000, 2);  // s
-                double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES * (dir_num == "1" ? 1 : 2);      // B
+                double calc = root[cp].size() * (double)SIZE * sizeof(int) * TIMES * (dir_mode == "2" ? 2 : 1);      // B
                 double avg_bd = calc / t_d / pow(1024, 3);
                 printf("time %lf s, REAL_BD %lf GB/s, SIZE %lf KB, comm_vol %lf KB\n", \
                         t_d, avg_bd, (double)SIZE * sizeof(int) / pow(1024, 1), calc / pow(1024, 1));

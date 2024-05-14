@@ -7,6 +7,7 @@ BACKENDs="NCCL MPI"
 BACKENDs="MPI"
 # BACKENDs="NCCL"
 CP_FILE_NAMEs="c2g"
+DIR_MODEs="0 1 2"
 
 
 # nico:
@@ -41,7 +42,8 @@ for HOST in $HOSTs; do
 for GPU_NUM in $GPU_NUMs; do       # for cudaMemcpy
 for CP_FILE_NAME in $CP_FILE_NAMEs; do
 echo "CP_FILE_NAME: ${CP_FILE_NAME}"
-
+for DIR_MODE in $DIR_MODEs; do
+echo "DIR_MODE: ${DIR_MODE}"
 
 if [ $GPU_NUM -le 8 ]; then
    NNODES=1
@@ -79,13 +81,15 @@ fi
 export SLURM_CPU_BIND=verbose
 # --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 \
 
-# set -x
+set -x
 # salloc -n $GPU_NUM
 srun $SLURM_ARGS \
 --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 \
 ./scripts/executor.sh \
-./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
+./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json ${DIR_MODE}
+set +x
 
+done
 done
 done
 done

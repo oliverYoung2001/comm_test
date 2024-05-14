@@ -1,0 +1,158 @@
+make -C csrc clean
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o conflict_allinone.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o comm.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/yhy/.local/nccl/build/lib -L/home/spack/spack/opt/spack/linux-debian12-cascadelake/gcc-12.2.0/cuda-12.0.1-34tfuheflqvthq3cikpjku6rigtpcsse/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone -Wl,-rpath=/home/yhy/.local/nccl/build/lib
+rm comm.o conflict_allinone.o utils.o
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 -K -w nico3,nico4 ./scripts/executor.sh ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
+cpu-bind=MASK - nico4, task  8  0 [253285]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task  9  1 [253286]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 10  2 [253287]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 11  3 [253288]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 12  4 [253289]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico3, task  0  0 [2394121]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico4, task 13  5 [253290]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico3, task  1  1 [2394122]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico4, task 14  6 [253291]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico3, task  2  2 [2394123]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  3  3 [2394124]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  4  4 [2394125]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico4, task 15  7 [253292]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico3, task  5  5 [2394126]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  6  6 [2394127]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  7  7 [2394128]: mask 0x3f003f003f003f set
+[[0,1]]
+time 0.176604 s, REAL_BD 8.493579 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.703406 s, REAL_BD 8.529924 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.349690 s, REAL_BD 8.579027 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.397864 s, REAL_BD 8.584526 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.259653 s, REAL_BD 5.776941 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 1.037043 s, REAL_BD 5.785681 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.354442 s, REAL_BD 8.464008 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.420107 s, REAL_BD 8.450067 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.356965 s, REAL_BD 8.404185 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.429075 s, REAL_BD 8.397040 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.518269 s, REAL_BD 5.788500 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.071871 s, REAL_BD 5.791866 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.659828 s, REAL_BD 9.093279 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.643120 s, REAL_BD 9.080178 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.348290 s, REAL_BD 8.613512 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.395405 s, REAL_BD 8.599654 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.518137 s, REAL_BD 5.789974 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.071998 s, REAL_BD 5.791511 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.660589 s, REAL_BD 9.082803 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.645654 s, REAL_BD 9.071481 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.518168 s, REAL_BD 5.789628 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.071285 s, REAL_BD 5.793505 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.667702 s, REAL_BD 8.986045 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.671562 s, REAL_BD 8.983509 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 1.035944 s, REAL_BD 5.791819 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 4.142786 s, REAL_BD 5.793203 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 1.331253 s, REAL_BD 9.014064 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 5.327008 s, REAL_BD 9.010687 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 2.071839 s, REAL_BD 5.791956 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 8.285341 s, REAL_BD 5.793364 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 2.648825 s, REAL_BD 9.060621 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 10.592542 s, REAL_BD 9.062980 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x
+BACKEND: MPI
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 -K -w nico3,nico4 ./scripts/executor.sh ./csrc/build/conflict_allinone 16 MPI ./scripts/configs/small_16.json
+srun: job 298973 queued and waiting for resources
+srun: job 298973 has been allocated resources
+cpu-bind=MASK - nico4, task  8  0 [253591]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task  9  1 [253592]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 10  2 [253593]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 11  3 [253594]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 12  4 [253595]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 13  5 [253596]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 14  6 [253597]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico4, task 15  7 [253598]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico3, task  0  0 [2394446]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  1  1 [2394447]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  2  2 [2394448]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  3  3 [2394449]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  4  4 [2394450]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  5  5 [2394451]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  6  6 [2394452]: mask 0x3f003f003f003f set
+cpu-bind=MASK - nico3, task  7  7 [2394453]: mask 0x3f003f003f003f set
+[[0,1]]
+time 0.162958 s, REAL_BD 9.204826 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.651225 s, REAL_BD 9.213406 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.325635 s, REAL_BD 9.212769 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.302472 s, REAL_BD 9.213250 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.357669 s, REAL_BD 4.193822 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 2.005848 s, REAL_BD 2.991254 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.488070 s, REAL_BD 6.146659 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.609526 s, REAL_BD 4.598536 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.490117 s, REAL_BD 6.120987 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.674379 s, REAL_BD 4.487023 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.593827 s, REAL_BD 5.051976 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 3.196354 s, REAL_BD 3.754278 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.986405 s, REAL_BD 6.082694 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 4.998115 s, REAL_BD 4.801810 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.481658 s, REAL_BD 6.228486 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.005956 s, REAL_BD 5.982185 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.667042 s, REAL_BD 4.497468 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.654714 s, REAL_BD 4.520261 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.908654 s, REAL_BD 6.603173 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 3.689642 s, REAL_BD 6.504696 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.664062 s, REAL_BD 4.517650 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.656826 s, REAL_BD 4.516668 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.911896 s, REAL_BD 6.579698 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 3.728971 s, REAL_BD 6.436092 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 1.225712 s, REAL_BD 4.895114 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 4.824864 s, REAL_BD 4.974233 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 1.589905 s, REAL_BD 7.547621 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 6.446276 s, REAL_BD 7.446160 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 2.389372 s, REAL_BD 5.022240 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 9.394039 s, REAL_BD 5.109623 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 3.110627 s, REAL_BD 7.715486 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 12.281416 s, REAL_BD 7.816688 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x
