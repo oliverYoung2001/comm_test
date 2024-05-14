@@ -29,8 +29,10 @@ typedef long long LL;
 
 PROC_PARAMS* pp;
 
-int TIMES = 3;
-int WARMUP = 2;
+// int TIMES = 3;
+// int WARMUP = 2;
+int TIMES = 100;
+int WARMUP = 10;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
@@ -197,7 +199,9 @@ int main(int argc, char** argv) {
         if (pp->BACKEND.find("cudaMemcpy") != std::string::npos && pp->ENABLE_GPU_P2P) {
             enableP2P(root[cp]);
         }
-        create_comm_group_from_pattern(pp, root[cp]);
+        if (pp->BACKEND.compare("NCCL") == 0 || pp->BACKEND.compare("MPI") == 0) {
+            create_comm_group_from_pattern(pp, root[cp]);
+        }
 
         for (int i = SIZEIDX_START; i < SIZEIDX_END; ++ i) {
             LL SIZE = SIZES[i];
@@ -452,6 +456,8 @@ int main(int argc, char** argv) {
     }
 
     delete pp;
-    MPI_Finalize();
+    if (pp->BACKEND.compare("NCCL") == 0 || pp->BACKEND.compare("MPI") == 0) {
+        MPI_Finalize();
+    }
     return 0;
 }

@@ -1,0 +1,127 @@
+make -C csrc clean
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone_c2g
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone_c2g.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/llm/comm_test/third_party/nccl/build/include -L/home/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o conflict_allinone_c2g.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/llm/comm_test/third_party/nccl/build/include -L/home/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o comm.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/llm/comm_test/third_party/nccl/build/include -L/home/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone_c2g.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/yhy/llm/comm_test/third_party/nccl/build/lib -L/home/spack/spack/opt/spack/linux-debian12-cascadelake/gcc-12.2.0/cuda-12.0.1-34tfuheflqvthq3cikpjku6rigtpcsse/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone_c2g -Wl,-rpath=/home/yhy/llm/comm_test/third_party/nccl/build/lib
+rm comm.o conflict_allinone_c2g.o utils.o
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+BACKEND: MPI
+CP_FILE_NAME: c2g
+DIR_MODE: 0
+NNODES: 1
+NGPU_PER_NODE: 8
++ srun -p Mix -N 1 --ntasks-per-node 8 --gres=gpu:8 -K -w nico3 --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 ./scripts/executor.sh ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 0
+[0]
+time 0.001088 s, REAL_BD 2.692727 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.081768 s, REAL_BD 4.586146 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.324169 s, REAL_BD 4.627216 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 1.294721 s, REAL_BD 4.634203 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[0,1]
+time 0.001259 s, REAL_BD 4.653991 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.082105 s, REAL_BD 9.134645 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.326557 s, REAL_BD 9.186758 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.303388 s, REAL_BD 9.206775 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,4]
+time 0.001041 s, REAL_BD 5.628602 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.081506 s, REAL_BD 9.201777 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.324655 s, REAL_BD 9.240578 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.297079 s, REAL_BD 9.251557 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,1,2,3]
+time 0.001284 s, REAL_BD 9.126752 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.082916 s, REAL_BD 18.090598 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.330772 s, REAL_BD 18.139383 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.321080 s, REAL_BD 18.166954 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,2,4,6]
+time 0.001049 s, REAL_BD 11.171354 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.082126 s, REAL_BD 18.264618 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.326733 s, REAL_BD 18.363618 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.305953 s, REAL_BD 18.377384 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,1,2,3,4,5,6,7]
+time 0.001304 s, REAL_BD 17.973543 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.083705 s, REAL_BD 35.840153 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.332694 s, REAL_BD 36.069181 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.328151 s, REAL_BD 36.140469 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
++ set +x
+DIR_MODE: 1
+NNODES: 1
+NGPU_PER_NODE: 8
++ srun -p Mix -N 1 --ntasks-per-node 8 --gres=gpu:8 -K -w nico3 --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 ./scripts/executor.sh ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 1
+srun: job 299333 queued and waiting for resources
+srun: job 299333 has been allocated resources
+[0]
+time 0.000884 s, REAL_BD 3.314126 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.075219 s, REAL_BD 4.985443 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.297250 s, REAL_BD 5.046257 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 1.189266 s, REAL_BD 5.045129 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[0,1]
+time 0.003590 s, REAL_BD 1.632138 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.094498 s, REAL_BD 7.936676 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.357830 s, REAL_BD 8.383869 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.420677 s, REAL_BD 8.446677 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,4]
+time 0.003585 s, REAL_BD 1.634414 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.074645 s, REAL_BD 10.047558 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.297500 s, REAL_BD 10.084034 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.189088 s, REAL_BD 10.091768 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,1,2,3]
+time 0.003883 s, REAL_BD 3.017963 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.093790 s, REAL_BD 15.993176 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.382422 s, REAL_BD 15.689474 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.484004 s, REAL_BD 16.172463 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,2,4,6]
+time 0.003586 s, REAL_BD 3.267917 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.073778 s, REAL_BD 20.331264 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.294349 s, REAL_BD 20.383966 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.177328 s, REAL_BD 20.385143 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,1,2,3,4,5,6,7]
+time 0.003782 s, REAL_BD 6.197118 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.095463 s, REAL_BD 31.425788 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.370300 s, REAL_BD 32.406157 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.436286 s, REAL_BD 33.419528 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
++ set +x
+DIR_MODE: 2
+NNODES: 1
+NGPU_PER_NODE: 8
++ srun -p Mix -N 1 --ntasks-per-node 8 --gres=gpu:8 -K -w nico3 --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 ./scripts/executor.sh ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 2
+srun: job 299334 queued and waiting for resources
+srun: job 299334 has been allocated resources
+[0]
+time 0.001907 s, REAL_BD 3.072562 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.156334 s, REAL_BD 4.797421 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.623203 s, REAL_BD 4.813841 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 2.489330 s, REAL_BD 4.820574 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,1]
+time 0.003749 s, REAL_BD 3.125834 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.170253 s, REAL_BD 8.810417 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.676297 s, REAL_BD 8.871842 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.703878 s, REAL_BD 8.876140 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,4]
+time 0.003579 s, REAL_BD 3.274308 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.156182 s, REAL_BD 9.604180 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.623102 s, REAL_BD 9.629242 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 2.491536 s, REAL_BD 9.632612 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,1,2,3]
+time 0.005165 s, REAL_BD 4.537754 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.171407 s, REAL_BD 17.502202 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.681621 s, REAL_BD 17.605091 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 2.724050 s, REAL_BD 17.620822 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[0,2,4,6]
+time 0.003585 s, REAL_BD 6.537657 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.156139 s, REAL_BD 19.213649 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.622162 s, REAL_BD 19.287581 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 2.487132 s, REAL_BD 19.299338 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[0,1,2,3,4,5,6,7]
+time 0.005176 s, REAL_BD 9.056221 GB/s, SIZE 1024.000000 KB, comm_vol 49152.000000 KB
+time 0.172017 s, REAL_BD 34.880273 GB/s, SIZE 131072.000000 KB, comm_vol 6291456.000000 KB
+time 0.684390 s, REAL_BD 35.067725 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 2.730847 s, REAL_BD 35.153928 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x

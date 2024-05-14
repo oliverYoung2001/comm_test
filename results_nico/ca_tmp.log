@@ -1,0 +1,27 @@
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 -K --nodelist zoltan,nico1 ./scripts/executor.sh ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
+cpu-bind=MASK - zoltan, task  8  0 [309807]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - zoltan, task  9  1 [309808]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - zoltan, task 10  2 [309809]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - zoltan, task 11  3 [309810]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - zoltan, task 12  4 [309811]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - zoltan, task 13  5 [309812]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - zoltan, task 14  6 [309813]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - zoltan, task 15  7 [309814]: mask 0x99c06660099c0666 set
+cpu-bind=MASK - nico1, task  0  0 [1563898]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  1  1 [1563900]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  2  2 [1563903]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  3  3 [1563905]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  4  4 [1563906]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  5  5 [1563907]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  6  6 [1563908]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  7  7 [1563909]: mask 0x30f030f030f030f set
+NCCL version 2.18.5+cuda12.0
+[[2,10]]
+NCCL version 2.18.5+cuda12.0
+time 7.753787 s, REAL_BD 6.448462 GB/s, SIZE 524288.000000 KB, comm_vol 52428800.000000 KB
+time 30.931081 s, REAL_BD 6.465988 GB/s, SIZE 2097152.000000 KB, comm_vol 209715200.000000 KB
++ set +x
