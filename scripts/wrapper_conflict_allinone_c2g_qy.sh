@@ -91,12 +91,12 @@ HOST_CONFIG="g4007:8,g4008:8"
 GPU_NUM=8
 HOST_CONFIG="g4008:8"
 # HOST_CONFIG="g4002:8"
-# HOST_CONFIG="g4005:8"
+HOST_CONFIG="g4005:8"
 
 set -x
 mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN \
    -np $GPU_NUM --host $HOST_CONFIG \
-   --map-by ppr:4:numa --bind-to core --report-bindings \
+   --map-by ppr:4:numa --report-bindings \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json ${DIR_MODE}
 set +x
 

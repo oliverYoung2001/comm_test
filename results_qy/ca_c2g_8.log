@@ -18,109 +18,162 @@ rm jsoncpp.o comm.o conflict_allinone_c2g.o utils.o
 make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
 BACKEND: MPI
 CP_FILE_NAME: c2g
-DIR_NUM: 1
+DIR_MODE: 0
 NNODES: 1
 NGPU_PER_NODE: 8
 +++ which mpirun
-++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4008:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 1
-[g4008:13368] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:13368] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:13368] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:13368] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:13368] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:13368] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:13368] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:13368] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4005:8 --map-by ppr:4:numa --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 0
+[g4005:08060] MCW rank 5 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08060] MCW rank 6 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08060] MCW rank 7 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08060] MCW rank 0 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08060] MCW rank 1 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08060] MCW rank 2 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08060] MCW rank 3 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08060] MCW rank 4 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
 --------------------------------------------------------------------------
 WARNING: There was an error initializing an OpenFabrics device.
 
-  Local host:   g4008
+  Local host:   g4005
   Local device: mlx5_0
 --------------------------------------------------------------------------
 [0]
-time 0.000789 s, REAL_BD 3.713165 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
-time 0.040170 s, REAL_BD 9.335325 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
-time 0.159630 s, REAL_BD 9.396730 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
-[mngg001:814065] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
-[mngg001:814065] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-time 0.638210 s, REAL_BD 9.401294 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+time 0.000701 s, REAL_BD 4.179297 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.040002 s, REAL_BD 9.374531 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.159513 s, REAL_BD 9.403622 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+[mngg001:1480371] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1480371] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 0.637021 s, REAL_BD 9.418842 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
 [0,1]
-time 0.000471 s, REAL_BD 12.440287 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
-time 0.040194 s, REAL_BD 18.659501 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
-time 0.159704 s, REAL_BD 18.784752 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.638578 s, REAL_BD 18.791753 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.000473 s, REAL_BD 12.387685 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.040182 s, REAL_BD 18.665074 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.159672 s, REAL_BD 18.788516 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.637967 s, REAL_BD 18.809750 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [0,4]
-time 0.000793 s, REAL_BD 7.388871 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
-time 0.039998 s, REAL_BD 18.750938 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
-time 0.159511 s, REAL_BD 18.807480 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-time 0.638542 s, REAL_BD 18.792812 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.000340 s, REAL_BD 17.233456 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.039967 s, REAL_BD 18.765482 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.159338 s, REAL_BD 18.827900 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.637218 s, REAL_BD 18.831860 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [0,1,2,3]
-time 0.000882 s, REAL_BD 13.286565 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
-time 0.040257 s, REAL_BD 37.260601 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
-time 0.160190 s, REAL_BD 37.455522 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.727508 s, REAL_BD 32.989328 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+time 0.000888 s, REAL_BD 13.196791 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.040258 s, REAL_BD 37.259675 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.159771 s, REAL_BD 37.553749 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.690712 s, REAL_BD 34.746754 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [0,2,4,6]
-time 0.000797 s, REAL_BD 14.703576 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
-time 0.040043 s, REAL_BD 37.459731 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
-time 0.159833 s, REAL_BD 37.539182 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.730408 s, REAL_BD 32.858348 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+time 0.000720 s, REAL_BD 16.276042 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.040030 s, REAL_BD 37.471896 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.159331 s, REAL_BD 37.657455 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.684761 s, REAL_BD 35.048725 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [0,1,2,3,4,5,6,7]
-time 0.000907 s, REAL_BD 25.840684 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
-time 0.040237 s, REAL_BD 74.558242 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
-time 0.159882 s, REAL_BD 75.055353 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
-time 0.728240 s, REAL_BD 65.912337 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+time 0.000836 s, REAL_BD 28.035287 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.040304 s, REAL_BD 74.434299 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.160070 s, REAL_BD 74.967202 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.729762 s, REAL_BD 65.774869 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
 + set +x
-DIR_NUM: 2
+DIR_MODE: 1
 NNODES: 1
 NGPU_PER_NODE: 8
 +++ which mpirun
-++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4008:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 2
-[g4008:14110] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:14110] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:14110] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:14110] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:14110] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:14110] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:14110] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
-[g4008:14110] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4005:8 --map-by ppr:4:numa --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 1
+[g4005:08243] MCW rank 5 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08243] MCW rank 6 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08243] MCW rank 7 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08243] MCW rank 0 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08243] MCW rank 1 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08243] MCW rank 2 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08243] MCW rank 3 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08243] MCW rank 4 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
 --------------------------------------------------------------------------
 WARNING: There was an error initializing an OpenFabrics device.
 
-  Local host:   g4008
+  Local host:   g4005
   Local device: mlx5_0
 --------------------------------------------------------------------------
 [0]
-time 0.000815 s, REAL_BD 7.189417 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
-time 0.058522 s, REAL_BD 12.815693 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
-time 0.232152 s, REAL_BD 12.922568 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
-[mngg001:817769] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
-[mngg001:817769] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-time 0.928084 s, REAL_BD 12.929864 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+time 0.000279 s, REAL_BD 10.500672 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.017480 s, REAL_BD 21.453089 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.069625 s, REAL_BD 21.543986 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.276973 s, REAL_BD 21.662761 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
 [0,1]
-time 0.003294 s, REAL_BD 3.557605 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
-time 0.073175 s, REAL_BD 20.498804 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
-time 0.291665 s, REAL_BD 20.571546 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 1.165762 s, REAL_BD 20.587393 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+time 0.003294 s, REAL_BD 1.778802 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.033138 s, REAL_BD 22.632627 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.132006 s, REAL_BD 22.726240 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+[mngg001:1483792] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1483792] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 0.527399 s, REAL_BD 22.753172 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [0,4]
-time 0.003306 s, REAL_BD 3.544691 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
-time 0.058265 s, REAL_BD 25.744443 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
-time 0.232065 s, REAL_BD 25.854825 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
-time 0.927180 s, REAL_BD 25.884941 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+time 0.003301 s, REAL_BD 1.775030 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.017447 s, REAL_BD 42.987333 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.069507 s, REAL_BD 43.161120 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.279158 s, REAL_BD 42.986409 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
 [0,1,2,3]
-time 0.003517 s, REAL_BD 6.664060 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
-time 0.074065 s, REAL_BD 40.504962 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
-time 0.295352 s, REAL_BD 40.629486 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
-time 1.180628 s, REAL_BD 40.656329 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+time 0.003298 s, REAL_BD 3.553290 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.033563 s, REAL_BD 44.692072 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.133138 s, REAL_BD 45.066022 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.530775 s, REAL_BD 45.216900 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [0,2,4,6]
-time 0.003299 s, REAL_BD 7.104426 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
-time 0.066426 s, REAL_BD 45.163039 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
-time 0.232773 s, REAL_BD 51.552371 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
-time 0.933646 s, REAL_BD 51.411349 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+time 0.003296 s, REAL_BD 3.555446 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.017843 s, REAL_BD 84.066581 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.071034 s, REAL_BD 84.466593 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.283840 s, REAL_BD 84.554679 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
 [0,1,2,3,4,5,6,7]
-time 0.003300 s, REAL_BD 14.204545 GB/s, SIZE 1024.000000 KB, comm_vol 49152.000000 KB
-time 0.074166 s, REAL_BD 80.899604 GB/s, SIZE 131072.000000 KB, comm_vol 6291456.000000 KB
-time 0.295545 s, REAL_BD 81.205908 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
-time 1.190572 s, REAL_BD 80.633511 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
+time 0.003296 s, REAL_BD 7.110892 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.034160 s, REAL_BD 87.822014 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.135416 s, REAL_BD 88.615821 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.543379 s, REAL_BD 88.336134 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
++ set +x
+DIR_MODE: 2
+NNODES: 1
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4005:8 --map-by ppr:4:numa --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 2
+[g4005:08428] MCW rank 0 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08428] MCW rank 1 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08428] MCW rank 2 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08428] MCW rank 3 bound to socket 0[core 0[hwt 0-1]], socket 0[core 1[hwt 0-1]], socket 0[core 2[hwt 0-1]], socket 0[core 3[hwt 0-1]], socket 0[core 4[hwt 0-1]], socket 0[core 5[hwt 0-1]], socket 0[core 6[hwt 0-1]], socket 0[core 7[hwt 0-1]], socket 0[core 8[hwt 0-1]], socket 0[core 9[hwt 0-1]], socket 0[core 10[hwt 0-1]], socket 0[core 11[hwt 0-1]], socket 0[core 12[hwt 0-1]], socket 0[core 13[hwt 0-1]], socket 0[core 14[hwt 0-1]], socket 0[core 15[hwt 0-1]], socket 0[core 16[hwt 0-1]], socket 0[core 17[hwt 0-1]], socket 0[core 18[hwt 0-1]], socket 0[core 19[hwt 0-1]], socket 0[core 20[hwt 0-1]], socket 0[core 21[hwt 0-1]], socket 0[core 22[hwt 0-1]], socket 0[core 23[hwt 0-1]], socket 0[core 24[hwt 0-1]], socket 0[core 25[hwt 0-1]], socket 0[core 26[hwt 0-1]], socket 0[core 27[hwt 0-1]], socket 0[core 28[hwt 0-1]], socket 0[core 29[hwt 0-1]], socket 0[core 30[hwt 0-1]], socket 0[core 31[hwt 0-1]]: [BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:08428] MCW rank 4 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08428] MCW rank 5 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08428] MCW rank 6 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+[g4005:08428] MCW rank 7 bound to socket 1[core 32[hwt 0-1]], socket 1[core 33[hwt 0-1]], socket 1[core 34[hwt 0-1]], socket 1[core 35[hwt 0-1]], socket 1[core 36[hwt 0-1]], socket 1[core 37[hwt 0-1]], socket 1[core 38[hwt 0-1]], socket 1[core 39[hwt 0-1]], socket 1[core 40[hwt 0-1]], socket 1[core 41[hwt 0-1]], socket 1[core 42[hwt 0-1]], socket 1[core 43[hwt 0-1]], socket 1[core 44[hwt 0-1]], socket 1[core 45[hwt 0-1]], socket 1[core 46[hwt 0-1]], socket 1[core 47[hwt 0-1]], socket 1[core 48[hwt 0-1]], socket 1[core 49[hwt 0-1]], socket 1[core 50[hwt 0-1]], socket 1[core 51[hwt 0-1]], socket 1[core 52[hwt 0-1]], socket 1[core 53[hwt 0-1]], socket 1[core 54[hwt 0-1]], socket 1[core 55[hwt 0-1]], socket 1[core 56[hwt 0-1]], socket 1[core 57[hwt 0-1]], socket 1[core 58[hwt 0-1]], socket 1[core 59[hwt 0-1]], socket 1[core 60[hwt 0-1]], socket 1[core 61[hwt 0-1]], socket 1[core 62[hwt 0-1]], socket 1[core 63[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB/BB]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[0]
+time 0.000727 s, REAL_BD 8.059663 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.057482 s, REAL_BD 13.047563 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.229302 s, REAL_BD 13.083183 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+[mngg001:1485253] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1485253] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 1.005285 s, REAL_BD 11.936913 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,1]
+time 0.003292 s, REAL_BD 3.559766 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.089568 s, REAL_BD 16.747053 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.291616 s, REAL_BD 20.575003 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.186610 s, REAL_BD 20.225685 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,4]
+time 0.003299 s, REAL_BD 3.552213 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.057445 s, REAL_BD 26.111933 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.228928 s, REAL_BD 26.209114 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.917748 s, REAL_BD 26.150970 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,1,2,3]
+time 0.003395 s, REAL_BD 6.903535 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.073904 s, REAL_BD 40.593202 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.294677 s, REAL_BD 40.722554 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.177649 s, REAL_BD 40.759174 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[0,2,4,6]
+time 0.003427 s, REAL_BD 6.839072 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.058122 s, REAL_BD 51.615567 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.231488 s, REAL_BD 51.838540 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.968435 s, REAL_BD 49.564504 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[0,1,2,3,4,5,6,7]
+time 0.003210 s, REAL_BD 14.602804 GB/s, SIZE 1024.000000 KB, comm_vol 49152.000000 KB
+time 0.074119 s, REAL_BD 80.950903 GB/s, SIZE 131072.000000 KB, comm_vol 6291456.000000 KB
+time 0.293761 s, REAL_BD 81.699068 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 1.180980 s, REAL_BD 81.288421 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
 + set +x

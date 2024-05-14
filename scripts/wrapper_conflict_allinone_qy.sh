@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# # build nccl
-# pushd ./third_party/nccl
-# rm -r build
-# # git checkout master   # for debug
-# git checkout v2.18    # default
-# # git checkout v2.17.1-1
-# # git checkout v2.10.3-1      # 性能弱于latest
-# make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
-# popd
+# build nccl
+pushd ./third_party/nccl
+rm -r build
+# git checkout master   # for debug
+git checkout v2.18    # default
+# git checkout v2.17.1-1
+# git checkout v2.10.3-1      # 性能弱于latest
+make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
+popd
 
 # configs:
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
