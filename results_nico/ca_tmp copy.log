@@ -1,0 +1,828 @@
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 -K -w zoltan,nico1 ./scripts/executor.sh ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
+cpu-bind=MASK - zoltan, task  8  0 [321872]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - zoltan, task  9  1 [321873]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - zoltan, task 10  2 [321874]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - zoltan, task 11  3 [321875]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - zoltan, task 12  4 [321876]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - zoltan, task 13  5 [321877]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - zoltan, task 14  6 [321878]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - zoltan, task 15  7 [321879]: mask 0x99c02670099c0267 set
+cpu-bind=MASK - nico1, task  0  0 [1625222]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  1  1 [1625223]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  2  2 [1625224]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  3  3 [1625225]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  4  4 [1625226]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  5  5 [1625227]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  6  6 [1625228]: mask 0x30f030f030f030f set
+cpu-bind=MASK - nico1, task  7  7 [1625229]: mask 0x30f030f030f030f set
+nico1:1625222:1625222 [0] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : ÌçÒ
+nico1:1625222:1625222 [0] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+NCCL version 2.18.5+cuda12.0
+zoltan:321877:321877 [5] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321877:321877 [5] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321877:321877 [5] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 5, flag: 0
+props.ptrSupport: 7
+zoltan:321877:321877 [5] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321877:321877 [5] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321877:321877 [5] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 0 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000d10
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 1 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000d60
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 2 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000db0
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 3 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000e00
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 4 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000e50
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 5 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000ea0
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 6 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000ef0
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 7 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000f40
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 8 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000f90
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 9 from local rank 5, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0000fe0
+zoltan:321878:321878 [6] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321878:321878 [6] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321878:321878 [6] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 6, flag: 0
+props.ptrSupport: 7
+zoltan:321878:321878 [6] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321878:321878 [6] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321878:321878 [6] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 0 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000d10
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 1 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000d60
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 2 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000db0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 3 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000e00
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 4 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000e50
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 5 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000ea0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 6 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000ef0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 7 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000f40
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 8 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000f90
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 9 from local rank 6, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00000fe0
+zoltan:321873:321873 [1] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321873:321873 [1] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321873:321873 [1] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 1, flag: 0
+props.ptrSupport: 7
+zoltan:321873:321873 [1] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321873:321873 [1] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 0 from local rank 1, transport 2
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000d10
+zoltan:321873:321873 [1] NCCL INFO Channel 00/0 : 9[1] -> 0[0] [send] via NET/IB/0
+zoltan:321873:321873 [1] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 1 from local rank 1, transport 2
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000d60
+zoltan:321873:321873 [1] NCCL INFO Channel 01/0 : 9[1] -> 0[0] [send] via NET/IB/0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 2 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000db0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 3 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000e00
+zoltan:321873:322018 [1] NCCL INFO NET/IB: Dev 0 Port 1 qpn 3658 mtu 5 LID 29
+zoltan:321873:322018 [1] NCCL INFO NET/IB: Dev 0 Port 1 qpn 3661 mtu 5 LID 29
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 4 from local rank 6, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 5 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000ea0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 6 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000ef0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 7 from local rank 6, transport 0
+zoltan:321872:321872 [0] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321872:321872 [0] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321872:321872 [0] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 0, flag: 0
+props.ptrSupport: 7
+zoltan:321872:321872 [0] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321872:321872 [0] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000d10
+zoltan:321872:321872 [0] NCCL INFO Channel 00/0 : 7[7] -> 8[0] [receive] via NET/IB/0
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000d60
+zoltan:321872:321872 [0] NCCL INFO Channel 01/0 : 7[7] -> 8[0] [receive] via NET/IB/0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 2 from local rank 0, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000db0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 3 from local rank 0, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000e00
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 4 from local rank 7, transport 0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 5 from local rank 0, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000ea0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 6 from local rank 0, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000ef0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 7 from local rank 7, transport 0
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 8 from local rank 0, transport 2
+zoltan:321874:321874 [2] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321874:321874 [2] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321874:321874 [2] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 2, flag: 0
+props.ptrSupport: 7
+zoltan:321874:321874 [2] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321874:321874 [2] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321874:322017 [2] NCCL INFO New proxy send connection 0 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000d10
+zoltan:321874:322017 [2] NCCL INFO New proxy send connection 1 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000d60
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 2 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000db0
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 3 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000e00
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 4 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000e50
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 5 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000ea0
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 6 from local rank 5, transport 0
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 7 from local rank 5, transport 0
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 8 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000f90
+zoltan:321874:322017 [2] NCCL INFO New proxy recv connection 9 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000fe0
+zoltan:321874:322017 [2] NCCL INFO New proxy send connection 10 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac001030
+zoltan:321875:321875 [3] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321875:321875 [3] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321875:321875 [3] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 3, flag: 0
+props.ptrSupport: 7
+zoltan:321875:321875 [3] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321875:321875 [3] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321875:321875 [3] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 0 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000d10
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 1 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000d60
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 2 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000db0
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 3 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000e00
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 4 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000e50
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 5 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000ea0
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 6 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000ef0
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 7 from local rank 3, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000f40
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 8 from local rank 4, transport 0
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 9 from local rank 4, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000f90
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000fe0
+zoltan:321876:321876 [4] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321876:321876 [4] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321876:321876 [4] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 4, flag: 0
+props.ptrSupport: 7
+zoltan:321876:321876 [4] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321876:321876 [4] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321876:321876 [4] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321876:322021 [4] NCCL INFO New proxy recv connection 0 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000d10
+zoltan:321876:322021 [4] NCCL INFO New proxy recv connection 1 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000d60
+zoltan:321876:322021 [4] NCCL INFO New proxy send connection 2 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000db0
+zoltan:321876:322021 [4] NCCL INFO New proxy send connection 3 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000e00
+zoltan:321876:322021 [4] NCCL INFO New proxy recv connection 4 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000e50
+zoltan:321876:322021 [4] NCCL INFO New proxy recv connection 5 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000ea0
+zoltan:321876:322021 [4] NCCL INFO New proxy send connection 6 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000ef0
+zoltan:321876:322021 [4] NCCL INFO New proxy send connection 7 from local rank 4, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398000f40
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000f90
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568000fe0
+zoltan:321876:322021 [4] NCCL INFO New proxy send connection 8 from local rank 3, transport 0
+zoltan:321876:322021 [4] NCCL INFO New proxy send connection 9 from local rank 3, transport 0
+zoltan:321879:321879 [7] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+zoltan:321879:321879 [7] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+zoltan:321879:321879 [7] NCCL INFO NET/IB : Using [0]mlx5_1:1/IB [RO]; OOB ibs8f1:10.0.18.11<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 7, flag: 0
+props.ptrSupport: 7
+zoltan:321879:321879 [7] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321879:321879 [7] NCCL INFO NCCL_NET_GDR_LEVEL set by environment to LOC
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 1b000 / HCA 0 (distance 6 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 3e000 / HCA 0 (distance 3 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 88000 / HCA 0 (distance 7 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU 89000 / HCA 0 (distance 7 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU b1000 / HCA 0 (distance 7 > 0)
+zoltan:321879:321879 [7] NCCL INFO GPU Direct RDMA Disabled for GPU b2000 / HCA 0 (distance 7 > 0)
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 0 from local rank 7, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000d10
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 1 from local rank 7, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000d60
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 2 from local rank 7, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000db0
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 3 from local rank 7, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000e00
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 4 from local rank 7, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000e50
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 5 from local rank 7, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000ea0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000e50
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000f40
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 6 from local rank 4, transport 0
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 7 from local rank 6, transport 0
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 8 from local rank 4, transport 0
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 9 from local rank 6, transport 0
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 10 from local rank 5, transport 0
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 11 from local rank 5, transport 0
+nico1:1625222:1625222 [0] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 0, flag: 0
+props.ptrSupport: 5
+nico1:1625222:1625222 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625222:1625362 [0] NCCL INFO New proxy send connection 0 from local rank 0, transport 0
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000d10
+nico1:1625222:1625362 [0] NCCL INFO New proxy send connection 1 from local rank 0, transport 0
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000d60
+nico1:1625222:1625362 [0] NCCL INFO New proxy recv connection 2 from local rank 0, transport 2
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000db0
+nico1:1625222:1625222 [0] NCCL INFO Channel 00/0 : 9[1] -> 0[0] [receive] via NET/IB/0
+nico1:1625222:1625362 [0] NCCL INFO New proxy recv connection 3 from local rank 0, transport 2
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000e00
+nico1:1625222:1625222 [0] NCCL INFO Channel 01/0 : 9[1] -> 0[0] [receive] via NET/IB/0
+nico1:1625222:1625362 [0] NCCL INFO New proxy recv connection 4 from local rank 0, transport 2
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000e50
+nico1:1625222:1625222 [0] NCCL INFO Channel 00/0 : 8[0] -> 0[0] [receive] via NET/IB/0
+nico1:1625222:1625362 [0] NCCL INFO New proxy recv connection 5 from local rank 0, transport 2
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000ea0
+nico1:1625222:1625222 [0] NCCL INFO Channel 01/0 : 8[0] -> 0[0] [receive] via NET/IB/0
+nico1:1625222:1625362 [0] NCCL INFO New proxy send connection 6 from local rank 0, transport 2
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000ef0
+nico1:1625222:1625222 [0] NCCL INFO Channel 00/0 : 0[0] -> 8[0] [send] via NET/IB/0
+nico1:1625222:1625362 [0] NCCL INFO New proxy send connection 7 from local rank 0, transport 2
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000f40
+nico1:1625222:1625222 [0] NCCL INFO Channel 01/0 : 0[0] -> 8[0] [send] via NET/IB/0
+nico1:1625222:1625362 [0] NCCL INFO New proxy recv connection 8 from local rank 0, transport 0
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000f90
+nico1:1625222:1625362 [0] NCCL INFO New proxy recv connection 9 from local rank 0, transport 0
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458000fe0
+nico1:1625222:1625362 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21115 mtu 5 LID 67
+nico1:1625222:1625362 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21116 mtu 5 LID 67
+nico1:1625222:1625362 [0] NCCL INFO New proxy send connection 10 from local rank 0, transport 2
+nico1:1625222:1625222 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7fb458001030
+[[2,10]]
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000f90
+zoltan:321872:321872 [0] NCCL INFO Channel 00/0 : 0[0] -> 8[0] [receive] via NET/IB/0
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 9 from local rank 0, transport 2
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500000fe0
+zoltan:321872:321872 [0] NCCL INFO Channel 01/0 : 0[0] -> 8[0] [receive] via NET/IB/0
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 10 from local rank 0, transport 2
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001030
+zoltan:321872:321872 [0] NCCL INFO Channel 00/0 : 8[0] -> 0[0] [send] via NET/IB/0
+zoltan:321872:321872 [0] NCCL INFO GPU Direct RDMA Disabled for GPU 1a000 / HCA 0 (distance 6 > 0)
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 11 from local rank 0, transport 2
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001080
+zoltan:321872:321872 [0] NCCL INFO Channel 01/0 : 8[0] -> 0[0] [send] via NET/IB/0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 12 from local rank 0, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000010d0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 13 from local rank 0, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001120
+zoltan:321872:322016 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 3664 mtu 5 LID 29
+zoltan:321872:322016 [0] NCCL INFO NET/IB: Dev 0 Port 1 qpn 3667 mtu 5 LID 29
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 14 from local rank 3, transport 0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 15 from local rank 2, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568001030
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 16 from local rank 1, transport 0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 17 from local rank 3, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568001080
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 18 from local rank 2, transport 0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 19 from local rank 1, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001120
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 20 from local rank 7, transport 0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 21 from local rank 3, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb000011c0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 22 from local rank 7, transport 0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 23 from local rank 3, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c0012b0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 24 from local rank 2, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001300
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 25 from local rank 2, transport 0
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 26 from local rank 1, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001350
+zoltan:321872:322016 [0] NCCL INFO New proxy recv connection 27 from local rank 1, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c0013a0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 28 from local rank 7, transport 0
+nico1:1625224:1625224 [2] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+nico1:1625224:1625224 [2] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+nico1:1625224:1625224 [2] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 2, flag: 0
+props.ptrSupport: 5
+nico1:1625224:1625224 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625224:1625364 [2] NCCL INFO New proxy send connection 0 from local rank 2, transport 0
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f4dc8000d10
+nico1:1625224:1625364 [2] NCCL INFO New proxy send connection 1 from local rank 2, transport 0
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f4dc8000d60
+nico1:1625224:1625364 [2] NCCL INFO New proxy recv connection 2 from local rank 2, transport 0
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f4dc8000db0
+nico1:1625224:1625364 [2] NCCL INFO New proxy recv connection 3 from local rank 2, transport 0
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f4dc8000e00
+nico1:1625224:1625364 [2] NCCL INFO New proxy send connection 4 from local rank 2, transport 2
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f4dc8000e50
+NCCL version 2.18.5+cuda12.0
+zoltan:321874:322017 [2] NCCL INFO New proxy send connection 11 from local rank 2, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac001080
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0001030
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0001080
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001210
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001260
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000011c0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000012b0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001490
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000014e0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c0013f0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001440
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0001210
+zoltan:321874:322017 [2] NCCL INFO New proxy send connection 12 from local rank 5, transport 0
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0001260
+zoltan:321874:322017 [2] NCCL INFO New proxy send connection 13 from local rank 5, transport 0
+zoltan:321874:322017 [2] NCCL INFO New proxy send connection 14 from local rank 2, transport 2
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac001170
+cudaDriverVersion: 12020
+comm->cudaDev: 2, flag: 0
+props.ptrSupport: 7
+zoltan:321874:321874 [2] NCCL INFO NET/IB : GPU Direct RDMA Enabled for HCA 0 'mlx5_1'
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 3 > 0)
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 6 > 0)
+zoltan:321874:322032 [2] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f7384000d10
+zoltan:321874:321874 [2] NCCL INFO Channel 00/0 : 0[2] -> 1[2] [receive] via NET/IB/0
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 6 > 0)
+zoltan:321874:322032 [2] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f7384000d60
+zoltan:321874:321874 [2] NCCL INFO Channel 01/0 : 0[2] -> 1[2] [receive] via NET/IB/0
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 6 > 0)
+zoltan:321874:322032 [2] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f7384000db0
+zoltan:321874:321874 [2] NCCL INFO Channel 00/0 : 1[2] -> 0[2] [send] via NET/IB/0
+zoltan:321874:321874 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 6 > 0)
+zoltan:321874:322032 [2] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f7384000e00
+zoltan:321874:321874 [2] NCCL INFO Channel 01/0 : 1[2] -> 0[2] [send] via NET/IB/0
+zoltan:321874:322032 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 3677 mtu 5 LID 29
+zoltan:321874:322032 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 3680 mtu 5 LID 29
+zoltan:321874:322032 [2] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+zoltan:321874:321874 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f7384000e50
+zoltan:321874:322034 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 6 > 0)
+zoltan:321874:322032 [2] NCCL INFO New proxy recv connection 5 from local rank 0, transport 2
+time 7.742109 s, REAL_BD 6.458189 GB/s, SIZE 524288.000000 KB, comm_vol 52428800.000000 KB
+time 30.930307 s, REAL_BD 6.466150 GB/s, SIZE 2097152.000000 KB, comm_vol 209715200.000000 KB
+nico1:1625223:1625223 [1] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+nico1:1625223:1625223 [1] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+nico1:1625223:1625223 [1] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 1, flag: 0
+props.ptrSupport: 5
+nico1:1625223:1625223 [1] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625223:1625366 [1] NCCL INFO New proxy recv connection 0 from local rank 1, transport 0
+nico1:1625223:1625223 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f81e4000d10
+nico1:1625223:1625366 [1] NCCL INFO New proxy recv connection 1 from local rank 1, transport 0
+nico1:1625223:1625223 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f81e4000d60
+nico1:1625223:1625366 [1] NCCL INFO New proxy send connection 2 from local rank 1, transport 0
+nico1:1625223:1625223 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f81e4000db0
+nico1:1625223:1625366 [1] NCCL INFO New proxy send connection 3 from local rank 1, transport 0
+nico1:1625223:1625223 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f81e4000e00
+nico1:1625223:1625366 [1] NCCL INFO New proxy send connection 4 from local rank 1, transport 2
+nico1:1625223:1625223 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7f81e4000e50
+zoltan:321874:322034 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f7384000ea0
+zoltan:321874:322034 [2] NCCL INFO Channel 00/1 : 0[2] -> 1[2] [receive] via NET/IB/0/Shared
+zoltan:321874:322034 [2] NCCL INFO GPU Direct RDMA Disabled for GPU 3d000 / HCA 0 (distance 6 > 0)
+zoltan:321874:322032 [2] NCCL INFO New proxy recv connection 6 from local rank 0, transport 2
+zoltan:321874:322034 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f7384000ef0
+zoltan:321874:322034 [2] NCCL INFO Channel 01/1 : 0[2] -> 1[2] [receive] via NET/IB/0/Shared
+nico1:1625229:1625229 [7] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+nico1:1625229:1625229 [7] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+nico1:1625229:1625229 [7] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 7, flag: 0
+props.ptrSupport: 5
+nico1:1625229:1625229 [7] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625229:1625361 [7] NCCL INFO New proxy recv connection 0 from local rank 7, transport 0
+nico1:1625229:1625229 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f0ae8000d10
+nico1:1625229:1625361 [7] NCCL INFO New proxy recv connection 1 from local rank 7, transport 0
+nico1:1625229:1625229 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f0ae8000d60
+nico1:1625229:1625361 [7] NCCL INFO New proxy send connection 2 from local rank 7, transport 2
+nico1:1625229:1625229 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f0ae8000db0
+nico1:1625229:1625229 [7] NCCL INFO Channel 00/0 : 7[7] -> 8[0] [send] via NET/IB/0
+nico1:1625229:1625361 [7] NCCL INFO New proxy send connection 3 from local rank 7, transport 2
+nico1:1625229:1625229 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f0ae8000e00
+nico1:1625229:1625229 [7] NCCL INFO Channel 01/0 : 7[7] -> 8[0] [send] via NET/IB/0
+nico1:1625229:1625361 [7] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21109 mtu 5 LID 67
+nico1:1625229:1625361 [7] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21110 mtu 5 LID 67
+nico1:1625229:1625361 [7] NCCL INFO New proxy send connection 4 from local rank 7, transport 0
+nico1:1625229:1625229 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f0ae8000e50
+nico1:1625229:1625361 [7] NCCL INFO New proxy send connection 5 from local rank 7, transport 0
+nico1:1625229:1625229 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f0ae8000ea0
+nico1:1625229:1625361 [7] NCCL INFO New proxy send connection 6 from local rank 7, transport 2
+nico1:1625229:1625229 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7f0ae8000ef0
+cudaDriverVersion: 12020
+comm->cudaDev: 2, flag: 0
+props.ptrSupport: 5
+nico1:1625224:1625224 [2] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625224:1625376 [2] NCCL INFO New proxy recv connection 0 from local rank 0, transport 2
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f4dac000d10
+nico1:1625224:1625224 [2] NCCL INFO Channel 00/0 : 1[2] -> 0[2] [receive] via NET/IB/0
+nico1:1625224:1625376 [2] NCCL INFO New proxy recv connection 1 from local rank 0, transport 2
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f4dac000d60
+nico1:1625224:1625224 [2] NCCL INFO Channel 01/0 : 1[2] -> 0[2] [receive] via NET/IB/0
+nico1:1625224:1625376 [2] NCCL INFO New proxy send connection 2 from local rank 0, transport 2
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f4dac000db0
+nico1:1625224:1625224 [2] NCCL INFO Channel 00/0 : 0[2] -> 1[2] [send] via NET/IB/0
+nico1:1625224:1625376 [2] NCCL INFO New proxy send connection 3 from local rank 0, transport 2
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f4dac000e00
+nico1:1625224:1625224 [2] NCCL INFO Channel 01/0 : 0[2] -> 1[2] [send] via NET/IB/0
+nico1:1625224:1625376 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21128 mtu 5 LID 67
+nico1:1625224:1625376 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21129 mtu 5 LID 67
+nico1:1625224:1625376 [2] NCCL INFO New proxy send connection 4 from local rank 0, transport 2
+nico1:1625224:1625224 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f4dac000e50
+nico1:1625224:1625376 [2] NCCL INFO New proxy send connection 5 from local rank 0, transport 2
+nico1:1625224:1625378 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f4dac000ea0
+nico1:1625224:1625378 [2] NCCL INFO Channel 00/1 : 0[2] -> 1[2] [send] via NET/IB/0/Shared
+nico1:1625224:1625376 [2] NCCL INFO New proxy send connection 6 from local rank 0, transport 2
+nico1:1625224:1625378 [2] NCCL INFO Connection to proxy localRank 0 -> connection 0x7f4dac000ef0
+nico1:1625224:1625378 [2] NCCL INFO Channel 01/1 : 0[2] -> 1[2] [send] via NET/IB/0/Shared
+nico1:1625224:1625376 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21134 mtu 5 LID 67
+nico1:1625224:1625376 [2] NCCL INFO NET/IB: Dev 0 Port 1 qpn 21135 mtu 5 LID 67
+nico1:1625228:1625228 [6] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+nico1:1625228:1625228 [6] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+nico1:1625228:1625228 [6] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 6, flag: 0
+props.ptrSupport: 5
+nico1:1625228:1625228 [6] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625228:1625359 [6] NCCL INFO New proxy send connection 0 from local rank 6, transport 0
+nico1:1625228:1625228 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7faa34000d10
+nico1:1625228:1625359 [6] NCCL INFO New proxy send connection 1 from local rank 6, transport 0
+nico1:1625228:1625228 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7faa34000d60
+nico1:1625228:1625359 [6] NCCL INFO New proxy recv connection 2 from local rank 6, transport 0
+nico1:1625228:1625228 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7faa34000db0
+nico1:1625228:1625359 [6] NCCL INFO New proxy recv connection 3 from local rank 6, transport 0
+nico1:1625228:1625228 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7faa34000e00
+nico1:1625228:1625359 [6] NCCL INFO New proxy send connection 4 from local rank 6, transport 2
+nico1:1625228:1625228 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7faa34000e50
+nico1:1625225:1625225 [3] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+nico1:1625225:1625225 [3] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+nico1:1625225:1625225 [3] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 3, flag: 0
+props.ptrSupport: 5
+nico1:1625225:1625225 [3] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625225:1625363 [3] NCCL INFO New proxy recv connection 0 from local rank 3, transport 0
+nico1:1625225:1625225 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f6d44000d10
+nico1:1625225:1625363 [3] NCCL INFO New proxy recv connection 1 from local rank 3, transport 0
+nico1:1625225:1625225 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f6d44000d60
+nico1:1625225:1625363 [3] NCCL INFO New proxy send connection 2 from local rank 3, transport 0
+nico1:1625225:1625225 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f6d44000db0
+nico1:1625225:1625363 [3] NCCL INFO New proxy send connection 3 from local rank 3, transport 0
+nico1:1625225:1625225 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f6d44000e00
+nico1:1625225:1625363 [3] NCCL INFO New proxy send connection 4 from local rank 3, transport 2
+nico1:1625225:1625225 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7f6d44000e50
+nico1:1625227:1625227 [5] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+nico1:1625227:1625227 [5] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+nico1:1625227:1625227 [5] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 5, flag: 0
+props.ptrSupport: 5
+nico1:1625227:1625227 [5] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625227:1625360 [5] NCCL INFO New proxy recv connection 0 from local rank 5, transport 0
+nico1:1625227:1625227 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fc5b4000d10
+nico1:1625227:1625360 [5] NCCL INFO New proxy recv connection 1 from local rank 5, transport 0
+nico1:1625227:1625227 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fc5b4000d60
+nico1:1625227:1625360 [5] NCCL INFO New proxy send connection 2 from local rank 5, transport 0
+nico1:1625227:1625227 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fc5b4000db0
+nico1:1625227:1625360 [5] NCCL INFO New proxy send connection 3 from local rank 5, transport 0
+nico1:1625227:1625227 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fc5b4000e00
+nico1:1625227:1625360 [5] NCCL INFO New proxy send connection 4 from local rank 5, transport 2
+nico1:1625227:1625227 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fc5b4000e50
+nico1:1625226:1625226 [4] NCCL INFO NET/Plugin : Plugin load (libnccl-net.so) returned 2 : libnccl-net.so: cannot open shared object file: No such file or directory
+nico1:1625226:1625226 [4] NCCL INFO NET/Plugin : No plugin found, using internal implementation
+nico1:1625226:1625226 [4] NCCL INFO NET/IB : Using [0]mlx5_0:1/IB [RO]; OOB ibp94s0:10.0.18.1<0>
+cudaDriverVersion: 12020
+comm->cudaDev: 4, flag: 0
+props.ptrSupport: 5
+nico1:1625226:1625226 [4] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+nico1:1625226:1625365 [4] NCCL INFO New proxy send connection 0 from local rank 4, transport 0
+nico1:1625226:1625226 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f14b8000d10
+nico1:1625226:1625365 [4] NCCL INFO New proxy send connection 1 from local rank 4, transport 0
+nico1:1625226:1625226 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f14b8000d60
+nico1:1625226:1625365 [4] NCCL INFO New proxy recv connection 2 from local rank 4, transport 0
+nico1:1625226:1625226 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f14b8000db0
+nico1:1625226:1625365 [4] NCCL INFO New proxy recv connection 3 from local rank 4, transport 0
+nico1:1625226:1625226 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f14b8000e00
+nico1:1625226:1625365 [4] NCCL INFO New proxy send connection 4 from local rank 4, transport 2
+nico1:1625226:1625226 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f14b8000e50
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 8 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000f90
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 9 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000fe0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 10 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001030
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 11 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001080
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 12 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c0010d0
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 13 from local rank 1, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001120
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001030
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001080
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 14 from local rank 3, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 15 from local rank 3, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 16 from local rank 2, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 17 from local rank 2, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001210
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001260
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001210
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001300
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 18 from local rank 0, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 19 from local rank 0, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001530
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 20 from local rank 0, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001580
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 21 from local rank 0, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e000013f0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001440
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 22 from local rank 2, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 23 from local rank 2, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 24 from local rank 6, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 25 from local rank 3, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 26 from local rank 6, transport 0
+zoltan:321873:322018 [1] NCCL INFO New proxy recv connection 27 from local rank 3, transport 0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e000015d0
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001620
+zoltan:321873:322018 [1] NCCL INFO New proxy send connection 28 from local rank 1, transport 2
+zoltan:321873:321873 [1] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c0015d0
+zoltan:321873:322018 [1] NCCL INFO [Service thread] Connection closed by localRank 2
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001350
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 29 from local rank 7, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb000013a0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 30 from local rank 7, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd5680010d0
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 31 from local rank 7, transport 0
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568001120
+zoltan:321872:322016 [0] NCCL INFO New proxy send connection 32 from local rank 0, transport 2
+zoltan:321872:321872 [0] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001710
+zoltan:321872:322016 [0] NCCL INFO [Service thread] Connection closed by localRank 2
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 12 from local rank 4, transport 0
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 13 from local rank 0, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001350
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 14 from local rank 4, transport 0
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 15 from local rank 0, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000013f0
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 16 from local rank 5, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e000012b0
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 17 from local rank 5, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001300
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001350
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 18 from local rank 6, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e000013a0
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 19 from local rank 6, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000015d0
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 20 from local rank 0, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001620
+zoltan:321879:322019 [7] NCCL INFO New proxy recv connection 21 from local rank 0, transport 0
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001670
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000016c0
+zoltan:321879:322019 [7] NCCL INFO New proxy send connection 22 from local rank 7, transport 2
+zoltan:321879:321879 [7] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb000013f0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001120
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e000011c0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000ef0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000f90
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb000010d0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001170
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001530
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001580
+zoltan:321876:322021 [4] NCCL INFO New proxy recv connection 10 from local rank 3, transport 0
+zoltan:321876:322021 [4] NCCL INFO New proxy recv connection 11 from local rank 3, transport 0
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568001170
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd5680011c0
+zoltan:321876:322021 [4] NCCL INFO New proxy send connection 12 from local rank 4, transport 2
+zoltan:321876:321876 [4] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f33980010d0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000e50
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c000f40
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 10 from local rank 1, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 11 from local rank 1, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 12 from local rank 5, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 13 from local rank 4, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb00010d0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 14 from local rank 5, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0001120
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 15 from local rank 4, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 16 from local rank 1, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 17 from local rank 1, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000f40
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00000fe0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 18 from local rank 7, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 19 from local rank 7, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 20 from local rank 7, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb000012b0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 21 from local rank 7, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001300
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 22 from local rank 1, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb0001170
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 23 from local rank 1, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb00011c0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 24 from local rank 5, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 25 from local rank 5, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001490
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 26 from local rank 4, transport 0
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001530
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 27 from local rank 4, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 28 from local rank 1, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy recv connection 29 from local rank 1, transport 0
+zoltan:321878:322023 [6] NCCL INFO New proxy send connection 30 from local rank 6, transport 2
+zoltan:321878:321878 [6] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001670
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000ef0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac000f40
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 10 from local rank 2, transport 0
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 11 from local rank 2, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e000010d0
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 12 from local rank 6, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001170
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 13 from local rank 6, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001030
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001080
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001210
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 7 -> connection 0x7fcb00001260
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 14 from local rank 6, transport 0
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 15 from local rank 6, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e00001490
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 6 -> connection 0x7f1e000014e0
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 16 from local rank 2, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac0010d0
+zoltan:321877:322022 [5] NCCL INFO New proxy recv connection 17 from local rank 2, transport 0
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 2 -> connection 0x7f73ac001120
+zoltan:321877:322022 [5] NCCL INFO New proxy send connection 18 from local rank 5, transport 2
+zoltan:321877:321877 [5] NCCL INFO Connection to proxy localRank 5 -> connection 0x7fccb00012b0
+zoltan:321877:322022 [5] NCCL INFO [Service thread] Connection closed by localRank 2
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001170
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c0011c0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001170
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 10 from local rank 0, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001260
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 11 from local rank 0, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff5000013a0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 0 -> connection 0x7ff500001440
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 12 from local rank 0, transport 0
+zoltan:321875:322020 [3] NCCL INFO New proxy recv connection 13 from local rank 0, transport 0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c0014e0
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 1 -> connection 0x7fe01c001580
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398001030
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 4 -> connection 0x7f3398001080
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 14 from local rank 4, transport 0
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 15 from local rank 4, transport 0
+zoltan:321875:322020 [3] NCCL INFO New proxy send connection 16 from local rank 3, transport 2
+zoltan:321875:321875 [3] NCCL INFO Connection to proxy localRank 3 -> connection 0x7fd568001210
++ set +x

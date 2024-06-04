@@ -2,6 +2,10 @@
 
 # export RECORD_P2P=1
 EXECUBLE=conflict_bench.py
+
+GPU_NUMs="8"
+GPU_NUMs="16"
+GPU_NUMs="32"
 BACKENDs="NCCL MPI"
 BACKENDs="MPI"
 BACKENDs="NCCL"
@@ -13,7 +17,7 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="bad_patterns_pcie_switch"
 # CP_FILE_NAMEs="all2all_4"
 # CP_FILE_NAMEs="E2E_4 E2E_8"
-CP_FILE_NAMEs="ring_16"
+CP_FILE_NAMEs="ring"
 CP_FILE_NAMEs="small"
 
 # nico:
@@ -34,6 +38,14 @@ HOSTs="g4007,g4008"
 HOSTs="g4002,g4003"
 GPU_NUMs="8"
 HOSTs="g4005"
+
+# wq:
+PARTITION=Nvidia_A800
+# PARTITION=gpu3-2-low
+# HOSTs="g4004"
+HOSTs="gpu21"
+HOSTs="gpu21,gpu22"
+HOSTs="gpu[11-14]"
 
 
 # HOSTs="None"

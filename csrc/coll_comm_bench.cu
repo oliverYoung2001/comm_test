@@ -29,8 +29,10 @@ typedef long long LL;
 
 PROC_PARAMS* pp;
 
-int WARMUP = 5;
-int TIMES = 20;
+int WARMUP = 2;
+int TIMES = 3;
+// int WARMUP = 5;
+// int TIMES = 20;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 

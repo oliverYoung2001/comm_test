@@ -1,0 +1,75 @@
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /public/home/qinghuatest/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /public/home/qinghuatest/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_NET_GDR_LEVEL=5 -x NCCL_DEBUG_SUBSYS=NET -x NCCL_IB_DISABLE=0 -np 8 --host gpu1:8 --bind-to core:overload-allowed --report-bindings ./csrc/build/conflict_allinone 8 NCCL ./scripts/configs/small_8.json
+[gpu1:21130] MCW rank 0 is not bound (or bound to all available processors)
+[gpu1:21130] MCW rank 1 is not bound (or bound to all available processors)
+[gpu1:21130] MCW rank 2 is not bound (or bound to all available processors)
+[gpu1:21130] MCW rank 3 is not bound (or bound to all available processors)
+[gpu1:21130] MCW rank 4 is not bound (or bound to all available processors)
+[gpu1:21130] MCW rank 5 is not bound (or bound to all available processors)
+[gpu1:21130] MCW rank 6 is not bound (or bound to all available processors)
+[gpu1:21130] MCW rank 7 is not bound (or bound to all available processors)
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   gpu1
+  Local device: mlx5_2
+--------------------------------------------------------------------------
+NCCL version 2.18.5+cuda11.8
+[gpu1:21130] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[gpu1:21130] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[[0,1]]
+time 8.145785 s, REAL_BD 6.138144 GB/s, SIZE 524288.000000 KB, comm_vol 52428800.000000 KB
+time 13.481425 s, REAL_BD 14.835227 GB/s, SIZE 2097152.000000 KB, comm_vol 209715200.000000 KB
+[[0,1],[1,0]]
+time 8.475996 s, REAL_BD 11.798024 GB/s, SIZE 524288.000000 KB, comm_vol 104857600.000000 KB
+time 13.702001 s, REAL_BD 29.192816 GB/s, SIZE 2097152.000000 KB, comm_vol 419430400.000000 KB
+[[0,2]]
+time 8.453147 s, REAL_BD 5.914957 GB/s, SIZE 524288.000000 KB, comm_vol 52428800.000000 KB
+time 13.439969 s, REAL_BD 14.880987 GB/s, SIZE 2097152.000000 KB, comm_vol 209715200.000000 KB
+[[0,2],[2,0]]
+time 8.395995 s, REAL_BD 11.910441 GB/s, SIZE 524288.000000 KB, comm_vol 104857600.000000 KB
+time 13.666998 s, REAL_BD 29.267583 GB/s, SIZE 2097152.000000 KB, comm_vol 419430400.000000 KB
+[[0,4]]
+time 8.621014 s, REAL_BD 5.799782 GB/s, SIZE 524288.000000 KB, comm_vol 52428800.000000 KB
+time 13.442551 s, REAL_BD 14.878128 GB/s, SIZE 2097152.000000 KB, comm_vol 209715200.000000 KB
+[[4,6]]
+NCCL version 2.18.5+cuda11.8
+time 8.347079 s, REAL_BD 5.990119 GB/s, SIZE 524288.000000 KB, comm_vol 52428800.000000 KB
+time 13.493893 s, REAL_BD 14.821520 GB/s, SIZE 2097152.000000 KB, comm_vol 209715200.000000 KB
++ set +x
+BACKEND: MPI
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /public/home/qinghuatest/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /public/home/qinghuatest/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_NET_GDR_LEVEL=5 -x NCCL_DEBUG_SUBSYS=NET -x NCCL_IB_DISABLE=0 -np 8 --host gpu1:8 --bind-to core:overload-allowed --report-bindings ./csrc/build/conflict_allinone 8 MPI ./scripts/configs/small_8.json
+[gpu1:27275] MCW rank 0 is not bound (or bound to all available processors)
+[gpu1:27275] MCW rank 1 is not bound (or bound to all available processors)
+[gpu1:27275] MCW rank 2 is not bound (or bound to all available processors)
+[gpu1:27275] MCW rank 3 is not bound (or bound to all available processors)
+[gpu1:27275] MCW rank 4 is not bound (or bound to all available processors)
+[gpu1:27275] MCW rank 5 is not bound (or bound to all available processors)
+[gpu1:27275] MCW rank 6 is not bound (or bound to all available processors)
+[gpu1:27275] MCW rank 7 is not bound (or bound to all available processors)
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   gpu1
+  Local device: mlx5_2
+--------------------------------------------------------------------------
+[[0,1]]
+NCCL version 2.18.5+cuda11.8
+[gpu1:27275] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[gpu1:27275] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 10.104314 s, REAL_BD 4.948381 GB/s, SIZE 524288.000000 KB, comm_vol 52428800.000000 KB
+time 16.175067 s, REAL_BD 12.364709 GB/s, SIZE 2097152.000000 KB, comm_vol 209715200.000000 KB
+[[0,1],[1,0]]
+time 10.449620 s, REAL_BD 9.569726 GB/s, SIZE 524288.000000 KB, comm_vol 104857600.000000 KB
+time 16.797077 s, REAL_BD 23.813667 GB/s, SIZE 2097152.000000 KB, comm_vol 419430400.000000 KB
+[[0,2]]

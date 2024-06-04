@@ -68,8 +68,8 @@ MSG_SIZES = [
 # ]
 
 
-WARMUP = 5
-TIMES = 20
+WARMUP = 2
+TIMES = 3
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Conflict Benchmark Arguments',

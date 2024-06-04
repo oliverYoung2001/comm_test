@@ -7,16 +7,16 @@
 # git checkout v2.18    # default
 # # git checkout v2.17.1-1
 # # git checkout v2.10.3-1      # 性能弱于latest
-# make -j src.build NVCC_GENCODE="-gencode=arch=compute_70,code=sm_70"
+# make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
 # popd
 
+# configs:
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="NCCL cudaMemcpy"
-BACKENDs="cudaMemcpy-P"
-BACKENDs="cudaMemcpy-nP"
-# BACKENDs="NCCL MPI"
+# BACKENDs="cudaMemcpy"
+BACKENDs="NCCL MPI"
 # BACKENDs="MPI"
-BACKENDs="NCCL"
+# BACKENDs="NCCL"
 # CP_FILE_NAMEs="p2p_si p2p_bi"
 # CP_FILE_NAMEs="p2p_si"
 CP_FILE_NAMEs="conflict_patterns"
@@ -25,32 +25,37 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="bad_patterns_pcie_switch"
 # CP_FILE_NAMEs="all2all_4"
 CP_FILE_NAMEs="E2E_4 E2E_8"
+CP_FILE_NAMEs="ring_16"
 CP_FILE_NAMEs="small"
 
 
 # nico:
 PARTITION=Mix
-GPU_NUMs="16"
-HOSTs="nico3,nico4"
-HOSTs="nico1,nico2"
-# HOSTs="zoltan,nico1"
+# export GPU_NUM=16
 # GPU_NUMs="8"
-# HOSTs="nico1"
 
 # qy:
-# PARTITION=gpu4-low
+PARTITION=gpu3-2-low
+PARTITION=gpu4-low
 # HOST="g4003"
 # GPU_NUM=8
 
-# HOSTs="None"
+# wq:
+PARTITION=Nvidia_A800
+# HOST="g4003"
+# GPU_NUM=8
+CORES_PER_NODE=64
+
+GPU_NUMs="16"
+HOSTs="None"
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
 
 EXECUBLE=conflict_allinone
 
-# make clean
-# make $EXECUBLE
+make clean
+make $EXECUBLE
 
 # mkdir results
 mkdir -p results
@@ -97,10 +102,42 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
-export SLURM_CPU_BIND=verbose
-# bind core: (but better without binding )
-# --cpu-bind=map_cpu:0,1,2,3,16,17,18,19 \   # for nico1,2
-# --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 \   # for nico3,4
+# salloc -n $GPU_NUM
+# srun $SLURM_ARGS \
+# ./scripts/executor.sh \
+# GPU_NUM=2
+# mpirun --prefix $(dirname `which mpirun`)/../ -np 2 --host g3022:2 \
+# mpirun --prefix $(dirname `which mpirun`)/../ -np 2 --host g3027:1,g3028:1 \
+# ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
+# mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH -np 2 --host g4007:1,g4008:1 \
+# ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
+GPU_NUM=32
+HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+GPU_NUM=24
+HOST_CONFIG="g4005:8,g4007:8,g4008:8"
+GPU_NUM=16
+HOST="gpu11,gpu12"
+HOST_CONFIG="gpu11:8,gpu12:8"
+# GPU_NUM=8
+# HOST="gpu1"
+# HOST_CONFIG="gpu1:8"
+
+if [ $GPU_NUM -le 8 ]; then
+   NNODES=1
+else
+   NNODES=$(($GPU_NUM / 8))
+fi
+
+# # ENV for GPU Direct RDMA   # [NOTE]: not effect
+# export NCCL_NET_GDR_READ=1
+# export NCCL_P2P_LEVEL=1
+# export NCCL_IB_PCI_RELAXED_ORDERING=1
+# export NCCL_NET_GDR_LEVEL=
+#    -x NCCL_SOCKET_IFNAME=eth0 \
+
+# bind core: (can bring certain performance improvements in some cases)
+#    --map-by ppr:4:numa --bind-to core --report-bindings \
+
 
    # -x NCCL_NET_GDR_READ \
    # -x NCCL_P2P_LEVEL \
@@ -111,18 +148,19 @@ export SLURM_CPU_BIND=verbose
    # -x NCCL_IB_GID_INDEX=3 \
    # -x NCCL_IB_DISABLE=0 \
 
-export NCCL_DEBUG=INFO
-export NCCL_DEBUG=WARN
-export NCCL_NET_GDR_LEVEL=5
-# export NCCL_NET_GDR_LEVEL=0   # Disable GDR
-export NCCL_IB_DISABLE=0
-export NCCL_DEBUG_SUBSYS=NET
-
 set -x
-# salloc -n $GPU_NUM
-srun $SLURM_ARGS \
-./scripts/executor.sh \
+# salloc -p $PARTITION -w $HOST -N $NNODES -n $(( $NNODES * $CORES_PER_NODE )) -t 3600 &
+# JOBID=
+mpirun --prefix $(dirname `which mpirun`)/../ \
+   -x LD_LIBRARY_PATH \
+   -x NCCL_DEBUG=WARN \
+   -x NCCL_NET_GDR_LEVEL=5 \
+   -x NCCL_DEBUG_SUBSYS=NET \
+   -x NCCL_IB_DISABLE=0 \
+   -np $GPU_NUM --host $HOST_CONFIG \
+   --map-by ppr:4:numa --bind-to core --report-bindings \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
+# scancel $JOBID
 set +x
 
 done
