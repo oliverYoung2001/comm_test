@@ -54,24 +54,7 @@ def convert_throughput(size_bytes, round_=3):
     return "%s %s" % (s, size_name[i])
 
 def get_proc_info():
-    rank = os.getenv('SLURM_PROCID', None)
-    if rank is None:    # launch with MPI
-        from mpi4py import MPI
-        rank = MPI.COMM_WORLD.Get_rank()
-        local_rank = rank
-        world_size = MPI.COMM_WORLD.Get_size()
-        # ip = os.environ['SLURM_STEP_NODELIST']
-        ip = None
-        hostname = socket.gethostname()
-        hostip = socket.gethostbyname(hostname)
-        clustername = os.environ['CLUSTER_NAME']
-        # nodeid = int(os.environ['SLURM_NODEID'])
-        nodeid = None
-        # nodename = os.environ['SLURMD_NODENAME']
-        nodename = None
-        # tasks_per_node = os.environ['SLURM_TASKS_PER_NODE']
-        tasks_per_node = world_size
-    else:   # launch with SLURM
+    if os.getenv('SLURM_PROCID', None) is not None:    # launch with Slurm
         rank = int(os.environ['SLURM_PROCID'])
         local_rank = int(os.environ['SLURM_LOCALID'])
         world_size = int(os.environ['SLURM_NTASKS'])
@@ -82,6 +65,25 @@ def get_proc_info():
         nodeid = int(os.environ['SLURM_NODEID'])
         nodename = os.environ['SLURMD_NODENAME']
         tasks_per_node = os.environ['SLURM_TASKS_PER_NODE']
+        
+    elif os.getenv('OMPI_COMM_WORLD_RANK', None) is not None: # launch with OpenMPI
+        rank = int(os.environ['OMPI_COMM_WORLD_RANK'])
+        local_rank = int(os.environ['OMPI_COMM_WORLD_LOCAL_RANK'])
+        world_size = int(os.environ['OMPI_COMM_WORLD_SIZE'])
+        # ip = os.environ['SLURM_STEP_NODELIST']
+        ip = None
+        hostname = socket.gethostname()
+        hostip = socket.gethostbyname(hostname)
+        clustername = os.getenv('CLUSTER_NAME', 'Unknown Cluster')
+        # nodeid = int(os.environ['SLURM_NODEID'])
+        nodeid = None
+        # nodename = os.environ['SLURMD_NODENAME']
+        nodename = None
+        # tasks_per_node = os.environ['SLURM_TASKS_PER_NODE']
+        tasks_per_node = int(os.environ['OMPI_COMM_WORLD_LOCAL_SIZE'])
+        
+    else:
+        raise Exception("Unknown Launcher !!!")
     proc_info = {
         'clustername': clustername,
         'hostname': hostname,
@@ -94,6 +96,7 @@ def get_proc_info():
         'hostip': hostip,
         'ip': ip,
     }
+    # print(f'proc_info: {proc_info}')
     return proc_info
 
 def init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend):

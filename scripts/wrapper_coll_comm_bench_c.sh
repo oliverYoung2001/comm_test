@@ -17,7 +17,7 @@ BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="NCCL cudaMemcpy"
 # BACKENDs="cudaMemcpy"
 BACKENDs="NCCL MPI"
-BACKENDs="MPI"
+# BACKENDs="MPI"
 BACKENDs="NCCL"
 
 
@@ -125,19 +125,34 @@ fi
 # on qy
 GPU_NUM=64
 HOST_CONFIG="g4001:8,g4002:8,g4003:8,g4004:8,g4005:8,g4006:8,g4007:8,g4008:8"
-# GPU_NUM=32
-# HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+GPU_NUM=32
+HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
 # GPU_NUM=24
 # HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
 # GPU_NUM=16
 # HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
 # HOST_CONFIG="g3025:8,g3029:8"
 # HOST_CONFIG="g4002:8,g4003:8"
+# HOST_CONFIG="g3021:8,g3022:8"
+
+export NCCL_DEBUG=INFO
+export NCCL_DEBUG=WARN
+export NCCL_NET_GDR_LEVEL=5
+# export NCCL_NET_GDR_LEVEL=0   # Disable GDR
+export NCCL_IB_DISABLE=0
+export NCCL_DEBUG_SUBSYS=NET
+
 set -x
-mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH \
+mpirun --prefix $(dirname `which mpirun`)/../ \
+   -x LD_LIBRARY_PATH \
+   -x NCCL_DEBUG \
+   -x NCCL_NET_GDR_LEVEL \
+   -x NCCL_DEBUG_SUBSYS \
+   -x NCCL_IB_DISABLE \
    -np $GPU_NUM --host $HOST_CONFIG \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
-
+set +x
 
 
 done

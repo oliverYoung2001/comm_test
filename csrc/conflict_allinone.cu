@@ -31,8 +31,8 @@ PROC_PARAMS* pp;
 
 // int TIMES = 3;
 // int WARMUP = 2;
-int TIMES = 100;
-int WARMUP = 10;
+int TIMES = 10;
+int WARMUP = 5;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
