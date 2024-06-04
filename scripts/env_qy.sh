@@ -2,10 +2,15 @@
 # spack load cuda@12.1.1
 # spack load openmpi@4.1.5
 
-source /data/apps/tools/spack/share/spack/setup-env.sh
-spack load cuda@11.8
+# source /data/apps/tools/spack/share/spack/setup-env.sh
+# spack load cuda@11.8
 # spack load openmpi@4.1.5
 # # spack load openmpi@4.1.2
+
+# cuda
+CUDA_PATH=~/yhy/.local/cuda-11.8
+export PATH="$CUDA_PATH/bin:$PATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
 
 # Openmpi
 # export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi   # normal mpi
@@ -16,6 +21,9 @@ export LD_LIBRARY_PATH="$OPENMPI_HOME/lib/:$LD_LIBRARY_PATH"
 export C_INCLUDE_PATH="$(dirname `which mpicxx`)/../include:$C_INCLUDE_PATH"  # for #include <mpi.h>
 export CPLUS_INCLUDE_PATH="$(dirname `which mpicxx`)/../include:$CPLUS_INCLUDE_PATH"  # for #include <mpi.h>
 export LD_LIBRARY_PATH="$(dirname `which nvcc`)/../lib64:$LD_LIBRARY_PATH"  # for -lcudart
+
+# conda
+conda deactivate && conda deactivate
 conda activate yhy_mg
 
 # [NOTE]: tmux of qy has bug along with conda, thus the solution is copy the $PATH out of tmux into tmux 

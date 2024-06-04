@@ -2,8 +2,8 @@
 
 # export RECORD_P2P=1
 EXECUBLE=conflict_bench.py
-GPU_NUMs="8"
-GPU_NUMs="16"
+BACKENDs="NCCL MPI"
+BACKENDs="MPI"
 BACKENDs="NCCL"
 CP_FILE_NAMEs="p2p_si p2p_bi"
 CP_FILE_NAMEs="p2p_bi"
@@ -14,7 +14,7 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="all2all_4"
 # CP_FILE_NAMEs="E2E_4 E2E_8"
 CP_FILE_NAMEs="ring_16"
-CP_FILE_NAMEs="small_16"
+CP_FILE_NAMEs="small"
 
 # nico:
 # PARTITION=SXM
@@ -29,8 +29,11 @@ HOSTs="nico2"
 PARTITION=gpu4-low
 # PARTITION=gpu3-2-low
 # HOSTs="g4004"
+GPU_NUMs="16"
 HOSTs="g4007,g4008"
 HOSTs="g4002,g4003"
+GPU_NUMs="8"
+HOSTs="g4005"
 
 
 # HOSTs="None"
@@ -88,13 +91,57 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
+# NCCL Args:
+export NCCL_DEBUG=INFO
+export NCCL_DEBUG=WARN
+# export NCCL_DEBUG=ERROR
+export NCCL_NET_GDR_LEVEL=5
+# export NCCL_NET_GDR_LEVEL=0   # Disable GDR
+export NCCL_IB_DISABLE=0
+export NCCL_DEBUG_SUBSYS=NET
+
+# export NCCL_AVOID_RECORD_STREAMS=0  # Disable Warning for P2P
 # export CUDA_LAUNCH_BLOCKING=1
+
+# # Launch with Slurm
+# set -x
+# srun $SLURM_ARGS \
+# ./scripts/executor.sh \
+# python $EXECUBLE \
+#     --backend $BACKEND \
+#     --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
+
+# Launch with MPI
+GPU_NUM=32
+HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
+# GPU_NUM=16
+# HOST_CONFIG="g4007:8,g4008:8"
+# # HOST_CONFIG="g3025:8,g4006:8"
+# # HOST_CONFIG="g4003:8,g4006:8"
+# HOST_CONFIG="g3021:8,g3022:8"
+# GPU_NUM=8
+# HOST_CONFIG="g4005:8"
+export MASTER_ADDR=$(echo $HOST_CONFIG | cut -d',' -f1 | cut -d':' -f1)
+export MASTER_ADDR=$(echo $HOST_CONFIG | awk -F',' '{print $1}' | awk -F':' '{print $1}')
+echo "MASTER_ADDR: $MASTER_ADDR"
 set -x
-srun $SLURM_ARGS \
-./scripts/executor.sh \
+mpirun --prefix $(dirname `which mpirun`)/../ \
+   -x MASTER_ADDR -x MASTER_PORT\
+   -x PATH -x LD_LIBRARY_PATH \
+   -x NCCL_DEBUG \
+   -x NCCL_NET_GDR_LEVEL \
+   -x NCCL_DEBUG_SUBSYS \
+   -x NCCL_IB_DISABLE \
+   -np $GPU_NUM --host $HOST_CONFIG \
+   --map-by ppr:4:numa --bind-to core --report-bindings \
 python $EXECUBLE \
     --backend $BACKEND \
-    --config ./scripts/configs/${CP_FILE_NAME}.json \
+    --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
+    2>/dev/null # Disable Warning
+
+
+set +x
 
 done
 done

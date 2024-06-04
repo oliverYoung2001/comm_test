@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# build nccl
-pushd ./third_party/nccl
-rm -r build
-# git checkout master   # for debug
-git checkout v2.18    # default
-# git checkout v2.17.1-1
-# git checkout v2.10.3-1      # 性能弱于latest
-make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
-popd
+# # build nccl
+# pushd ./third_party/nccl
+# rm -r build
+# # git checkout master   # for debug
+# git checkout v2.18    # default
+# # git checkout v2.17.1-1
+# # git checkout v2.10.3-1      # 性能弱于latest
+# make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
+# popd
 
 # configs:
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
@@ -16,7 +16,7 @@ BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="cudaMemcpy"
 BACKENDs="NCCL MPI"
 # BACKENDs="MPI"
-BACKENDs="NCCL"
+# BACKENDs="NCCL"
 # CP_FILE_NAMEs="p2p_si p2p_bi"
 # CP_FILE_NAMEs="p2p_si"
 CP_FILE_NAMEs="conflict_patterns"
@@ -48,8 +48,8 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 EXECUBLE=conflict_allinone
 
-# make clean
-# make $EXECUBLE
+make clean
+make $EXECUBLE
 
 # mkdir results
 mkdir -p results
@@ -107,12 +107,14 @@ fi
 # ./csrc/build/${EXECUBLE} 2 $BACKEND ./scripts/configs/${CP_FILE_NAME}.json
 GPU_NUM=32
 HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
-GPU_NUM=24
-HOST_CONFIG="g4005:8,g4007:8,g4008:8"
-GPU_NUM=16
-HOST_CONFIG="g4007:8,g4008:8"
-# HOST_CONFIG="g3025:8,g4006:8"
-# HOST_CONFIG="g4003:8,g4006:8"
+HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
+# GPU_NUM=24
+# HOST_CONFIG="g4005:8,g4007:8,g4008:8"
+# GPU_NUM=16
+# HOST_CONFIG="g4007:8,g4008:8"
+# # HOST_CONFIG="g3025:8,g4006:8"
+# # HOST_CONFIG="g4003:8,g4006:8"
+# HOST_CONFIG="g3021:8,g3022:8"
 # GPU_NUM=8
 # HOST_CONFIG="g4008:8"
 # # HOST_CONFIG="g4002:8"
@@ -138,13 +140,20 @@ HOST_CONFIG="g4007:8,g4008:8"
    # -x NCCL_IB_GID_INDEX=3 \
    # -x NCCL_IB_DISABLE=0 \
 
+export NCCL_DEBUG=INFO
+export NCCL_DEBUG=WARN
+export NCCL_NET_GDR_LEVEL=5
+export NCCL_NET_GDR_LEVEL=0   # Disable GDR
+export NCCL_IB_DISABLE=0
+export NCCL_DEBUG_SUBSYS=NET
+
 set -x
 mpirun --prefix $(dirname `which mpirun`)/../ \
    -x LD_LIBRARY_PATH \
-   -x NCCL_DEBUG=INFO \
-   -x NCCL_NET_GDR_LEVEL=5 \
-   -x NCCL_DEBUG_SUBSYS=NET \
-   -x NCCL_IB_DISABLE=0 \
+   -x NCCL_DEBUG \
+   -x NCCL_NET_GDR_LEVEL \
+   -x NCCL_DEBUG_SUBSYS \
+   -x NCCL_IB_DISABLE \
    -np $GPU_NUM --host $HOST_CONFIG \
    --map-by ppr:4:numa --bind-to core --report-bindings \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json

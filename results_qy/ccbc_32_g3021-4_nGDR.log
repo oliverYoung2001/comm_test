@@ -1,0 +1,29 @@
+BACKEND: NCCL
+HOST: g4002,g4003
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG -x NCCL_NET_GDR_LEVEL -x NCCL_DEBUG_SUBSYS -x NCCL_IB_DISABLE -np 32 --host g3021:8,g3022:8,g3023:8,g3024:8 ./csrc/build/coll_comm_bench 32 NCCL
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g3021
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[mngg001:2253885] 31 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:2253885] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+NCCL version 2.18.5+cuda11.8
+Comm_Op: ag
+msg_size 16384.000000 KB, time 0.344440 s, tput 31.173552 GB/s, busbw 30.199378 GB/s
+msg_size 65536.000000 KB, time 1.344274 s, tput 31.950088 GB/s, busbw 30.951648 GB/s
+msg_size 262144.000000 KB, time 5.286308 s, tput 32.498805 GB/s, busbw 31.483217 GB/s
+Comm_Op: rs
+msg_size 16384.000000 KB, time 0.341946 s, tput 31.400918 GB/s, busbw 30.419639 GB/s
+msg_size 65536.000000 KB, time 1.387833 s, tput 30.947292 GB/s, busbw 29.980189 GB/s
+msg_size 262144.000000 KB, time 5.384550 s, tput 31.905859 GB/s, busbw 30.908801 GB/s
+Comm_Op: ar
+msg_size 16384.000000 KB, time 0.685778 s, tput 31.314560 GB/s, busbw 30.335980 GB/s
+msg_size 65536.000000 KB, time 2.660566 s, tput 32.286117 GB/s, busbw 31.277176 GB/s
+msg_size 262144.000000 KB, time 10.757484 s, tput 31.940311 GB/s, busbw 30.942176 GB/s
++ set +x

@@ -14,7 +14,12 @@ then
     export MASTER_PORT=12580
 fi
 
-if [ ! -z $SLURM_PROCID ]
+if [ ! -z $OMPI_COMM_WORLD_RANK ]
+then
+    export RANK=$OMPI_COMM_WORLD_RANK
+    export WORLD_SIZE=$OMPI_COMM_WORLD_SIZE
+    export localrank=$OMPI_COMM_WORLD_LOCAL_RANK
+elif [ ! -z $SLURM_PROCID ]
 then
     export RANK=$SLURM_PROCID
     export WORLD_SIZE=$SLURM_NPROCS
@@ -24,9 +29,7 @@ else
     export WORLD_SIZE=1
 fi
 
-# echo "MASTER_ADDR: $MASTER_ADDR"
-# echo "RANK: $RANK"
-# echo "WORLD_SIZE: $WORLD_SIZE"
+echo "MASTER_ADDR: $MASTER_ADDR, MASTER_PORT: $MASTER_PORT, RANK: $RANK, WORLD_SIZE: $WORLD_SIZE"
 # echo "NCCL_AVOID_RECORD_STREAMS: $NCCL_AVOID_RECORD_STREAMS"
 
 # set -x

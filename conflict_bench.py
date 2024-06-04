@@ -69,7 +69,7 @@ MSG_SIZES = [
 
 # GPU_NUM = 8
 WARM_UP = 5
-TIMES = 20
+TIMES = 10
 # TIMES = 100
 
 def parse_args():
