@@ -21,23 +21,24 @@ popd
 # A: https://www.open-mpi.org/faq/?category=buildcuda (openmpi, cuda, ucx, gdrcopy)
 
 # install gdrcopy (v2.4.1 -> v1.3)
-GDRCOPY_HOME=<position to install>  #  /home/zhaijidong/yhy/.local/gdrcopy
-git clone git@github.com:NVIDIA/gdrcopy.git
-git checkout v2.4.1
+GDRCOPY_HOME=<position to install>  #  /home/zhaijidong/yhy/.local/gdrcopy or /public/home/qinghuatest/yhy/.local/gdrcopy
+git clone https://github.com/NVIDIA/gdrcopy.git # in Sotware
+cd gdrcopy && git checkout v2.4.1
 # git checkout v1.3
+# [NOTE]: need build on node with GPU !!!
 make prefix=$GDRCOPY_HOME CUDA=$(dirname `which nvcc`)/../ all install    # for v2.4.1
-make PREFIX=$GDRCOPY_HOME CUDA=$(dirname `which nvcc`)/../ all install      # for v1.3
+# make PREFIX=$GDRCOPY_HOME CUDA=$(dirname `which nvcc`)/../ all install      # for v1.3
 # sudo ./insmod.sh   # need sudo
 mv $GDRCOPY_HOME/lib $GDRCOPY_HOME/lib64    # [NOTE]: fit for ucx !!!
 # export LD_LIBRARY_PATH="$GDRCOPY_HOME/lib64:$LD_LIBRARY_PATH"
 
 
 # install ucx (v1.16.0)
-UCX_HOME=<position to install>  # /home/zhaijidong/yhy/.local/ucx
+UCX_HOME=<position to install>  # /home/zhaijidong/yhy/.local/ucx or /public/home/qinghuatest/yhy/.local/ucx
 # wget https://github.com/openucx/ucx/releases/download/v1.4.0/ucx-1.4.0.tar.gz
 # tar -zxvf ucx-1.4.0.tar.gz
-git clone git@github.com:openucx/ucx.git
-git checkout v1.16.0
+git clone https://github.com/openucx/ucx.git
+cd ucx && git checkout v1.16.0
 ./autogen.sh
 ./configure --prefix=$UCX_HOME --with-cuda=$(dirname `which nvcc`)/../ --with-gdrcopy=$GDRCOPY_HOME \
 && make -j install
@@ -45,7 +46,7 @@ git checkout v1.16.0
 
 # install openmpi
 # Ref: https://yuhldr.github.io/posts/bfa79f01.html
-OPENMPI_HOME=<position to install>
+OPENMPI_HOME=<position to install>  # /public/home/qinghuatest/yhy/.local/openmpi
 wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.6.tar.bz2
 tar jxvf openmpi-4.1.6.tar.bz2
 cd openmpi-4.1.6

@@ -1,0 +1,1391 @@
+make -C csrc clean
+make[1]: Entering directory `/public/home/qinghuatest/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access *.o: No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory `/public/home/qinghuatest/yhy/llm/comm_test/csrc'
+make -C csrc coll_comm_bench
+make[1]: Entering directory `/public/home/qinghuatest/yhy/llm/comm_test/csrc'
+nvcc coll_comm_bench.cu -std=c++11 -Xcompiler -fopenmp -I/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/include -L/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o coll_comm_bench.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/include -L/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/include -L/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" coll_comm_bench.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/lib -L/public/home/qinghuatest/yhy/.local/spack/opt/spack/linux-centos7-cascadelake/gcc-13.2.0/cuda-11.8.0-rvlajpvy3ynvqmhgwhm5dnhe56gyitdq/bin/../lib64 -lcudart -lnccl -Wall -o build/coll_comm_bench -Wl,-rpath=/public/home/qinghuatest/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o utils.o coll_comm_bench.o
+make[1]: Leaving directory `/public/home/qinghuatest/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+HOST: gpu21
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /public/home/qinghuatest/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /public/home/qinghuatest/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_NET_GDR_LEVEL=5 -x NCCL_DEBUG_SUBSYS=NET -x NCCL_IB_DISABLE=0 -np 16 --host gpu11:8,gpu12:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/coll_comm_bench 16 NCCL
+[gpu11:49215] MCW rank 0 bound to socket 0[core 0[hwt 0]]: [B/././././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 8 bound to socket 0[core 0[hwt 0]]: [B/././././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49215] MCW rank 1 bound to socket 0[core 1[hwt 0]]: [./B/./././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 9 bound to socket 0[core 1[hwt 0]]: [./B/./././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49215] MCW rank 2 bound to socket 0[core 2[hwt 0]]: [././B/././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 10 bound to socket 0[core 2[hwt 0]]: [././B/././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49215] MCW rank 3 bound to socket 0[core 3[hwt 0]]: [./././B/./././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 11 bound to socket 0[core 3[hwt 0]]: [./././B/./././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49215] MCW rank 4 bound to socket 1[core 32[hwt 0]]: [./././././././././././././././././././././././././././././././.][B/././././././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 12 bound to socket 1[core 32[hwt 0]]: [./././././././././././././././././././././././././././././././.][B/././././././././././././././././././././././././././././././.]
+[gpu11:49215] MCW rank 5 bound to socket 1[core 33[hwt 0]]: [./././././././././././././././././././././././././././././././.][./B/./././././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 13 bound to socket 1[core 33[hwt 0]]: [./././././././././././././././././././././././././././././././.][./B/./././././././././././././././././././././././././././././.]
+[gpu11:49215] MCW rank 6 bound to socket 1[core 34[hwt 0]]: [./././././././././././././././././././././././././././././././.][././B/././././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 14 bound to socket 1[core 34[hwt 0]]: [./././././././././././././././././././././././././././././././.][././B/././././././././././././././././././././././././././././.]
+[gpu11:49215] MCW rank 7 bound to socket 1[core 35[hwt 0]]: [./././././././././././././././././././././././././././././././.][./././B/./././././././././././././././././././././././././././.]
+[gpu12:48222] MCW rank 15 bound to socket 1[core 35[hwt 0]]: [./././././././././././././././././././././././././././././././.][./././B/./././././././././././././././././././././././././././.]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   gpu12
+  Local device: mlx5_2
+--------------------------------------------------------------------------
+NCCL version 2.18.5+cuda11.8
+Comm_Op: ag
+[admin1:10709] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[admin1:10709] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+msg_size 16384.000000 KB, time 0.306692 s, tput 2.625782 GB/s, busbw 2.461671 GB/s
+msg_size 65536.000000 KB, time 0.827422 s, tput 3.893087 GB/s, busbw 3.649769 GB/s
+msg_size 262144.000000 KB, time 3.136350 s, tput 4.108247 GB/s, busbw 3.851482 GB/s
+Comm_Op: rs
+msg_size 16384.000000 KB, time 0.357877 s, tput 2.250232 GB/s, busbw 2.109593 GB/s
+msg_size 65536.000000 KB, time 1.026057 s, tput 3.139422 GB/s, busbw 2.943208 GB/s
+msg_size 262144.000000 KB, time 4.043922 s, tput 3.186239 GB/s, busbw 2.987099 GB/s
+Comm_Op: ar
+msg_size 16384.000000 KB, time 0.559755 s, tput 2.877353 GB/s, busbw 2.697518 GB/s
+msg_size 65536.000000 KB, time 1.718625 s, tput 3.748608 GB/s, busbw 3.514320 GB/s
+msg_size 262144.000000 KB, time 7.090892 s, tput 3.634212 GB/s, busbw 3.407074 GB/s
++ set +x
+BACKEND: MPI
+HOST: gpu21
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /public/home/qinghuatest/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /public/home/qinghuatest/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_NET_GDR_LEVEL=5 -x NCCL_DEBUG_SUBSYS=NET -x NCCL_IB_DISABLE=0 -np 16 --host gpu11:8,gpu12:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/coll_comm_bench 16 MPI
+[gpu11:49922] MCW rank 0 bound to socket 0[core 0[hwt 0]]: [B/././././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49922] MCW rank 1 bound to socket 0[core 1[hwt 0]]: [./B/./././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49922] MCW rank 2 bound to socket 0[core 2[hwt 0]]: [././B/././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49922] MCW rank 3 bound to socket 0[core 3[hwt 0]]: [./././B/./././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:49922] MCW rank 4 bound to socket 1[core 32[hwt 0]]: [./././././././././././././././././././././././././././././././.][B/././././././././././././././././././././././././././././././.]
+[gpu11:49922] MCW rank 5 bound to socket 1[core 33[hwt 0]]: [./././././././././././././././././././././././././././././././.][./B/./././././././././././././././././././././././././././././.]
+[gpu11:49922] MCW rank 6 bound to socket 1[core 34[hwt 0]]: [./././././././././././././././././././././././././././././././.][././B/././././././././././././././././././././././././././././.]
+[gpu11:49922] MCW rank 7 bound to socket 1[core 35[hwt 0]]: [./././././././././././././././././././././././././././././././.][./././B/./././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 8 bound to socket 0[core 0[hwt 0]]: [B/././././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 9 bound to socket 0[core 1[hwt 0]]: [./B/./././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 10 bound to socket 0[core 2[hwt 0]]: [././B/././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 11 bound to socket 0[core 3[hwt 0]]: [./././B/./././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 12 bound to socket 1[core 32[hwt 0]]: [./././././././././././././././././././././././././././././././.][B/././././././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 13 bound to socket 1[core 33[hwt 0]]: [./././././././././././././././././././././././././././././././.][./B/./././././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 14 bound to socket 1[core 34[hwt 0]]: [./././././././././././././././././././././././././././././././.][././B/././././././././././././././././././././././././././././.]
+[gpu12:49584] MCW rank 15 bound to socket 1[core 35[hwt 0]]: [./././././././././././././././././././././././././././././././.][./././B/./././././././././././././././././././././././././././.]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   gpu11
+  Local device: mlx5_2
+--------------------------------------------------------------------------
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+Comm_Op: ag
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+msg_size 16384.000000 KB, time 0.000051 s, tput 15790.320941 GB/s, busbw 14803.425882 GB/s
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+msg_size 65536.000000 KB, time 0.000044 s, tput 73209.669818 GB/s, busbw 68634.065455 GB/s
+msg_size 262144.000000 KB, time 0.000034 s, tput 378967.702588 GB/s, busbw 355282.221176 GB/s
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllGather : comm argument is NULL
+Comm_Op: rs
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+msg_size 16384.000000 KB, time 0.000034 s, tput 23685.481412 GB/s, busbw 22205.138824 GB/s
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+msg_size 65536.000000 KB, time 0.000044 s, tput 73209.669818 GB/s, busbw 68634.065455 GB/s
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+msg_size 262144.000000 KB, time 0.000031 s, tput 415641.996387 GB/s, busbw 389664.371613 GB/s
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN ReduceScatter : comm argument is NULL
+Comm_Op: ar
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+msg_size 16384.000000 KB, time 0.000040 s, tput 40265.318400 GB/s, busbw 37748.736000 GB/s
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+msg_size 65536.000000 KB, time 0.000038 s, tput 169538.182737 GB/s, busbw 158942.046316 GB/s
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49931:49931 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49928:49928 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49929:49929 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49930:49930 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49925:49925 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+msg_size 262144.000000 KB, time 0.000036 s, tput 715827.882667 GB/s, busbw 671088.640000 GB/s
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49927:49927 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49593:49593 [6] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49926:49926 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49589:49589 [2] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu11:49932:49932 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49591:49591 [4] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49592:49592 [5] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49587:49587 [0] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49588:49588 [1] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49594:49594 [7] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+
+gpu12:49590:49590 [3] misc/argcheck.cc:30 NCCL WARN AllReduce : comm argument is NULL
+[admin1:19541] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[admin1:19541] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
++ set +x

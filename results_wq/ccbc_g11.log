@@ -1,0 +1,36 @@
+BACKEND: NCCL
+HOST: gpu21
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /public/home/qinghuatest/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /public/home/qinghuatest/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x LD_LIBRARY_PATH -x NCCL_DEBUG=ERROR -x NCCL_NET_GDR_LEVEL=5 -x NCCL_DEBUG_SUBSYS=NET -x NCCL_IB_DISABLE=0 -np 8 --host gpu11:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/coll_comm_bench 8 NCCL
+[gpu11:59892] MCW rank 0 bound to socket 0[core 0[hwt 0]]: [B/././././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:59892] MCW rank 1 bound to socket 0[core 1[hwt 0]]: [./B/./././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:59892] MCW rank 2 bound to socket 0[core 2[hwt 0]]: [././B/././././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:59892] MCW rank 3 bound to socket 0[core 3[hwt 0]]: [./././B/./././././././././././././././././././././././././././.][./././././././././././././././././././././././././././././././.]
+[gpu11:59892] MCW rank 4 bound to socket 1[core 32[hwt 0]]: [./././././././././././././././././././././././././././././././.][B/././././././././././././././././././././././././././././././.]
+[gpu11:59892] MCW rank 5 bound to socket 1[core 33[hwt 0]]: [./././././././././././././././././././././././././././././././.][./B/./././././././././././././././././././././././././././././.]
+[gpu11:59892] MCW rank 6 bound to socket 1[core 34[hwt 0]]: [./././././././././././././././././././././././././././././././.][././B/././././././././././././././././././././././././././././.]
+[gpu11:59892] MCW rank 7 bound to socket 1[core 35[hwt 0]]: [./././././././././././././././././././././././././././././././.][./././B/./././././././././././././././././././././././././././.]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   gpu11
+  Local device: mlx5_2
+--------------------------------------------------------------------------
+Comm_Op: ag
+msg_size 16384.000000 KB, time 0.022033 s, tput 18.275005 GB/s, busbw 15.990629 GB/s
+msg_size 65536.000000 KB, time 0.087361 s, tput 18.436290 GB/s, busbw 16.131754 GB/s
+msg_size 262144.000000 KB, time 0.348565 s, tput 18.482782 GB/s, busbw 16.172434 GB/s
+Comm_Op: rs
+msg_size 16384.000000 KB, time 0.031511 s, tput 12.778179 GB/s, busbw 11.180906 GB/s
+[admin1:45155] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[admin1:45155] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+msg_size 65536.000000 KB, time 0.125028 s, tput 12.882016 GB/s, busbw 11.271764 GB/s
+msg_size 262144.000000 KB, time 0.498159 s, tput 12.932519 GB/s, busbw 11.315954 GB/s
+Comm_Op: ar
+msg_size 16384.000000 KB, time 0.051188 s, tput 15.732327 GB/s, busbw 13.765786 GB/s
+msg_size 65536.000000 KB, time 0.204357 s, tput 15.762736 GB/s, busbw 13.792394 GB/s
+msg_size 262144.000000 KB, time 0.812276 s, tput 15.862714 GB/s, busbw 13.879875 GB/s
++ set +x

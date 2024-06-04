@@ -3,8 +3,9 @@
 export GPU_NUMs="4 8"
 export GPU_NUMs="2 4 8"
 export GPU_NUMs="16"
-export GPU_NUMs="24"
-export GPU_NUMs="64"
+# export GPU_NUMs="24"
+export GPU_NUMs="32"
+# export GPU_NUMs="64"
 
 # nico:
 export CLUSTER_NAME=nico
@@ -18,6 +19,12 @@ HOST="g4005,g4006,g4007"
 # HOST="g4002,g4003"
 # PARTITION=gpu3-2-low
 # HOST=None
+# wq:
+export CLUSTER_NAME=wq
+PARTITION=Nvidia_A800
+HOST="gpu11,gpu12"
+HOST="gpu[11-14]"
+
 
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
@@ -62,4 +69,5 @@ srun $SLURM_ARGS \
 python $EXECUBLE \
     --output $OUTPUT \
 
+set +x
 done

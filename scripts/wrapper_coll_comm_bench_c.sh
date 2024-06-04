@@ -31,6 +31,10 @@ PARTITION=gpu4-low
 # # HOSTs="g4003"
 HOSTs="g4002,g4003"
 # # GPU_NUM=8
+# wq:
+export CLUSTER_NAME=wq
+PARTITION=Nvidia_A800
+HOSTs="gpu21"
 
 GPU_NUMs="16"
 # HOSTs="None"
@@ -133,12 +137,24 @@ HOST_CONFIG="g4001:8,g4002:8,g4003:8,g4004:8,g4005:8,g4006:8,g4007:8,g4008:8"
 # HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
 # HOST_CONFIG="g3025:8,g3029:8"
 # HOST_CONFIG="g4002:8,g4003:8"
+# on wq
+GPU_NUM=16
+HOST_CONFIG="gpu11:8,gpu12:8"
+GPU_NUM=8
+HOST_CONFIG="gpu11:8"
+
 set -x
 mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH \
+   -x LD_LIBRARY_PATH \
+   -x NCCL_DEBUG=ERROR \
+   -x NCCL_NET_GDR_LEVEL=5 \
+   -x NCCL_DEBUG_SUBSYS=NET \
+   -x NCCL_IB_DISABLE=0 \
    -np $GPU_NUM --host $HOST_CONFIG \
+   --map-by ppr:4:numa --bind-to core --report-bindings \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
 
-
+set +x
 
 done
 done

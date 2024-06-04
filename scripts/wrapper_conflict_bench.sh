@@ -4,6 +4,7 @@
 EXECUBLE=conflict_bench.py
 GPU_NUMs="8"
 GPU_NUMs="16"
+GPU_NUMs="32"
 BACKENDs="NCCL"
 CP_FILE_NAMEs="p2p_si p2p_bi"
 CP_FILE_NAMEs="p2p_bi"
@@ -13,8 +14,8 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="bad_patterns_pcie_switch"
 # CP_FILE_NAMEs="all2all_4"
 # CP_FILE_NAMEs="E2E_4 E2E_8"
-CP_FILE_NAMEs="ring_16"
-CP_FILE_NAMEs="small_16"
+CP_FILE_NAMEs="ring"
+CP_FILE_NAMEs="small"
 
 # nico:
 # PARTITION=SXM
@@ -31,6 +32,14 @@ PARTITION=gpu4-low
 # HOSTs="g4004"
 HOSTs="g4007,g4008"
 HOSTs="g4002,g4003"
+
+# wq:
+PARTITION=Nvidia_A800
+# PARTITION=gpu3-2-low
+# HOSTs="g4004"
+HOSTs="gpu21"
+HOSTs="gpu21,gpu22"
+HOSTs="gpu[11-14]"
 
 
 # HOSTs="None"
@@ -94,7 +103,7 @@ srun $SLURM_ARGS \
 ./scripts/executor.sh \
 python $EXECUBLE \
     --backend $BACKEND \
-    --config ./scripts/configs/${CP_FILE_NAME}.json \
+    --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
 
 done
 done

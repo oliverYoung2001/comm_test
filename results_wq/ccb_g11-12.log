@@ -1,0 +1,23 @@
+PARTITION: Nvidia_A800
+HOST: gpu11,gpu12
+GPU_NUM: 16
++ srun -p Nvidia_A800 -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w gpu11,gpu12 ./scripts/executor.sh python coll_comm_bench.py --output ./prof_data/coll_comm_bench_16_gpu11,gpu12.json
+srun: job 116524 queued and waiting for resources
+srun: job 116524 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 16 MB, t_d: 0.5838 s, t_d/r: 0.1168, tput: 2.299 GB/s, busbw: 2.155 GB/s
+msg_size: 64 MB, t_d: 2.7424 s, t_d/r: 0.5485, tput: 1.958 GB/s, busbw: 1.835 GB/s
+msg_size: 256 MB, t_d: 11.381 s, t_d/r: 2.2762, tput: 1.887 GB/s, busbw: 1.769 GB/s
+msg_size: 1 GB, t_d: 37.9529 s, t_d/r: 7.5906, tput: 2.263 GB/s, busbw: 2.122 GB/s
+COLL_COMM: reducescatter
+msg_size: 16 MB, t_d: 0.619 s, t_d/r: 0.1238, tput: 2.168 GB/s, busbw: 2.033 GB/s
+msg_size: 64 MB, t_d: 2.243 s, t_d/r: 0.4486, tput: 2.394 GB/s, busbw: 2.244 GB/s
+msg_size: 256 MB, t_d: 10.1759 s, t_d/r: 2.0352, tput: 2.11 GB/s, busbw: 1.978 GB/s
+msg_size: 1 GB, t_d: 31.9658 s, t_d/r: 6.3932, tput: 2.687 GB/s, busbw: 2.519 GB/s
+COLL_COMM: allreduce
+msg_size: 16 MB, t_d: 1.13 s, t_d/r: 0.226, tput: 2.376 GB/s, busbw: 2.227 GB/s
+msg_size: 64 MB, t_d: 5.6023 s, t_d/r: 1.1205, tput: 1.917 GB/s, busbw: 1.797 GB/s
+msg_size: 256 MB, t_d: 18.7596 s, t_d/r: 3.7519, tput: 2.289 GB/s, busbw: 2.146 GB/s
+msg_size: 1 GB, t_d: 71.555 s, t_d/r: 14.311, tput: 2.401 GB/s, busbw: 2.251 GB/s
++ set +x
