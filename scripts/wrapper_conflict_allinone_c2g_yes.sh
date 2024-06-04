@@ -7,35 +7,32 @@
 # git checkout v2.18    # default
 # # git checkout v2.17.1-1
 # # git checkout v2.10.3-1      # 性能弱于latest
-# make -j src.build NVCC_GENCODE="-gencode=arch=compute_70,code=sm_70"
+# make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
 # popd
 
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
 # BACKENDs="NCCL cudaMemcpy"
-BACKENDs="cudaMemcpy-P"
-BACKENDs="cudaMemcpy-nP"
-# BACKENDs="NCCL MPI"
+# BACKENDs="cudaMemcpy"
+BACKENDs="NCCL MPI"
 # BACKENDs="MPI"
-BACKENDs="NCCL"
-# CP_FILE_NAMEs="p2p_si p2p_bi"
-# CP_FILE_NAMEs="p2p_si"
-CP_FILE_NAMEs="conflict_patterns"
-# CP_FILE_NAMEs="bad_patterns_3+2"
-# CP_FILE_NAMEs="bad_patterns_3+3"
-# CP_FILE_NAMEs="bad_patterns_pcie_switch"
-# CP_FILE_NAMEs="all2all_4"
-CP_FILE_NAMEs="E2E_4 E2E_8"
-CP_FILE_NAMEs="small"
+# BACKENDs="NCCL"
+CP_FILE_NAMEs="c2g"
+DIR_MODEs="0 1 2"
 
 
-# nico:
-PARTITION=Mix
-GPU_NUMs="16"
-HOSTs="nico3,nico4"
-HOSTs="nico1,nico2"
-# HOSTs="zoltan,nico1"
+# # nico:
+# PARTITION=Mix
+# # export GPU_NUM=16
 # GPU_NUMs="8"
-# HOSTs="nico1"
+# # GPU_NUMs="16"
+# HOSTs="nico3"
+
+# yes:
+PARTITION=octave
+# export GPU_NUM=16
+GPU_NUMs="8"
+# GPU_NUMs="16"
+HOSTs="octave"
 
 # qy:
 # PARTITION=gpu4-low
@@ -47,13 +44,10 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
 
-EXECUBLE=conflict_allinone
+EXECUBLE=conflict_allinone_c2g
 
-# make clean
-# make $EXECUBLE
-
-# mkdir results
-mkdir -p results
+make clean
+make $EXECUBLE
 
 for BACKEND in $BACKENDs; do
 echo "BACKEND: $BACKEND"
@@ -62,7 +56,8 @@ for HOST in $HOSTs; do
 for GPU_NUM in $GPU_NUMs; do       # for cudaMemcpy
 for CP_FILE_NAME in $CP_FILE_NAMEs; do
 echo "CP_FILE_NAME: ${CP_FILE_NAME}"
-
+for DIR_MODE in $DIR_MODEs; do
+echo "DIR_MODE: ${DIR_MODE}"
 
 if [ $GPU_NUM -le 8 ]; then
    NNODES=1
@@ -98,33 +93,17 @@ if [ "$HOST" != "None" ]; then
 fi
 
 export SLURM_CPU_BIND=verbose
-# bind core: (but better without binding )
-# --cpu-bind=map_cpu:0,1,2,3,16,17,18,19 \   # for nico1,2
-# --cpu-bind=map_cpu:1,2,3,4,16,17,18,19 \   # for nico3,4
-
-   # -x NCCL_NET_GDR_READ \
-   # -x NCCL_P2P_LEVEL \
-   # -x NCCL_IB_PCI_RELAXED_ORDERING \
-   # -x NCCL_IB_QPS_PER_CONNECTION=4 \
-   # -x NCCL_DEBUG_SUBSYS=NET \
-   # -x NCCL_IB_TC=160 \
-   # -x NCCL_IB_GID_INDEX=3 \
-   # -x NCCL_IB_DISABLE=0 \
-
-export NCCL_DEBUG=INFO
-export NCCL_DEBUG=WARN
-export NCCL_NET_GDR_LEVEL=5
-# export NCCL_NET_GDR_LEVEL=0   # Disable GDR
-export NCCL_IB_DISABLE=0
-export NCCL_DEBUG_SUBSYS=NET
+# --cpu-bind=map_cpu:0,1,64,65,128,129,192,193 \
 
 set -x
 # salloc -n $GPU_NUM
 srun $SLURM_ARGS \
+--cpu-bind=map_cpu:0,1,64,65,128,129,192,193 \
 ./scripts/executor.sh \
-./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
+./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json ${DIR_MODE}
 set +x
 
+done
 done
 done
 done
