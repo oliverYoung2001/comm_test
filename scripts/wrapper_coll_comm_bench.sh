@@ -69,7 +69,7 @@ export NCCL_DEBUG=INFO
 export NCCL_DEBUG=WARN
 # export NCCL_DEBUG=ERROR
 export NCCL_NET_GDR_LEVEL=5
-export NCCL_NET_GDR_LEVEL=0   # Disable GDR
+# export NCCL_NET_GDR_LEVEL=0   # Disable GDR
 export NCCL_IB_DISABLE=0
 export NCCL_DEBUG_SUBSYS=NET
 

@@ -25,7 +25,7 @@ GDRCOPY_HOME=<position to install>  #  /home/zhaijidong/yhy/.local/gdrcopy or /p
 git clone https://github.com/NVIDIA/gdrcopy.git # in Sotware
 cd gdrcopy && git checkout v2.4.1
 # git checkout v1.3
-# [NOTE]: need build on node with GPU !!!
+# [NOTE]: need build on node with cuda driver !!!
 make prefix=$GDRCOPY_HOME CUDA=$(dirname `which nvcc`)/../ all install    # for v2.4.1
 # make PREFIX=$GDRCOPY_HOME CUDA=$(dirname `which nvcc`)/../ all install      # for v1.3
 # sudo ./insmod.sh   # need sudo
@@ -46,7 +46,7 @@ cd ucx && git checkout v1.16.0
 
 # install openmpi
 # Ref: https://yuhldr.github.io/posts/bfa79f01.html
-OPENMPI_HOME=<position to install>  # /public/home/qinghuatest/yhy/.local/openmpi
+OPENMPI_HOME=<position to install>  # /home/zhaijidong/yhy/.local/openmpi or /public/home/qinghuatest/yhy/.local/openmpi
 wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.6.tar.bz2
 tar jxvf openmpi-4.1.6.tar.bz2
 cd openmpi-4.1.6
@@ -54,7 +54,11 @@ cd openmpi-4.1.6
 --with-slurm --with-pmix \
 --enable-orterun-prefix-by-default --enable-mpirun-prefix-by-default \
 --with-cuda=$(dirname `which nvcc`)/../ --with-ucx=$UCX_HOME \    # for cuda-aware mpi
-&& make -j && make install # on nico1
+# for -levent_core and -levent_pthreads
+source ~/yhy/.local/spack/share/spack/setup-env.sh
+spack load libevent
+export LIBRARY_PATH="$(dirname `which event_rpcgen.py`)/../lib:$LIBRARY_PATH"   # for libevent
+make -j && make install # on nico1
 # necessary to install openmpi with slurm support
 
 # ENV SETUP:

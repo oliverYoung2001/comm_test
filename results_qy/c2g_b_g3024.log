@@ -1,0 +1,123 @@
+CP_FILE_NAME: c2g
+DIR_MODE: 0
+NNODES: 1
+NGPU_PER_NODE: 8
++ srun -p arch -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3024 --cpu-bind=map_cpu:0,1,2,3,64,65,66,67 ./scripts/executor.sh python c2g_bench.py --config ./scripts/configs/c2g_8.json --mode 0
+srun: job 428 queued and waiting for resources
+srun: job 428 has been allocated resources
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 0, WORLD_SIZE: 8
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 2, WORLD_SIZE: 8
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 5, WORLD_SIZE: 8
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 6, WORLD_SIZE: 8
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 3, WORLD_SIZE: 8
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 4, WORLD_SIZE: 8
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 7, WORLD_SIZE: 8
+MASTER_ADDR: g3024, MASTER_PORT: 20434, RANK: 1, WORLD_SIZE: 8
+[INFO]: Cluster init done !!!
+[0]
+SIZE 16 MB, REAL_BD 10.606 GB/s, time 0.0158 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 10.669 GB/s, time 0.0629 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 11.167 GB/s, time 0.2404 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 11.333 GB/s, time 0.9475 s, comm_vol 10.737 GB
+[0, 1]
+SIZE 16 MB, REAL_BD 21.48 GB/s, time 0.0156 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 22.289 GB/s, time 0.0602 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 22.471 GB/s, time 0.2389 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 21.589 GB/s, time 0.9947 s, comm_vol 21.475 GB
+[0, 4]
+SIZE 16 MB, REAL_BD 21.93 GB/s, time 0.0153 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 22.505 GB/s, time 0.0596 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 22.392 GB/s, time 0.2398 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 21.947 GB/s, time 0.9785 s, comm_vol 21.475 GB
+[0, 1, 2, 3]
+SIZE 16 MB, REAL_BD 35.602 GB/s, time 0.0188 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 36.406 GB/s, time 0.0737 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 36.791 GB/s, time 0.2918 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 34.552 GB/s, time 1.2431 s, comm_vol 42.95 GB
+[0, 2, 4, 6]
+SIZE 16 MB, REAL_BD 41.441 GB/s, time 0.0162 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 42.287 GB/s, time 0.0635 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 42.377 GB/s, time 0.2534 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 38.401 GB/s, time 1.1185 s, comm_vol 42.95 GB
+[0, 1, 2, 3, 4, 5, 6, 7]
+SIZE 16 MB, REAL_BD 67.919 GB/s, time 0.0198 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 68.362 GB/s, time 0.0785 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 68.529 GB/s, time 0.3134 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 59.835 GB/s, time 1.4356 s, comm_vol 85.899 GB
++ set +x
+DIR_MODE: 1
+NNODES: 1
+NGPU_PER_NODE: 8
++ srun -p arch -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3024 --cpu-bind=map_cpu:0,1,2,3,64,65,66,67 ./scripts/executor.sh python c2g_bench.py --config ./scripts/configs/c2g_8.json --mode 1
+srun: job 429 queued and waiting for resources
+srun: job 429 has been allocated resources
+[INFO]: Cluster init done !!!
+[0]
+SIZE 16 MB, REAL_BD 19.947 GB/s, time 0.0084 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 21.366 GB/s, time 0.0314 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 21.693 GB/s, time 0.1237 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 21.643 GB/s, time 0.4961 s, comm_vol 10.737 GB
+[0, 1]
+SIZE 16 MB, REAL_BD 24.157 GB/s, time 0.0139 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 23.906 GB/s, time 0.0561 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 24.398 GB/s, time 0.22 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 24.371 GB/s, time 0.8812 s, comm_vol 21.475 GB
+[0, 4]
+SIZE 16 MB, REAL_BD 23.52 GB/s, time 0.0143 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 23.696 GB/s, time 0.0566 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 23.772 GB/s, time 0.2258 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 23.798 GB/s, time 0.9024 s, comm_vol 21.475 GB
+[0, 1, 2, 3]
+SIZE 16 MB, REAL_BD 47.369 GB/s, time 0.0142 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 48.198 GB/s, time 0.0557 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 48.563 GB/s, time 0.2211 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 48.616 GB/s, time 0.8834 s, comm_vol 42.95 GB
+[0, 2, 4, 6]
+SIZE 16 MB, REAL_BD 44.666 GB/s, time 0.015 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 45.058 GB/s, time 0.0596 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 45.18 GB/s, time 0.2377 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 45.166 GB/s, time 0.9509 s, comm_vol 42.95 GB
+[0, 1, 2, 3, 4, 5, 6, 7]
+SIZE 16 MB, REAL_BD 74.061 GB/s, time 0.0181 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 74.744 GB/s, time 0.0718 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 74.842 GB/s, time 0.2869 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 74.199 GB/s, time 1.1577 s, comm_vol 85.899 GB
++ set +x
+DIR_MODE: 2
+NNODES: 1
+NGPU_PER_NODE: 8
++ srun -p arch -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3024 --cpu-bind=map_cpu:0,1,2,3,64,65,66,67 ./scripts/executor.sh python c2g_bench.py --config ./scripts/configs/c2g_8.json --mode 2
+srun: job 430 queued and waiting for resources
+srun: job 430 has been allocated resources
+[INFO]: Cluster init done !!!
+[0]
+SIZE 16 MB, REAL_BD 22.546 GB/s, time 0.0149 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 21.855 GB/s, time 0.0614 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 23.76 GB/s, time 0.226 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 23.885 GB/s, time 0.8991 s, comm_vol 21.475 GB
+[0, 1]
+SIZE 16 MB, REAL_BD 25.188 GB/s, time 0.0266 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 27.197 GB/s, time 0.0987 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 25.324 GB/s, time 0.424 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 25.364 GB/s, time 1.6933 s, comm_vol 42.95 GB
+[0, 4]
+SIZE 16 MB, REAL_BD 34.679 GB/s, time 0.0194 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 33.447 GB/s, time 0.0803 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 33.846 GB/s, time 0.3172 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 32.864 GB/s, time 1.3069 s, comm_vol 42.95 GB
+[0, 1, 2, 3]
+SIZE 16 MB, REAL_BD 50.228 GB/s, time 0.0267 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 50.355 GB/s, time 0.1066 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 50.525 GB/s, time 0.425 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 50.634 GB/s, time 1.6965 s, comm_vol 85.899 GB
+[0, 2, 4, 6]
+SIZE 16 MB, REAL_BD 70.814 GB/s, time 0.019 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 66.611 GB/s, time 0.0806 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 66.061 GB/s, time 0.3251 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 65.764 GB/s, time 1.3062 s, comm_vol 85.899 GB
+[0, 1, 2, 3, 4, 5, 6, 7]
+SIZE 16 MB, REAL_BD 78.447 GB/s, time 0.0342 s, comm_vol 2.684 GB
+SIZE 64 MB, REAL_BD 77.848 GB/s, time 0.1379 s, comm_vol 10.737 GB
+SIZE 256 MB, REAL_BD 79.954 GB/s, time 0.5372 s, comm_vol 42.95 GB
+SIZE 1 GB, REAL_BD 78.817 GB/s, time 2.1797 s, comm_vol 171.799 GB
++ set +x

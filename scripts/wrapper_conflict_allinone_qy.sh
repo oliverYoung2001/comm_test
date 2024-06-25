@@ -4,11 +4,12 @@
 # pushd ./third_party/nccl
 # rm -r build
 # # git checkout master   # for debug
-# git checkout v2.18    # default
+# # git checkout v2.18    # default
 # # git checkout v2.17.1-1
 # # git checkout v2.10.3-1      # 性能弱于latest
 # make -j src.build NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
 # popd
+# exit 0
 
 # configs:
 BACKENDs="NCCL MPI cudaMemcpy-P cudaMemcpy-nP"
@@ -25,7 +26,7 @@ CP_FILE_NAMEs="conflict_patterns"
 # CP_FILE_NAMEs="bad_patterns_pcie_switch"
 # CP_FILE_NAMEs="all2all_4"
 CP_FILE_NAMEs="E2E_4 E2E_8"
-CP_FILE_NAMEs="ring_16"
+CP_FILE_NAMEs="ring"
 CP_FILE_NAMEs="small"
 
 
@@ -35,12 +36,12 @@ PARTITION=Mix
 # GPU_NUMs="8"
 
 # qy:
-PARTITION=gpu3-2-low
-PARTITION=gpu4-low
-# HOST="g4003"
+PARTITION=arch
+PARTITION=rag
 # GPU_NUM=8
 
 GPU_NUMs="16"
+HOST="g3017,g3018"
 HOSTs="None"
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
@@ -96,7 +97,11 @@ if [ "$HOST" != "None" ]; then
     "
 fi
 
-# salloc -n $GPU_NUM
+# CORES_PER_NODE
+# salloc -p $PARTITION -w $HOST -N $NNODES -n $(( $NNODES * $CORES_PER_NODE )) -t 3600 &
+# salloc -p rag -w g3011,g3017,g3018,g3022 -N 4 -n 512 -t 3600
+# salloc -p rag -w g3017,g3018 -N 2 -n 256 -t 3600
+# salloc -p rag -w g3017 -N 1 -n 128 -t 3600
 # srun $SLURM_ARGS \
 # ./scripts/executor.sh \
 # GPU_NUM=2
@@ -108,15 +113,16 @@ fi
 GPU_NUM=32
 HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
 HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
+HOST_CONFIG="g3011:8,g3017:8,g3018:8,g3022:8"
 # GPU_NUM=24
 # HOST_CONFIG="g4005:8,g4007:8,g4008:8"
 # GPU_NUM=16
 # HOST_CONFIG="g4007:8,g4008:8"
-# # HOST_CONFIG="g3025:8,g4006:8"
+# HOST_CONFIG="g3017:8,g3018:8"
 # # HOST_CONFIG="g4003:8,g4006:8"
 # HOST_CONFIG="g3021:8,g3022:8"
-# GPU_NUM=8
-# HOST_CONFIG="g4008:8"
+GPU_NUM=8
+HOST_CONFIG="g3017:8"
 # # HOST_CONFIG="g4002:8"
 # HOST_CONFIG="g4006:8"
 
@@ -143,10 +149,11 @@ HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
 export NCCL_DEBUG=INFO
 export NCCL_DEBUG=WARN
 export NCCL_NET_GDR_LEVEL=5
-export NCCL_NET_GDR_LEVEL=0   # Disable GDR
+# export NCCL_NET_GDR_LEVEL=0   # Disable GDR
 export NCCL_IB_DISABLE=0
 export NCCL_DEBUG_SUBSYS=NET
 
+# Run with MPI
 set -x
 mpirun --prefix $(dirname `which mpirun`)/../ \
    -x LD_LIBRARY_PATH \
@@ -158,6 +165,16 @@ mpirun --prefix $(dirname `which mpirun`)/../ \
    --map-by ppr:4:numa --bind-to core --report-bindings \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
 set +x
+
+# # Run with Slurm (Error, not support slurm !!!)
+# export SLURM_CPU_BIND=verbose
+# set -x
+# srun $SLURM_ARGS \
+# -c 14 \
+# --cpu-bind=map_cpu:0,1,2,3,28,29,30,31 \
+# ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json
+
+# set +x
 
 done
 done
