@@ -1,0 +1,142 @@
+HOST: None
+CP_FILE_NAME: small
+HOST: None
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 16
+PROC_NUM: 16
+NNODES: 2
+NTASK_PER_NODE: 8
++ srun -p hit -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -c 16 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_16.json
+srun: job 3609 queued and waiting for resources
+srun: job 3609 has been allocated resources
+cpu-bind=MASK - g4005, task  8  0 [24148]: mask 0xff00000000000000ff set
+cpu-bind=MASK - g4005, task  9  1 [24149]: mask 0xff00000000000000ff00000000 set
+cpu-bind=MASK - g4005, task 10  2 [24150]: mask 0xff00000000000000ff00 set
+cpu-bind=MASK - g4005, task 11  3 [24151]: mask 0xff00000000000000ff0000000000 set
+cpu-bind=MASK - g4005, task 12  4 [24152]: mask 0xff00000000000000ff0000 set
+cpu-bind=MASK - g4005, task 13  5 [24153]: mask 0xff00000000000000ff000000000000 set
+cpu-bind=MASK - g4005, task 14  6 [24154]: mask 0xff00000000000000ff000000 set
+cpu-bind=MASK - g4005, task 15  7 [24155]: mask 0xff00000000000000ff00000000000000 set
+cpu-bind=MASK - g4004, task  0  0 [64276]: mask 0xff00000000000000ff set
+cpu-bind=MASK - g4004, task  1  1 [64277]: mask 0xff00000000000000ff00000000 set
+cpu-bind=MASK - g4004, task  2  2 [64278]: mask 0xff00000000000000ff00 set
+cpu-bind=MASK - g4004, task  3  3 [64279]: mask 0xff00000000000000ff0000000000 set
+cpu-bind=MASK - g4004, task  4  4 [64280]: mask 0xff00000000000000ff0000 set
+cpu-bind=MASK - g4004, task  5  5 [64281]: mask 0xff00000000000000ff000000000000 set
+cpu-bind=MASK - g4004, task  6  6 [64282]: mask 0xff00000000000000ff000000 set
+cpu-bind=MASK - g4004, task  7  7 [64283]: mask 0xff00000000000000ff00000000000000 set
+NCCL version 2.18.6+cuda11.8
+[INFO]: Cluster init done !!!
+[[0, 1]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 99.771 GB/s, time 0.0017 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 207.333 GB/s, time 0.0032 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 241.501 GB/s, time 0.0111 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 255.029 GB/s, time 0.0421 s, comm_vol 10.737 GB
+[[0, 1], [1, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 150.876 GB/s, time 0.0022 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 297.542 GB/s, time 0.0045 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 341.829 GB/s, time 0.0157 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 437.408 GB/s, time 0.0491 s, comm_vol 21.475 GB
+[[0, 8]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 21.701 GB/s, time 0.0077 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 22.861 GB/s, time 0.0294 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 23.267 GB/s, time 0.1154 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 22.221 GB/s, time 0.4832 s, comm_vol 10.737 GB
+[[0, 8], [8, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 37.967 GB/s, time 0.0088 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 40.734 GB/s, time 0.0329 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 40.866 GB/s, time 0.1314 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 41.158 GB/s, time 0.5218 s, comm_vol 21.475 GB
+[[0, 15], [15, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 38.361 GB/s, time 0.0087 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 40.42 GB/s, time 0.0332 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 40.698 GB/s, time 0.1319 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 41.006 GB/s, time 0.5237 s, comm_vol 21.475 GB
+[[0, 8], [0, 15]]
+SIZE 16 MB, REAL_BD 23.523 GB/s, time 0.0143 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 24.11 GB/s, time 0.0557 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 24.305 GB/s, time 0.2209 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 24.282 GB/s, time 0.8844 s, comm_vol 21.475 GB
+[[0, 8], [0, 15], [8, 0], [15, 0]]
+SIZE 16 MB, REAL_BD 43.985 GB/s, time 0.0153 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 44.643 GB/s, time 0.0601 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 44.735 GB/s, time 0.24 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 44.836 GB/s, time 0.9579 s, comm_vol 42.95 GB
+[[7, 8], [15, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 40.124 GB/s, time 0.0084 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 42.389 GB/s, time 0.0317 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 41.621 GB/s, time 0.129 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 41.496 GB/s, time 0.5175 s, comm_vol 21.475 GB
+[[0, 8], [2, 10]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 43.443 GB/s, time 0.0077 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 45.749 GB/s, time 0.0293 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 46.2 GB/s, time 0.1162 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 45.412 GB/s, time 0.4729 s, comm_vol 21.475 GB
+[[0, 8], [8, 0], [2, 10], [10, 2]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 75.639 GB/s, time 0.0089 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 81.243 GB/s, time 0.033 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 82.136 GB/s, time 0.1307 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 82.08 GB/s, time 0.5233 s, comm_vol 42.95 GB
+[[0, 8], [4, 12]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 43.19 GB/s, time 0.0078 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 46.195 GB/s, time 0.0291 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 46.185 GB/s, time 0.1162 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 45.174 GB/s, time 0.4754 s, comm_vol 21.475 GB
+[[0, 8], [8, 0], [4, 12], [12, 4]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 75.98 GB/s, time 0.0088 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 79.985 GB/s, time 0.0336 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 81.899 GB/s, time 0.1311 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 81.984 GB/s, time 0.5239 s, comm_vol 42.95 GB
+[[0, 8], [2, 10], [4, 12], [6, 14]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 87.312 GB/s, time 0.0077 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 92.256 GB/s, time 0.0291 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 92.951 GB/s, time 0.1155 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 92.935 GB/s, time 0.4621 s, comm_vol 42.95 GB
+[[0, 8], [8, 0], [2, 10], [10, 2], [4, 12], [12, 4], [6, 14], [14, 6]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 120.283 GB/s, time 0.0112 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 164.011 GB/s, time 0.0327 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 164.611 GB/s, time 0.1305 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 165.26 GB/s, time 0.5198 s, comm_vol 85.899 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 95.23 GB/s, time 0.0141 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 96.548 GB/s, time 0.0556 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 96.73 GB/s, time 0.222 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 97.02 GB/s, time 0.8854 s, comm_vol 85.899 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15], [8, 0], [9, 1], [10, 2], [11, 3], [12, 4], [13, 5], [14, 6], [15, 7]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE 16 MB, REAL_BD 177.483 GB/s, time 0.0151 s, comm_vol 2.684 GB
+SIZE 64 MB, REAL_BD 181.661 GB/s, time 0.0591 s, comm_vol 10.737 GB
+SIZE 256 MB, REAL_BD 187.771 GB/s, time 0.2287 s, comm_vol 42.95 GB
+SIZE 1 GB, REAL_BD 188.341 GB/s, time 0.9122 s, comm_vol 171.799 GB
++ set +x

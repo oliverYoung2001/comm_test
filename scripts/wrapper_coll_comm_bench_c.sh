@@ -138,24 +138,6 @@ HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
 # HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
 # HOST_CONFIG="g3025:8,g3029:8"
 # HOST_CONFIG="g4002:8,g4003:8"
-<<<<<<< HEAD
-# HOST_CONFIG="g3021:8,g3022:8"
-
-export NCCL_DEBUG=INFO
-export NCCL_DEBUG=WARN
-export NCCL_NET_GDR_LEVEL=5
-# export NCCL_NET_GDR_LEVEL=0   # Disable GDR
-export NCCL_IB_DISABLE=0
-export NCCL_DEBUG_SUBSYS=NET
-
-set -x
-mpirun --prefix $(dirname `which mpirun`)/../ \
-   -x LD_LIBRARY_PATH \
-   -x NCCL_DEBUG \
-   -x NCCL_NET_GDR_LEVEL \
-   -x NCCL_DEBUG_SUBSYS \
-   -x NCCL_IB_DISABLE \
-=======
 # on wq
 GPU_NUM=16
 HOST_CONFIG="gpu11:8,gpu12:8"
@@ -169,17 +151,11 @@ mpirun --prefix $(dirname `which mpirun`)/../ -x LD_LIBRARY_PATH \
    -x NCCL_NET_GDR_LEVEL=5 \
    -x NCCL_DEBUG_SUBSYS=NET \
    -x NCCL_IB_DISABLE=0 \
->>>>>>> 90e6c3d71d4e53b6e0195cd54f54ec95e2dc40a0
    -np $GPU_NUM --host $HOST_CONFIG \
    --map-by ppr:4:numa --bind-to core --report-bindings \
 ./csrc/build/${EXECUBLE} $GPU_NUM $BACKEND
-<<<<<<< HEAD
-set +x
-
-=======
 
 set +x
->>>>>>> 90e6c3d71d4e53b6e0195cd54f54ec95e2dc40a0
 
 done
 done

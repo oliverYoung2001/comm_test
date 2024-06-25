@@ -1,5 +1,7 @@
-# source ~/yhy/.local/spack/share/spack/setup-env.sh
-# spack load cuda@12.1.1
+source ~/yhy/.local/spack/share/spack/setup-env.sh
+spack load cuda@11.8.0
+# spack load libevent
+# export LIBRARY_PATH="$(dirname `which event_rpcgen.py`)/../lib:$LIBRARY_PATH"   # for libevent
 # spack load openmpi@4.1.5
 
 # source /data/apps/tools/spack/share/spack/setup-env.sh
@@ -13,8 +15,8 @@ export PATH="$CUDA_PATH/bin:$PATH"
 export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
 
 # Openmpi
-# export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi   # normal mpi
-export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy # cuda-aware mpi
+# export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy # cuda-aware gdr mpi (deprecated !!!)
+export OPENMPI_HOME=/home/zhaijidong/yhy/.local/openmpi   # cuda-aware gdr mpi
 export PATH="$OPENMPI_HOME/bin:$PATH"
 export LD_LIBRARY_PATH="$OPENMPI_HOME/lib/:$LD_LIBRARY_PATH"
 

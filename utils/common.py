@@ -16,6 +16,7 @@ def calc_comm_vol_ag(t: torch.Tensor, world_size):  # -> GB
 def execute_comm_ops(ops, barrier=False, light_barrier=False):
     if len(ops) > 0:
         works = dist.batch_isend_irecv(ops)
+        # works = [op() for op in ops]
         for work in works:
             work.wait()
     if barrier:

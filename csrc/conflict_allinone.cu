@@ -29,17 +29,17 @@ typedef long long LL;
 
 PROC_PARAMS* pp;
 
-int TIMES = 3;
-int WARMUP = 2;
-// int TIMES = 100;
+int WARMUP = 5;
+int TIMES = 10;
 // int WARMUP = 10;
+// int TIMES = 100;
 const int MAGIC_FACTOR = pow(2, 5) * pow(3, 3) * pow(5, 2) * 7;     // 151200, for tests on different number of GPUs
 // 62792 B
 
-const int SIZEIDX_START = 7;
-const int SIZEIDX_END = 9;
+const int SIZEIDX_START = 6;
+const int SIZEIDX_END = 10;
 
-const int SIZES_LEN = 9;
+const int SIZES_LEN = 10;
 const LL SIZES[SIZES_LEN] = {   // int = 4B
     1LL * 256,                  // 1KB      // 打不满带宽
     1LL * 1024 * 1,             // 4KB      // 打不满带宽
@@ -50,11 +50,13 @@ const LL SIZES[SIZES_LEN] = {   // int = 4B
     // 1LL * 1024 * 64,            // 256KB    // 趋于稳定
     1LL * 1024 * 256,           // 1MB
     // 1LL * 1024 * 1024 * 1,      // 4MB      // 打不满带宽
-    1LL * 1024 * 1024 * 32,     // 128MB
-    // 1LL * 1024 * 1024 * 64,     // 256MB
-    1LL * 1024 * 1024 * 128,    // 512MB
-    // 1LL * 1024 * 1024 * 256,    // 1GB
-    1LL * 1024 * 1024 * 512,    // 2GB
+    1LL * 1024 * 1024 * 4,     // 16MB
+    1LL * 1024 * 1024 * 16,     // 64MB
+    // 1LL * 1024 * 1024 * 32,     // 128MB
+    1LL * 1024 * 1024 * 64,     // 256MB
+    // 1LL * 1024 * 1024 * 128,    // 512MB
+    1LL * 1024 * 1024 * 256,    // 1GB
+    // 1LL * 1024 * 1024 * 512,    // 2GB
     // 1LL * 1024 * 1024 * 1024,   // 4GB      // 用cudaMemcpy，竟然有性能下降！！！
     // 1LL * 1024 * 1024 * 2048,   // 8GB
     // 1LL * 1024 * 1024 * 4096,   // 16GB
