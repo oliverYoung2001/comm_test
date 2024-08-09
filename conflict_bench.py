@@ -28,6 +28,7 @@ from utils.comm_impl import *
 from utils.common import *
 import torch
 import torch.distributed as dist
+from utils.cb_communicator import Cb_Communicator
 # BATCH = 1
 
 MSG_SIZES = [
@@ -48,32 +49,62 @@ MSG_SIZES = [
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
-# MSG_SIZES = [
-#     # BYTE_MULTPLE_UP,
-#     # BYTE_MULTPLE_UP * 4,
-#     # BYTE_MULTPLE_UP * 16,
-#     # BYTE_MULTPLE_UP * 64,
-#     # BYTE_MULTPLE_UP * 256,
-#     pow(BYTE_MULTPLE_UP, 2),            # 1MB
-#     pow(BYTE_MULTPLE_UP, 2) * 2,
-#     pow(BYTE_MULTPLE_UP, 2) * 4,
-#     pow(BYTE_MULTPLE_UP, 2) * 8,
-#     pow(BYTE_MULTPLE_UP, 2) * 16,
-#     pow(BYTE_MULTPLE_UP, 2) * 32,
-#     pow(BYTE_MULTPLE_UP, 2) * 64,
-#     pow(BYTE_MULTPLE_UP, 2) * 128,
-#     pow(BYTE_MULTPLE_UP, 2) * 256,
-#     pow(BYTE_MULTPLE_UP, 2) * 512,
-#     pow(BYTE_MULTPLE_UP, 3),         # 1GB
-#     pow(BYTE_MULTPLE_UP, 3) * 2,
-#     pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-#     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
-# ]
+MSG_SIZES = [
+    # BYTE_MULTPLE_UP,
+    # BYTE_MULTPLE_UP * 4,
+    BYTE_MULTPLE_UP * 8,        # 8KB, S=32 * bs=1 * Nh=1 * D=128 * 2B = 8KB (intra-machine start point)
+    BYTE_MULTPLE_UP * 16,
+    BYTE_MULTPLE_UP * 32,
+    BYTE_MULTPLE_UP * 64,       # 64KB, S=256 * bs=1 * Nh=1 * D=128 * 2B = 64KB (inter-machine start point)
+    BYTE_MULTPLE_UP * 128,
+    BYTE_MULTPLE_UP * 256,
+    BYTE_MULTPLE_UP * 512,
+    pow(BYTE_MULTPLE_UP, 2),            # 1MB
+    pow(BYTE_MULTPLE_UP, 2) * 2,
+    pow(BYTE_MULTPLE_UP, 2) * 4,
+    pow(BYTE_MULTPLE_UP, 2) * 8,
+    pow(BYTE_MULTPLE_UP, 2) * 16,
+    pow(BYTE_MULTPLE_UP, 2) * 32,
+    pow(BYTE_MULTPLE_UP, 2) * 64,
+    pow(BYTE_MULTPLE_UP, 2) * 128,
+    pow(BYTE_MULTPLE_UP, 2) * 256,
+    pow(BYTE_MULTPLE_UP, 2) * 512,
+    pow(BYTE_MULTPLE_UP, 3),         # 1GB
+    # pow(BYTE_MULTPLE_UP, 3) * 2,
+    # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+]
+
+MSG_SIZES = [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    BYTE_MULTPLE_UP,
+    BYTE_MULTPLE_UP * 4,
+    BYTE_MULTPLE_UP * 16,
+    BYTE_MULTPLE_UP * 64,
+    BYTE_MULTPLE_UP * 256,
+    pow(BYTE_MULTPLE_UP, 2),           
+    pow(BYTE_MULTPLE_UP, 2) * 4,   
+    pow(BYTE_MULTPLE_UP, 2) * 16,
+    pow(BYTE_MULTPLE_UP, 2) * 64,        
+]
+
+multiplying_powers = [1]
+# multiplying_powers = [1, 2, 3, 4, 5, 6, 7]
 
 # GPU_NUM = 8
 WARM_UP = 5
 TIMES = 10
-# TIMES = 100
+TIMES = 100
+TIMES = 1000
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Conflict Benchmark Arguments',
@@ -84,6 +115,7 @@ def parse_args():
                        help='Json config file of conflict patterns.')
     parser.add_argument('--profiler-with-tensorboard', action='store_true', default=False, help='whether to profile with tensorboard')
     parser.add_argument('--tb-dir', default=None, type=str, help='where to storage tensorboard files')
+    parser.add_argument('--comm-module', default='torch-distributed', choices=['torch-distributed', 'raw-nccl'], type=str, help='which module to use for communication')
 
     args = parser.parse_args()
     return args
@@ -105,8 +137,24 @@ def main():
     
     with open(args.config, 'r') as f:
         patterns = json.load(f)
+    global MSG_SIZES
+    if len(multiplying_powers) > 1:
+        UB = max(MSG_SIZES)
+        MSG_SIZES = [SIZE * power for SIZE in MSG_SIZES for power in multiplying_powers if SIZE * power <= UB]
+        MSG_SIZES = sorted(list(set(MSG_SIZES)))
+        # print(f'MSG_SIZES: {MSG_SIZES}')
     row_a = torch.empty(max(MSG_SIZES), dtype=torch.int8).cuda()
     row_b = torch.empty(max(MSG_SIZES), dtype=torch.int8).cuda()
+    
+    # Create gloo groups for each pair
+    group_dict = {}
+    for pattern in patterns:
+        for pair in pattern:
+            key = tuple(sorted(pair))
+            if key not in group_dict.keys():
+                group_dict[key] = torch.distributed.new_group(key, backend='gloo')
+    # Create communicator
+    communicator = Cb_Communicator(PROC_INFO, args, group_dict)
 
     for pattern in patterns:
         if max(max(pattern)) >= world_size:
@@ -127,20 +175,27 @@ def main():
             a = row_a[: SIZE]
             b = row_b[: SIZE]
             
+            communicator.clear_ops()
             ops = []
+            # Insert ops to communicator
             for i, pair in enumerate(pattern):
                 pg = pgs[min(i, len(pgs) - 1)]
                 if rank == pair[0]:
-                    ops.append(dist.P2POp(dist.isend, a, pair[1], group=pg))
-                    # ops.append(partial(dist.isend, a, pair[1], group=pg))
+                    # ops.append(dist.P2POp(dist.isend, a, pair[1], group=pg))
+                    # ops.append(partial(dist.isend, a, pair[1], group=pg))   # [NOTE]: for intra-machine comm !!!
+                    communicator.send(a, pair[1])
                 if rank == pair[1]:
-                    ops.append(dist.P2POp(dist.irecv, b, pair[0], group=pg))
+                    # ops.append(dist.P2POp(dist.irecv, b, pair[0], group=pg))
                     # ops.append(partial(dist.irecv, b, pair[0], group=pg))
+                    communicator.recv(b, pair[0])
             
             torch.cuda.synchronize()
             dist.barrier()
             for _ in range(WARM_UP):
-                execute_comm_ops(ops, barrier=True)
+                # execute_comm_ops(ops, barrier=True)
+                communicator.execute_comm_ops(barrier=True)
+            torch.cuda.synchronize()
+            dist.barrier()
             
             if args.profiler_with_tensorboard:
                 args.tb_profiled = True
@@ -164,7 +219,8 @@ def main():
                     dist.barrier()
                     t0 = time.time()
                     for _ in range(TOTAL_TURNS):
-                        execute_comm_ops(ops, barrier=False, light_barrier=False)
+                        # execute_comm_ops(ops, barrier=False, light_barrier=False)
+                        communicator.execute_comm_ops(barrier=False, light_barrier=False)
                         if (_ + 1) % BARRIER_FREQ == 0:
                             torch.cuda.synchronize()
                             dist.barrier()
@@ -175,7 +231,8 @@ def main():
                 dist.barrier()
                 t0 = time.time()
                 for _ in range(TIMES):
-                    execute_comm_ops(ops, barrier=False, light_barrier=False)
+                    # execute_comm_ops(ops, barrier=False, light_barrier=False)
+                    communicator.execute_comm_ops(barrier=False, light_barrier=False)
                 torch.cuda.synchronize()
                 dist.barrier()
                 t1 = time.time()
@@ -183,8 +240,14 @@ def main():
             t_d = t1 - t0
             # calc = len(GPU_pairs) * reduce((lambda x,y: x*y), SIZE) * 4 * TIMES / pow(1024, 3) # GB
             calc = SIZE * len(pattern) * TIMES # B
-            BD = calc / t_d
-            print_rank_0(f'SIZE {convert_size(SIZE)}, REAL_BD {convert_throughput(BD)}/s, time {round(t_d, 4)} s, comm_vol {convert_throughput(calc)}')
+            BD = calc / t_d # B/s
+            if len(multiplying_powers) == 1: 
+                print_rank_0(f'SIZE {convert_size(SIZE)}, REAL_BD {convert_throughput(BD)}/s, BD/PAIR {convert_throughput(BD/len(pattern))}/s, '
+                             f'time {t_d:.3e} s, time/iter {t_d/TIMES:.3e}, comm_vol {convert_throughput(calc)}')
+            else:   # for benchmark
+                print_rank_0(f'SIZE {SIZE}, REAL_BD {convert_throughput(BD)}/s, BD/PAIR {convert_throughput(BD/len(pattern))}/s, '
+                             f'time {t_d:.3e} s, comm_vol {convert_throughput(calc)}')
+
 
         del a, b
         torch.cuda.empty_cache()

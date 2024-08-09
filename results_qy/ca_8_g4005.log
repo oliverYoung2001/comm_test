@@ -1,7 +1,0 @@
-BACKEND: NCCL
-CP_FILE_NAME: small
-NNODES: 2
-NGPU_PER_NODE: 8
-+++ which mpirun
-++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 32 --host g4005:8,g4006:8,g4007:8,g4008:8 ./csrc/build/conflict_allinone 32 NCCL ./scripts/configs/small_32.json
