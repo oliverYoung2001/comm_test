@@ -2,6 +2,7 @@
 # git submodule add -b v2.18 https://github.com/NVIDIA/nccl.git third_party/nccl
 # git submodule add -b v2.18.6-1 https://github.com/NVIDIA/nccl.git third_party/nccl
 # git submodule add -b v2.18.6-1 https://github.com/NVIDIA/nccl.git third_party/nccl
+# git submodule add https://github.com/NVIDIA/nccl-tests.git third_party/nccl-tests
 
 # update submodules
 git submodule update --init --recursive

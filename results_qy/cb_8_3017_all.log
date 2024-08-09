@@ -1,0 +1,131 @@
+HOST: g3017
+CP_FILE_NAME: small
+HOST: g3017
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+COMM_MODULE: torch-distributed
++ srun -p rag -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3017 -c 16 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json --comm-module torch-distributed
+NCCL version 2.18.6+cuda11.8
+[INFO]: Cluster init done !!!
+[[0, 1]]
+SIZE 16 MB, REAL_BD 161.248 GB/s, time 0.001 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 213.952 GB/s, time 0.0031 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 243.138 GB/s, time 0.011 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 250.788 GB/s, time 0.0428 s, comm_vol 10.737 GB
+[[0, 1], [1, 0]]
+SIZE 16 MB, REAL_BD 139.468 GB/s, time 0.0024 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 206.345 GB/s, time 0.0065 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 241.641 GB/s, time 0.0222 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 256.736 GB/s, time 0.0836 s, comm_vol 21.475 GB
+[[0, 2]]
+SIZE 16 MB, REAL_BD 169.278 GB/s, time 0.001 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 227.197 GB/s, time 0.003 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 252.421 GB/s, time 0.0106 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 258.841 GB/s, time 0.0415 s, comm_vol 10.737 GB
+[[0, 2], [2, 0]]
+SIZE 16 MB, REAL_BD 144.331 GB/s, time 0.0023 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 214.172 GB/s, time 0.0063 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 247.165 GB/s, time 0.0217 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 257.284 GB/s, time 0.0835 s, comm_vol 21.475 GB
+[[0, 4]]
+SIZE 16 MB, REAL_BD 171.255 GB/s, time 0.001 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 220.35 GB/s, time 0.003 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 248.856 GB/s, time 0.0108 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 258.987 GB/s, time 0.0415 s, comm_vol 10.737 GB
+[[4, 6]]
+NCCL version 2.18.6+cuda11.8
+SIZE 16 MB, REAL_BD 172.769 GB/s, time 0.001 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 223.216 GB/s, time 0.003 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 248.95 GB/s, time 0.0108 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 257.886 GB/s, time 0.0416 s, comm_vol 10.737 GB
+[[0, 1], [1, 2], [2, 0]]
+NCCL version 2.18.6+cuda11.8
+SIZE 16 MB, REAL_BD 339.018 GB/s, time 0.0015 s, comm_vol 503.316 MB
+SIZE 64 MB, REAL_BD 539.603 GB/s, time 0.0037 s, comm_vol 2.013 GB
+SIZE 256 MB, REAL_BD 635.671 GB/s, time 0.0127 s, comm_vol 8.053 GB
+SIZE 1 GB, REAL_BD 666.904 GB/s, time 0.0483 s, comm_vol 32.212 GB
+[[0, 1], [1, 2], [2, 3], [3, 0]]
+NCCL version 2.18.6+cuda11.8
+SIZE 16 MB, REAL_BD 434.979 GB/s, time 0.0015 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 718.323 GB/s, time 0.0037 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 849.8 GB/s, time 0.0126 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 907.65 GB/s, time 0.0473 s, comm_vol 42.95 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0]]
+NCCL version 2.18.6+cuda11.8
+SIZE 16 MB, REAL_BD 685.632 GB/s, time 0.0015 s, comm_vol 1.007 GB
+SIZE 64 MB, REAL_BD 1.082 TB/s, time 0.0037 s, comm_vol 4.027 GB
+SIZE 256 MB, REAL_BD 1.264 TB/s, time 0.0127 s, comm_vol 16.106 GB
+SIZE 1 GB, REAL_BD 1.335 TB/s, time 0.0483 s, comm_vol 64.425 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]]
+NCCL version 2.18.6+cuda11.8
+NCCL version 2.18.6+cuda11.8
+SIZE 16 MB, REAL_BD 867.812 GB/s, time 0.0015 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 1.419 TB/s, time 0.0038 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 1.708 TB/s, time 0.0126 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 1.812 TB/s, time 0.0474 s, comm_vol 85.899 GB
++ set +x
+COMM_MODULE: raw-nccl
++ srun -p rag -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3017 -c 16 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json --comm-module raw-nccl
+NCCL version 2.18.6+cuda11.8
+[INFO]: Cluster init done !!!
+[[0, 1]]
+NCCL version 2.21.5+cuda11.8
+SIZE 16 MB, REAL_BD 154.997 GB/s, time 0.0011 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 212.771 GB/s, time 0.0032 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 241.175 GB/s, time 0.0111 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 249.656 GB/s, time 0.043 s, comm_vol 10.737 GB
+[[0, 1], [1, 0]]
+SIZE 16 MB, REAL_BD 272.378 GB/s, time 0.0012 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 345.368 GB/s, time 0.0039 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 404.331 GB/s, time 0.0133 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 428.596 GB/s, time 0.0501 s, comm_vol 21.475 GB
+[[0, 2]]
+SIZE 16 MB, REAL_BD 173.151 GB/s, time 0.001 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 222.668 GB/s, time 0.003 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 248.642 GB/s, time 0.0108 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 258.933 GB/s, time 0.0415 s, comm_vol 10.737 GB
+[[0, 2], [2, 0]]
+SIZE 16 MB, REAL_BD 283.345 GB/s, time 0.0012 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 378.123 GB/s, time 0.0035 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 426.801 GB/s, time 0.0126 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 457.99 GB/s, time 0.0469 s, comm_vol 21.475 GB
+[[0, 4]]
+SIZE 16 MB, REAL_BD 175.483 GB/s, time 0.001 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 223.944 GB/s, time 0.003 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 248.983 GB/s, time 0.0108 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 258.752 GB/s, time 0.0415 s, comm_vol 10.737 GB
+[[4, 6]]
+NCCL version 2.21.5+cuda11.8
+SIZE 16 MB, REAL_BD 168.346 GB/s, time 0.001 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 221.739 GB/s, time 0.003 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 247.81 GB/s, time 0.0108 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 257.219 GB/s, time 0.0417 s, comm_vol 10.737 GB
+[[0, 1], [1, 2], [2, 0]]
+NCCL version 2.21.5+cuda11.8
+SIZE 16 MB, REAL_BD 425.875 GB/s, time 0.0012 s, comm_vol 503.316 MB
+SIZE 64 MB, REAL_BD 545.953 GB/s, time 0.0037 s, comm_vol 2.013 GB
+SIZE 256 MB, REAL_BD 638.265 GB/s, time 0.0126 s, comm_vol 8.053 GB
+SIZE 1 GB, REAL_BD 633.878 GB/s, time 0.0508 s, comm_vol 32.212 GB
+[[0, 1], [1, 2], [2, 3], [3, 0]]
+NCCL version 2.21.5+cuda11.8
+SIZE 16 MB, REAL_BD 555.287 GB/s, time 0.0012 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 769.793 GB/s, time 0.0035 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 853.86 GB/s, time 0.0126 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 841.087 GB/s, time 0.0511 s, comm_vol 42.95 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0]]
+NCCL version 2.21.5+cuda11.8
+SIZE 16 MB, REAL_BD 789.182 GB/s, time 0.0013 s, comm_vol 1.007 GB
+SIZE 64 MB, REAL_BD 1.042 TB/s, time 0.0039 s, comm_vol 4.027 GB
+SIZE 256 MB, REAL_BD 1.146 TB/s, time 0.0141 s, comm_vol 16.106 GB
+SIZE 1 GB, REAL_BD 1.257 TB/s, time 0.0513 s, comm_vol 64.425 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]]
+NCCL version 2.21.5+cuda11.8
+NCCL version 2.21.5+cuda11.8
+SIZE 16 MB, REAL_BD 1.112 TB/s, time 0.0012 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 1.506 TB/s, time 0.0036 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 1.695 TB/s, time 0.0127 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 1.68 TB/s, time 0.0511 s, comm_vol 85.899 GB
++ set +x

@@ -1,0 +1,84 @@
+HOST: g3017
+CP_FILE_NAME: small
+HOST: g3017
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+COMM_MODULE: raw-nccl
++ srun -p rag -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3017 -c 16 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json --comm-module raw-nccl
+srun: job 12692 queued and waiting for resources
+srun: job 12692 has been allocated resources
+cpu-bind=MASK - g3017, task  0  0 [624319]: mask 0xff00000000000000ff set
+cpu-bind=MASK - g3017, task  1  1 [624320]: mask 0xff00000000000000ff00000000 set
+cpu-bind=MASK - g3017, task  2  2 [624321]: mask 0xff00000000000000ff00 set
+cpu-bind=MASK - g3017, task  3  3 [624322]: mask 0xff00000000000000ff0000000000 set
+cpu-bind=MASK - g3017, task  4  4 [624323]: mask 0xff00000000000000ff0000 set
+cpu-bind=MASK - g3017, task  5  5 [624324]: mask 0xff00000000000000ff000000000000 set
+cpu-bind=MASK - g3017, task  6  6 [624325]: mask 0xff00000000000000ff000000 set
+cpu-bind=MASK - g3017, task  7  7 [624326]: mask 0xff00000000000000ff00000000000000 set
+NCCL version 2.18.6+cuda11.8
+[INFO]: Cluster init done !!!
+[[0, 1]]
+NCCL version 2.21.5+cuda11.8
+SIZE 1 B, REAL_BD 45.739 KB/s, BD/PAIR 45.739 KB/s, time 2.186e-03 s, comm_vol 100.0 B
+SIZE 2 B, REAL_BD 126.107 KB/s, BD/PAIR 126.107 KB/s, time 1.586e-03 s, comm_vol 200.0 B
+SIZE 4 B, REAL_BD 332.485 KB/s, BD/PAIR 332.485 KB/s, time 1.203e-03 s, comm_vol 400.0 B
+SIZE 8 B, REAL_BD 658.446 KB/s, BD/PAIR 658.446 KB/s, time 1.215e-03 s, comm_vol 800.0 B
+SIZE 16 B, REAL_BD 1.331 MB/s, BD/PAIR 1.331 MB/s, time 1.202e-03 s, comm_vol 1.6 KB
+SIZE 32 B, REAL_BD 2.797 MB/s, BD/PAIR 2.797 MB/s, time 1.144e-03 s, comm_vol 3.2 KB
+SIZE 64 B, REAL_BD 5.961 MB/s, BD/PAIR 5.961 MB/s, time 1.074e-03 s, comm_vol 6.4 KB
+SIZE 128 B, REAL_BD 11.904 MB/s, BD/PAIR 11.904 MB/s, time 1.075e-03 s, comm_vol 12.8 KB
+[[0, 1], [1, 0]]
+SIZE 1 B, REAL_BD 49.348 KB/s, BD/PAIR 24.674 KB/s, time 4.053e-03 s, comm_vol 200.0 B
+SIZE 2 B, REAL_BD 130.116 KB/s, BD/PAIR 65.058 KB/s, time 3.074e-03 s, comm_vol 400.0 B
+SIZE 4 B, REAL_BD 534.732 KB/s, BD/PAIR 267.366 KB/s, time 1.496e-03 s, comm_vol 800.0 B
+SIZE 8 B, REAL_BD 1.062 MB/s, BD/PAIR 530.925 KB/s, time 1.507e-03 s, comm_vol 1.6 KB
+SIZE 16 B, REAL_BD 2.12 MB/s, BD/PAIR 1.06 MB/s, time 1.510e-03 s, comm_vol 3.2 KB
+SIZE 32 B, REAL_BD 4.294 MB/s, BD/PAIR 2.147 MB/s, time 1.491e-03 s, comm_vol 6.4 KB
+SIZE 64 B, REAL_BD 8.476 MB/s, BD/PAIR 4.238 MB/s, time 1.510e-03 s, comm_vol 12.8 KB
+SIZE 128 B, REAL_BD 17.101 MB/s, BD/PAIR 8.55 MB/s, time 1.497e-03 s, comm_vol 25.6 KB
+[[0, 1], [1, 2], [2, 3], [3, 0]]
+NCCL version 2.21.5+cuda11.8
+NCCL version 2.21.5+cuda11.8
+SIZE 1 B, REAL_BD 98.87 KB/s, BD/PAIR 24.717 KB/s, time 4.046e-03 s, comm_vol 400.0 B
+SIZE 2 B, REAL_BD 421.379 KB/s, BD/PAIR 105.345 KB/s, time 1.899e-03 s, comm_vol 800.0 B
+SIZE 4 B, REAL_BD 846.586 KB/s, BD/PAIR 211.646 KB/s, time 1.890e-03 s, comm_vol 1.6 KB
+SIZE 8 B, REAL_BD 1.694 MB/s, BD/PAIR 423.614 KB/s, time 1.889e-03 s, comm_vol 3.2 KB
+SIZE 16 B, REAL_BD 3.395 MB/s, BD/PAIR 848.835 KB/s, time 1.885e-03 s, comm_vol 6.4 KB
+SIZE 32 B, REAL_BD 7.256 MB/s, BD/PAIR 1.814 MB/s, time 1.764e-03 s, comm_vol 12.8 KB
+SIZE 64 B, REAL_BD 17.249 MB/s, BD/PAIR 4.312 MB/s, time 1.484e-03 s, comm_vol 25.6 KB
+SIZE 128 B, REAL_BD 34.201 MB/s, BD/PAIR 8.55 MB/s, time 1.497e-03 s, comm_vol 51.2 KB
+[[0, 2], [1, 3], [2, 0], [3, 1]]
+SIZE 1 B, REAL_BD 80.788 KB/s, BD/PAIR 20.197 KB/s, time 4.951e-03 s, comm_vol 400.0 B
+SIZE 2 B, REAL_BD 231.394 KB/s, BD/PAIR 57.848 KB/s, time 3.457e-03 s, comm_vol 800.0 B
+SIZE 4 B, REAL_BD 729.92 KB/s, BD/PAIR 182.48 KB/s, time 2.192e-03 s, comm_vol 1.6 KB
+SIZE 8 B, REAL_BD 2.165 MB/s, BD/PAIR 541.288 KB/s, time 1.478e-03 s, comm_vol 3.2 KB
+SIZE 16 B, REAL_BD 4.299 MB/s, BD/PAIR 1.075 MB/s, time 1.489e-03 s, comm_vol 6.4 KB
+SIZE 32 B, REAL_BD 8.708 MB/s, BD/PAIR 2.177 MB/s, time 1.470e-03 s, comm_vol 12.8 KB
+SIZE 64 B, REAL_BD 17.068 MB/s, BD/PAIR 4.267 MB/s, time 1.500e-03 s, comm_vol 25.6 KB
+SIZE 128 B, REAL_BD 34.794 MB/s, BD/PAIR 8.698 MB/s, time 1.472e-03 s, comm_vol 51.2 KB
+[[0, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7], [6, 0], [7, 1]]
+NCCL version 2.21.5+cuda11.8
+NCCL version 2.21.5+cuda11.8
+NCCL version 2.21.5+cuda11.8
+SIZE 1 B, REAL_BD 200.445 KB/s, BD/PAIR 25.056 KB/s, time 3.991e-03 s, comm_vol 800.0 B
+SIZE 2 B, REAL_BD 616.809 KB/s, BD/PAIR 77.101 KB/s, time 2.594e-03 s, comm_vol 1.6 KB
+SIZE 4 B, REAL_BD 1.244 MB/s, BD/PAIR 155.46 KB/s, time 2.573e-03 s, comm_vol 3.2 KB
+SIZE 8 B, REAL_BD 3.458 MB/s, BD/PAIR 432.235 KB/s, time 1.851e-03 s, comm_vol 6.4 KB
+SIZE 16 B, REAL_BD 6.779 MB/s, BD/PAIR 847.334 KB/s, time 1.888e-03 s, comm_vol 12.8 KB
+SIZE 32 B, REAL_BD 16.998 MB/s, BD/PAIR 2.125 MB/s, time 1.506e-03 s, comm_vol 25.6 KB
+SIZE 64 B, REAL_BD 25.432 MB/s, BD/PAIR 3.179 MB/s, time 2.013e-03 s, comm_vol 51.2 KB
+SIZE 128 B, REAL_BD 68.282 MB/s, BD/PAIR 8.535 MB/s, time 1.500e-03 s, comm_vol 102.4 KB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]]
+NCCL version 2.21.5+cuda11.8
+SIZE 1 B, REAL_BD 202.355 KB/s, BD/PAIR 25.294 KB/s, time 3.953e-03 s, comm_vol 800.0 B
+SIZE 2 B, REAL_BD 598.225 KB/s, BD/PAIR 74.778 KB/s, time 2.675e-03 s, comm_vol 1.6 KB
+SIZE 4 B, REAL_BD 1.56 MB/s, BD/PAIR 194.971 KB/s, time 2.052e-03 s, comm_vol 3.2 KB
+SIZE 8 B, REAL_BD 3.135 MB/s, BD/PAIR 391.899 KB/s, time 2.041e-03 s, comm_vol 6.4 KB
+SIZE 16 B, REAL_BD 7.703 MB/s, BD/PAIR 962.824 KB/s, time 1.662e-03 s, comm_vol 12.8 KB
+SIZE 32 B, REAL_BD 17.468 MB/s, BD/PAIR 2.183 MB/s, time 1.466e-03 s, comm_vol 25.6 KB
+SIZE 64 B, REAL_BD 35.038 MB/s, BD/PAIR 4.38 MB/s, time 1.461e-03 s, comm_vol 51.2 KB
+SIZE 128 B, REAL_BD 69.543 MB/s, BD/PAIR 8.693 MB/s, time 1.472e-03 s, comm_vol 102.4 KB
++ set +x

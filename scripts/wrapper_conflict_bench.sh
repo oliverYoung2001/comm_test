@@ -37,22 +37,27 @@ PARTITION=align
 PARTITION=rag
 GPU_NUMs="8"
 HOSTs="g3017"
-GPU_NUMs="16"
+# GPU_NUMs="16"
 # # HOSTs="g4007,g4008"
 # # HOSTs="g4002,g4003"
 # # HOSTs="g3025,g3026"
 # HOSTs="g3027,g3028"
 # HOSTs="g1003,g1004"
-HOSTs="g3017,g3018"
-HOSTs="g3015,g3017"
-HOSTs="g3015,g3018"
-GPU_NUMs="24"
-HOSTs="g3015,g3018,g3021"
-GPU_NUMs="32"
-HOSTs="g3011,g3017,g3018,g3022"
-PARTITION=arch
-GPU_NUMs="16"
-HOSTs="g3027,g3028"
+# HOSTs="g3017,g3018"
+# HOSTs="g3015,g3017"
+# HOSTs="g3015,g3018"
+# GPU_NUMs="24"
+# HOSTs="g3015,g3018,g3021"
+# GPU_NUMs="32"
+# HOSTs="g3011,g3017,g3018,g3022"
+# PARTITION=arch
+# GPU_NUMs="8"
+# HOSTs="g3028"
+# GPU_NUMs="16"
+# HOSTs="g3027,g3028"
+# HOSTs="g3028,g3029"
+# GPU_NUMs="24"
+# HOSTs="g3024,g3028,g3029"
 
 # GPU_NUMs="32"
 # HOSTs="g3024,g3025,g3026,g3027"
@@ -63,6 +68,8 @@ HOSTs="g3027,g3028"
 # HOSTs="g3023,g3024,g3025,g3026,g3027,g3028"
 
 # PARTITION=hit
+# GPU_NUMs="8"
+# HOSTs="g4002"
 # GPU_NUMs="16"
 # HOSTs="g4004,g4005"
 # HOSTs="g4001,g4004"
@@ -168,56 +175,75 @@ export NCCL_DEBUG_SUBSYS=NET
 # export NCCL_AVOID_RECORD_STREAMS=0  # Disable Warning for P2P
 # export CUDA_LAUNCH_BLOCKING=1
 
-# Launch with Slurm
-# -c 14 \   # WQ
-# -c 16 \   # QY
-# [TODO]: performance degradation when message size <= 64M in NCCL(2.18~2.21)
-export SLURM_CPU_BIND=verbose
-set -x
-srun $SLURM_ARGS \
--c $CPU_PER_TASK \
-./scripts/executor.sh \
-python $EXECUBLE \
-    --backend $BACKEND \
-    --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
-    $LOGGING_ARGS \
-    2>/dev/null # Disable Warning
 
-# # Launch with MPI
-# # salloc -p rag -w g3017,g3018 -N 2 -n 256 -t 3600
-# # salloc -p rag -w g3011,g3017,g3018,g3022 -N 4 -n 512 -t 3600
-# GPU_NUM=32
-# HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
-# HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
-# HOST_CONFIG="g3011:8,g3017:8,g3018:8,g3022:8"
-# # GPU_NUM=16
-# # # HOST_CONFIG="g4007:8,g4008:8"
-# # HOST_CONFIG="g3017:8,g3018:8"
-# # # HOST_CONFIG="g4003:8,g4006:8"
-# # HOST_CONFIG="g3021:8,g3022:8"
-# # GPU_NUM=8
-# # HOST_CONFIG="g4005:8"
-# export MASTER_ADDR=$(echo $HOST_CONFIG | cut -d',' -f1 | cut -d':' -f1)
-# export MASTER_ADDR=$(echo $HOST_CONFIG | awk -F',' '{print $1}' | awk -F':' '{print $1}')
-# echo "MASTER_ADDR: $MASTER_ADDR"
+# Comm Module
+# COMM_MODULE='torch-distributed'
+# COMM_MODULE='raw-nccl'
+COMM_MODULEs="torch-distributed raw-nccl"
+COMM_MODULEs="raw-nccl"
+
+
+for COMM_MODULE in $COMM_MODULEs; do
+echo "COMM_MODULE: ${COMM_MODULE}"
+
+# # Launch with Slurm
+# # -c 14 \   # WQ
+# # -c 16 \   # QY
+# export SLURM_CPU_BIND=verbose
 # set -x
-# mpirun --prefix $(dirname `which mpirun`)/../ \
-#    -x MASTER_ADDR -x MASTER_PORT\
-#    -x PATH -x LD_LIBRARY_PATH \
-#    -x NCCL_DEBUG \
-#    -x NCCL_NET_GDR_LEVEL \
-#    -x NCCL_DEBUG_SUBSYS \
-#    -x NCCL_IB_DISABLE \
-#    -np $GPU_NUM --host $HOST_CONFIG \
-#    --map-by ppr:4:numa --bind-to core --report-bindings \
+# srun $SLURM_ARGS \
+# -c $CPU_PER_TASK \
+# ./scripts/executor.sh \
 # python $EXECUBLE \
 #     --backend $BACKEND \
 #     --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
+#     --comm-module $COMM_MODULE \
+#     $LOGGING_ARGS \
 #     2>/dev/null # Disable Warning
+# set +x
 
+# Launch with MPI
+# salloc -p rag -w g3017 -N 1 -n 128 -t 3600
+# salloc -p rag -w g3017,g3018 -N 2 -n 256 -t 3600
+# salloc -p rag -w g3011,g3017,g3018,g3022 -N 4 -n 512 -t 3600
+GPU_NUM=32
+HOST_CONFIG="g4005:8,g4006:8,g4007:8,g4008:8"
+HOST_CONFIG="g3021:8,g3022:8,g3023:8,g3024:8"
+HOST_CONFIG="g3011:8,g3017:8,g3018:8,g3022:8"
+# GPU_NUM=16
+# # HOST_CONFIG="g4007:8,g4008:8"
+# HOST_CONFIG="g3017:8,g3018:8"
+# # HOST_CONFIG="g4003:8,g4006:8"
+# HOST_CONFIG="g3021:8,g3022:8"
+# GPU_NUM=8
+# HOST_CONFIG="g4005:8"
+GPU_NUM=2
+HOST_CONFIG="g3017:2"
+export MASTER_ADDR=$(echo $HOST_CONFIG | cut -d',' -f1 | cut -d':' -f1)
+export MASTER_ADDR=$(echo $HOST_CONFIG | awk -F',' '{print $1}' | awk -F':' '{print $1}')
+# echo "MASTER_ADDR: $MASTER_ADDR"
+RUNNER_CMD="mpirun --prefix $(dirname `which mpirun`)/../ \
+    -x MASTER_ADDR -x MASTER_PORT \
+    -x LD_LIBRARY_PATH -x PATH \
+    -x TRACE_NAME \
+    -x NCCL_DEBUG \
+    -x NCCL_NET_GDR_LEVEL \
+    -x NCCL_DEBUG_SUBSYS \
+    -x NCCL_IB_DISABLE \
+    --map-by ppr:4:numa --bind-to core --report-bindings \
+    -np $GPU_NUM --host $HOST_CONFIG"
+NSIGHT_CMD="nsys profile --mpi-impl=openmpi -o ${NSYS_DIR}/${TRACE_NAME}_w${GPU_NUM}_$(date "+%Y%m%d-%H%M%S")"
+# NSIGHT_CMD=""
+set -x
+${NSIGHT_CMD} \
+${RUNNER_CMD} \
+python $EXECUBLE \
+    --backend $BACKEND \
+    --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
+    --comm-module $COMM_MODULE \
+    2>/dev/null # Disable Warning
 
-set +x
-
+done
 done
 done
 done
