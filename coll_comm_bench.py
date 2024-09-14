@@ -45,27 +45,32 @@ MSG_SIZES = [
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
-# MSG_SIZES = [
-#     # BYTE_MULTPLE_UP,
-#     # BYTE_MULTPLE_UP * 4,
-#     # BYTE_MULTPLE_UP * 16,
-#     # BYTE_MULTPLE_UP * 64,
-#     # BYTE_MULTPLE_UP * 256,
-#     pow(BYTE_MULTPLE_UP, 2),            # 1MB
-#     pow(BYTE_MULTPLE_UP, 2) * 2,
-#     pow(BYTE_MULTPLE_UP, 2) * 4,
-#     pow(BYTE_MULTPLE_UP, 2) * 8,
-#     pow(BYTE_MULTPLE_UP, 2) * 16,
-#     pow(BYTE_MULTPLE_UP, 2) * 32,
-#     pow(BYTE_MULTPLE_UP, 2) * 64,
-#     pow(BYTE_MULTPLE_UP, 2) * 128,
-#     pow(BYTE_MULTPLE_UP, 2) * 256,
-#     pow(BYTE_MULTPLE_UP, 2) * 512,
-#     pow(BYTE_MULTPLE_UP, 3),         # 1GB
-#     pow(BYTE_MULTPLE_UP, 3) * 2,
-#     pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-#     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
-# ]
+MSG_SIZES = [
+    BYTE_MULTPLE_UP,                    # 1KB
+    BYTE_MULTPLE_UP * 2,
+    BYTE_MULTPLE_UP * 4,
+    BYTE_MULTPLE_UP * 8,
+    BYTE_MULTPLE_UP * 16,
+    BYTE_MULTPLE_UP * 32,
+    BYTE_MULTPLE_UP * 64,
+    BYTE_MULTPLE_UP * 128,
+    BYTE_MULTPLE_UP * 256,
+    BYTE_MULTPLE_UP * 512,
+    pow(BYTE_MULTPLE_UP, 2),            # 1MB
+    pow(BYTE_MULTPLE_UP, 2) * 2,
+    pow(BYTE_MULTPLE_UP, 2) * 4,
+    pow(BYTE_MULTPLE_UP, 2) * 8,
+    pow(BYTE_MULTPLE_UP, 2) * 16,
+    pow(BYTE_MULTPLE_UP, 2) * 32,
+    pow(BYTE_MULTPLE_UP, 2) * 64,
+    pow(BYTE_MULTPLE_UP, 2) * 128,
+    pow(BYTE_MULTPLE_UP, 2) * 256,
+    pow(BYTE_MULTPLE_UP, 2) * 512,
+    pow(BYTE_MULTPLE_UP, 3),         # 1GB
+    # pow(BYTE_MULTPLE_UP, 3) * 2,
+    # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+]
 
 
 WARMUP = 2

@@ -1,4 +1,5 @@
 #!/bin/bash
+# Enviromnent
 
 # export RECORD_P2P=1
 EXECUBLE=conflict_bench.py
@@ -162,12 +163,15 @@ LOGGING_ARGS=""
 
 # NCCL Args:
 export NCCL_DEBUG=INFO
-# export NCCL_DEBUG=WARN
+export NCCL_DEBUG=WARN
 # export NCCL_DEBUG=ERROR
 export NCCL_NET_GDR_LEVEL=5
 # export NCCL_NET_GDR_LEVEL=0   # Disable GDR
 export NCCL_IB_DISABLE=0
 export NCCL_DEBUG_SUBSYS=NET
+# Only for Tusimple, [NOTE]: necessary !!!
+export NCCL_SOCKET_IFNAME="=eth1,=eth2,=eth3,=eth4"
+export NCCL_IB_GID_INDEX="7"
 
 # export NCCL_ALGO=Ring
 # export NCCL_PROTO=Simple
@@ -181,6 +185,7 @@ export NCCL_DEBUG_SUBSYS=NET
 # COMM_MODULE='raw-nccl'
 COMM_MODULEs="raw-nccl torch-distributed"
 # COMM_MODULEs="raw-nccl"
+# COMM_MODULEs="torch-distributed"
 
 
 for COMM_MODULE in $COMM_MODULEs; do
@@ -220,15 +225,17 @@ HOST_CONFIG="g3011:8,g3017:8,g3018:8,g3022:8"
 GPU_NUM=2
 HOST_CONFIG="g3017:2"
 ALLOW_ROOT=""
-# # Tusimple
-# GPU_NUM=8
-# HOST_CONFIG="10.21.74.94:8"     # Node0
-# HOST_CONFIG="10.21.77.110:8"    # Node1
-# HOST_CONFIG="feng-wang-qcsleep2-worker-0:8"    # Node1
+# Tusimple
+GPU_NUM=8
+HOST_CONFIG="10.21.74.94:8"     # Node0
+HOST_CONFIG="10.21.77.110:8"    # Node1
+HOST_CONFIG="feng-wang-qcsleep2-worker-0:8"    # Node1
 # GPU_NUM=16
 # HOST_CONFIG="feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8"     # Node0, 1
-# # HOST_CONFIG="10.21.74.94:8,10.21.77.110:8"
-
+# GPU_NUM=24
+# HOST_CONFIG="feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8"     # Node0, 1, 2
+GPU_NUM=32
+HOST_CONFIG="feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8,feng-wang-qcsleep2-worker-3:8"     # Node0, 1, 2, 3
 
 ALLOW_ROOT="--allow-run-as-root"
 
@@ -236,6 +243,7 @@ export MASTER_ADDR=$(echo $HOST_CONFIG | cut -d',' -f1 | cut -d':' -f1)
 export MASTER_ADDR=$(echo $HOST_CONFIG | awk -F',' '{print $1}' | awk -F':' '{print $1}')
 # export MASTER_ADDR="10.21.77.110"
 # export MASTER_ADDR="feng-wang-qcsleep2-worker-1"
+
 echo "MASTER_ADDR: $MASTER_ADDR"
 echo "MASTER_PORT: $MASTER_PORT"
 RUNNER_CMD="mpirun $ALLOW_ROOT --prefix $(dirname `which mpirun`)/../ \
@@ -246,6 +254,8 @@ RUNNER_CMD="mpirun $ALLOW_ROOT --prefix $(dirname `which mpirun`)/../ \
     -x NCCL_NET_GDR_LEVEL \
     -x NCCL_DEBUG_SUBSYS \
     -x NCCL_IB_DISABLE \
+    -x NCCL_SOCKET_IFNAME \
+    -x NCCL_IB_GID_INDEX \
     --map-by ppr:4:numa --bind-to core --report-bindings \
     -np $GPU_NUM --host $HOST_CONFIG"
 NSIGHT_CMD="nsys profile --mpi-impl=openmpi -o ${NSYS_DIR}/${TRACE_NAME}_w${GPU_NUM}_$(date "+%Y%m%d-%H%M%S")"
@@ -257,7 +267,7 @@ python $EXECUBLE \
     --backend $BACKEND \
     --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
     --comm-module $COMM_MODULE \
-    # 2>/dev/null # Disable Warning
+    2>/dev/null # Disable Warning
 
 done
 done

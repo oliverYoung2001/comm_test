@@ -102,12 +102,16 @@ def get_proc_info():
 
 def init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend):
     init_method = f'tcp://[{MASTER_ADDR}]:{MASTER_PORT}'
+    # print(f'init_method: {init_method}', flush=True)
     # print(f'world_size: {PROC_INFO["world_size"]}')
     # print(f'MASTER_ADDR: {MASTER_ADDR}')
     # print(f'MASTER_PORT: {MASTER_PORT}')
     # print(f'rank: {PROC_INFO["rank"]}, local_rank: {PROC_INFO["local_rank"]}', flush=True)
-    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+    dist.init_process_group(backend=backend, 
+                            # init_method=init_method, # [NOTE]: Not necessary, configs like world_size, rank, can be read from env !!!
+                            world_size=PROC_INFO['world_size'], 
                             rank=PROC_INFO['rank'])
+    # print(f'init_process_group done !!!', flush=True)
     if torch.cuda.is_available():
         # os.environ['CUDA_VISIBLE_DEVICES'] = str(GPUID)
         # torch.cuda.set_device(0)

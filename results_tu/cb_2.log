@@ -1,0 +1,89 @@
+HOST: g3017
+CP_FILE_NAME: small
+HOST: g3017
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+COMM_MODULE: raw-nccl
+MASTER_ADDR: feng-wang-qcsleep2-worker-1
++ mpirun --allow-run-as-root --prefix /usr/local/bin/../ -x MASTER_ADDR -x MASTER_PORT -x LD_LIBRARY_PATH -x PATH -x TRACE_NAME -x NCCL_DEBUG -x NCCL_NET_GDR_LEVEL -x NCCL_DEBUG_SUBSYS -x NCCL_IB_DISABLE --map-by ppr:4:numa --bind-to core --report-bindings -np 2 --host feng-wang-qcsleep2-worker-1:2 python conflict_bench.py --backend NCCL --config ./scripts/configs/small_2.json --comm-module raw-nccl
+[feng-wang-qcsleep2-worker-1:34011] Warning: could not find environment variable "LD_LIBRARY_PATH"
+[feng-wang-qcsleep2-worker-1:34011] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:34011] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+init_method: tcp://[feng-wang-qcsleep2-worker-1]:16877
+Traceback (most recent call last):
+  File "/mnt/personal/temp/comm_test/conflict_bench.py", line 258, in <module>
+    main()
+  File "/mnt/personal/temp/comm_test/conflict_bench.py", line 129, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/mnt/personal/temp/comm_test/utils/common.py", line 110, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 1138, in init_process_group
+    rendezvous_iterator = rendezvous(
+                          ^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/rendezvous.py", line 98, in rendezvous
+    return _rendezvous_helper(url, rank, world_size, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/rendezvous.py", line 60, in _rendezvous_helper
+    result = urlparse(url)
+             ^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/urllib/parse.py", line 395, in urlparse
+    splitresult = urlsplit(url, scheme, allow_fragments)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/urllib/parse.py", line 500, in urlsplit
+    _check_bracketed_host(bracketed_host)
+  File "/opt/miniconda/envs/py311/lib/python3.11/urllib/parse.py", line 446, in _check_bracketed_host
+    ip = ipaddress.ip_address(hostname) # Throws Value Error if not IPv6 or IPv4
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/ipaddress.py", line 54, in ip_address
+    raise ValueError(f'{address!r} does not appear to be an IPv4 or IPv6 address')
+ValueError: 'feng-wang-qcsleep2-worker-1' does not appear to be an IPv4 or IPv6 address
+init_method: tcp://[feng-wang-qcsleep2-worker-1]:16877
+Traceback (most recent call last):
+  File "/mnt/personal/temp/comm_test/conflict_bench.py", line 258, in <module>
+    main()
+  File "/mnt/personal/temp/comm_test/conflict_bench.py", line 129, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/mnt/personal/temp/comm_test/utils/common.py", line 110, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 1138, in init_process_group
+    rendezvous_iterator = rendezvous(
+                          ^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/rendezvous.py", line 98, in rendezvous
+    return _rendezvous_helper(url, rank, world_size, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/site-packages/torch/distributed/rendezvous.py", line 60, in _rendezvous_helper
+    result = urlparse(url)
+             ^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/urllib/parse.py", line 395, in urlparse
+    splitresult = urlsplit(url, scheme, allow_fragments)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/urllib/parse.py", line 500, in urlsplit
+    _check_bracketed_host(bracketed_host)
+  File "/opt/miniconda/envs/py311/lib/python3.11/urllib/parse.py", line 446, in _check_bracketed_host
+    ip = ipaddress.ip_address(hostname) # Throws Value Error if not IPv6 or IPv4
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda/envs/py311/lib/python3.11/ipaddress.py", line 54, in ip_address
+    raise ValueError(f'{address!r} does not appear to be an IPv4 or IPv6 address')
+ValueError: 'feng-wang-qcsleep2-worker-1' does not appear to be an IPv4 or IPv6 address
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[35127,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
