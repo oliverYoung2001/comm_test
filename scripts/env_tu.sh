@@ -1,3 +1,5 @@
+source /mnt/personal/temp/spack/share/spack/setup-env.sh
+spack load cuda@11.8.0
 # conda
 conda deactivate && conda deactivate
 conda activate py311
