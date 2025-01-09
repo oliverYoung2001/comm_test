@@ -1,0 +1,36 @@
+PARTITION: Nvidia_A800
+HOST: gpu[11-14]
+GPU_NUM: 32
+MASTER_ADDR: feng-wang-qcsleep2-worker-0
+MASTER_PORT: 18359
++ mpirun --allow-run-as-root --prefix /usr/local/bin/../ -x MASTER_ADDR -x MASTER_PORT -x LD_LIBRARY_PATH -x PATH -x TRACE_NAME -x NCCL_DEBUG -x NCCL_NET_GDR_LEVEL -x NCCL_DEBUG_SUBSYS -x NCCL_IB_DISABLE -x NCCL_SOCKET_IFNAME -x NCCL_IB_GID_INDEX --map-by ppr:4:numa --bind-to core --report-bindings -np 8 --host feng-wang-qcsleep2-worker-0:8 python coll_comm_bench.py --output './prof_data/coll_comm_bench_32_gpu[11-14].json'
+[feng-wang-qcsleep2-worker-0:36357] Warning: could not find environment variable "LD_LIBRARY_PATH"
+[feng-wang-qcsleep2-worker-0:36357] Warning: could not find environment variable "TRACE_NAME"
+[feng-wang-qcsleep2-worker-0:36357] Warning: could not find environment variable "NCCL_SOCKET_IFNAME"
+[feng-wang-qcsleep2-worker-0:36357] Warning: could not find environment variable "NCCL_IB_GID_INDEX"
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:36357] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+NCCL version 2.18.1+cuda12.1
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 16 MB, t_d: 0.0038 s, t_d/r: 0.0013, tput: 105.231 GB/s, busbw: 92.077 GB/s
+msg_size: 64 MB, t_d: 0.0127 s, t_d/r: 0.0042, tput: 126.845 GB/s, busbw: 110.99 GB/s
+msg_size: 256 MB, t_d: 0.047 s, t_d/r: 0.0157, tput: 137.159 GB/s, busbw: 120.014 GB/s
+msg_size: 1 GB, t_d: 0.1843 s, t_d/r: 0.0614, tput: 139.862 GB/s, busbw: 122.379 GB/s
+COLL_COMM: reducescatter
+msg_size: 16 MB, t_d: 0.0039 s, t_d/r: 0.0013, tput: 103.029 GB/s, busbw: 90.15 GB/s
+msg_size: 64 MB, t_d: 0.0138 s, t_d/r: 0.0046, tput: 116.541 GB/s, busbw: 101.973 GB/s
+msg_size: 256 MB, t_d: 0.046 s, t_d/r: 0.0153, tput: 140.1 GB/s, busbw: 122.587 GB/s
+msg_size: 1 GB, t_d: 0.1819 s, t_d/r: 0.0606, tput: 141.7 GB/s, busbw: 123.988 GB/s
+COLL_COMM: allreduce
+msg_size: 16 MB, t_d: 0.0051 s, t_d/r: 0.0017, tput: 156.484 GB/s, busbw: 136.923 GB/s
+msg_size: 64 MB, t_d: 0.0189 s, t_d/r: 0.0063, tput: 170.432 GB/s, busbw: 149.128 GB/s
+msg_size: 256 MB, t_d: 0.0734 s, t_d/r: 0.0245, tput: 175.551 GB/s, busbw: 153.607 GB/s
+msg_size: 1 GB, t_d: 0.2892 s, t_d/r: 0.0964, tput: 178.207 GB/s, busbw: 155.931 GB/s
++ set +x

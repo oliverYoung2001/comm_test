@@ -189,6 +189,7 @@ class NCCLLibrary:
     def __init__(self, so_file: Optional[str] = None):
         so_file = '/home/zhaijidong/miniconda3/envs/yhy_easycontext/lib/python3.10/site-packages/nvidia/nccl/lib/libnccl.so.2'  # 2.20.5, failed with cudagraph
         so_file = '/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/libnccl.so.2'  # 2.21.5, passed with cudagraph
+        so_file = '/opt/miniconda/envs/py311/lib/python3.11/site-packages/nvidia/nccl/lib/libnccl.so.2' # for Tusimple, `strings */libnccl.so.2 | grep NCCL` -> NCCL version 2.18.1+cuda12.1
         # so_file = so_file or find_nccl_library()
         # print(f'so_file: {so_file}')
         try:

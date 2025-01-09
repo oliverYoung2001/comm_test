@@ -1,0 +1,101 @@
+PARTITION: Nvidia_A800
+HOST: gpu[11-14]
+GPU_NUM: 32
+MASTER_ADDR: feng-wang-qcsleep2-worker-0
+MASTER_PORT: 16722
++ mpirun --allow-run-as-root --prefix /usr/local/bin/../ -x MASTER_ADDR -x MASTER_PORT -x LD_LIBRARY_PATH -x PATH -x TRACE_NAME -x NCCL_DEBUG -x NCCL_NET_GDR_LEVEL -x NCCL_DEBUG_SUBSYS -x NCCL_IB_DISABLE -x NCCL_SOCKET_IFNAME -x NCCL_IB_GID_INDEX --map-by ppr:4:numa --bind-to core --report-bindings -np 24 --host feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8 python coll_comm_bench.py --output './prof_data/coll_comm_bench_32_gpu[11-14].json'
+[feng-wang-qcsleep2-worker-0:51759] Warning: could not find environment variable "LD_LIBRARY_PATH"
+[feng-wang-qcsleep2-worker-0:51759] Warning: could not find environment variable "TRACE_NAME"
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-0:51759] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 23 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 16 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 17 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 18 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 19 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 20 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 21 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-2:35468] MCW rank 22 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 8 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 9 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 10 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 11 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 12 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 13 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 14 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[feng-wang-qcsleep2-worker-1:07658] MCW rank 15 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+NCCL version 2.18.1+cuda12.1
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 1 KB, t_d: 0.0215 s, t_d/r: 0.0072, tput: 3.426 MB/s, busbw: 3.283 MB/s
+msg_size: 2 KB, t_d: 0.0215 s, t_d/r: 0.0072, tput: 6.862 MB/s, busbw: 6.576 MB/s
+msg_size: 4 KB, t_d: 0.0215 s, t_d/r: 0.0072, tput: 13.72 MB/s, busbw: 13.148 MB/s
+msg_size: 8 KB, t_d: 0.0213 s, t_d/r: 0.0071, tput: 27.663 MB/s, busbw: 26.51 MB/s
+msg_size: 16 KB, t_d: 0.0208 s, t_d/r: 0.0069, tput: 56.702 MB/s, busbw: 54.339 MB/s
+msg_size: 32 KB, t_d: 0.0181 s, t_d/r: 0.006, tput: 130.573 MB/s, busbw: 125.132 MB/s
+msg_size: 64 KB, t_d: 0.0173 s, t_d/r: 0.0058, tput: 273.114 MB/s, busbw: 261.734 MB/s
+msg_size: 128 KB, t_d: 0.0174 s, t_d/r: 0.0058, tput: 541.461 MB/s, busbw: 518.9 MB/s
+msg_size: 256 KB, t_d: 0.0036 s, t_d/r: 0.0012, tput: 5.187 GB/s, busbw: 4.971 GB/s
+msg_size: 512 KB, t_d: 0.0021 s, t_d/r: 0.0007, tput: 17.937 GB/s, busbw: 17.19 GB/s
+msg_size: 1 MB, t_d: 0.003 s, t_d/r: 0.001, tput: 25.459 GB/s, busbw: 24.398 GB/s
+msg_size: 2 MB, t_d: 0.0036 s, t_d/r: 0.0012, tput: 41.611 GB/s, busbw: 39.877 GB/s
+msg_size: 4 MB, t_d: 0.005 s, t_d/r: 0.0017, tput: 60.544 GB/s, busbw: 58.021 GB/s
+msg_size: 8 MB, t_d: 0.0083 s, t_d/r: 0.0028, tput: 72.751 GB/s, busbw: 69.72 GB/s
+msg_size: 16 MB, t_d: 0.0152 s, t_d/r: 0.0051, tput: 79.45 GB/s, busbw: 76.14 GB/s
+msg_size: 32 MB, t_d: 0.0357 s, t_d/r: 0.0119, tput: 67.634 GB/s, busbw: 64.816 GB/s
+msg_size: 64 MB, t_d: 0.057 s, t_d/r: 0.019, tput: 84.765 GB/s, busbw: 81.233 GB/s
+msg_size: 128 MB, t_d: 0.1118 s, t_d/r: 0.0373, tput: 86.448 GB/s, busbw: 82.846 GB/s
+msg_size: 256 MB, t_d: 0.2246 s, t_d/r: 0.0749, tput: 86.037 GB/s, busbw: 82.452 GB/s
+msg_size: 512 MB, t_d: 0.4612 s, t_d/r: 0.1537, tput: 83.804 GB/s, busbw: 80.313 GB/s
+msg_size: 1 GB, t_d: 0.8914 s, t_d/r: 0.2971, tput: 86.73 GB/s, busbw: 83.117 GB/s
+COLL_COMM: reducescatter
+msg_size: 1 KB, t_d: 0.0013 s, t_d/r: 0.0004, tput: 55.369 MB/s, busbw: 53.062 MB/s
+msg_size: 2 KB, t_d: 0.0013 s, t_d/r: 0.0004, tput: 113.732 MB/s, busbw: 108.993 MB/s
+msg_size: 4 KB, t_d: 0.0013 s, t_d/r: 0.0004, tput: 224.859 MB/s, busbw: 215.49 MB/s
+msg_size: 8 KB, t_d: 0.0013 s, t_d/r: 0.0004, tput: 453.178 MB/s, busbw: 434.296 MB/s
+msg_size: 16 KB, t_d: 0.0013 s, t_d/r: 0.0004, tput: 889.573 MB/s, busbw: 852.507 MB/s
+msg_size: 32 KB, t_d: 0.0014 s, t_d/r: 0.0005, tput: 1.706 GB/s, busbw: 1.635 GB/s
+msg_size: 64 KB, t_d: 0.0014 s, t_d/r: 0.0005, tput: 3.287 GB/s, busbw: 3.15 GB/s
+msg_size: 128 KB, t_d: 0.0014 s, t_d/r: 0.0005, tput: 6.634 GB/s, busbw: 6.357 GB/s
+msg_size: 256 KB, t_d: 0.0015 s, t_d/r: 0.0005, tput: 12.185 GB/s, busbw: 11.677 GB/s
+msg_size: 512 KB, t_d: 0.0018 s, t_d/r: 0.0006, tput: 21.466 GB/s, busbw: 20.571 GB/s
+msg_size: 1 MB, t_d: 0.0026 s, t_d/r: 0.0009, tput: 29.158 GB/s, busbw: 27.943 GB/s
+msg_size: 2 MB, t_d: 0.0033 s, t_d/r: 0.0011, tput: 45.631 GB/s, busbw: 43.73 GB/s
+msg_size: 4 MB, t_d: 0.005 s, t_d/r: 0.0017, tput: 60.062 GB/s, busbw: 57.559 GB/s
+msg_size: 8 MB, t_d: 0.0083 s, t_d/r: 0.0028, tput: 72.545 GB/s, busbw: 69.522 GB/s
+msg_size: 16 MB, t_d: 0.0152 s, t_d/r: 0.0051, tput: 79.615 GB/s, busbw: 76.298 GB/s
+msg_size: 32 MB, t_d: 0.0294 s, t_d/r: 0.0098, tput: 82.087 GB/s, busbw: 78.667 GB/s
+msg_size: 64 MB, t_d: 0.0567 s, t_d/r: 0.0189, tput: 85.15 GB/s, busbw: 81.602 GB/s
+msg_size: 128 MB, t_d: 0.113 s, t_d/r: 0.0377, tput: 85.485 GB/s, busbw: 81.924 GB/s
+msg_size: 256 MB, t_d: 0.2161 s, t_d/r: 0.072, tput: 89.433 GB/s, busbw: 85.706 GB/s
+msg_size: 512 MB, t_d: 0.4368 s, t_d/r: 0.1456, tput: 88.504 GB/s, busbw: 84.816 GB/s
+msg_size: 1 GB, t_d: 0.8976 s, t_d/r: 0.2992, tput: 86.127 GB/s, busbw: 82.538 GB/s
+COLL_COMM: allreduce
+msg_size: 1 KB, t_d: 0.0007 s, t_d/r: 0.0002, tput: 204.185 MB/s, busbw: 195.677 MB/s
+msg_size: 2 KB, t_d: 0.0007 s, t_d/r: 0.0002, tput: 400.049 MB/s, busbw: 383.38 MB/s
+msg_size: 4 KB, t_d: 0.0007 s, t_d/r: 0.0002, tput: 802.693 MB/s, busbw: 769.248 MB/s
+msg_size: 8 KB, t_d: 0.0008 s, t_d/r: 0.0003, tput: 1.515 GB/s, busbw: 1.452 GB/s
+msg_size: 16 KB, t_d: 0.0008 s, t_d/r: 0.0003, tput: 2.962 GB/s, busbw: 2.838 GB/s
+msg_size: 32 KB, t_d: 0.0009 s, t_d/r: 0.0003, tput: 5.478 GB/s, busbw: 5.25 GB/s
+msg_size: 64 KB, t_d: 0.001 s, t_d/r: 0.0003, tput: 9.864 GB/s, busbw: 9.453 GB/s
+msg_size: 128 KB, t_d: 0.0011 s, t_d/r: 0.0004, tput: 16.579 GB/s, busbw: 15.888 GB/s
+msg_size: 256 KB, t_d: 0.0012 s, t_d/r: 0.0004, tput: 30.448 GB/s, busbw: 29.179 GB/s
+msg_size: 512 KB, t_d: 0.0016 s, t_d/r: 0.0005, tput: 46.85 GB/s, busbw: 44.898 GB/s
+msg_size: 1 MB, t_d: 0.0024 s, t_d/r: 0.0008, tput: 63.13 GB/s, busbw: 60.499 GB/s
+msg_size: 2 MB, t_d: 0.004 s, t_d/r: 0.0013, tput: 76.202 GB/s, busbw: 73.027 GB/s
+msg_size: 4 MB, t_d: 0.0077 s, t_d/r: 0.0026, tput: 78.571 GB/s, busbw: 75.297 GB/s
+msg_size: 8 MB, t_d: 0.0172 s, t_d/r: 0.0057, tput: 70.397 GB/s, busbw: 67.464 GB/s
+msg_size: 16 MB, t_d: 0.0258 s, t_d/r: 0.0086, tput: 93.714 GB/s, busbw: 89.809 GB/s
+msg_size: 32 MB, t_d: 0.0493 s, t_d/r: 0.0164, tput: 97.927 GB/s, busbw: 93.846 GB/s
+msg_size: 64 MB, t_d: 0.0966 s, t_d/r: 0.0322, tput: 99.988 GB/s, busbw: 95.822 GB/s
+msg_size: 128 MB, t_d: 0.2094 s, t_d/r: 0.0698, tput: 92.314 GB/s, busbw: 88.468 GB/s
+msg_size: 256 MB, t_d: 0.401 s, t_d/r: 0.1337, tput: 96.404 GB/s, busbw: 92.387 GB/s
+msg_size: 512 MB, t_d: 0.8014 s, t_d/r: 0.2671, tput: 96.467 GB/s, busbw: 92.448 GB/s
+msg_size: 1 GB, t_d: 1.5501 s, t_d/r: 0.5167, tput: 99.746 GB/s, busbw: 95.59 GB/s
++ set +x

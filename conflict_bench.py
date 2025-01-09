@@ -49,53 +49,53 @@ MSG_SIZES = [
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
-MSG_SIZES = [
-    # BYTE_MULTPLE_UP,
-    # BYTE_MULTPLE_UP * 4,
-    BYTE_MULTPLE_UP * 8,        # 8KB, S=32 * bs=1 * Nh=1 * D=128 * 2B = 8KB (intra-machine start point)
-    BYTE_MULTPLE_UP * 16,
-    BYTE_MULTPLE_UP * 32,
-    BYTE_MULTPLE_UP * 64,       # 64KB, S=256 * bs=1 * Nh=1 * D=128 * 2B = 64KB (inter-machine start point)
-    BYTE_MULTPLE_UP * 128,
-    BYTE_MULTPLE_UP * 256,
-    BYTE_MULTPLE_UP * 512,
-    pow(BYTE_MULTPLE_UP, 2),            # 1MB
-    pow(BYTE_MULTPLE_UP, 2) * 2,
-    pow(BYTE_MULTPLE_UP, 2) * 4,
-    pow(BYTE_MULTPLE_UP, 2) * 8,
-    pow(BYTE_MULTPLE_UP, 2) * 16,
-    pow(BYTE_MULTPLE_UP, 2) * 32,
-    pow(BYTE_MULTPLE_UP, 2) * 64,
-    pow(BYTE_MULTPLE_UP, 2) * 128,
-    pow(BYTE_MULTPLE_UP, 2) * 256,
-    pow(BYTE_MULTPLE_UP, 2) * 512,
-    pow(BYTE_MULTPLE_UP, 3),         # 1GB
-    # pow(BYTE_MULTPLE_UP, 3) * 2,
-    # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
-]
+# MSG_SIZES = [
+#     # BYTE_MULTPLE_UP,
+#     # BYTE_MULTPLE_UP * 4,
+#     BYTE_MULTPLE_UP * 8,        # 8KB, S=32 * bs=1 * Nh=1 * D=128 * 2B = 8KB (intra-machine start point)
+#     BYTE_MULTPLE_UP * 16,
+#     BYTE_MULTPLE_UP * 32,
+#     BYTE_MULTPLE_UP * 64,       # 64KB, S=256 * bs=1 * Nh=1 * D=128 * 2B = 64KB (inter-machine start point)
+#     BYTE_MULTPLE_UP * 128,
+#     BYTE_MULTPLE_UP * 256,
+#     BYTE_MULTPLE_UP * 512,
+#     pow(BYTE_MULTPLE_UP, 2),            # 1MB
+#     pow(BYTE_MULTPLE_UP, 2) * 2,
+#     pow(BYTE_MULTPLE_UP, 2) * 4,
+#     pow(BYTE_MULTPLE_UP, 2) * 8,
+#     pow(BYTE_MULTPLE_UP, 2) * 16,
+#     pow(BYTE_MULTPLE_UP, 2) * 32,
+#     pow(BYTE_MULTPLE_UP, 2) * 64,
+#     pow(BYTE_MULTPLE_UP, 2) * 128,
+#     pow(BYTE_MULTPLE_UP, 2) * 256,
+#     pow(BYTE_MULTPLE_UP, 2) * 512,
+#     pow(BYTE_MULTPLE_UP, 3),         # 1GB
+#     # pow(BYTE_MULTPLE_UP, 3) * 2,
+#     # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+#     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+# ]
 
-MSG_SIZES = [
-    1,
-    2,
-    4,
-    8,
-    16,
-    32,
-    64,
-    128,
-    256,
-    512,
-    BYTE_MULTPLE_UP,
-    BYTE_MULTPLE_UP * 4,
-    BYTE_MULTPLE_UP * 16,
-    BYTE_MULTPLE_UP * 64,
-    BYTE_MULTPLE_UP * 256,
-    pow(BYTE_MULTPLE_UP, 2),           
-    pow(BYTE_MULTPLE_UP, 2) * 4,   
-    pow(BYTE_MULTPLE_UP, 2) * 16,
-    pow(BYTE_MULTPLE_UP, 2) * 64,        
-]
+# MSG_SIZES = [
+#     1,
+#     2,
+#     4,
+#     8,
+#     16,
+#     32,
+#     64,
+#     128,
+#     256,
+#     512,
+#     BYTE_MULTPLE_UP,
+#     BYTE_MULTPLE_UP * 4,
+#     BYTE_MULTPLE_UP * 16,
+#     BYTE_MULTPLE_UP * 64,
+#     BYTE_MULTPLE_UP * 256,
+#     pow(BYTE_MULTPLE_UP, 2),           
+#     pow(BYTE_MULTPLE_UP, 2) * 4,   
+#     pow(BYTE_MULTPLE_UP, 2) * 16,
+#     pow(BYTE_MULTPLE_UP, 2) * 64,        
+# ]
 
 multiplying_powers = [1]
 # multiplying_powers = [1, 2, 3, 4, 5, 6, 7]
@@ -104,7 +104,7 @@ multiplying_powers = [1]
 WARM_UP = 5
 TIMES = 10
 TIMES = 100
-TIMES = 1000
+# TIMES = 1000
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Conflict Benchmark Arguments',
@@ -155,7 +155,9 @@ def main():
                 group_dict[key] = torch.distributed.new_group(key, backend='gloo')
     # Create communicator
     communicator = Cb_Communicator(PROC_INFO, args, group_dict)
-
+    comm_stream = torch.cuda.current_stream()
+    comm_stream = None
+    
     for pattern in patterns:
         if max(max(pattern)) >= world_size:
             continue
@@ -183,17 +185,17 @@ def main():
                 if rank == pair[0]:
                     # ops.append(dist.P2POp(dist.isend, a, pair[1], group=pg))
                     # ops.append(partial(dist.isend, a, pair[1], group=pg))   # [NOTE]: for intra-machine comm !!!
-                    communicator.send(a, pair[1])
+                    communicator.send(a, pair[1], comm_stream)
                 if rank == pair[1]:
                     # ops.append(dist.P2POp(dist.irecv, b, pair[0], group=pg))
                     # ops.append(partial(dist.irecv, b, pair[0], group=pg))
-                    communicator.recv(b, pair[0])
+                    communicator.recv(b, pair[0], comm_stream)
             
             torch.cuda.synchronize()
             dist.barrier()
             for _ in range(WARM_UP):
                 # execute_comm_ops(ops, barrier=True)
-                communicator.execute_comm_ops(barrier=True)
+                communicator.execute_comm_ops(barrier=True, nccl_group=True)
             torch.cuda.synchronize()
             dist.barrier()
             
@@ -220,7 +222,7 @@ def main():
                     t0 = time.time()
                     for _ in range(TOTAL_TURNS):
                         # execute_comm_ops(ops, barrier=False, light_barrier=False)
-                        communicator.execute_comm_ops(barrier=False, light_barrier=False)
+                        communicator.execute_comm_ops(barrier=False, light_barrier=False, nccl_group=True)
                         if (_ + 1) % BARRIER_FREQ == 0:
                             torch.cuda.synchronize()
                             dist.barrier()
@@ -232,7 +234,7 @@ def main():
                 t0 = time.time()
                 for _ in range(TIMES):
                     # execute_comm_ops(ops, barrier=False, light_barrier=False)
-                    communicator.execute_comm_ops(barrier=False, light_barrier=False)
+                    communicator.execute_comm_ops(barrier=False, light_barrier=False, nccl_group=True)
                 torch.cuda.synchronize()
                 dist.barrier()
                 t1 = time.time()
