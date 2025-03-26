@@ -49,31 +49,31 @@ MSG_SIZES = [
     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
-# MSG_SIZES = [
-#     # BYTE_MULTPLE_UP,
-#     # BYTE_MULTPLE_UP * 4,
-#     BYTE_MULTPLE_UP * 8,        # 8KB, S=32 * bs=1 * Nh=1 * D=128 * 2B = 8KB (intra-machine start point)
-#     BYTE_MULTPLE_UP * 16,
-#     BYTE_MULTPLE_UP * 32,
-#     BYTE_MULTPLE_UP * 64,       # 64KB, S=256 * bs=1 * Nh=1 * D=128 * 2B = 64KB (inter-machine start point)
-#     BYTE_MULTPLE_UP * 128,
-#     BYTE_MULTPLE_UP * 256,
-#     BYTE_MULTPLE_UP * 512,
-#     pow(BYTE_MULTPLE_UP, 2),            # 1MB
-#     pow(BYTE_MULTPLE_UP, 2) * 2,
-#     pow(BYTE_MULTPLE_UP, 2) * 4,
-#     pow(BYTE_MULTPLE_UP, 2) * 8,
-#     pow(BYTE_MULTPLE_UP, 2) * 16,
-#     pow(BYTE_MULTPLE_UP, 2) * 32,
-#     pow(BYTE_MULTPLE_UP, 2) * 64,
-#     pow(BYTE_MULTPLE_UP, 2) * 128,
-#     pow(BYTE_MULTPLE_UP, 2) * 256,
-#     pow(BYTE_MULTPLE_UP, 2) * 512,
-#     pow(BYTE_MULTPLE_UP, 3),         # 1GB
-#     # pow(BYTE_MULTPLE_UP, 3) * 2,
-#     # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-#     # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
-# ]
+MSG_SIZES = [
+    # BYTE_MULTPLE_UP,
+    # BYTE_MULTPLE_UP * 4,
+    BYTE_MULTPLE_UP * 8,        # 8KB, S=32 * bs=1 * Nh=1 * D=128 * 2B = 8KB (intra-machine start point)
+    BYTE_MULTPLE_UP * 16,
+    BYTE_MULTPLE_UP * 32,
+    BYTE_MULTPLE_UP * 64,       # 64KB, S=256 * bs=1 * Nh=1 * D=128 * 2B = 64KB (inter-machine start point)
+    BYTE_MULTPLE_UP * 128,
+    BYTE_MULTPLE_UP * 256,
+    BYTE_MULTPLE_UP * 512,
+    pow(BYTE_MULTPLE_UP, 2),            # 1MB
+    pow(BYTE_MULTPLE_UP, 2) * 2,
+    pow(BYTE_MULTPLE_UP, 2) * 4,
+    pow(BYTE_MULTPLE_UP, 2) * 8,
+    pow(BYTE_MULTPLE_UP, 2) * 16,
+    pow(BYTE_MULTPLE_UP, 2) * 32,
+    pow(BYTE_MULTPLE_UP, 2) * 64,
+    pow(BYTE_MULTPLE_UP, 2) * 128,
+    pow(BYTE_MULTPLE_UP, 2) * 256,
+    pow(BYTE_MULTPLE_UP, 2) * 512,
+    pow(BYTE_MULTPLE_UP, 3),         # 1GB
+    # pow(BYTE_MULTPLE_UP, 3) * 2,
+    # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
+    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
+]
 
 # MSG_SIZES = [
 #     1,
@@ -98,7 +98,7 @@ MSG_SIZES = [
 # ]
 
 multiplying_powers = [1]
-# multiplying_powers = [1, 2, 3, 4, 5, 6, 7]
+multiplying_powers = [1, 2, 3, 4, 5, 6, 7]
 
 # GPU_NUM = 8
 WARM_UP = 5

@@ -13,6 +13,8 @@ Support nearly all kinds of comm in torch.distributed package.
 ## Download Sources
 ```shell
 git clone <git_address> --recurse-submodules
+or
+git clone <git_address> && git submodule update --init --recursive
 ```
 
 ## Setup Environments

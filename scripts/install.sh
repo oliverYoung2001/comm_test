@@ -9,7 +9,7 @@ git submodule update --init --recursive
 
 # build nccl
 NCCL_PATH=./third_party/nccl
-NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
+NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80 -gencode=arch=compute_90,code=sm_90"  # both for A100 and H100
 pushd $NCCL_PATH
 # rm -r build
 # git checkout master   # for debug
