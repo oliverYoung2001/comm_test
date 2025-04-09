@@ -129,6 +129,13 @@ HOSTs="bjdb-h20-node-[039-040]"
 HOSTs="bjdb-h20-node-[037,040]"
 CPU_PER_TASK=$((224 / 8))   # 28
 
+# Weiqiao
+CLUSTER_NAME=Weiqiao
+PARTITION=debug
+GPU_NUMs="8"
+HOSTs="gpunode81"
+CPU_PER_TASK=$((96 / 8))   # 12
+
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
