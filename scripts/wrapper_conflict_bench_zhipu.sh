@@ -37,6 +37,7 @@ CP_FILE_NAMEs="small"
 
 # Zhipu
 CLUSTER_NAME=zhipu_planck
+CLUSTER_NAME=zhipu_hamming
 GPU_NUMs="8"
 GPU_NUMs="16"
 # GPU_NUMs="24"
@@ -57,11 +58,11 @@ export MASTER_PORT=$((RANDOM % 12000 + 10000))
 # mkdir results
 mkdir -p results_${CLUSTER_NAME}
 MPI_EXTRA=''
-if [ $CLUSTER_NAME == 'zhipu_planck' ]; then
-   MPI_EXTRA="$MPI_EXTRA \
-   -mca oob_tcp_if_include 10.102.2.0/24 \
-   "
-fi
+# if [ $CLUSTER_NAME == 'zhipu_planck' ] || [ $CLUSTER_NAME == 'zhipu_hamming' ]; then
+#    MPI_EXTRA="$MPI_EXTRA \
+#    -mca oob_tcp_if_include 10.102.2.0/24 \
+#    "
+# fi
 
 for BACKEND in $BACKENDs; do
 for GPU_NUM in $GPU_NUMs; do       # for cudaMemcpy
