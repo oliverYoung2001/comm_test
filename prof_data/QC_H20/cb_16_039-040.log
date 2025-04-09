@@ -1,0 +1,58 @@
+HOST: bjdb-h20-node-[039-040]
+CP_FILE_NAME: small
+HOST: bjdb-h20-node-[039-040]
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 16
+PROC_NUM: 16
+NNODES: 2
+NTASK_PER_NODE: 8
+COMM_MODULE: torch-distributed
++ srun -p debug -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w 'bjdb-h20-node-[039-040]' -c 28 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_16.json --comm-module torch-distributed
+cpu-bind=MASK - bjdb-h20-node-040, task  8  0 [511278]: mask 0x3fff0000000000000000000000003fff set
+cpu-bind=MASK - bjdb-h20-node-040, task  9  1 [511279]: mask 0x3fff0000000000000000000000003fff00000000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task 10  2 [511280]: mask 0xfffc000000000000000000000000fffc000 set
+cpu-bind=MASK - bjdb-h20-node-040, task 11  3 [511281]: mask 0xfffc000000000000000000000000fffc00000000000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task 12  4 [511282]: mask 0x3fff0000000000000000000000003fff0000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task 13  5 [511283]: mask 0x3fff0000000000000000000000003fff000000000000000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task 14  6 [511284]: mask 0xfffc000000000000000000000000fffc0000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task 15  7 [511285]: mask 0xfffc000000000000000000000000fffc000000000000000000000000 set
+cpu-bind=MASK - bjdb-h20-node-039, task  0  0 [4057423]: mask 0x3fff0000000000000000000000003fff set
+cpu-bind=MASK - bjdb-h20-node-039, task  1  1 [4057424]: mask 0x3fff0000000000000000000000003fff00000000000000 set
+cpu-bind=MASK - bjdb-h20-node-039, task  2  2 [4057425]: mask 0xfffc000000000000000000000000fffc000 set
+cpu-bind=MASK - bjdb-h20-node-039, task  3  3 [4057426]: mask 0xfffc000000000000000000000000fffc00000000000000000 set
+cpu-bind=MASK - bjdb-h20-node-039, task  4  4 [4057427]: mask 0x3fff0000000000000000000000003fff0000000 set
+cpu-bind=MASK - bjdb-h20-node-039, task  5  5 [4057428]: mask 0x3fff0000000000000000000000003fff000000000000000000000 set
+cpu-bind=MASK - bjdb-h20-node-039, task  6  6 [4057429]: mask 0xfffc000000000000000000000000fffc0000000000 set
+cpu-bind=MASK - bjdb-h20-node-039, task  7  7 [4057430]: mask 0xfffc000000000000000000000000fffc000000000000000000000000 set
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+In main
+[rank2]:[W403 18:06:37.395913807 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank12]:[W403 18:06:38.597684898 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank11]:[W403 18:06:38.738515190 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W403 18:06:38.902210286 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W403 18:06:38.991538995 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank9]:[W403 18:06:38.914267464 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank14]:[W403 18:06:38.963016464 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank7]:[W403 18:06:38.206657695 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W403 18:06:38.232937937 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W403 18:06:38.317754448 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W403 18:06:38.322063510 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank13]:[W403 18:06:38.173709708 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W403 18:06:38.339259035 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank10]:[W403 18:06:38.320941635 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank8]:[W403 18:06:38.321924919 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank15]:[W403 18:06:38.322035313 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
