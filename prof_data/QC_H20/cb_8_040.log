@@ -1,0 +1,434 @@
+HOST: bjdb-h20-node-040
+CP_FILE_NAME: small
+HOST: bjdb-h20-node-040
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+COMM_MODULE: torch-distributed
++ srun -p debug -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w bjdb-h20-node-040 -c 28 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json --comm-module torch-distributed
+cpu-bind=MASK - bjdb-h20-node-040, task  0  0 [505400]: mask 0x3fff0000000000000000000000003fff set
+cpu-bind=MASK - bjdb-h20-node-040, task  1  1 [505401]: mask 0x3fff0000000000000000000000003fff00000000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task  2  2 [505402]: mask 0xfffc000000000000000000000000fffc000 set
+cpu-bind=MASK - bjdb-h20-node-040, task  3  3 [505403]: mask 0xfffc000000000000000000000000fffc00000000000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task  4  4 [505404]: mask 0x3fff0000000000000000000000003fff0000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task  5  5 [505405]: mask 0x3fff0000000000000000000000003fff000000000000000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task  6  6 [505406]: mask 0xfffc000000000000000000000000fffc0000000000 set
+cpu-bind=MASK - bjdb-h20-node-040, task  7  7 [505407]: mask 0xfffc000000000000000000000000fffc000000000000000000000000 set
+[rank7]:[W403 18:00:26.043967682 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank1]:[W403 18:00:26.128431029 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank5]:[W403 18:00:26.427518545 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank4]:[W403 18:00:27.878383556 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank6]:[W403 18:00:27.882311183 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank3]:[W403 18:00:27.882660959 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank2]:[W403 18:00:27.902157417 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[rank0]:[W403 18:00:27.906283569 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.
+[INFO]: Cluster init done !!!
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+[[0, 1]]
+SIZE 8192, REAL_BD 425.771 MB/s, BD/PAIR 425.771 MB/s, time 1.924e-03 s, comm_vol 819.2 KB
+SIZE 16384, REAL_BD 867.123 MB/s, BD/PAIR 867.123 MB/s, time 1.889e-03 s, comm_vol 1.638 MB
+SIZE 24576, REAL_BD 1.306 GB/s, BD/PAIR 1.306 GB/s, time 1.882e-03 s, comm_vol 2.458 MB
+SIZE 32768, REAL_BD 1.721 GB/s, BD/PAIR 1.721 GB/s, time 1.904e-03 s, comm_vol 3.277 MB
+SIZE 40960, REAL_BD 2.175 GB/s, BD/PAIR 2.175 GB/s, time 1.884e-03 s, comm_vol 4.096 MB
+SIZE 49152, REAL_BD 2.575 GB/s, BD/PAIR 2.575 GB/s, time 1.909e-03 s, comm_vol 4.915 MB
+SIZE 57344, REAL_BD 3.007 GB/s, BD/PAIR 3.007 GB/s, time 1.907e-03 s, comm_vol 5.734 MB
+SIZE 65536, REAL_BD 3.445 GB/s, BD/PAIR 3.445 GB/s, time 1.902e-03 s, comm_vol 6.554 MB
+SIZE 81920, REAL_BD 4.264 GB/s, BD/PAIR 4.264 GB/s, time 1.921e-03 s, comm_vol 8.192 MB
+SIZE 98304, REAL_BD 1.433 GB/s, BD/PAIR 1.433 GB/s, time 6.862e-03 s, comm_vol 9.83 MB
+SIZE 114688, REAL_BD 5.901 GB/s, BD/PAIR 5.901 GB/s, time 1.944e-03 s, comm_vol 11.469 MB
+SIZE 131072, REAL_BD 6.758 GB/s, BD/PAIR 6.758 GB/s, time 1.940e-03 s, comm_vol 13.107 MB
+SIZE 163840, REAL_BD 8.58 GB/s, BD/PAIR 8.58 GB/s, time 1.909e-03 s, comm_vol 16.384 MB
+SIZE 196608, REAL_BD 10.166 GB/s, BD/PAIR 10.166 GB/s, time 1.934e-03 s, comm_vol 19.661 MB
+SIZE 229376, REAL_BD 11.948 GB/s, BD/PAIR 11.948 GB/s, time 1.920e-03 s, comm_vol 22.938 MB
+SIZE 262144, REAL_BD 13.655 GB/s, BD/PAIR 13.655 GB/s, time 1.920e-03 s, comm_vol 26.214 MB
+SIZE 327680, REAL_BD 16.955 GB/s, BD/PAIR 16.955 GB/s, time 1.933e-03 s, comm_vol 32.768 MB
+SIZE 393216, REAL_BD 20.541 GB/s, BD/PAIR 20.541 GB/s, time 1.914e-03 s, comm_vol 39.322 MB
+SIZE 458752, REAL_BD 23.644 GB/s, BD/PAIR 23.644 GB/s, time 1.940e-03 s, comm_vol 45.875 MB
+SIZE 524288, REAL_BD 26.785 GB/s, BD/PAIR 26.785 GB/s, time 1.957e-03 s, comm_vol 52.429 MB
+SIZE 655360, REAL_BD 34.032 GB/s, BD/PAIR 34.032 GB/s, time 1.926e-03 s, comm_vol 65.536 MB
+SIZE 786432, REAL_BD 40.703 GB/s, BD/PAIR 40.703 GB/s, time 1.932e-03 s, comm_vol 78.643 MB
+SIZE 917504, REAL_BD 47.358 GB/s, BD/PAIR 47.358 GB/s, time 1.937e-03 s, comm_vol 91.75 MB
+SIZE 1048576, REAL_BD 53.779 GB/s, BD/PAIR 53.779 GB/s, time 1.950e-03 s, comm_vol 104.858 MB
+SIZE 1310720, REAL_BD 67.779 GB/s, BD/PAIR 67.779 GB/s, time 1.934e-03 s, comm_vol 131.072 MB
+SIZE 1572864, REAL_BD 80.698 GB/s, BD/PAIR 80.698 GB/s, time 1.949e-03 s, comm_vol 157.286 MB
+SIZE 1835008, REAL_BD 12.977 GB/s, BD/PAIR 12.977 GB/s, time 1.414e-02 s, comm_vol 183.501 MB
+SIZE 2097152, REAL_BD 100.838 GB/s, BD/PAIR 100.838 GB/s, time 2.080e-03 s, comm_vol 209.715 MB
+SIZE 2621440, REAL_BD 135.441 GB/s, BD/PAIR 135.441 GB/s, time 1.935e-03 s, comm_vol 262.144 MB
+SIZE 3145728, REAL_BD 159.465 GB/s, BD/PAIR 159.465 GB/s, time 1.973e-03 s, comm_vol 314.573 MB
+SIZE 3670016, REAL_BD 173.522 GB/s, BD/PAIR 173.522 GB/s, time 2.115e-03 s, comm_vol 367.002 MB
+SIZE 4194304, REAL_BD 189.898 GB/s, BD/PAIR 189.898 GB/s, time 2.209e-03 s, comm_vol 419.43 MB
+SIZE 5242880, REAL_BD 209.991 GB/s, BD/PAIR 209.991 GB/s, time 2.497e-03 s, comm_vol 524.288 MB
+SIZE 6291456, REAL_BD 226.043 GB/s, BD/PAIR 226.043 GB/s, time 2.783e-03 s, comm_vol 629.146 MB
+SIZE 7340032, REAL_BD 237.842 GB/s, BD/PAIR 237.842 GB/s, time 3.086e-03 s, comm_vol 734.003 MB
+SIZE 8388608, REAL_BD 248.512 GB/s, BD/PAIR 248.512 GB/s, time 3.376e-03 s, comm_vol 838.861 MB
+SIZE 10485760, REAL_BD 258.026 GB/s, BD/PAIR 258.026 GB/s, time 4.064e-03 s, comm_vol 1.049 GB
+SIZE 12582912, REAL_BD 269.131 GB/s, BD/PAIR 269.131 GB/s, time 4.675e-03 s, comm_vol 1.258 GB
+SIZE 14680064, REAL_BD 83.304 GB/s, BD/PAIR 83.304 GB/s, time 1.762e-02 s, comm_vol 1.468 GB
+SIZE 16777216, REAL_BD 289.131 GB/s, BD/PAIR 289.131 GB/s, time 5.803e-03 s, comm_vol 1.678 GB
+SIZE 20971520, REAL_BD 299.329 GB/s, BD/PAIR 299.329 GB/s, time 7.006e-03 s, comm_vol 2.097 GB
+SIZE 25165824, REAL_BD 308.635 GB/s, BD/PAIR 308.635 GB/s, time 8.154e-03 s, comm_vol 2.517 GB
+SIZE 29360128, REAL_BD 315.264 GB/s, BD/PAIR 315.264 GB/s, time 9.313e-03 s, comm_vol 2.936 GB
+SIZE 33554432, REAL_BD 319.422 GB/s, BD/PAIR 319.422 GB/s, time 1.050e-02 s, comm_vol 3.355 GB
+SIZE 41943040, REAL_BD 327.144 GB/s, BD/PAIR 327.144 GB/s, time 1.282e-02 s, comm_vol 4.194 GB
+SIZE 50331648, REAL_BD 330.421 GB/s, BD/PAIR 330.421 GB/s, time 1.523e-02 s, comm_vol 5.033 GB
+SIZE 58720256, REAL_BD 331.241 GB/s, BD/PAIR 331.241 GB/s, time 1.773e-02 s, comm_vol 5.872 GB
+SIZE 67108864, REAL_BD 335.765 GB/s, BD/PAIR 335.765 GB/s, time 1.999e-02 s, comm_vol 6.711 GB
+SIZE 83886080, REAL_BD 342.467 GB/s, BD/PAIR 342.467 GB/s, time 2.449e-02 s, comm_vol 8.389 GB
+SIZE 100663296, REAL_BD 346.806 GB/s, BD/PAIR 346.806 GB/s, time 2.903e-02 s, comm_vol 10.066 GB
+SIZE 117440512, REAL_BD 349.594 GB/s, BD/PAIR 349.594 GB/s, time 3.359e-02 s, comm_vol 11.744 GB
+SIZE 134217728, REAL_BD 350.521 GB/s, BD/PAIR 350.521 GB/s, time 3.829e-02 s, comm_vol 13.422 GB
+SIZE 167772160, REAL_BD 355.046 GB/s, BD/PAIR 355.046 GB/s, time 4.725e-02 s, comm_vol 16.777 GB
+SIZE 201326592, REAL_BD 354.346 GB/s, BD/PAIR 354.346 GB/s, time 5.682e-02 s, comm_vol 20.133 GB
+SIZE 234881024, REAL_BD 355.35 GB/s, BD/PAIR 355.35 GB/s, time 6.610e-02 s, comm_vol 23.488 GB
+SIZE 268435456, REAL_BD 356.987 GB/s, BD/PAIR 356.987 GB/s, time 7.519e-02 s, comm_vol 26.844 GB
+SIZE 335544320, REAL_BD 330.349 GB/s, BD/PAIR 330.349 GB/s, time 1.016e-01 s, comm_vol 33.554 GB
+SIZE 402653184, REAL_BD 331.438 GB/s, BD/PAIR 331.438 GB/s, time 1.215e-01 s, comm_vol 40.265 GB
+SIZE 469762048, REAL_BD 331.308 GB/s, BD/PAIR 331.308 GB/s, time 1.418e-01 s, comm_vol 46.976 GB
+SIZE 536870912, REAL_BD 332.386 GB/s, BD/PAIR 332.386 GB/s, time 1.615e-01 s, comm_vol 53.687 GB
+SIZE 671088640, REAL_BD 332.873 GB/s, BD/PAIR 332.873 GB/s, time 2.016e-01 s, comm_vol 67.109 GB
+SIZE 805306368, REAL_BD 333.681 GB/s, BD/PAIR 333.681 GB/s, time 2.413e-01 s, comm_vol 80.531 GB
+SIZE 939524096, REAL_BD 333.683 GB/s, BD/PAIR 333.683 GB/s, time 2.816e-01 s, comm_vol 93.952 GB
+SIZE 1073741824, REAL_BD 334.092 GB/s, BD/PAIR 334.092 GB/s, time 3.214e-01 s, comm_vol 107.374 GB
+[[0, 1], [1, 0]]
+SIZE 8192, REAL_BD 393.921 MB/s, BD/PAIR 196.96 MB/s, time 4.159e-03 s, comm_vol 1.638 MB
+SIZE 16384, REAL_BD 909.65 MB/s, BD/PAIR 454.825 MB/s, time 3.602e-03 s, comm_vol 3.277 MB
+SIZE 24576, REAL_BD 1.37 GB/s, BD/PAIR 684.775 MB/s, time 3.589e-03 s, comm_vol 4.915 MB
+SIZE 32768, REAL_BD 1.795 GB/s, BD/PAIR 897.59 MB/s, time 3.651e-03 s, comm_vol 6.554 MB
+SIZE 40960, REAL_BD 2.24 GB/s, BD/PAIR 1.12 GB/s, time 3.658e-03 s, comm_vol 8.192 MB
+SIZE 49152, REAL_BD 2.702 GB/s, BD/PAIR 1.351 GB/s, time 3.639e-03 s, comm_vol 9.83 MB
+SIZE 57344, REAL_BD 3.158 GB/s, BD/PAIR 1.579 GB/s, time 3.632e-03 s, comm_vol 11.469 MB
+SIZE 65536, REAL_BD 3.597 GB/s, BD/PAIR 1.798 GB/s, time 3.644e-03 s, comm_vol 13.107 MB
+SIZE 81920, REAL_BD 1.346 GB/s, BD/PAIR 672.823 MB/s, time 1.218e-02 s, comm_vol 16.384 MB
+SIZE 98304, REAL_BD 5.311 GB/s, BD/PAIR 2.655 GB/s, time 3.702e-03 s, comm_vol 19.661 MB
+SIZE 114688, REAL_BD 6.207 GB/s, BD/PAIR 3.104 GB/s, time 3.695e-03 s, comm_vol 22.938 MB
+SIZE 131072, REAL_BD 7.068 GB/s, BD/PAIR 3.534 GB/s, time 3.709e-03 s, comm_vol 26.214 MB
+SIZE 163840, REAL_BD 8.838 GB/s, BD/PAIR 4.419 GB/s, time 3.708e-03 s, comm_vol 32.768 MB
+SIZE 196608, REAL_BD 10.625 GB/s, BD/PAIR 5.313 GB/s, time 3.701e-03 s, comm_vol 39.322 MB
+SIZE 229376, REAL_BD 12.419 GB/s, BD/PAIR 6.21 GB/s, time 3.694e-03 s, comm_vol 45.875 MB
+SIZE 262144, REAL_BD 13.921 GB/s, BD/PAIR 6.961 GB/s, time 3.766e-03 s, comm_vol 52.429 MB
+SIZE 327680, REAL_BD 17.449 GB/s, BD/PAIR 8.725 GB/s, time 3.756e-03 s, comm_vol 65.536 MB
+SIZE 393216, REAL_BD 20.861 GB/s, BD/PAIR 10.43 GB/s, time 3.770e-03 s, comm_vol 78.643 MB
+SIZE 458752, REAL_BD 16.98 GB/s, BD/PAIR 8.49 GB/s, time 5.403e-03 s, comm_vol 91.75 MB
+SIZE 524288, REAL_BD 28.36 GB/s, BD/PAIR 14.18 GB/s, time 3.697e-03 s, comm_vol 104.858 MB
+SIZE 655360, REAL_BD 35.719 GB/s, BD/PAIR 17.86 GB/s, time 3.670e-03 s, comm_vol 131.072 MB
+SIZE 786432, REAL_BD 42.805 GB/s, BD/PAIR 21.402 GB/s, time 3.675e-03 s, comm_vol 157.286 MB
+SIZE 917504, REAL_BD 47.912 GB/s, BD/PAIR 23.956 GB/s, time 3.830e-03 s, comm_vol 183.501 MB
+SIZE 1048576, REAL_BD 54.455 GB/s, BD/PAIR 27.227 GB/s, time 3.851e-03 s, comm_vol 209.715 MB
+SIZE 1310720, REAL_BD 67.896 GB/s, BD/PAIR 33.948 GB/s, time 3.861e-03 s, comm_vol 262.144 MB
+SIZE 1572864, REAL_BD 81.571 GB/s, BD/PAIR 40.786 GB/s, time 3.856e-03 s, comm_vol 314.573 MB
+SIZE 1835008, REAL_BD 94.768 GB/s, BD/PAIR 47.384 GB/s, time 3.873e-03 s, comm_vol 367.002 MB
+SIZE 2097152, REAL_BD 94.755 GB/s, BD/PAIR 47.377 GB/s, time 4.426e-03 s, comm_vol 419.43 MB
+SIZE 2621440, REAL_BD 111.507 GB/s, BD/PAIR 55.753 GB/s, time 4.702e-03 s, comm_vol 524.288 MB
+SIZE 3145728, REAL_BD 123.356 GB/s, BD/PAIR 61.678 GB/s, time 5.100e-03 s, comm_vol 629.146 MB
+SIZE 3670016, REAL_BD 132.54 GB/s, BD/PAIR 66.27 GB/s, time 5.538e-03 s, comm_vol 734.003 MB
+SIZE 4194304, REAL_BD 142.13 GB/s, BD/PAIR 71.065 GB/s, time 5.902e-03 s, comm_vol 838.861 MB
+SIZE 5242880, REAL_BD 155.981 GB/s, BD/PAIR 77.991 GB/s, time 6.722e-03 s, comm_vol 1.049 GB
+SIZE 6291456, REAL_BD 70.039 GB/s, BD/PAIR 35.02 GB/s, time 1.797e-02 s, comm_vol 1.258 GB
+SIZE 7340032, REAL_BD 171.259 GB/s, BD/PAIR 85.629 GB/s, time 8.572e-03 s, comm_vol 1.468 GB
+SIZE 8388608, REAL_BD 177.515 GB/s, BD/PAIR 88.758 GB/s, time 9.451e-03 s, comm_vol 1.678 GB
+SIZE 10485760, REAL_BD 194.75 GB/s, BD/PAIR 97.375 GB/s, time 1.077e-02 s, comm_vol 2.097 GB
+SIZE 12582912, REAL_BD 215.943 GB/s, BD/PAIR 107.972 GB/s, time 1.165e-02 s, comm_vol 2.517 GB
+SIZE 14680064, REAL_BD 227.891 GB/s, BD/PAIR 113.945 GB/s, time 1.288e-02 s, comm_vol 2.936 GB
+SIZE 16777216, REAL_BD 228.414 GB/s, BD/PAIR 114.207 GB/s, time 1.469e-02 s, comm_vol 3.355 GB
+SIZE 20971520, REAL_BD 214.877 GB/s, BD/PAIR 107.438 GB/s, time 1.952e-02 s, comm_vol 4.194 GB
+SIZE 25165824, REAL_BD 255.045 GB/s, BD/PAIR 127.523 GB/s, time 1.973e-02 s, comm_vol 5.033 GB
+SIZE 29360128, REAL_BD 269.3 GB/s, BD/PAIR 134.65 GB/s, time 2.180e-02 s, comm_vol 5.872 GB
+SIZE 33554432, REAL_BD 275.128 GB/s, BD/PAIR 137.564 GB/s, time 2.439e-02 s, comm_vol 6.711 GB
+SIZE 41943040, REAL_BD 267.074 GB/s, BD/PAIR 133.537 GB/s, time 3.141e-02 s, comm_vol 8.389 GB
+SIZE 50331648, REAL_BD 300.319 GB/s, BD/PAIR 150.159 GB/s, time 3.352e-02 s, comm_vol 10.066 GB
+SIZE 58720256, REAL_BD 308.65 GB/s, BD/PAIR 154.325 GB/s, time 3.805e-02 s, comm_vol 11.744 GB
+SIZE 67108864, REAL_BD 314.803 GB/s, BD/PAIR 157.402 GB/s, time 4.264e-02 s, comm_vol 13.422 GB
+SIZE 83886080, REAL_BD 322.659 GB/s, BD/PAIR 161.33 GB/s, time 5.200e-02 s, comm_vol 16.777 GB
+SIZE 100663296, REAL_BD 327.689 GB/s, BD/PAIR 163.844 GB/s, time 6.144e-02 s, comm_vol 20.133 GB
+SIZE 117440512, REAL_BD 332.736 GB/s, BD/PAIR 166.368 GB/s, time 7.059e-02 s, comm_vol 23.488 GB
+SIZE 134217728, REAL_BD 336.589 GB/s, BD/PAIR 168.294 GB/s, time 7.975e-02 s, comm_vol 26.844 GB
+SIZE 167772160, REAL_BD 343.027 GB/s, BD/PAIR 171.514 GB/s, time 9.782e-02 s, comm_vol 33.554 GB
+SIZE 201326592, REAL_BD 347.183 GB/s, BD/PAIR 173.591 GB/s, time 1.160e-01 s, comm_vol 40.265 GB
+SIZE 234881024, REAL_BD 350.517 GB/s, BD/PAIR 175.259 GB/s, time 1.340e-01 s, comm_vol 46.976 GB
+SIZE 268435456, REAL_BD 351.946 GB/s, BD/PAIR 175.973 GB/s, time 1.525e-01 s, comm_vol 53.687 GB
+SIZE 335544320, REAL_BD 326.889 GB/s, BD/PAIR 163.445 GB/s, time 2.053e-01 s, comm_vol 67.109 GB
+SIZE 402653184, REAL_BD 327.848 GB/s, BD/PAIR 163.924 GB/s, time 2.456e-01 s, comm_vol 80.531 GB
+SIZE 469762048, REAL_BD 329.161 GB/s, BD/PAIR 164.58 GB/s, time 2.854e-01 s, comm_vol 93.952 GB
+SIZE 536870912, REAL_BD 330.087 GB/s, BD/PAIR 165.043 GB/s, time 3.253e-01 s, comm_vol 107.374 GB
+SIZE 671088640, REAL_BD 331.319 GB/s, BD/PAIR 165.659 GB/s, time 4.051e-01 s, comm_vol 134.218 GB
+SIZE 805306368, REAL_BD 331.85 GB/s, BD/PAIR 165.925 GB/s, time 4.853e-01 s, comm_vol 161.061 GB
+SIZE 939524096, REAL_BD 332.551 GB/s, BD/PAIR 166.275 GB/s, time 5.650e-01 s, comm_vol 187.905 GB
+SIZE 1073741824, REAL_BD 332.897 GB/s, BD/PAIR 166.449 GB/s, time 6.451e-01 s, comm_vol 214.748 GB
+[[0, 1], [1, 2], [2, 3], [3, 0]]
+SIZE 8192, REAL_BD 708.448 MB/s, BD/PAIR 177.112 MB/s, time 4.625e-03 s, comm_vol 3.277 MB
+SIZE 16384, REAL_BD 1.734 GB/s, BD/PAIR 433.507 MB/s, time 3.779e-03 s, comm_vol 6.554 MB
+SIZE 24576, REAL_BD 2.589 GB/s, BD/PAIR 647.157 MB/s, time 3.798e-03 s, comm_vol 9.83 MB
+SIZE 32768, REAL_BD 3.439 GB/s, BD/PAIR 859.746 MB/s, time 3.811e-03 s, comm_vol 13.107 MB
+SIZE 40960, REAL_BD 2.039 GB/s, BD/PAIR 509.713 MB/s, time 8.036e-03 s, comm_vol 16.384 MB
+SIZE 49152, REAL_BD 5.217 GB/s, BD/PAIR 1.304 GB/s, time 3.769e-03 s, comm_vol 19.661 MB
+SIZE 57344, REAL_BD 6.022 GB/s, BD/PAIR 1.505 GB/s, time 3.809e-03 s, comm_vol 22.938 MB
+SIZE 65536, REAL_BD 6.843 GB/s, BD/PAIR 1.711 GB/s, time 3.831e-03 s, comm_vol 26.214 MB
+SIZE 81920, REAL_BD 8.599 GB/s, BD/PAIR 2.15 GB/s, time 3.811e-03 s, comm_vol 32.768 MB
+SIZE 98304, REAL_BD 3.676 GB/s, BD/PAIR 919.058 MB/s, time 1.070e-02 s, comm_vol 39.322 MB
+SIZE 114688, REAL_BD 11.92 GB/s, BD/PAIR 2.98 GB/s, time 3.849e-03 s, comm_vol 45.875 MB
+SIZE 131072, REAL_BD 13.619 GB/s, BD/PAIR 3.405 GB/s, time 3.850e-03 s, comm_vol 52.429 MB
+SIZE 163840, REAL_BD 16.968 GB/s, BD/PAIR 4.242 GB/s, time 3.862e-03 s, comm_vol 65.536 MB
+SIZE 196608, REAL_BD 20.31 GB/s, BD/PAIR 5.077 GB/s, time 3.872e-03 s, comm_vol 78.643 MB
+SIZE 229376, REAL_BD 23.748 GB/s, BD/PAIR 5.937 GB/s, time 3.864e-03 s, comm_vol 91.75 MB
+SIZE 262144, REAL_BD 27.204 GB/s, BD/PAIR 6.801 GB/s, time 3.855e-03 s, comm_vol 104.858 MB
+SIZE 327680, REAL_BD 34.098 GB/s, BD/PAIR 8.524 GB/s, time 3.844e-03 s, comm_vol 131.072 MB
+SIZE 393216, REAL_BD 8.617 GB/s, BD/PAIR 2.154 GB/s, time 1.825e-02 s, comm_vol 157.286 MB
+SIZE 458752, REAL_BD 47.554 GB/s, BD/PAIR 11.888 GB/s, time 3.859e-03 s, comm_vol 183.501 MB
+SIZE 524288, REAL_BD 54.371 GB/s, BD/PAIR 13.593 GB/s, time 3.857e-03 s, comm_vol 209.715 MB
+SIZE 655360, REAL_BD 13.667 GB/s, BD/PAIR 3.417 GB/s, time 1.918e-02 s, comm_vol 262.144 MB
+SIZE 786432, REAL_BD 76.603 GB/s, BD/PAIR 19.151 GB/s, time 4.107e-03 s, comm_vol 314.573 MB
+SIZE 917504, REAL_BD 95.42 GB/s, BD/PAIR 23.855 GB/s, time 3.846e-03 s, comm_vol 367.002 MB
+SIZE 1048576, REAL_BD 28.506 GB/s, BD/PAIR 7.126 GB/s, time 1.471e-02 s, comm_vol 419.43 MB
+SIZE 1310720, REAL_BD 131.497 GB/s, BD/PAIR 32.874 GB/s, time 3.987e-03 s, comm_vol 524.288 MB
+SIZE 1572864, REAL_BD 165.693 GB/s, BD/PAIR 41.423 GB/s, time 3.797e-03 s, comm_vol 629.146 MB
+SIZE 1835008, REAL_BD 193.26 GB/s, BD/PAIR 48.315 GB/s, time 3.798e-03 s, comm_vol 734.003 MB
+SIZE 2097152, REAL_BD 221.592 GB/s, BD/PAIR 55.398 GB/s, time 3.786e-03 s, comm_vol 838.861 MB
+SIZE 2621440, REAL_BD 276.19 GB/s, BD/PAIR 69.047 GB/s, time 3.797e-03 s, comm_vol 1.049 GB
+SIZE 3145728, REAL_BD 331.886 GB/s, BD/PAIR 82.972 GB/s, time 3.791e-03 s, comm_vol 1.258 GB
+SIZE 3670016, REAL_BD 385.866 GB/s, BD/PAIR 96.467 GB/s, time 3.804e-03 s, comm_vol 1.468 GB
+SIZE 4194304, REAL_BD 106.663 GB/s, BD/PAIR 26.666 GB/s, time 1.573e-02 s, comm_vol 1.678 GB
+SIZE 5242880, REAL_BD 537.757 GB/s, BD/PAIR 134.439 GB/s, time 3.900e-03 s, comm_vol 2.097 GB
+SIZE 6291456, REAL_BD 639.755 GB/s, BD/PAIR 159.939 GB/s, time 3.934e-03 s, comm_vol 2.517 GB
+SIZE 7340032, REAL_BD 641.95 GB/s, BD/PAIR 160.488 GB/s, time 4.574e-03 s, comm_vol 2.936 GB
+SIZE 8388608, REAL_BD 649.878 GB/s, BD/PAIR 162.469 GB/s, time 5.163e-03 s, comm_vol 3.355 GB
+SIZE 10485760, REAL_BD 719.959 GB/s, BD/PAIR 179.99 GB/s, time 5.826e-03 s, comm_vol 4.194 GB
+SIZE 12582912, REAL_BD 293.293 GB/s, BD/PAIR 73.323 GB/s, time 1.716e-02 s, comm_vol 5.033 GB
+SIZE 14680064, REAL_BD 837.809 GB/s, BD/PAIR 209.452 GB/s, time 7.009e-03 s, comm_vol 5.872 GB
+SIZE 16777216, REAL_BD 857.215 GB/s, BD/PAIR 214.304 GB/s, time 7.829e-03 s, comm_vol 6.711 GB
+SIZE 20971520, REAL_BD 929.746 GB/s, BD/PAIR 232.436 GB/s, time 9.022e-03 s, comm_vol 8.389 GB
+SIZE 25165824, REAL_BD 663.282 GB/s, BD/PAIR 165.821 GB/s, time 1.518e-02 s, comm_vol 10.066 GB
+SIZE 29360128, REAL_BD 1.006 TB/s, BD/PAIR 251.569 GB/s, time 1.167e-02 s, comm_vol 11.744 GB
+SIZE 33554432, REAL_BD 750.43 GB/s, BD/PAIR 187.607 GB/s, time 1.789e-02 s, comm_vol 13.422 GB
+SIZE 41943040, REAL_BD 1.096 TB/s, BD/PAIR 274.013 GB/s, time 1.531e-02 s, comm_vol 16.777 GB
+SIZE 50331648, REAL_BD 1.131 TB/s, BD/PAIR 282.723 GB/s, time 1.780e-02 s, comm_vol 20.133 GB
+SIZE 58720256, REAL_BD 999.931 GB/s, BD/PAIR 249.983 GB/s, time 2.349e-02 s, comm_vol 23.488 GB
+SIZE 67108864, REAL_BD 1.206 TB/s, BD/PAIR 301.585 GB/s, time 2.225e-02 s, comm_vol 26.844 GB
+SIZE 83886080, REAL_BD 1.244 TB/s, BD/PAIR 310.956 GB/s, time 2.698e-02 s, comm_vol 33.554 GB
+SIZE 100663296, REAL_BD 1.276 TB/s, BD/PAIR 319.017 GB/s, time 3.155e-02 s, comm_vol 40.265 GB
+SIZE 117440512, REAL_BD 1.295 TB/s, BD/PAIR 323.651 GB/s, time 3.629e-02 s, comm_vol 46.976 GB
+SIZE 134217728, REAL_BD 1.314 TB/s, BD/PAIR 328.488 GB/s, time 4.086e-02 s, comm_vol 53.687 GB
+SIZE 167772160, REAL_BD 1.329 TB/s, BD/PAIR 332.251 GB/s, time 5.050e-02 s, comm_vol 67.109 GB
+SIZE 201326592, REAL_BD 1.343 TB/s, BD/PAIR 335.791 GB/s, time 5.996e-02 s, comm_vol 80.531 GB
+SIZE 234881024, REAL_BD 1.361 TB/s, BD/PAIR 340.361 GB/s, time 6.901e-02 s, comm_vol 93.952 GB
+SIZE 268435456, REAL_BD 1.373 TB/s, BD/PAIR 343.31 GB/s, time 7.819e-02 s, comm_vol 107.374 GB
+SIZE 335544320, REAL_BD 1.276 TB/s, BD/PAIR 318.997 GB/s, time 1.052e-01 s, comm_vol 134.218 GB
+SIZE 402653184, REAL_BD 1.279 TB/s, BD/PAIR 319.643 GB/s, time 1.260e-01 s, comm_vol 161.061 GB
+SIZE 469762048, REAL_BD 1.281 TB/s, BD/PAIR 320.296 GB/s, time 1.467e-01 s, comm_vol 187.905 GB
+SIZE 536870912, REAL_BD 1.286 TB/s, BD/PAIR 321.622 GB/s, time 1.669e-01 s, comm_vol 214.748 GB
+SIZE 671088640, REAL_BD 1.286 TB/s, BD/PAIR 321.383 GB/s, time 2.088e-01 s, comm_vol 268.435 GB
+SIZE 805306368, REAL_BD 1.284 TB/s, BD/PAIR 320.988 GB/s, time 2.509e-01 s, comm_vol 322.123 GB
+SIZE 939524096, REAL_BD 1.284 TB/s, BD/PAIR 320.922 GB/s, time 2.928e-01 s, comm_vol 375.81 GB
+SIZE 1073741824, REAL_BD 1.284 TB/s, BD/PAIR 321.021 GB/s, time 3.345e-01 s, comm_vol 429.497 GB
+[[0, 2], [1, 3], [2, 0], [3, 1]]
+SIZE 8192, REAL_BD 697.66 MB/s, BD/PAIR 174.415 MB/s, time 4.697e-03 s, comm_vol 3.277 MB
+SIZE 16384, REAL_BD 1.845 GB/s, BD/PAIR 461.143 MB/s, time 3.553e-03 s, comm_vol 6.554 MB
+SIZE 24576, REAL_BD 2.699 GB/s, BD/PAIR 674.735 MB/s, time 3.642e-03 s, comm_vol 9.83 MB
+SIZE 32768, REAL_BD 3.625 GB/s, BD/PAIR 906.29 MB/s, time 3.616e-03 s, comm_vol 13.107 MB
+SIZE 40960, REAL_BD 1.834 GB/s, BD/PAIR 458.484 MB/s, time 8.934e-03 s, comm_vol 16.384 MB
+SIZE 49152, REAL_BD 4.694 GB/s, BD/PAIR 1.173 GB/s, time 4.189e-03 s, comm_vol 19.661 MB
+SIZE 57344, REAL_BD 6.196 GB/s, BD/PAIR 1.549 GB/s, time 3.702e-03 s, comm_vol 22.938 MB
+SIZE 65536, REAL_BD 7.089 GB/s, BD/PAIR 1.772 GB/s, time 3.698e-03 s, comm_vol 26.214 MB
+SIZE 81920, REAL_BD 8.848 GB/s, BD/PAIR 2.212 GB/s, time 3.704e-03 s, comm_vol 32.768 MB
+SIZE 98304, REAL_BD 3.087 GB/s, BD/PAIR 771.768 MB/s, time 1.274e-02 s, comm_vol 39.322 MB
+SIZE 114688, REAL_BD 12.456 GB/s, BD/PAIR 3.114 GB/s, time 3.683e-03 s, comm_vol 45.875 MB
+SIZE 131072, REAL_BD 14.227 GB/s, BD/PAIR 3.557 GB/s, time 3.685e-03 s, comm_vol 52.429 MB
+SIZE 163840, REAL_BD 17.853 GB/s, BD/PAIR 4.463 GB/s, time 3.671e-03 s, comm_vol 65.536 MB
+SIZE 196608, REAL_BD 21.018 GB/s, BD/PAIR 5.254 GB/s, time 3.742e-03 s, comm_vol 78.643 MB
+SIZE 229376, REAL_BD 24.376 GB/s, BD/PAIR 6.094 GB/s, time 3.764e-03 s, comm_vol 91.75 MB
+SIZE 262144, REAL_BD 5.991 GB/s, BD/PAIR 1.498 GB/s, time 1.750e-02 s, comm_vol 104.858 MB
+SIZE 327680, REAL_BD 32.609 GB/s, BD/PAIR 8.152 GB/s, time 4.019e-03 s, comm_vol 131.072 MB
+SIZE 393216, REAL_BD 42.777 GB/s, BD/PAIR 10.694 GB/s, time 3.677e-03 s, comm_vol 157.286 MB
+SIZE 458752, REAL_BD 49.887 GB/s, BD/PAIR 12.472 GB/s, time 3.678e-03 s, comm_vol 183.501 MB
+SIZE 524288, REAL_BD 54.989 GB/s, BD/PAIR 13.747 GB/s, time 3.814e-03 s, comm_vol 209.715 MB
+SIZE 655360, REAL_BD 14.441 GB/s, BD/PAIR 3.61 GB/s, time 1.815e-02 s, comm_vol 262.144 MB
+SIZE 786432, REAL_BD 81.14 GB/s, BD/PAIR 20.285 GB/s, time 3.877e-03 s, comm_vol 314.573 MB
+SIZE 917504, REAL_BD 99.176 GB/s, BD/PAIR 24.794 GB/s, time 3.700e-03 s, comm_vol 367.002 MB
+SIZE 1048576, REAL_BD 112.532 GB/s, BD/PAIR 28.133 GB/s, time 3.727e-03 s, comm_vol 419.43 MB
+SIZE 1310720, REAL_BD 31.824 GB/s, BD/PAIR 7.956 GB/s, time 1.647e-02 s, comm_vol 524.288 MB
+SIZE 1572864, REAL_BD 167.63 GB/s, BD/PAIR 41.907 GB/s, time 3.753e-03 s, comm_vol 629.146 MB
+SIZE 1835008, REAL_BD 187.928 GB/s, BD/PAIR 46.982 GB/s, time 3.906e-03 s, comm_vol 734.003 MB
+SIZE 2097152, REAL_BD 200.606 GB/s, BD/PAIR 50.152 GB/s, time 4.182e-03 s, comm_vol 838.861 MB
+SIZE 2621440, REAL_BD 221.475 GB/s, BD/PAIR 55.369 GB/s, time 4.735e-03 s, comm_vol 1.049 GB
+SIZE 3145728, REAL_BD 242.261 GB/s, BD/PAIR 60.565 GB/s, time 5.194e-03 s, comm_vol 1.258 GB
+SIZE 3670016, REAL_BD 255.414 GB/s, BD/PAIR 63.853 GB/s, time 5.748e-03 s, comm_vol 1.468 GB
+SIZE 4194304, REAL_BD 279.208 GB/s, BD/PAIR 69.802 GB/s, time 6.009e-03 s, comm_vol 1.678 GB
+SIZE 5242880, REAL_BD 308.44 GB/s, BD/PAIR 77.11 GB/s, time 6.799e-03 s, comm_vol 2.097 GB
+SIZE 6291456, REAL_BD 141.087 GB/s, BD/PAIR 35.272 GB/s, time 1.784e-02 s, comm_vol 2.517 GB
+SIZE 7340032, REAL_BD 340.124 GB/s, BD/PAIR 85.031 GB/s, time 8.632e-03 s, comm_vol 2.936 GB
+SIZE 8388608, REAL_BD 354.351 GB/s, BD/PAIR 88.588 GB/s, time 9.469e-03 s, comm_vol 3.355 GB
+SIZE 10485760, REAL_BD 382.289 GB/s, BD/PAIR 95.572 GB/s, time 1.097e-02 s, comm_vol 4.194 GB
+SIZE 12582912, REAL_BD 422.652 GB/s, BD/PAIR 105.663 GB/s, time 1.191e-02 s, comm_vol 5.033 GB
+SIZE 14680064, REAL_BD 397.378 GB/s, BD/PAIR 99.344 GB/s, time 1.478e-02 s, comm_vol 5.872 GB
+SIZE 16777216, REAL_BD 456.288 GB/s, BD/PAIR 114.072 GB/s, time 1.471e-02 s, comm_vol 6.711 GB
+SIZE 20971520, REAL_BD 493.435 GB/s, BD/PAIR 123.359 GB/s, time 1.700e-02 s, comm_vol 8.389 GB
+SIZE 25165824, REAL_BD 507.406 GB/s, BD/PAIR 126.851 GB/s, time 1.984e-02 s, comm_vol 10.066 GB
+SIZE 29360128, REAL_BD 531.033 GB/s, BD/PAIR 132.758 GB/s, time 2.212e-02 s, comm_vol 11.744 GB
+SIZE 33554432, REAL_BD 548.989 GB/s, BD/PAIR 137.247 GB/s, time 2.445e-02 s, comm_vol 13.422 GB
+SIZE 41943040, REAL_BD 574.111 GB/s, BD/PAIR 143.528 GB/s, time 2.922e-02 s, comm_vol 16.777 GB
+SIZE 50331648, REAL_BD 597.544 GB/s, BD/PAIR 149.386 GB/s, time 3.369e-02 s, comm_vol 20.133 GB
+SIZE 58720256, REAL_BD 613.552 GB/s, BD/PAIR 153.388 GB/s, time 3.828e-02 s, comm_vol 23.488 GB
+SIZE 67108864, REAL_BD 626.231 GB/s, BD/PAIR 156.558 GB/s, time 4.287e-02 s, comm_vol 26.844 GB
+SIZE 83886080, REAL_BD 643.163 GB/s, BD/PAIR 160.791 GB/s, time 5.217e-02 s, comm_vol 33.554 GB
+SIZE 100663296, REAL_BD 654.436 GB/s, BD/PAIR 163.609 GB/s, time 6.153e-02 s, comm_vol 40.265 GB
+SIZE 117440512, REAL_BD 668.77 GB/s, BD/PAIR 167.193 GB/s, time 7.024e-02 s, comm_vol 46.976 GB
+SIZE 134217728, REAL_BD 674.82 GB/s, BD/PAIR 168.705 GB/s, time 7.956e-02 s, comm_vol 53.687 GB
+SIZE 167772160, REAL_BD 687.067 GB/s, BD/PAIR 171.767 GB/s, time 9.767e-02 s, comm_vol 67.109 GB
+SIZE 201326592, REAL_BD 694.55 GB/s, BD/PAIR 173.637 GB/s, time 1.159e-01 s, comm_vol 80.531 GB
+SIZE 234881024, REAL_BD 701.118 GB/s, BD/PAIR 175.28 GB/s, time 1.340e-01 s, comm_vol 93.952 GB
+SIZE 268435456, REAL_BD 704.865 GB/s, BD/PAIR 176.216 GB/s, time 1.523e-01 s, comm_vol 107.374 GB
+SIZE 335544320, REAL_BD 653.438 GB/s, BD/PAIR 163.36 GB/s, time 2.054e-01 s, comm_vol 134.218 GB
+SIZE 402653184, REAL_BD 656.153 GB/s, BD/PAIR 164.038 GB/s, time 2.455e-01 s, comm_vol 161.061 GB
+SIZE 469762048, REAL_BD 658.033 GB/s, BD/PAIR 164.508 GB/s, time 2.856e-01 s, comm_vol 187.905 GB
+SIZE 536870912, REAL_BD 660.096 GB/s, BD/PAIR 165.024 GB/s, time 3.253e-01 s, comm_vol 214.748 GB
+SIZE 671088640, REAL_BD 661.962 GB/s, BD/PAIR 165.49 GB/s, time 4.055e-01 s, comm_vol 268.435 GB
+SIZE 805306368, REAL_BD 663.497 GB/s, BD/PAIR 165.874 GB/s, time 4.855e-01 s, comm_vol 322.123 GB
+SIZE 939524096, REAL_BD 664.795 GB/s, BD/PAIR 166.199 GB/s, time 5.653e-01 s, comm_vol 375.81 GB
+SIZE 1073741824, REAL_BD 665.463 GB/s, BD/PAIR 166.366 GB/s, time 6.454e-01 s, comm_vol 429.497 GB
+[[0, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7], [6, 0], [7, 1]]
+SIZE 8192, REAL_BD 1.742 GB/s, BD/PAIR 217.811 MB/s, time 3.761e-03 s, comm_vol 6.554 MB
+SIZE 16384, REAL_BD 3.44 GB/s, BD/PAIR 430.061 MB/s, time 3.810e-03 s, comm_vol 13.107 MB
+SIZE 24576, REAL_BD 2.79 GB/s, BD/PAIR 348.806 MB/s, time 7.046e-03 s, comm_vol 19.661 MB
+SIZE 32768, REAL_BD 6.756 GB/s, BD/PAIR 844.531 MB/s, time 3.880e-03 s, comm_vol 26.214 MB
+SIZE 40960, REAL_BD 3.582 GB/s, BD/PAIR 447.777 MB/s, time 9.147e-03 s, comm_vol 32.768 MB
+SIZE 49152, REAL_BD 10.599 GB/s, BD/PAIR 1.325 GB/s, time 3.710e-03 s, comm_vol 39.322 MB
+SIZE 57344, REAL_BD 12.175 GB/s, BD/PAIR 1.522 GB/s, time 3.768e-03 s, comm_vol 45.875 MB
+SIZE 65536, REAL_BD 14.065 GB/s, BD/PAIR 1.758 GB/s, time 3.728e-03 s, comm_vol 52.429 MB
+SIZE 81920, REAL_BD 17.116 GB/s, BD/PAIR 2.139 GB/s, time 3.829e-03 s, comm_vol 65.536 MB
+SIZE 98304, REAL_BD 20.502 GB/s, BD/PAIR 2.563 GB/s, time 3.836e-03 s, comm_vol 78.643 MB
+SIZE 114688, REAL_BD 6.572 GB/s, BD/PAIR 821.498 MB/s, time 1.396e-02 s, comm_vol 91.75 MB
+SIZE 131072, REAL_BD 26.488 GB/s, BD/PAIR 3.311 GB/s, time 3.959e-03 s, comm_vol 104.858 MB
+SIZE 163840, REAL_BD 33.349 GB/s, BD/PAIR 4.169 GB/s, time 3.930e-03 s, comm_vol 131.072 MB
+SIZE 196608, REAL_BD 40.162 GB/s, BD/PAIR 5.02 GB/s, time 3.916e-03 s, comm_vol 157.286 MB
+SIZE 229376, REAL_BD 46.979 GB/s, BD/PAIR 5.872 GB/s, time 3.906e-03 s, comm_vol 183.501 MB
+SIZE 262144, REAL_BD 13.36 GB/s, BD/PAIR 1.67 GB/s, time 1.570e-02 s, comm_vol 209.715 MB
+SIZE 327680, REAL_BD 69.004 GB/s, BD/PAIR 8.626 GB/s, time 3.799e-03 s, comm_vol 262.144 MB
+SIZE 393216, REAL_BD 82.499 GB/s, BD/PAIR 10.312 GB/s, time 3.813e-03 s, comm_vol 314.573 MB
+SIZE 458752, REAL_BD 25.4 GB/s, BD/PAIR 3.175 GB/s, time 1.445e-02 s, comm_vol 367.002 MB
+SIZE 524288, REAL_BD 110.754 GB/s, BD/PAIR 13.844 GB/s, time 3.787e-03 s, comm_vol 419.43 MB
+SIZE 655360, REAL_BD 141.035 GB/s, BD/PAIR 17.629 GB/s, time 3.717e-03 s, comm_vol 524.288 MB
+SIZE 786432, REAL_BD 46.177 GB/s, BD/PAIR 5.772 GB/s, time 1.362e-02 s, comm_vol 629.146 MB
+SIZE 917504, REAL_BD 195.481 GB/s, BD/PAIR 24.435 GB/s, time 3.755e-03 s, comm_vol 734.003 MB
+SIZE 1048576, REAL_BD 222.517 GB/s, BD/PAIR 27.815 GB/s, time 3.770e-03 s, comm_vol 838.861 MB
+SIZE 1310720, REAL_BD 277.584 GB/s, BD/PAIR 34.698 GB/s, time 3.778e-03 s, comm_vol 1.049 GB
+SIZE 1572864, REAL_BD 333.017 GB/s, BD/PAIR 41.627 GB/s, time 3.778e-03 s, comm_vol 1.258 GB
+SIZE 1835008, REAL_BD 390.145 GB/s, BD/PAIR 48.768 GB/s, time 3.763e-03 s, comm_vol 1.468 GB
+SIZE 2097152, REAL_BD 116.828 GB/s, BD/PAIR 14.603 GB/s, time 1.436e-02 s, comm_vol 1.678 GB
+SIZE 2621440, REAL_BD 523.297 GB/s, BD/PAIR 65.412 GB/s, time 4.008e-03 s, comm_vol 2.097 GB
+SIZE 3145728, REAL_BD 659.625 GB/s, BD/PAIR 82.453 GB/s, time 3.815e-03 s, comm_vol 2.517 GB
+SIZE 3670016, REAL_BD 771.249 GB/s, BD/PAIR 96.406 GB/s, time 3.807e-03 s, comm_vol 2.936 GB
+SIZE 4194304, REAL_BD 882.809 GB/s, BD/PAIR 110.351 GB/s, time 3.801e-03 s, comm_vol 3.355 GB
+SIZE 5242880, REAL_BD 1.109 TB/s, BD/PAIR 138.678 GB/s, time 3.781e-03 s, comm_vol 4.194 GB
+SIZE 6291456, REAL_BD 1.014 TB/s, BD/PAIR 126.781 GB/s, time 4.962e-03 s, comm_vol 5.033 GB
+SIZE 7340032, REAL_BD 1.259 TB/s, BD/PAIR 157.33 GB/s, time 4.665e-03 s, comm_vol 5.872 GB
+SIZE 8388608, REAL_BD 1.315 TB/s, BD/PAIR 164.375 GB/s, time 5.103e-03 s, comm_vol 6.711 GB
+SIZE 10485760, REAL_BD 654.837 GB/s, BD/PAIR 81.855 GB/s, time 1.281e-02 s, comm_vol 8.389 GB
+SIZE 12582912, REAL_BD 1.572 TB/s, BD/PAIR 196.561 GB/s, time 6.402e-03 s, comm_vol 10.066 GB
+SIZE 14680064, REAL_BD 1.666 TB/s, BD/PAIR 208.276 GB/s, time 7.048e-03 s, comm_vol 11.744 GB
+SIZE 16777216, REAL_BD 855.001 GB/s, BD/PAIR 106.875 GB/s, time 1.570e-02 s, comm_vol 13.422 GB
+SIZE 20971520, REAL_BD 1.847 TB/s, BD/PAIR 230.881 GB/s, time 9.083e-03 s, comm_vol 16.777 GB
+SIZE 25165824, REAL_BD 1.433 TB/s, BD/PAIR 179.186 GB/s, time 1.404e-02 s, comm_vol 20.133 GB
+SIZE 29360128, REAL_BD 2.015 TB/s, BD/PAIR 251.934 GB/s, time 1.165e-02 s, comm_vol 23.488 GB
+SIZE 33554432, REAL_BD 1.776 TB/s, BD/PAIR 222.039 GB/s, time 1.511e-02 s, comm_vol 26.844 GB
+SIZE 41943040, REAL_BD 2.19 TB/s, BD/PAIR 273.783 GB/s, time 1.532e-02 s, comm_vol 33.554 GB
+SIZE 50331648, REAL_BD 2.286 TB/s, BD/PAIR 285.696 GB/s, time 1.762e-02 s, comm_vol 40.265 GB
+SIZE 58720256, REAL_BD 2.358 TB/s, BD/PAIR 294.691 GB/s, time 1.993e-02 s, comm_vol 46.976 GB
+SIZE 67108864, REAL_BD 2.271 TB/s, BD/PAIR 283.854 GB/s, time 2.364e-02 s, comm_vol 53.687 GB
+SIZE 83886080, REAL_BD 2.477 TB/s, BD/PAIR 309.583 GB/s, time 2.710e-02 s, comm_vol 67.109 GB
+SIZE 100663296, REAL_BD 2.55 TB/s, BD/PAIR 318.728 GB/s, time 3.158e-02 s, comm_vol 80.531 GB
+SIZE 117440512, REAL_BD 2.594 TB/s, BD/PAIR 324.297 GB/s, time 3.621e-02 s, comm_vol 93.952 GB
+SIZE 134217728, REAL_BD 2.628 TB/s, BD/PAIR 328.546 GB/s, time 4.085e-02 s, comm_vol 107.374 GB
+SIZE 167772160, REAL_BD 2.672 TB/s, BD/PAIR 333.957 GB/s, time 5.024e-02 s, comm_vol 134.218 GB
+SIZE 201326592, REAL_BD 2.71 TB/s, BD/PAIR 338.801 GB/s, time 5.942e-02 s, comm_vol 161.061 GB
+SIZE 234881024, REAL_BD 2.736 TB/s, BD/PAIR 342.009 GB/s, time 6.868e-02 s, comm_vol 187.905 GB
+SIZE 268435456, REAL_BD 2.75 TB/s, BD/PAIR 343.793 GB/s, time 7.808e-02 s, comm_vol 214.748 GB
+SIZE 335544320, REAL_BD 2.55 TB/s, BD/PAIR 318.776 GB/s, time 1.053e-01 s, comm_vol 268.435 GB
+SIZE 402653184, REAL_BD 2.57 TB/s, BD/PAIR 321.307 GB/s, time 1.253e-01 s, comm_vol 322.123 GB
+SIZE 469762048, REAL_BD 2.577 TB/s, BD/PAIR 322.18 GB/s, time 1.458e-01 s, comm_vol 375.81 GB
+SIZE 536870912, REAL_BD 2.569 TB/s, BD/PAIR 321.183 GB/s, time 1.672e-01 s, comm_vol 429.497 GB
+SIZE 671088640, REAL_BD 2.572 TB/s, BD/PAIR 321.485 GB/s, time 2.087e-01 s, comm_vol 536.871 GB
+SIZE 805306368, REAL_BD 2.569 TB/s, BD/PAIR 321.088 GB/s, time 2.508e-01 s, comm_vol 644.245 GB
+SIZE 939524096, REAL_BD 2.568 TB/s, BD/PAIR 320.96 GB/s, time 2.927e-01 s, comm_vol 751.619 GB
+SIZE 1073741824, REAL_BD 2.566 TB/s, BD/PAIR 320.725 GB/s, time 3.348e-01 s, comm_vol 858.993 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]]
+SIZE 8192, REAL_BD 1.57 GB/s, BD/PAIR 196.196 MB/s, time 4.175e-03 s, comm_vol 6.554 MB
+SIZE 16384, REAL_BD 3.443 GB/s, BD/PAIR 430.33 MB/s, time 3.807e-03 s, comm_vol 13.107 MB
+SIZE 24576, REAL_BD 5.1 GB/s, BD/PAIR 637.511 MB/s, time 3.855e-03 s, comm_vol 19.661 MB
+SIZE 32768, REAL_BD 6.834 GB/s, BD/PAIR 854.295 MB/s, time 3.836e-03 s, comm_vol 26.214 MB
+SIZE 40960, REAL_BD 8.608 GB/s, BD/PAIR 1.076 GB/s, time 3.807e-03 s, comm_vol 32.768 MB
+SIZE 49152, REAL_BD 10.39 GB/s, BD/PAIR 1.299 GB/s, time 3.785e-03 s, comm_vol 39.322 MB
+SIZE 57344, REAL_BD 4.507 GB/s, BD/PAIR 563.42 MB/s, time 1.018e-02 s, comm_vol 45.875 MB
+SIZE 65536, REAL_BD 13.551 GB/s, BD/PAIR 1.694 GB/s, time 3.869e-03 s, comm_vol 52.429 MB
+SIZE 81920, REAL_BD 5.567 GB/s, BD/PAIR 695.837 MB/s, time 1.177e-02 s, comm_vol 65.536 MB
+SIZE 98304, REAL_BD 5.694 GB/s, BD/PAIR 711.738 MB/s, time 1.381e-02 s, comm_vol 78.643 MB
+SIZE 114688, REAL_BD 24.059 GB/s, BD/PAIR 3.007 GB/s, time 3.814e-03 s, comm_vol 91.75 MB
+SIZE 131072, REAL_BD 27.774 GB/s, BD/PAIR 3.472 GB/s, time 3.775e-03 s, comm_vol 104.858 MB
+SIZE 163840, REAL_BD 33.686 GB/s, BD/PAIR 4.211 GB/s, time 3.891e-03 s, comm_vol 131.072 MB
+SIZE 196608, REAL_BD 31.559 GB/s, BD/PAIR 3.945 GB/s, time 4.984e-03 s, comm_vol 157.286 MB
+SIZE 229376, REAL_BD 48.4 GB/s, BD/PAIR 6.05 GB/s, time 3.791e-03 s, comm_vol 183.501 MB
+SIZE 262144, REAL_BD 55.165 GB/s, BD/PAIR 6.896 GB/s, time 3.802e-03 s, comm_vol 209.715 MB
+SIZE 327680, REAL_BD 69.859 GB/s, BD/PAIR 8.732 GB/s, time 3.752e-03 s, comm_vol 262.144 MB
+SIZE 393216, REAL_BD 81.773 GB/s, BD/PAIR 10.222 GB/s, time 3.847e-03 s, comm_vol 314.573 MB
+SIZE 458752, REAL_BD 27.726 GB/s, BD/PAIR 3.466 GB/s, time 1.324e-02 s, comm_vol 367.002 MB
+SIZE 524288, REAL_BD 29.945 GB/s, BD/PAIR 3.743 GB/s, time 1.401e-02 s, comm_vol 419.43 MB
+SIZE 655360, REAL_BD 140.477 GB/s, BD/PAIR 17.56 GB/s, time 3.732e-03 s, comm_vol 524.288 MB
+SIZE 786432, REAL_BD 167.406 GB/s, BD/PAIR 20.926 GB/s, time 3.758e-03 s, comm_vol 629.146 MB
+SIZE 917504, REAL_BD 194.69 GB/s, BD/PAIR 24.336 GB/s, time 3.770e-03 s, comm_vol 734.003 MB
+SIZE 1048576, REAL_BD 64.285 GB/s, BD/PAIR 8.036 GB/s, time 1.305e-02 s, comm_vol 838.861 MB
+SIZE 1310720, REAL_BD 221.978 GB/s, BD/PAIR 27.747 GB/s, time 4.724e-03 s, comm_vol 1.049 GB
+SIZE 1572864, REAL_BD 333.354 GB/s, BD/PAIR 41.669 GB/s, time 3.775e-03 s, comm_vol 1.258 GB
+SIZE 1835008, REAL_BD 387.225 GB/s, BD/PAIR 48.403 GB/s, time 3.791e-03 s, comm_vol 1.468 GB
+SIZE 2097152, REAL_BD 116.199 GB/s, BD/PAIR 14.525 GB/s, time 1.444e-02 s, comm_vol 1.678 GB
+SIZE 2621440, REAL_BD 143.83 GB/s, BD/PAIR 17.979 GB/s, time 1.458e-02 s, comm_vol 2.097 GB
+SIZE 3145728, REAL_BD 660.615 GB/s, BD/PAIR 82.577 GB/s, time 3.809e-03 s, comm_vol 2.517 GB
+SIZE 3670016, REAL_BD 217.56 GB/s, BD/PAIR 27.195 GB/s, time 1.350e-02 s, comm_vol 2.936 GB
+SIZE 4194304, REAL_BD 874.907 GB/s, BD/PAIR 109.363 GB/s, time 3.835e-03 s, comm_vol 3.355 GB
+SIZE 5242880, REAL_BD 1.095 TB/s, BD/PAIR 136.883 GB/s, time 3.830e-03 s, comm_vol 4.194 GB
+SIZE 6291456, REAL_BD 1.275 TB/s, BD/PAIR 159.398 GB/s, time 3.947e-03 s, comm_vol 5.033 GB
+SIZE 7340032, REAL_BD 413.329 GB/s, BD/PAIR 51.666 GB/s, time 1.421e-02 s, comm_vol 5.872 GB
+SIZE 8388608, REAL_BD 1.321 TB/s, BD/PAIR 165.069 GB/s, time 5.082e-03 s, comm_vol 6.711 GB
+SIZE 10485760, REAL_BD 1.442 TB/s, BD/PAIR 180.3 GB/s, time 5.816e-03 s, comm_vol 8.389 GB
+SIZE 12582912, REAL_BD 754.288 GB/s, BD/PAIR 94.286 GB/s, time 1.335e-02 s, comm_vol 10.066 GB
+SIZE 14680064, REAL_BD 1.69 TB/s, BD/PAIR 211.22 GB/s, time 6.950e-03 s, comm_vol 11.744 GB
+SIZE 16777216, REAL_BD 1.699 TB/s, BD/PAIR 212.434 GB/s, time 7.898e-03 s, comm_vol 13.422 GB
+SIZE 20971520, REAL_BD 1.858 TB/s, BD/PAIR 232.222 GB/s, time 9.031e-03 s, comm_vol 16.777 GB
+SIZE 25165824, REAL_BD 1.9 TB/s, BD/PAIR 237.524 GB/s, time 1.060e-02 s, comm_vol 20.133 GB
+SIZE 29360128, REAL_BD 1.369 TB/s, BD/PAIR 171.125 GB/s, time 1.716e-02 s, comm_vol 23.488 GB
+SIZE 33554432, REAL_BD 1.684 TB/s, BD/PAIR 210.515 GB/s, time 1.594e-02 s, comm_vol 26.844 GB
+SIZE 41943040, REAL_BD 2.19 TB/s, BD/PAIR 273.693 GB/s, time 1.532e-02 s, comm_vol 33.554 GB
+SIZE 50331648, REAL_BD 1.675 TB/s, BD/PAIR 209.387 GB/s, time 2.404e-02 s, comm_vol 40.265 GB
+SIZE 58720256, REAL_BD 2.357 TB/s, BD/PAIR 294.564 GB/s, time 1.993e-02 s, comm_vol 46.976 GB
+SIZE 67108864, REAL_BD 2.412 TB/s, BD/PAIR 301.526 GB/s, time 2.226e-02 s, comm_vol 53.687 GB
+SIZE 83886080, REAL_BD 2.489 TB/s, BD/PAIR 311.124 GB/s, time 2.696e-02 s, comm_vol 67.109 GB
+SIZE 100663296, REAL_BD 2.547 TB/s, BD/PAIR 318.355 GB/s, time 3.162e-02 s, comm_vol 80.531 GB
+SIZE 117440512, REAL_BD 2.593 TB/s, BD/PAIR 324.103 GB/s, time 3.624e-02 s, comm_vol 93.952 GB
+SIZE 134217728, REAL_BD 2.625 TB/s, BD/PAIR 328.176 GB/s, time 4.090e-02 s, comm_vol 107.374 GB
+SIZE 167772160, REAL_BD 2.673 TB/s, BD/PAIR 334.158 GB/s, time 5.021e-02 s, comm_vol 134.218 GB
+SIZE 201326592, REAL_BD 2.712 TB/s, BD/PAIR 338.981 GB/s, time 5.939e-02 s, comm_vol 161.061 GB
+SIZE 234881024, REAL_BD 2.739 TB/s, BD/PAIR 342.41 GB/s, time 6.860e-02 s, comm_vol 187.905 GB
+SIZE 268435456, REAL_BD 2.755 TB/s, BD/PAIR 344.437 GB/s, time 7.793e-02 s, comm_vol 214.748 GB
+SIZE 335544320, REAL_BD 2.552 TB/s, BD/PAIR 319.032 GB/s, time 1.052e-01 s, comm_vol 268.435 GB
+SIZE 402653184, REAL_BD 2.567 TB/s, BD/PAIR 320.889 GB/s, time 1.255e-01 s, comm_vol 322.123 GB
+SIZE 469762048, REAL_BD 2.572 TB/s, BD/PAIR 321.504 GB/s, time 1.461e-01 s, comm_vol 375.81 GB
+SIZE 536870912, REAL_BD 2.573 TB/s, BD/PAIR 321.663 GB/s, time 1.669e-01 s, comm_vol 429.497 GB
+SIZE 671088640, REAL_BD 2.573 TB/s, BD/PAIR 321.635 GB/s, time 2.086e-01 s, comm_vol 536.871 GB
+SIZE 805306368, REAL_BD 2.573 TB/s, BD/PAIR 321.649 GB/s, time 2.504e-01 s, comm_vol 644.245 GB
+SIZE 939524096, REAL_BD 2.564 TB/s, BD/PAIR 320.531 GB/s, time 2.931e-01 s, comm_vol 751.619 GB
+SIZE 1073741824, REAL_BD 2.565 TB/s, BD/PAIR 320.583 GB/s, time 3.349e-01 s, comm_vol 858.993 GB
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+[ERROR]: Not found /home/yanghy/yqg/UltraAttn/third_party/comm_test/utils/distributed/device_communicators/../../../third_party/nccl/build/lib/libnccl.so.2 !!!
+NCCL version 2.26.2+cuda12.8
+[rank0]:[W403 18:00:56.556228948 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+NCCL version 2.26.2+cuda12.8
+NCCL version 2.26.2+cuda12.8
+NCCL version 2.26.2+cuda12.8
+NCCL version 2.26.2+cuda12.8
+NCCL version 2.26.2+cuda12.8
+NCCL version 2.26.2+cuda12.8
++ set +x

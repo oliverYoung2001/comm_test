@@ -26,7 +26,8 @@ class Cb_Communicator():
         except Exception:
             # disable because of missing NCCL library
             # e.g. in a non-GPU environment
-            raise Exception("NCCL library not found")
+            if self.comm_module == 'raw-nccl':
+                raise Exception("NCCL library not found")
     
     def send(self, t: torch.Tensor, peer: int, stream = None):
         if self.comm_module == 'torch-distributed':

@@ -118,6 +118,17 @@ HOSTs="g42,g44"
 CPU_PER_TASK=13
 # HOSTs="None"
 
+# QC_H20
+CLUSTER_NAME=QC_H20
+PARTITION=debug
+GPU_NUMs="8"
+HOSTs="bjdb-h20-node-033"
+HOSTs="bjdb-h20-node-040"
+GPU_NUMs="16"
+HOSTs="bjdb-h20-node-[039-040]"
+HOSTs="bjdb-h20-node-[037,040]"
+CPU_PER_TASK=$((224 / 8))   # 28
+
 export MASTER_PORT=$((RANDOM % 12000 + 10000))
 
 
@@ -198,11 +209,9 @@ export NCCL_DEBUG_SUBSYS=NET
 
 
 # Comm Module
-# COMM_MODULE='torch-distributed'
-# COMM_MODULE='raw-nccl'
-COMM_MODULEs="raw-nccl torch-distributed"
-COMM_MODULEs="raw-nccl"
-
+# COMM_MODULEs="raw-nccl torch-distributed"
+# COMM_MODULEs="raw-nccl"
+COMM_MODULEs='torch-distributed'
 
 for COMM_MODULE in $COMM_MODULEs; do
 echo "COMM_MODULE: ${COMM_MODULE}"
@@ -221,7 +230,7 @@ python $EXECUBLE \
     --config ./scripts/configs/${CP_FILE_NAME}_${GPU_NUM}.json \
     --comm-module $COMM_MODULE \
     $LOGGING_ARGS \
-    2>/dev/null # Disable Warning
+    # 2>/dev/null # Disable Warning
 set +x
 # exit 0
 
