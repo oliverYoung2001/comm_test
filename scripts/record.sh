@@ -9,7 +9,7 @@ ibstatus
 # cpu & gpu topo
 lstopo
 # visualize
-lstopo --of png > output.png    # can see how cpu & gpu are connected
+lstopo --of png > lstopo.png    # can see how cpu & gpu are connected
 
 # pcie attributes   # [NOTE]: no cpu !!! 
 # [NOTE]: root complexes are the highest level nodes in a pcie tree

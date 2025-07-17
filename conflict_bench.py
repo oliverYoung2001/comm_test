@@ -70,9 +70,6 @@ MSG_SIZES = [
     pow(BYTE_MULTPLE_UP, 2) * 256,
     pow(BYTE_MULTPLE_UP, 2) * 512,
     pow(BYTE_MULTPLE_UP, 3),         # 1GB
-    # pow(BYTE_MULTPLE_UP, 3) * 2,
-    # pow(BYTE_MULTPLE_UP, 3) * 4,     # 4GB
-    # pow(BYTE_MULTPLE_UP, 3) * 16,    # 16GB
 ]
 
 # MSG_SIZES = [
@@ -116,6 +113,7 @@ def parse_args():
     parser.add_argument('--profiler-with-tensorboard', action='store_true', default=False, help='whether to profile with tensorboard')
     parser.add_argument('--tb-dir', default=None, type=str, help='where to storage tensorboard files')
     parser.add_argument('--comm-module', default='torch-distributed', choices=['torch-distributed', 'raw-nccl'], type=str, help='which module to use for communication')
+    parser.add_argument('--output', default=None, type=str, help='where to record the results')
 
     args = parser.parse_args()
     return args
@@ -161,7 +159,7 @@ def main():
     for pattern in patterns:
         if max(max(pattern)) >= world_size:
             continue
-        print_rank_0(f'{pattern}')
+        print_rank_0(f'{pattern}', output_file=args.output)
         # 1 Use minimized ProcessGroup, deduplicate and sort
         ranks = [rank for pair in pattern for rank in pair]
         ranks = sorted(list(set(ranks)))
@@ -245,10 +243,10 @@ def main():
             BD = calc / t_d # B/s
             if len(multiplying_powers) == 1: 
                 print_rank_0(f'SIZE {convert_size(SIZE)}, REAL_BD {convert_throughput(BD)}/s, BD/PAIR {convert_throughput(BD/len(pattern))}/s, '
-                             f'time {t_d:.3e} s, time/iter {t_d/TIMES:.3e}, comm_vol {convert_throughput(calc)}')
+                             f'time {t_d:.3e} s, time/iter {t_d/TIMES:.3e}, comm_vol {convert_throughput(calc)}', output_file=args.output)
             else:   # for benchmark
                 print_rank_0(f'SIZE {SIZE}, REAL_BD {convert_throughput(BD)}/s, BD/PAIR {convert_throughput(BD/len(pattern))}/s, '
-                             f'time {t_d:.3e} s, comm_vol {convert_throughput(calc)}')
+                             f'time {t_d:.3e} s, comm_vol {convert_throughput(calc)}', output_file=args.output)
 
 
         del a, b

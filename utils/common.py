@@ -25,13 +25,20 @@ def execute_comm_ops(ops, barrier=False, light_barrier=False):
     elif light_barrier:
         torch.cuda.synchronize() 
 
-def print_rank_0(message):
+def append_to_file(message: str, output_file: str, end='\n'):
+    if output_file:
+        with open(output_file, 'a') as f:
+            f.write(message + end)
+    
+def print_rank_0(message, output_file: str = None):
     """If distributed is initialized, print only on rank 0."""
     if torch.distributed.is_initialized():
         if torch.distributed.get_rank() == 0:
             print(message, flush=True)
+            append_to_file(message, output_file)
     else:
         print(message, flush=True)
+        append_to_file(message, output_file)
 
 # Helper function to pretty-print message sizes
 def convert_size(size_bytes, infix=' ', suffix='B'):
