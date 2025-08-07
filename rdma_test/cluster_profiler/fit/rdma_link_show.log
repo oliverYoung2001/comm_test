@@ -1,0 +1,9 @@
+link mlx5_0/1 subnet_prefix fe80:0000:0000:0000 lid 599 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_1/1 subnet_prefix fe80:0000:0000:0000 lid 602 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_2/1 subnet_prefix fe80:0000:0000:0000 lid 586 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_3/1 subnet_prefix fe80:0000:0000:0000 lid 597 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_4/1 subnet_prefix fe80:0000:0000:0000 lid 592 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_5/1 subnet_prefix fe80:0000:0000:0000 lid 1005 sm_lid 30 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_6/1 subnet_prefix fe80:0000:0000:0000 lid 601 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_7/1 subnet_prefix fe80:0000:0000:0000 lid 596 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 
+link mlx5_8/1 subnet_prefix fe80:0000:0000:0000 lid 600 sm_lid 1 lmc 0 state ACTIVE physical_state LINK_UP 

@@ -1,5 +1,4 @@
 .vscode/
-logs/
 tb/
 core
 
@@ -7,8 +6,13 @@ tmp/
 
 third_party/
 
+# all logs
+logs/
+rdma_test/logs/
+
 # all executable
 csrc/build/
+rdma_test/build/
 
 # reproduce sccl
 msccl-tools

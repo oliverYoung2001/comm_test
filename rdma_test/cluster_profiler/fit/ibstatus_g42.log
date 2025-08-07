@@ -1,0 +1,83 @@
+srun: job 109966 queued and waiting for resources
+srun: job 109966 has been allocated resources
+Infiniband device 'mlx5_0' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:3636
+	base lid:	 0x203
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_1' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:31d6
+	base lid:	 0x205
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_2' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:3822
+	base lid:	 0x204
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_3' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:299a
+	base lid:	 0x207
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_4' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:231e
+	base lid:	 0x206
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_5' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:2aee
+	base lid:	 0x3df
+	sm lid:		 0x1e
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_6' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:286a
+	base lid:	 0x20a
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_7' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:2302
+	base lid:	 0x208
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_8' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00d5:393a
+	base lid:	 0x209
+	sm lid:		 0x1
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 200 Gb/sec (4X HDR)
+	link_layer:	 InfiniBand
+

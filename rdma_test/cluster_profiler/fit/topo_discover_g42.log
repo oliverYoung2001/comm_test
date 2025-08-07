@@ -1,0 +1,227 @@
+GpuFreq=control_disabled
+Found 9 RDMA device(s)
+
+Device 0:
+  Name: mlx5_0
+  GUID: 0x4239d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x4239d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 599
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:39:42
+
+Device 1:
+  Name: mlx5_1
+  GUID: 0x5e28d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x5e28d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 602
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:28:5e
+
+Device 2:
+  Name: mlx5_2
+  GUID: 0x6228d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x6228d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 586
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:28:62
+
+Device 3:
+  Name: mlx5_3
+  GUID: 0x3239d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x3239d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 597
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:39:32
+
+Device 4:
+  Name: mlx5_4
+  GUID: 0x6e28d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x6e28d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 592
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:28:6e
+
+Device 5:
+  Name: mlx5_5
+  GUID: 0xfa24d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0xfa24d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 1005
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:24:fa
+
+Device 6:
+  Name: mlx5_6
+  GUID: 0x4236d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x4236d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 601
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:36:42
+
+Device 7:
+  Name: mlx5_7
+  GUID: 0x5623d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x5623d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 596
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:23:56
+
+Device 8:
+  Name: mlx5_8
+  GUID: 0x3229d50003ae6d94
+  Firmware Version: 20.39.3004
+  Node GUID: 0x3229d50003ae6d94
+  Max MR Size: 0xffffffffffffffff
+  Max QPs: 131072
+  Max CQs: 16777216
+  Port 1:
+    State: Active
+    LID: 600
+    MTU: 5 bytes
+    GID[0]: fe:80:00:00:00:00:00:00:94:6d:ae:03:00:d5:29:32
+
+Found 9 Infiniband device(s)
+
+Infiniband Device 0:
+    Name: mlx5_0
+    Pci_bus_id: 0000:0e:00.0
+    Numa_node: 0
+
+Infiniband Device 1:
+    Name: mlx5_1
+    Pci_bus_id: 0000:35:00.0
+    Numa_node: 0
+
+Infiniband Device 2:
+    Name: mlx5_2
+    Pci_bus_id: 0000:47:00.0
+    Numa_node: 0
+
+Infiniband Device 3:
+    Name: mlx5_3
+    Pci_bus_id: 0000:5b:00.0
+    Numa_node: 0
+
+Infiniband Device 4:
+    Name: mlx5_4
+    Pci_bus_id: 0000:86:00.0
+    Numa_node: 1
+
+Infiniband Device 5:
+    Name: mlx5_5
+    Pci_bus_id: 0000:98:00.0
+    Numa_node: 1
+
+Infiniband Device 6:
+    Name: mlx5_6
+    Pci_bus_id: 0000:af:00.0
+    Numa_node: 1
+
+Infiniband Device 7:
+    Name: mlx5_7
+    Pci_bus_id: 0000:c3:00.0
+    Numa_node: 1
+
+Infiniband Device 8:
+    Name: mlx5_8
+    Pci_bus_id: 0000:d6:00.0
+    Numa_node: 1
+
+Found 10 storage device(s)
+
+Storage device name: cuda:7
+Entry Name: cuda:7
+    preferred_hca:  mlx5_8
+    avail_hca:  mlx5_0 mlx5_1 mlx5_2 mlx5_3 mlx5_4 mlx5_5 mlx5_6 mlx5_7
+
+Storage device name: cuda:6
+Entry Name: cuda:6
+    preferred_hca:  mlx5_7
+    avail_hca:  mlx5_0 mlx5_1 mlx5_2 mlx5_3 mlx5_4 mlx5_5 mlx5_6 mlx5_8
+
+Storage device name: cuda:4
+Entry Name: cuda:4
+    preferred_hca:  mlx5_4
+    avail_hca:  mlx5_0 mlx5_1 mlx5_2 mlx5_3 mlx5_5 mlx5_6 mlx5_7 mlx5_8
+
+Storage device name: cuda:3
+Entry Name: cuda:3
+    preferred_hca:  mlx5_3
+    avail_hca:  mlx5_0 mlx5_1 mlx5_2 mlx5_4 mlx5_5 mlx5_6 mlx5_7 mlx5_8
+
+Storage device name: cuda:2
+Entry Name: cuda:2
+    preferred_hca:  mlx5_2
+    avail_hca:  mlx5_0 mlx5_1 mlx5_3 mlx5_4 mlx5_5 mlx5_6 mlx5_7 mlx5_8
+
+Storage device name: cuda:5
+Entry Name: cuda:5
+    preferred_hca:  mlx5_6
+    avail_hca:  mlx5_0 mlx5_1 mlx5_2 mlx5_3 mlx5_4 mlx5_5 mlx5_7 mlx5_8
+
+Storage device name: cuda:1
+Entry Name: cuda:1
+    preferred_hca:  mlx5_1
+    avail_hca:  mlx5_0 mlx5_2 mlx5_3 mlx5_4 mlx5_5 mlx5_6 mlx5_7 mlx5_8
+
+Storage device name: cuda:0
+Entry Name: cuda:0
+    preferred_hca:  mlx5_0
+    avail_hca:  mlx5_1 mlx5_2 mlx5_3 mlx5_4 mlx5_5 mlx5_6 mlx5_7 mlx5_8
+
+Storage device name: cpu:1
+Entry Name: cpu:1
+    preferred_hca:  mlx5_4 mlx5_5 mlx5_6 mlx5_7 mlx5_8
+    avail_hca:  mlx5_0 mlx5_1 mlx5_2 mlx5_3
+
+Storage device name: cpu:0
+Entry Name: cpu:0
+    preferred_hca:  mlx5_0 mlx5_1 mlx5_2 mlx5_3
+    avail_hca:  mlx5_4 mlx5_5 mlx5_6 mlx5_7 mlx5_8
