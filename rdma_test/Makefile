@@ -12,6 +12,12 @@ rdma_client: build_dir
 rdma_p2p_gpt: build_dir
 	nvcc -std=c++17 rdma_p2p_gpt.cpp -o build/rdma_p2p_gpt -libverbs -lrdmacm
 
+rdma_p2p_gpt5: build_dir
+	nvcc -std=c++17 rdma_p2p_gpt5.cpp -o build/rdma_p2p_gpt5 -libverbs -lrdmacm
+
+rdma_p2p_claude: build_dir
+	nvcc -std=c++17 rdma_p2p_claude.cpp -o build/rdma_p2p_claude -libverbs -lrdmacm
+
 topo_discover: build_dir
 	nvcc topo_discover.cpp -o build/topo_discover -libverbs -lrdmacm
 

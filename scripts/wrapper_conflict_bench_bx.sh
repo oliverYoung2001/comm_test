@@ -13,8 +13,8 @@ CP_FILE_NAMEs="small"
 # bx
 CLUSTER_NAME=bx
 GPU_NUMs="8"
-GPU_NUMs="16"
-GPU_NUMs="24"
+# GPU_NUMs="16"
+# GPU_NUMs="24"
 # GPU_NUMs="32"
 # GPU_NUMs="48"
 # GPU_NUMs="64"
@@ -65,6 +65,7 @@ SLURM_ARGS="
 -K \
 --cpu-bind=none \
 "
+# --exclusive \
 # --cpu-bind=none \
 if [ "$HOST" != "None" ]; then
     SLURM_ARGS="$SLURM_ARGS \

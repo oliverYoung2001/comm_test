@@ -95,7 +95,7 @@ MSG_SIZES = [
 # ]
 
 multiplying_powers = [1]
-multiplying_powers = [1, 2, 3, 4, 5, 6, 7]
+# multiplying_powers = [1, 2, 3, 4, 5, 6, 7]
 
 # GPU_NUM = 8
 WARM_UP = 5

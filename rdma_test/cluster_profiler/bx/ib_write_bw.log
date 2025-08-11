@@ -1,0 +1,53 @@
+rm -f rdma_p2p_gpt.o
+rm -f build/rdma_p2p_gpt
+mkdir -p build
+nvcc -std=c++17 rdma_p2p_gpt.cpp -o build/rdma_p2p_gpt -libverbs -lrdmacm
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Started process0 with PID 396511
+Started process1 with PID 396514
+Conflicting CPU frequency values detected: 3200.000000 != 2701.000000. CPU Frequency is not max.
+---------------------------------------------------------------------------------------
+                    RDMA_Write BW Test
+ Dual-port       : OFF		Device         : mlx5_3
+ Number of qps   : 1		Transport type : IB
+ Connection type : RC		Using SRQ      : OFF
+ PCIe relax order: ON		Lock-free      : OFF
+ ibv_wr* API     : ON		Using DDP      : OFF
+ TX depth        : 128
+ CQ Moderation   : 1
+ Mtu             : 4096[B]
+ Link type       : IB
+ Max inline data : 0[B]
+ rdma_cm QPs	 : OFF
+ Data ex. method : Ethernet
+---------------------------------------------------------------------------------------
+ local address: LID 0x73 QPN 0x3011 PSN 0x79d323 RKey 0x1fff00 VAddr 0x0014ee6747b000
+ remote address: LID 0x7e QPN 0x389f PSN 0xba8cdb RKey 0x1fff00 VAddr 0x00151818b5b000
+---------------------------------------------------------------------------------------
+ #bytes     #iterations    BW peak[MiB/sec]    BW average[MiB/sec]   MsgRate[Mpps]
+ 65536      5000             43616.23            43600.61		     0.697610
+************************************
+* Waiting for client to connect... *
+************************************
+---------------------------------------------------------------------------------------
+                    RDMA_Write BW Test
+ Dual-port       : OFF		Device         : mlx5_4
+ Number of qps   : 1		Transport type : IB
+ Connection type : RC		Using SRQ      : OFF
+ PCIe relax order: ON		Lock-free      : OFF
+ ibv_wr* API     : ON		Using DDP      : OFF
+ CQ Moderation   : 1
+ Mtu             : 4096[B]
+ Link type       : IB
+ Max inline data : 0[B]
+ rdma_cm QPs	 : OFF
+ Data ex. method : Ethernet
+---------------------------------------------------------------------------------------
+ local address: LID 0x7e QPN 0x389f PSN 0xba8cdb RKey 0x1fff00 VAddr 0x00151818b5b000
+ remote address: LID 0x73 QPN 0x3011 PSN 0x79d323 RKey 0x1fff00 VAddr 0x0014ee6747b000
+---------------------------------------------------------------------------------------
+ #bytes     #iterations    BW peak[MiB/sec]    BW average[MiB/sec]   MsgRate[Mpps]
+ 65536      5000             43616.23            43600.61		     0.697610
+---------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------

@@ -60,6 +60,7 @@ int main(int argc, char** argv) {
     CUDA_CHECK(cudaSetDevice(1));
     void* buf1; CUDA_CHECK(cudaMalloc(&buf1, SIZE));
     CUDA_CHECK(cudaMemset(buf1, 0, SIZE));
+    uint8_t host_buf[SIZE];
 
     // 3. RDMA setup
     ibv_device** dev_list = ibv_get_device_list(nullptr);
@@ -73,12 +74,12 @@ int main(int argc, char** argv) {
         }
     }
     if (! ctx) die("Failed to find NIC");
-    ibv_pd* pd = ibv_alloc_pd(ctx);
-    ibv_cq* cq = ibv_create_cq(ctx, 16, nullptr, nullptr, 0);
-    ibv_mr* mr0 = ibv_reg_mr(pd, buf0, SIZE, IBV_ACCESS_LOCAL_WRITE | IBV_ACCESS_REMOTE_WRITE);
+    ibv_pd* pd = ibv_alloc_pd(ctx); // pd: Protection Domain
+    ibv_cq* cq = ibv_create_cq(ctx, 16, nullptr, nullptr, 0);   // cq: completion queue
+    ibv_mr* mr0 = ibv_reg_mr(pd, buf0, SIZE, IBV_ACCESS_LOCAL_WRITE | IBV_ACCESS_REMOTE_WRITE); // mr: Memory Region
     ibv_mr* mr1 = ibv_reg_mr(pd, buf1, SIZE, IBV_ACCESS_LOCAL_WRITE | IBV_ACCESS_REMOTE_WRITE);
     ibv_qp_init_attr init{.send_cq=cq, .recv_cq=cq, .cap={.max_send_wr=1, .max_recv_wr=1, .max_send_sge=1, .max_recv_sge=1}, .qp_type=IBV_QPT_RC};
-    ibv_qp* qp = ibv_create_qp(pd, &init);
+    ibv_qp* qp = ibv_create_qp(pd, &init);  // qp: queue pair
 
     // 4. Query port to get LID
     ibv_port_attr port_attr;
@@ -109,7 +110,10 @@ int main(int argc, char** argv) {
     ibv_modify_qp(qp, &attr, IBV_QP_STATE|IBV_QP_TIMEOUT|IBV_QP_RETRY_CNT|IBV_QP_RNR_RETRY|IBV_QP_SQ_PSN|IBV_QP_MAX_QP_RD_ATOMIC);
 
     // 7. RDMA Write op
-    ibv_sge sge{(uint64_t)buf0, SIZE, mr0->lkey};
+    //      7.1 prepare wr
+    //      7.2 call ibv_post_send
+    //      7.3 wait for wc(work completion)
+    ibv_sge sge{(uint64_t)buf0, SIZE, mr0->lkey};   // sge: scatter gather elements
     // ibv_send_wr wr{.opcode=IBV_WR_RDMA_WRITE, .sg_list=&sge, .num_sge=1, .send_flags=IBV_SEND_SIGNALED};
     ibv_send_wr wr;
     wr.opcode = IBV_WR_RDMA_WRITE;
@@ -121,14 +125,18 @@ int main(int argc, char** argv) {
 
     wr.wr.rdma.remote_addr = remote.addr; wr.wr.rdma.rkey = remote.rkey;
     ibv_send_wr* bad_wr;
+
+    CUDA_CHECK(cudaSetDevice(1));
+    CUDA_CHECK(cudaMemcpy(host_buf, buf1, SIZE, cudaMemcpyDeviceToHost));
+    std::cout<<"Received byte before p2p: 0x"<< std::hex<<(int)host_buf[0] << " on " << (is_server ? "server" : "client") <<std::endl;
+
     ibv_post_send(qp, &wr, &bad_wr);
 
-    ibv_wc wc;
+    ibv_wc wc;  // wc: work completion
     while (ibv_poll_cq(cq, 1, &wc) == 0);
     if (wc.status != IBV_WC_SUCCESS) { std::cerr<<"RDMA write failed\n"; return 1; }
 
     CUDA_CHECK(cudaSetDevice(1));
-    uint8_t host_buf[SIZE];
     CUDA_CHECK(cudaMemcpy(host_buf, buf1, SIZE, cudaMemcpyDeviceToHost));
     std::cout<<"Received byte: 0x"<< std::hex<<(int)host_buf[0] << " on " << (is_server ? "server" : "client") <<std::endl;
 

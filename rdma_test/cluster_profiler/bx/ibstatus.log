@@ -1,0 +1,81 @@
+Infiniband device 'mlx5_0' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00f3:98fa
+	base lid:	 0x4f
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_1' port 1 status:
+	default gid:	 fe80:0000:0000:0000:58a2:e103:000a:576c
+	base lid:	 0x5a
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_2' port 1 status:
+	default gid:	 fe80:0000:0000:0000:58a2:e103:000a:6054
+	base lid:	 0x60
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_3' port 1 status:
+	default gid:	 fe80:0000:0000:0000:58a2:e103:000b:454a
+	base lid:	 0x73
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_4' port 1 status:
+	default gid:	 fe80:0000:0000:0000:58a2:e103:0009:bd3c
+	base lid:	 0x7e
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_7' port 1 status:
+	default gid:	 fe80:0000:0000:0000:58a2:e103:000a:582c
+	base lid:	 0x66
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_8' port 1 status:
+	default gid:	 fe80:0000:0000:0000:946d:ae03:00f3:a092
+	base lid:	 0x69
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_9' port 1 status:
+	default gid:	 fe80:0000:0000:0000:58a2:e103:000a:601c
+	base lid:	 0x6b
+	sm lid:		 0x50
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 400 Gb/sec (4X NDR)
+	link_layer:	 InfiniBand
+
+Infiniband device 'mlx5_bond_0' port 1 status:
+	default gid:	 fe80:0000:0000:0000:948b:85ff:fe8d:68a3
+	base lid:	 0x0
+	sm lid:		 0x0
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 100 Gb/sec (4X EDR)
+	link_layer:	 Ethernet
+

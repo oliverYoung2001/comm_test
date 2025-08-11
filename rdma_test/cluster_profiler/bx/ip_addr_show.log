@@ -1,0 +1,12 @@
+lo               UNKNOWN        127.0.0.1/8 
+ens47f0np0       UP             
+ens47f1np1       DOWN           
+bond0            UP             10.254.46.179/28 fe80::948b:85ff:fe8d:68a3/64 
+ibs61            DOWN           
+ibs64            DOWN           
+ibs66            DOWN           
+ibs69            DOWN           
+ibs73            DOWN           
+ibs76            DOWN           
+ibs78            DOWN           
+ibs81            DOWN           

@@ -1,0 +1,359 @@
+CP_FILE_NAME: small_8
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+COMM_MODULE: raw-nccl
++ srun -p H100 -N 1 --ntasks-per-node=8 --gres=gpu:8 -K --cpu-bind=none -w 'g[0290]' --cpus-per-task=22 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json --comm-module raw-nccl --output './prof_data/tmp/cb_8_g[0290]_all.log'
+LOCAL_RANK: 3, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+LOCAL_RANK: 4, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+LOCAL_RANK: 5, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+LOCAL_RANK: 6, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+LOCAL_RANK: 1, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+LOCAL_RANK: 2, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+LOCAL_RANK: 0, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+LOCAL_RANK: 7, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+[rank5]:[W811 21:30:25.583319030 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W811 21:30:25.780535174 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W811 21:30:26.196502650 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W811 21:30:26.223503239 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W811 21:30:26.274818968 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W811 21:30:26.288859290 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W811 21:30:26.333332139 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank0]:[W811 21:30:26.341531328 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[INFO]: Cluster init done !!!
+NCCL version 2.27.3+cuda12.9
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[[0, 1]]
+NCCL version 2.21.5+cuda12.8
+SIZE 8 KB, REAL_BD 1.062 GB/s, BD/PAIR 1.062 GB/s, time 7.713e-04 s, time/iter 7.713e-06, comm_vol 819.2 KB
+SIZE 16 KB, REAL_BD 1.778 GB/s, BD/PAIR 1.778 GB/s, time 9.212e-04 s, time/iter 9.212e-06, comm_vol 1.638 MB
+SIZE 32 KB, REAL_BD 3.368 GB/s, BD/PAIR 3.368 GB/s, time 9.730e-04 s, time/iter 9.730e-06, comm_vol 3.277 MB
+SIZE 64 KB, REAL_BD 6.155 GB/s, BD/PAIR 6.155 GB/s, time 1.065e-03 s, time/iter 1.065e-05, comm_vol 6.554 MB
+SIZE 128 KB, REAL_BD 12.192 GB/s, BD/PAIR 12.192 GB/s, time 1.075e-03 s, time/iter 1.075e-05, comm_vol 13.107 MB
+SIZE 256 KB, REAL_BD 23.928 GB/s, BD/PAIR 23.928 GB/s, time 1.096e-03 s, time/iter 1.096e-05, comm_vol 26.214 MB
+SIZE 512 KB, REAL_BD 46.639 GB/s, BD/PAIR 46.639 GB/s, time 1.124e-03 s, time/iter 1.124e-05, comm_vol 52.429 MB
+SIZE 1 MB, REAL_BD 85.532 GB/s, BD/PAIR 85.532 GB/s, time 1.226e-03 s, time/iter 1.226e-05, comm_vol 104.858 MB
+SIZE 2 MB, REAL_BD 133.842 GB/s, BD/PAIR 133.842 GB/s, time 1.567e-03 s, time/iter 1.567e-05, comm_vol 209.715 MB
+SIZE 4 MB, REAL_BD 195.86 GB/s, BD/PAIR 195.86 GB/s, time 2.141e-03 s, time/iter 2.141e-05, comm_vol 419.43 MB
+SIZE 8 MB, REAL_BD 255.015 GB/s, BD/PAIR 255.015 GB/s, time 3.289e-03 s, time/iter 3.289e-05, comm_vol 838.861 MB
+SIZE 16 MB, REAL_BD 299.352 GB/s, BD/PAIR 299.352 GB/s, time 5.605e-03 s, time/iter 5.605e-05, comm_vol 1.678 GB
+SIZE 32 MB, REAL_BD 326.59 GB/s, BD/PAIR 326.59 GB/s, time 1.027e-02 s, time/iter 1.027e-04, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 341.687 GB/s, BD/PAIR 341.687 GB/s, time 1.964e-02 s, time/iter 1.964e-04, comm_vol 6.711 GB
+SIZE 128 MB, REAL_BD 354.905 GB/s, BD/PAIR 354.905 GB/s, time 3.782e-02 s, time/iter 3.782e-04, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 358.534 GB/s, BD/PAIR 358.534 GB/s, time 7.487e-02 s, time/iter 7.487e-04, comm_vol 26.844 GB
+SIZE 512 MB, REAL_BD 369.02 GB/s, BD/PAIR 369.02 GB/s, time 1.455e-01 s, time/iter 1.455e-03, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 372.076 GB/s, BD/PAIR 372.076 GB/s, time 2.886e-01 s, time/iter 2.886e-03, comm_vol 107.374 GB
+[[0, 1], [1, 0]]
+SIZE 8 KB, REAL_BD 1.315 GB/s, BD/PAIR 657.603 MB/s, time 1.246e-03 s, time/iter 1.246e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 2.643 GB/s, BD/PAIR 1.322 GB/s, time 1.240e-03 s, time/iter 1.240e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 5.267 GB/s, BD/PAIR 2.633 GB/s, time 1.244e-03 s, time/iter 1.244e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 10.591 GB/s, BD/PAIR 5.295 GB/s, time 1.238e-03 s, time/iter 1.238e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 20.373 GB/s, BD/PAIR 10.186 GB/s, time 1.287e-03 s, time/iter 1.287e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 38.914 GB/s, BD/PAIR 19.457 GB/s, time 1.347e-03 s, time/iter 1.347e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 70.697 GB/s, BD/PAIR 35.348 GB/s, time 1.483e-03 s, time/iter 1.483e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 116.892 GB/s, BD/PAIR 58.446 GB/s, time 1.794e-03 s, time/iter 1.794e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 244.404 GB/s, BD/PAIR 122.202 GB/s, time 1.716e-03 s, time/iter 1.716e-05, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 356.622 GB/s, BD/PAIR 178.311 GB/s, time 2.352e-03 s, time/iter 2.352e-05, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 460.77 GB/s, BD/PAIR 230.385 GB/s, time 3.641e-03 s, time/iter 3.641e-05, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 544.523 GB/s, BD/PAIR 272.262 GB/s, time 6.162e-03 s, time/iter 6.162e-05, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 607.308 GB/s, BD/PAIR 303.654 GB/s, time 1.105e-02 s, time/iter 1.105e-04, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 650.96 GB/s, BD/PAIR 325.48 GB/s, time 2.062e-02 s, time/iter 2.062e-04, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 656.41 GB/s, BD/PAIR 328.205 GB/s, time 4.089e-02 s, time/iter 4.089e-04, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 665.488 GB/s, BD/PAIR 332.744 GB/s, time 8.067e-02 s, time/iter 8.067e-04, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 712.436 GB/s, BD/PAIR 356.218 GB/s, time 1.507e-01 s, time/iter 1.507e-03, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 705.704 GB/s, BD/PAIR 352.852 GB/s, time 3.043e-01 s, time/iter 3.043e-03, comm_vol 214.748 GB
+[[0, 1], [1, 2], [2, 3], [3, 0]]
+NCCL version 2.21.5+cuda12.8
+NCCL version 2.21.5+cuda12.8
+SIZE 8 KB, REAL_BD 2.591 GB/s, BD/PAIR 647.808 MB/s, time 1.265e-03 s, time/iter 1.265e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 5.29 GB/s, BD/PAIR 1.323 GB/s, time 1.239e-03 s, time/iter 1.239e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 10.632 GB/s, BD/PAIR 2.658 GB/s, time 1.233e-03 s, time/iter 1.233e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 21.255 GB/s, BD/PAIR 5.314 GB/s, time 1.233e-03 s, time/iter 1.233e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 41.188 GB/s, BD/PAIR 10.297 GB/s, time 1.273e-03 s, time/iter 1.273e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 74.67 GB/s, BD/PAIR 18.667 GB/s, time 1.404e-03 s, time/iter 1.404e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 138.981 GB/s, BD/PAIR 34.745 GB/s, time 1.509e-03 s, time/iter 1.509e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 238.862 GB/s, BD/PAIR 59.715 GB/s, time 1.756e-03 s, time/iter 1.756e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 470.505 GB/s, BD/PAIR 117.626 GB/s, time 1.783e-03 s, time/iter 1.783e-05, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 699.63 GB/s, BD/PAIR 174.907 GB/s, time 2.398e-03 s, time/iter 2.398e-05, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 932.345 GB/s, BD/PAIR 233.086 GB/s, time 3.599e-03 s, time/iter 3.599e-05, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 1.088 TB/s, BD/PAIR 271.904 GB/s, time 6.170e-03 s, time/iter 6.170e-05, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 1.21 TB/s, BD/PAIR 302.512 GB/s, time 1.109e-02 s, time/iter 1.109e-04, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 1.28 TB/s, BD/PAIR 320.123 GB/s, time 2.096e-02 s, time/iter 2.096e-04, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 1.31 TB/s, BD/PAIR 327.607 GB/s, time 4.097e-02 s, time/iter 4.097e-04, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 1.325 TB/s, BD/PAIR 331.139 GB/s, time 8.106e-02 s, time/iter 8.106e-04, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 1.39 TB/s, BD/PAIR 347.506 GB/s, time 1.545e-01 s, time/iter 1.545e-03, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 1.434 TB/s, BD/PAIR 358.554 GB/s, time 2.995e-01 s, time/iter 2.995e-03, comm_vol 429.497 GB
+[[0, 2], [1, 3], [2, 0], [3, 1]]
+SIZE 8 KB, REAL_BD 2.676 GB/s, BD/PAIR 668.998 MB/s, time 1.225e-03 s, time/iter 1.225e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 5.245 GB/s, BD/PAIR 1.311 GB/s, time 1.250e-03 s, time/iter 1.250e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 9.852 GB/s, BD/PAIR 2.463 GB/s, time 1.330e-03 s, time/iter 1.330e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 21.263 GB/s, BD/PAIR 5.316 GB/s, time 1.233e-03 s, time/iter 1.233e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 40.084 GB/s, BD/PAIR 10.021 GB/s, time 1.308e-03 s, time/iter 1.308e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 77.704 GB/s, BD/PAIR 19.426 GB/s, time 1.349e-03 s, time/iter 1.349e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 141.348 GB/s, BD/PAIR 35.337 GB/s, time 1.484e-03 s, time/iter 1.484e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 238.7 GB/s, BD/PAIR 59.675 GB/s, time 1.757e-03 s, time/iter 1.757e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 476.108 GB/s, BD/PAIR 119.027 GB/s, time 1.762e-03 s, time/iter 1.762e-05, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 681.142 GB/s, BD/PAIR 170.285 GB/s, time 2.463e-03 s, time/iter 2.463e-05, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 891.816 GB/s, BD/PAIR 222.954 GB/s, time 3.762e-03 s, time/iter 3.762e-05, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 1.063 TB/s, BD/PAIR 265.874 GB/s, time 6.310e-03 s, time/iter 6.310e-05, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 1.195 TB/s, BD/PAIR 298.85 GB/s, time 1.123e-02 s, time/iter 1.123e-04, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 1.298 TB/s, BD/PAIR 324.429 GB/s, time 2.069e-02 s, time/iter 2.069e-04, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 1.363 TB/s, BD/PAIR 340.703 GB/s, time 3.939e-02 s, time/iter 3.939e-04, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 1.326 TB/s, BD/PAIR 331.58 GB/s, time 8.096e-02 s, time/iter 8.096e-04, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 1.45 TB/s, BD/PAIR 362.534 GB/s, time 1.481e-01 s, time/iter 1.481e-03, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 1.448 TB/s, BD/PAIR 362.056 GB/s, time 2.966e-01 s, time/iter 2.966e-03, comm_vol 429.497 GB
+[[0, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7], [6, 0], [7, 1]]
+NCCL version 2.21.5+cuda12.8
+NCCL version 2.21.5+cuda12.8
+NCCL version 2.21.5+cuda12.8
+SIZE 8 KB, REAL_BD 5.174 GB/s, BD/PAIR 646.711 MB/s, time 1.267e-03 s, time/iter 1.267e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 10.398 GB/s, BD/PAIR 1.3 GB/s, time 1.261e-03 s, time/iter 1.261e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 20.8 GB/s, BD/PAIR 2.6 GB/s, time 1.260e-03 s, time/iter 1.260e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 42.054 GB/s, BD/PAIR 5.257 GB/s, time 1.247e-03 s, time/iter 1.247e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 80.683 GB/s, BD/PAIR 10.085 GB/s, time 1.300e-03 s, time/iter 1.300e-05, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 151.5 GB/s, BD/PAIR 18.938 GB/s, time 1.384e-03 s, time/iter 1.384e-05, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 273.001 GB/s, BD/PAIR 34.125 GB/s, time 1.536e-03 s, time/iter 1.536e-05, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 480.202 GB/s, BD/PAIR 60.025 GB/s, time 1.747e-03 s, time/iter 1.747e-05, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 963.559 GB/s, BD/PAIR 120.445 GB/s, time 1.741e-03 s, time/iter 1.741e-05, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 1.357 TB/s, BD/PAIR 169.612 GB/s, time 2.473e-03 s, time/iter 2.473e-05, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 1.778 TB/s, BD/PAIR 222.222 GB/s, time 3.775e-03 s, time/iter 3.775e-05, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 2.13 TB/s, BD/PAIR 266.256 GB/s, time 6.301e-03 s, time/iter 6.301e-05, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 2.377 TB/s, BD/PAIR 297.096 GB/s, time 1.129e-02 s, time/iter 1.129e-04, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 2.583 TB/s, BD/PAIR 322.878 GB/s, time 2.078e-02 s, time/iter 2.078e-04, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 2.697 TB/s, BD/PAIR 337.108 GB/s, time 3.981e-02 s, time/iter 3.981e-04, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 2.681 TB/s, BD/PAIR 335.085 GB/s, time 8.011e-02 s, time/iter 8.011e-04, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 2.86 TB/s, BD/PAIR 357.519 GB/s, time 1.502e-01 s, time/iter 1.502e-03, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 2.765 TB/s, BD/PAIR 345.635 GB/s, time 3.107e-01 s, time/iter 3.107e-03, comm_vol 858.993 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]]
+NCCL version 2.21.5+cuda12.8
+SIZE 8 KB, REAL_BD 5.224 GB/s, BD/PAIR 652.979 MB/s, time 1.255e-03 s, time/iter 1.255e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 9.029 GB/s, BD/PAIR 1.129 GB/s, time 1.452e-03 s, time/iter 1.452e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 20.629 GB/s, BD/PAIR 2.579 GB/s, time 1.271e-03 s, time/iter 1.271e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 42.783 GB/s, BD/PAIR 5.348 GB/s, time 1.225e-03 s, time/iter 1.225e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 77.362 GB/s, BD/PAIR 9.67 GB/s, time 1.355e-03 s, time/iter 1.355e-05, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 155.683 GB/s, BD/PAIR 19.46 GB/s, time 1.347e-03 s, time/iter 1.347e-05, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 272.494 GB/s, BD/PAIR 34.062 GB/s, time 1.539e-03 s, time/iter 1.539e-05, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 487.588 GB/s, BD/PAIR 60.949 GB/s, time 1.720e-03 s, time/iter 1.720e-05, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 957.137 GB/s, BD/PAIR 119.642 GB/s, time 1.753e-03 s, time/iter 1.753e-05, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 1.356 TB/s, BD/PAIR 169.531 GB/s, time 2.474e-03 s, time/iter 2.474e-05, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 1.773 TB/s, BD/PAIR 221.648 GB/s, time 3.785e-03 s, time/iter 3.785e-05, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 2.124 TB/s, BD/PAIR 265.472 GB/s, time 6.320e-03 s, time/iter 6.320e-05, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 2.385 TB/s, BD/PAIR 298.116 GB/s, time 1.126e-02 s, time/iter 1.126e-04, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 2.569 TB/s, BD/PAIR 321.128 GB/s, time 2.090e-02 s, time/iter 2.090e-04, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 2.631 TB/s, BD/PAIR 328.895 GB/s, time 4.081e-02 s, time/iter 4.081e-04, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 2.637 TB/s, BD/PAIR 329.615 GB/s, time 8.144e-02 s, time/iter 8.144e-04, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 2.853 TB/s, BD/PAIR 356.577 GB/s, time 1.506e-01 s, time/iter 1.506e-03, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 2.842 TB/s, BD/PAIR 355.206 GB/s, time 3.023e-01 s, time/iter 3.023e-03, comm_vol 858.993 GB
+[rank0]:[W811 21:30:42.766810174 ProcessGroupNCCL.cpp:1538] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
++ set +x
+COMM_MODULE: torch-distributed
++ srun -p H100 -N 1 --ntasks-per-node=8 --gres=gpu:8 -K --cpu-bind=none -w 'g[0290]' --cpus-per-task=22 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json --comm-module torch-distributed --output './prof_data/tmp/cb_8_g[0290]_all.log'
+LOCAL_RANK: 7, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+LOCAL_RANK: 0, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+LOCAL_RANK: 6, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+LOCAL_RANK: 4, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+LOCAL_RANK: 3, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+LOCAL_RANK: 5, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+LOCAL_RANK: 2, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+LOCAL_RANK: 1, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+[rank5]:[W811 21:30:52.656992237 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W811 21:30:53.580843568 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W811 21:30:53.595153297 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W811 21:30:53.606837600 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W811 21:30:53.618058816 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W811 21:30:53.618071589 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank0]:[W811 21:30:53.618099236 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W811 21:30:53.634255102 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[INFO]: Cluster init done !!!
+NCCL version 2.27.3+cuda12.9
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 1 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[Gloo] Rank 0 is connected to 1 peer ranks. Expected number of connected peer ranks is : 1
+[[0, 1]]
+SIZE 8 KB, REAL_BD 407.492 MB/s, BD/PAIR 407.492 MB/s, time 2.010e-03 s, time/iter 2.010e-05, comm_vol 819.2 KB
+SIZE 16 KB, REAL_BD 815.274 MB/s, BD/PAIR 815.274 MB/s, time 2.010e-03 s, time/iter 2.010e-05, comm_vol 1.638 MB
+SIZE 32 KB, REAL_BD 1.611 GB/s, BD/PAIR 1.611 GB/s, time 2.034e-03 s, time/iter 2.034e-05, comm_vol 3.277 MB
+SIZE 64 KB, REAL_BD 3.239 GB/s, BD/PAIR 3.239 GB/s, time 2.023e-03 s, time/iter 2.023e-05, comm_vol 6.554 MB
+SIZE 128 KB, REAL_BD 6.315 GB/s, BD/PAIR 6.315 GB/s, time 2.075e-03 s, time/iter 2.075e-05, comm_vol 13.107 MB
+SIZE 256 KB, REAL_BD 12.638 GB/s, BD/PAIR 12.638 GB/s, time 2.074e-03 s, time/iter 2.074e-05, comm_vol 26.214 MB
+SIZE 512 KB, REAL_BD 25.135 GB/s, BD/PAIR 25.135 GB/s, time 2.086e-03 s, time/iter 2.086e-05, comm_vol 52.429 MB
+SIZE 1 MB, REAL_BD 50.523 GB/s, BD/PAIR 50.523 GB/s, time 2.075e-03 s, time/iter 2.075e-05, comm_vol 104.858 MB
+SIZE 2 MB, REAL_BD 100.561 GB/s, BD/PAIR 100.561 GB/s, time 2.085e-03 s, time/iter 2.085e-05, comm_vol 209.715 MB
+SIZE 4 MB, REAL_BD 187.69 GB/s, BD/PAIR 187.69 GB/s, time 2.235e-03 s, time/iter 2.235e-05, comm_vol 419.43 MB
+SIZE 8 MB, REAL_BD 241.402 GB/s, BD/PAIR 241.402 GB/s, time 3.475e-03 s, time/iter 3.475e-05, comm_vol 838.861 MB
+SIZE 16 MB, REAL_BD 258.272 GB/s, BD/PAIR 258.272 GB/s, time 6.496e-03 s, time/iter 6.496e-05, comm_vol 1.678 GB
+SIZE 32 MB, REAL_BD 319.851 GB/s, BD/PAIR 319.851 GB/s, time 1.049e-02 s, time/iter 1.049e-04, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 336.186 GB/s, BD/PAIR 336.186 GB/s, time 1.996e-02 s, time/iter 1.996e-04, comm_vol 6.711 GB
+SIZE 128 MB, REAL_BD 351.727 GB/s, BD/PAIR 351.727 GB/s, time 3.816e-02 s, time/iter 3.816e-04, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 356.541 GB/s, BD/PAIR 356.541 GB/s, time 7.529e-02 s, time/iter 7.529e-04, comm_vol 26.844 GB
+SIZE 512 MB, REAL_BD 369.163 GB/s, BD/PAIR 369.163 GB/s, time 1.454e-01 s, time/iter 1.454e-03, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 371.765 GB/s, BD/PAIR 371.765 GB/s, time 2.888e-01 s, time/iter 2.888e-03, comm_vol 107.374 GB
+[[0, 1], [1, 0]]
+SIZE 8 KB, REAL_BD 429.175 MB/s, BD/PAIR 214.587 MB/s, time 3.818e-03 s, time/iter 3.818e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 873.294 MB/s, BD/PAIR 436.647 MB/s, time 3.752e-03 s, time/iter 3.752e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 1.744 GB/s, BD/PAIR 872.13 MB/s, time 3.757e-03 s, time/iter 3.757e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 3.462 GB/s, BD/PAIR 1.731 GB/s, time 3.787e-03 s, time/iter 3.787e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 6.831 GB/s, BD/PAIR 3.416 GB/s, time 3.837e-03 s, time/iter 3.837e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 13.323 GB/s, BD/PAIR 6.661 GB/s, time 3.935e-03 s, time/iter 3.935e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 26.067 GB/s, BD/PAIR 13.034 GB/s, time 4.023e-03 s, time/iter 4.023e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 51.818 GB/s, BD/PAIR 25.909 GB/s, time 4.047e-03 s, time/iter 4.047e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 99.531 GB/s, BD/PAIR 49.766 GB/s, time 4.214e-03 s, time/iter 4.214e-05, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 138.271 GB/s, BD/PAIR 69.135 GB/s, time 6.067e-03 s, time/iter 6.067e-05, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 173.181 GB/s, BD/PAIR 86.591 GB/s, time 9.688e-03 s, time/iter 9.688e-05, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 224.906 GB/s, BD/PAIR 112.453 GB/s, time 1.492e-02 s, time/iter 1.492e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 274.043 GB/s, BD/PAIR 137.021 GB/s, time 2.449e-02 s, time/iter 2.449e-04, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 315.521 GB/s, BD/PAIR 157.761 GB/s, time 4.254e-02 s, time/iter 4.254e-04, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 337.94 GB/s, BD/PAIR 168.97 GB/s, time 7.943e-02 s, time/iter 7.943e-04, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 352.424 GB/s, BD/PAIR 176.212 GB/s, time 1.523e-01 s, time/iter 1.523e-03, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 365.738 GB/s, BD/PAIR 182.869 GB/s, time 2.936e-01 s, time/iter 2.936e-03, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 370.208 GB/s, BD/PAIR 185.104 GB/s, time 5.801e-01 s, time/iter 5.801e-03, comm_vol 214.748 GB
+[[0, 1], [1, 2], [2, 3], [3, 0]]
+SIZE 8 KB, REAL_BD 820.923 MB/s, BD/PAIR 205.231 MB/s, time 3.992e-03 s, time/iter 3.992e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 1.631 GB/s, BD/PAIR 407.661 MB/s, time 4.019e-03 s, time/iter 4.019e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 3.324 GB/s, BD/PAIR 830.899 MB/s, time 3.944e-03 s, time/iter 3.944e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 6.612 GB/s, BD/PAIR 1.653 GB/s, time 3.965e-03 s, time/iter 3.965e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 13.087 GB/s, BD/PAIR 3.272 GB/s, time 4.006e-03 s, time/iter 4.006e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 26.042 GB/s, BD/PAIR 6.511 GB/s, time 4.026e-03 s, time/iter 4.026e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 51.931 GB/s, BD/PAIR 12.983 GB/s, time 4.038e-03 s, time/iter 4.038e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 103.795 GB/s, BD/PAIR 25.949 GB/s, time 4.041e-03 s, time/iter 4.041e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 207.296 GB/s, BD/PAIR 51.824 GB/s, time 4.047e-03 s, time/iter 4.047e-05, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 411.345 GB/s, BD/PAIR 102.836 GB/s, time 4.079e-03 s, time/iter 4.079e-05, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 652.045 GB/s, BD/PAIR 163.011 GB/s, time 5.146e-03 s, time/iter 5.146e-05, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 502.078 GB/s, BD/PAIR 125.52 GB/s, time 1.337e-02 s, time/iter 1.337e-04, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 708.63 GB/s, BD/PAIR 177.158 GB/s, time 1.894e-02 s, time/iter 1.894e-04, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 1.165 TB/s, BD/PAIR 291.316 GB/s, time 2.304e-02 s, time/iter 2.304e-04, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 1.295 TB/s, BD/PAIR 323.86 GB/s, time 4.144e-02 s, time/iter 4.144e-04, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 1.355 TB/s, BD/PAIR 338.631 GB/s, time 7.927e-02 s, time/iter 7.927e-04, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 1.434 TB/s, BD/PAIR 358.603 GB/s, time 1.497e-01 s, time/iter 1.497e-03, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 1.456 TB/s, BD/PAIR 363.9 GB/s, time 2.951e-01 s, time/iter 2.951e-03, comm_vol 429.497 GB
+[[0, 2], [1, 3], [2, 0], [3, 1]]
+SIZE 8 KB, REAL_BD 732.89 MB/s, BD/PAIR 183.223 MB/s, time 4.471e-03 s, time/iter 4.471e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 1.696 GB/s, BD/PAIR 424.037 MB/s, time 3.864e-03 s, time/iter 3.864e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 3.415 GB/s, BD/PAIR 853.658 MB/s, time 3.839e-03 s, time/iter 3.839e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 6.767 GB/s, BD/PAIR 1.692 GB/s, time 3.874e-03 s, time/iter 3.874e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 7.42 GB/s, BD/PAIR 1.855 GB/s, time 7.066e-03 s, time/iter 7.066e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 26.995 GB/s, BD/PAIR 6.749 GB/s, time 3.884e-03 s, time/iter 3.884e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 54.391 GB/s, BD/PAIR 13.598 GB/s, time 3.856e-03 s, time/iter 3.856e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 107.394 GB/s, BD/PAIR 26.848 GB/s, time 3.906e-03 s, time/iter 3.906e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 199.741 GB/s, BD/PAIR 49.935 GB/s, time 4.200e-03 s, time/iter 4.200e-05, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 276.77 GB/s, BD/PAIR 69.192 GB/s, time 6.062e-03 s, time/iter 6.062e-05, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 350.678 GB/s, BD/PAIR 87.669 GB/s, time 9.568e-03 s, time/iter 9.568e-05, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 450.887 GB/s, BD/PAIR 112.722 GB/s, time 1.488e-02 s, time/iter 1.488e-04, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 543.115 GB/s, BD/PAIR 135.779 GB/s, time 2.471e-02 s, time/iter 2.471e-04, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 626.701 GB/s, BD/PAIR 156.675 GB/s, time 4.283e-02 s, time/iter 4.283e-04, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 675.437 GB/s, BD/PAIR 168.859 GB/s, time 7.948e-02 s, time/iter 7.948e-04, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 705.204 GB/s, BD/PAIR 176.301 GB/s, time 1.523e-01 s, time/iter 1.523e-03, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 731.846 GB/s, BD/PAIR 182.962 GB/s, time 2.934e-01 s, time/iter 2.934e-03, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 740.643 GB/s, BD/PAIR 185.161 GB/s, time 5.799e-01 s, time/iter 5.799e-03, comm_vol 429.497 GB
+[[0, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7], [6, 0], [7, 1]]
+SIZE 8 KB, REAL_BD 821.537 MB/s, BD/PAIR 102.692 MB/s, time 7.977e-03 s, time/iter 7.977e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 1.588 GB/s, BD/PAIR 198.56 MB/s, time 8.251e-03 s, time/iter 8.251e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 3.233 GB/s, BD/PAIR 404.113 MB/s, time 8.109e-03 s, time/iter 8.109e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 6.408 GB/s, BD/PAIR 800.996 MB/s, time 8.182e-03 s, time/iter 8.182e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 12.611 GB/s, BD/PAIR 1.576 GB/s, time 8.315e-03 s, time/iter 8.315e-05, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 25.084 GB/s, BD/PAIR 3.136 GB/s, time 8.360e-03 s, time/iter 8.360e-05, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 49.253 GB/s, BD/PAIR 6.157 GB/s, time 8.516e-03 s, time/iter 8.516e-05, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 91.459 GB/s, BD/PAIR 11.432 GB/s, time 9.172e-03 s, time/iter 9.172e-05, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 179.558 GB/s, BD/PAIR 22.445 GB/s, time 9.344e-03 s, time/iter 9.344e-05, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 823.074 GB/s, BD/PAIR 102.884 GB/s, time 4.077e-03 s, time/iter 4.077e-05, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 620.672 GB/s, BD/PAIR 77.584 GB/s, time 1.081e-02 s, time/iter 1.081e-04, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 1.651 TB/s, BD/PAIR 206.42 GB/s, time 8.128e-03 s, time/iter 8.128e-05, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 2.067 TB/s, BD/PAIR 258.405 GB/s, time 1.299e-02 s, time/iter 1.299e-04, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 2.364 TB/s, BD/PAIR 295.502 GB/s, time 2.271e-02 s, time/iter 2.271e-04, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 2.579 TB/s, BD/PAIR 322.354 GB/s, time 4.164e-02 s, time/iter 4.164e-04, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 2.725 TB/s, BD/PAIR 340.599 GB/s, time 7.881e-02 s, time/iter 7.881e-04, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 2.876 TB/s, BD/PAIR 359.528 GB/s, time 1.493e-01 s, time/iter 1.493e-03, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 2.915 TB/s, BD/PAIR 364.36 GB/s, time 2.947e-01 s, time/iter 2.947e-03, comm_vol 858.993 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]]
+SIZE 8 KB, REAL_BD 1.46 GB/s, BD/PAIR 182.483 MB/s, time 4.489e-03 s, time/iter 4.489e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 3.333 GB/s, BD/PAIR 416.608 MB/s, time 3.933e-03 s, time/iter 3.933e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 6.672 GB/s, BD/PAIR 834.025 MB/s, time 3.929e-03 s, time/iter 3.929e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 13.425 GB/s, BD/PAIR 1.678 GB/s, time 3.905e-03 s, time/iter 3.905e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 26.521 GB/s, BD/PAIR 3.315 GB/s, time 3.954e-03 s, time/iter 3.954e-05, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 53.223 GB/s, BD/PAIR 6.653 GB/s, time 3.940e-03 s, time/iter 3.940e-05, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 106.775 GB/s, BD/PAIR 13.347 GB/s, time 3.928e-03 s, time/iter 3.928e-05, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 205.865 GB/s, BD/PAIR 25.733 GB/s, time 4.075e-03 s, time/iter 4.075e-05, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 408.598 GB/s, BD/PAIR 51.075 GB/s, time 4.106e-03 s, time/iter 4.106e-05, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 813.135 GB/s, BD/PAIR 101.642 GB/s, time 4.127e-03 s, time/iter 4.127e-05, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 1.29 TB/s, BD/PAIR 161.256 GB/s, time 5.202e-03 s, time/iter 5.202e-05, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 1.121 TB/s, BD/PAIR 140.154 GB/s, time 1.197e-02 s, time/iter 1.197e-04, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 2.021 TB/s, BD/PAIR 252.648 GB/s, time 1.328e-02 s, time/iter 1.328e-04, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 2.375 TB/s, BD/PAIR 296.877 GB/s, time 2.260e-02 s, time/iter 2.260e-04, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 2.584 TB/s, BD/PAIR 322.952 GB/s, time 4.156e-02 s, time/iter 4.156e-04, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 2.722 TB/s, BD/PAIR 340.22 GB/s, time 7.890e-02 s, time/iter 7.890e-04, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 2.875 TB/s, BD/PAIR 359.319 GB/s, time 1.494e-01 s, time/iter 1.494e-03, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 2.913 TB/s, BD/PAIR 364.065 GB/s, time 2.949e-01 s, time/iter 2.949e-03, comm_vol 858.993 GB
+[rank0]:[W811 21:31:05.227786210 ProcessGroupNCCL.cpp:1538] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+NCCL version 2.27.3+cuda12.9
+NCCL version 2.27.3+cuda12.9
+NCCL version 2.27.3+cuda12.9
+NCCL version 2.27.3+cuda12.9
+NCCL version 2.27.3+cuda12.9
+NCCL version 2.27.3+cuda12.9
++ set +x
