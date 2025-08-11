@@ -1,0 +1,302 @@
+GPUs: 0, 1
+srun: job 8301 queued and waiting for resources
+srun: job 8301 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.6863577365875244
+BD: 15.644055086178465 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.38048267364501953
+BD: 225.76414609654964 GB/s
+GPUs: 0, 2
+srun: job 8302 queued and waiting for resources
+srun: job 8302 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.42310500144958496
+BD: 25.37766796235666 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3785088062286377
+BD: 226.9414727120315 GB/s
+GPUs: 0, 3
+srun: job 8304 queued and waiting for resources
+srun: job 8304 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.2616133689880371
+BD: 41.04307926438956 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.37803149223327637
+BD: 227.22801587914552 GB/s
+GPUs: 0, 4
+srun: job 8305 queued and waiting for resources
+srun: job 8305 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.23419189453125
+BD: 45.84880386868908 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.37479281425476074
+BD: 229.19154971207905 GB/s
+GPUs: 0, 5
+srun: job 8306 queued and waiting for resources
+srun: job 8306 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.5360884666442871
+BD: 20.029190904277822 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.38597750663757324
+BD: 222.5501342508493 GB/s
+GPUs: 0, 6
+srun: job 8307 queued and waiting for resources
+srun: job 8307 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.501319408416748
+BD: 21.418317463332595 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3809051513671875
+BD: 225.51374170625004 GB/s
+GPUs: 0, 7
+srun: job 8308 queued and waiting for resources
+srun: job 8308 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.4328131675720215
+BD: 24.80843709130744 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3739337921142578
+BD: 229.718061676953 GB/s
+GPUs: 1, 0
+srun: job 8309 queued and waiting for resources
+srun: job 8309 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.947939395904541
+BD: 11.327114672509376 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.37622857093811035
+BD: 228.3169130558414 GB/s
+GPUs: 1, 2
+srun: job 8310 queued and waiting for resources
+srun: job 8310 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.8327014446258545
+BD: 12.894679490828176 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.378558874130249
+BD: 226.9114576097482 GB/s
+GPUs: 1, 3
+srun: job 8311 queued and waiting for resources
+srun: job 8311 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.8689017295837402
+BD: 12.357459853537078 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.38822102546691895
+BD: 221.2640230309207 GB/s
+GPUs: 1, 4
+srun: job 8312 queued and waiting for resources
+srun: job 8312 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.2662210464477539
+BD: 40.33271742888753 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.38534045219421387
+BD: 222.91805968169214 GB/s
+GPUs: 1, 5
+srun: job 8313 queued and waiting for resources
+srun: job 8313 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.27138614654541016
+BD: 39.56509341645169 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3774881362915039
+BD: 227.55508759530076 GB/s
+GPUs: 1, 6
+srun: job 8314 queued and waiting for resources
+srun: job 8314 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.31569361686706543
+BD: 34.01214869834188 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.37871861457824707
+BD: 226.81574819252074 GB/s
+GPUs: 1, 7
+srun: job 8315 queued and waiting for resources
+srun: job 8315 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.2451004981994629
+BD: 43.80822690642548 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3853940963745117
+BD: 222.8870310367344 GB/s
+GPUs: 2, 0
+srun: job 8316 queued and waiting for resources
+srun: job 8316 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.282611608505249
+BD: 37.99354986439126 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3854379653930664
+BD: 222.8616629199995 GB/s
+GPUs: 2, 1
+srun: job 8317 queued and waiting for resources
+srun: job 8317 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.34769225120544434
+BD: 30.881960132195974 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3786196708679199
+BD: 226.87502137195 GB/s
+GPUs: 2, 3
+srun: job 8318 queued and waiting for resources
+srun: job 8318 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.24693965911865234
+BD: 43.481951333061346 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3818840980529785
+BD: 224.93564502411735 GB/s
+GPUs: 2, 4
+srun: job 8319 queued and waiting for resources
+srun: job 8319 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.2348649501800537
+BD: 45.71741433435857 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3809664249420166
+BD: 225.4774707064381 GB/s
+GPUs: 2, 5
+srun: job 8320 queued and waiting for resources
+srun: job 8320 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.5359854698181152
+BD: 20.033039783044316 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3792574405670166
+BD: 226.49350212239588 GB/s
+GPUs: 2, 6
+srun: job 8321 queued and waiting for resources
+srun: job 8321 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.23873448371887207
+BD: 44.97640254033901 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3904109001159668
+BD: 220.02291917178707 GB/s
+GPUs: 2, 7
+srun: job 8322 queued and waiting for resources
+srun: job 8322 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 0.4040863513946533
+BD: 26.57208837403478 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.37981319427490234
+BD: 226.16209024541553 GB/s
+GPUs: 3, 0
+srun: job 8323 queued and waiting for resources
+srun: job 8323 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 1.0482854843139648
+BD: 10.242837853494601 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.37980175018310547
+BD: 226.1689049052229 GB/s
+GPUs: 3, 1
+srun: job 8324 queued and waiting for resources
+srun: job 8324 has been allocated resources
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+SIZE: [1, 1024, 1024, 128]
+time: 1.3218762874603271
+BD: 8.122861679158653 GB/s
+SIZE: [1, 1024, 1024, 1024]
+time: 0.3774902820587158
+BD: 227.5537941043976 GB/s
+GPUs: 3, 2
+srun: job 8325 queued and waiting for resources
+srun: job 8325 has been allocated resources

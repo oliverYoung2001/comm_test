@@ -1,0 +1,136 @@
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/../ -x LD_LIBRARY_PATH -x NCCL_NET_GDR_READ -x NCCL_P2P_LEVEL -x NCCL_IB_PCI_RELAXED_ORDERING -x NCCL_DEBUG=WARN -x NCCL_IB_GID_INDEX=3 -x NCCL_IB_DISABLE=0 -x NCCL_NET_GDR_LEVEL=2 -x NCCL_IB_QPS_PER_CONNECTION=4 -x NCCL_IB_TC=160 -np 16 --host g3027:8,g4006:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small_16.json
+[mngg001:3572179] Warning: could not find environment variable "NCCL_NET_GDR_READ"
+[mngg001:3572179] Warning: could not find environment variable "NCCL_P2P_LEVEL"
+[mngg001:3572179] Warning: could not find environment variable "NCCL_IB_PCI_RELAXED_ORDERING"
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4006
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[mngg001:3572179] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:3572179] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+NCCL version 2.18.5+cuda11.8
+[[0,1]]
+time 0.006545 s, REAL_BD 229.182582 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.025234 s, REAL_BD 237.774431 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.007330 s, REAL_BD 409.276944 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.027460 s, REAL_BD 436.999272 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.073394 s, REAL_BD 20.437638 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.296252 s, REAL_BD 20.253028 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.147043 s, REAL_BD 20.402195 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.587801 s, REAL_BD 20.415072 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.149001 s, REAL_BD 20.134093 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.591803 s, REAL_BD 20.277018 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.129282 s, REAL_BD 23.205087 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.517508 s, REAL_BD 23.188047 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.272377 s, REAL_BD 22.028292 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.094483 s, REAL_BD 21.928162 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.079934 s, REAL_BD 37.530963 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.308849 s, REAL_BD 38.853938 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.131913 s, REAL_BD 22.742262 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.525966 s, REAL_BD 22.815163 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.220081 s, REAL_BD 27.262690 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.883088 s, REAL_BD 27.177359 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.085880 s, REAL_BD 34.932464 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.326091 s, REAL_BD 36.799544 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.157644 s, REAL_BD 38.060440 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.633218 s, REAL_BD 37.901639 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 0.136649 s, REAL_BD 43.908115 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.546054 s, REAL_BD 43.951697 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 0.240238 s, REAL_BD 49.950466 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.959740 s, REAL_BD 50.013545 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 0.188529 s, REAL_BD 63.650685 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.755375 s, REAL_BD 63.544597 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 0.347032 s, REAL_BD 69.157887 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 1.391974 s, REAL_BD 68.966805 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x
+BACKEND: MPI
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/../ -x LD_LIBRARY_PATH -x NCCL_NET_GDR_READ -x NCCL_P2P_LEVEL -x NCCL_IB_PCI_RELAXED_ORDERING -x NCCL_DEBUG=WARN -x NCCL_IB_GID_INDEX=3 -x NCCL_IB_DISABLE=0 -x NCCL_NET_GDR_LEVEL=2 -x NCCL_IB_QPS_PER_CONNECTION=4 -x NCCL_IB_TC=160 -np 16 --host g3027:8,g4006:8 ./csrc/build/conflict_allinone 16 MPI ./scripts/configs/small_16.json
+[mngg001:3647490] Warning: could not find environment variable "NCCL_NET_GDR_READ"
+[mngg001:3647490] Warning: could not find environment variable "NCCL_P2P_LEVEL"
+[mngg001:3647490] Warning: could not find environment variable "NCCL_IB_PCI_RELAXED_ORDERING"
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g3027
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[[0,1]]
+NCCL version 2.18.5+cuda11.8
+[mngg001:3647490] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:3647490] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 0.005815 s, REAL_BD 257.953568 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.022926 s, REAL_BD 261.711594 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.006660 s, REAL_BD 450.450450 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.024252 s, REAL_BD 494.804552 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.078679 s, REAL_BD 19.064808 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.493814 s, REAL_BD 12.150324 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.145340 s, REAL_BD 20.641255 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.936524 s, REAL_BD 12.813340 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.153585 s, REAL_BD 19.533158 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.843315 s, REAL_BD 14.229558 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.152485 s, REAL_BD 19.674066 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.860252 s, REAL_BD 13.949401 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.300200 s, REAL_BD 19.986676 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.528768 s, REAL_BD 15.698916 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.080686 s, REAL_BD 37.181171 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.516460 s, REAL_BD 23.235100 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[2,10]]
+time 0.114275 s, REAL_BD 26.252461 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.631138 s, REAL_BD 19.013274 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[2,10],[10,2]]
+time 0.191903 s, REAL_BD 31.265796 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.951998 s, REAL_BD 25.210137 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[4,12]]
+time 0.110440 s, REAL_BD 27.164071 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.629994 s, REAL_BD 19.047800 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.194137 s, REAL_BD 30.906010 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.051206 s, REAL_BD 22.830920 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 0.220038 s, REAL_BD 27.268017 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.942432 s, REAL_BD 25.466028 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 0.276816 s, REAL_BD 43.350095 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.451512 s, REAL_BD 33.068965 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 0.301883 s, REAL_BD 39.750499 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.306729 s, REAL_BD 36.732942 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15],[8,0],[9,1],[10,2],[11,3],[12,4],[13,5],[14,6],[15,7]]
+time 0.370466 s, REAL_BD 64.783273 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 1.896109 s, REAL_BD 50.630001 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x

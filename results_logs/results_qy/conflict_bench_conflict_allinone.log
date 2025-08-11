@@ -1,0 +1,531 @@
+HOST: g4004
+CP_FILE_NAME: conflict_patterns
+HOST: g4004
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+srun: job 8470 queued and waiting for resources
+srun: job 8470 has been allocated resources
+[INFO]: Cluster init done !!!
+[[0, 1]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 5.7 GB/s, time 0.0092 s, comm_vol 52.43 MB
+rank 0, SIZE 2 MB, REAL_BD 10.29 GB/s, time 0.0102 s, comm_vol 104.86 MB
+rank 0, SIZE 4 MB, REAL_BD 18.4 GB/s, time 0.0114 s, comm_vol 209.72 MB
+rank 0, SIZE 8 MB, REAL_BD 30.4 GB/s, time 0.0138 s, comm_vol 419.43 MB
+rank 0, SIZE 16 MB, REAL_BD 45.59 GB/s, time 0.0184 s, comm_vol 838.86 MB
+rank 0, SIZE 32 MB, REAL_BD 50.47 GB/s, time 0.0332 s, comm_vol 1.68 GB
+rank 0, SIZE 64 MB, REAL_BD 74.35 GB/s, time 0.0451 s, comm_vol 3.36 GB
+rank 0, SIZE 128 MB, REAL_BD 137.92 GB/s, time 0.0487 s, comm_vol 6.71 GB
+rank 0, SIZE 256 MB, REAL_BD 212.09 GB/s, time 0.0633 s, comm_vol 13.42 GB
+rank 0, SIZE 512 MB, REAL_BD 234.89 GB/s, time 0.1143 s, comm_vol 26.84 GB
+rank 0, SIZE 1 GB, REAL_BD 248.09 GB/s, time 0.2164 s, comm_vol 53.69 GB
+rank 0, SIZE 2 GB, REAL_BD 254.26 GB/s, time 0.4223 s, comm_vol 107.37 GB
+rank 0, SIZE 4 GB, REAL_BD 259.56 GB/s, time 0.8274 s, comm_vol 214.75 GB
+[[0, 1], [1, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 10.62 GB/s, time 0.0099 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 19.83 GB/s, time 0.0106 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 36.43 GB/s, time 0.0115 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 61.95 GB/s, time 0.0135 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 95.72 GB/s, time 0.0175 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 133.0 GB/s, time 0.0252 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 164.84 GB/s, time 0.0407 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 290.27 GB/s, time 0.0462 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 311.33 GB/s, time 0.0862 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 326.53 GB/s, time 0.1644 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 342.67 GB/s, time 0.3133 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 344.97 GB/s, time 0.6225 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 350.04 GB/s, time 1.227 s, comm_vol 429.5 GB
+[[0, 1], [0, 2]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 10.87 GB/s, time 0.0096 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 19.6 GB/s, time 0.0107 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 35.35 GB/s, time 0.0119 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 60.54 GB/s, time 0.0139 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 95.14 GB/s, time 0.0176 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 119.04 GB/s, time 0.0282 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 149.87 GB/s, time 0.0448 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 205.88 GB/s, time 0.0652 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 238.92 GB/s, time 0.1124 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 247.52 GB/s, time 0.2169 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 256.59 GB/s, time 0.4185 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 259.33 GB/s, time 0.8281 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 261.17 GB/s, time 1.6445 s, comm_vol 429.5 GB
+[[2, 0], [1, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 10.93 GB/s, time 0.0096 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 21.87 GB/s, time 0.0096 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 39.54 GB/s, time 0.0106 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 66.28 GB/s, time 0.0127 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 101.8 GB/s, time 0.0165 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 136.85 GB/s, time 0.0245 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 170.23 GB/s, time 0.0394 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 222.55 GB/s, time 0.0603 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 240.74 GB/s, time 0.1115 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 250.63 GB/s, time 0.2142 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 256.24 GB/s, time 0.419 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 260.06 GB/s, time 0.8258 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 261.4 GB/s, time 1.643 s, comm_vol 429.5 GB
+[[0, 1], [2, 1]]
+rank 0, SIZE 1 MB, REAL_BD 10.91 GB/s, time 0.0096 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 21.83 GB/s, time 0.0096 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 39.91 GB/s, time 0.0105 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 66.71 GB/s, time 0.0126 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 102.06 GB/s, time 0.0164 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 138.67 GB/s, time 0.0242 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 170.73 GB/s, time 0.0393 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 222.56 GB/s, time 0.0603 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 182.29 GB/s, time 0.1473 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 186.36 GB/s, time 0.2881 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 189.2 GB/s, time 0.5675 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 189.1 GB/s, time 1.1357 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 190.47 GB/s, time 2.2549 s, comm_vol 429.5 GB
+[[1, 2], [3, 2]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 10.7 GB/s, time 0.0098 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 21.82 GB/s, time 0.0096 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 39.48 GB/s, time 0.0106 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 66.91 GB/s, time 0.0125 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 102.21 GB/s, time 0.0164 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 138.79 GB/s, time 0.0242 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 170.44 GB/s, time 0.0394 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 222.6 GB/s, time 0.0603 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 181.45 GB/s, time 0.1479 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 186.14 GB/s, time 0.2884 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 188.55 GB/s, time 0.5695 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 189.62 GB/s, time 1.1325 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 190.36 GB/s, time 2.2563 s, comm_vol 429.5 GB
+[[0, 2], [1, 2]]
+rank 0, SIZE 1 MB, REAL_BD 11.86 GB/s, time 0.0088 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 22.78 GB/s, time 0.0092 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 40.8 GB/s, time 0.0103 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 68.59 GB/s, time 0.0122 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 88.45 GB/s, time 0.019 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 140.19 GB/s, time 0.0239 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 171.28 GB/s, time 0.0392 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 223.76 GB/s, time 0.06 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 197.42 GB/s, time 0.136 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 202.49 GB/s, time 0.2651 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 205.76 GB/s, time 0.5219 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 205.92 GB/s, time 1.0429 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 206.4 GB/s, time 2.0809 s, comm_vol 429.5 GB
+[[1, 3], [2, 3]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 10.72 GB/s, time 0.0098 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 21.75 GB/s, time 0.0096 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 39.52 GB/s, time 0.0106 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 66.29 GB/s, time 0.0127 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 101.0 GB/s, time 0.0166 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 138.04 GB/s, time 0.0243 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 169.21 GB/s, time 0.0397 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 222.87 GB/s, time 0.0602 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 194.11 GB/s, time 0.1383 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 202.17 GB/s, time 0.2656 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 206.08 GB/s, time 0.521 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 206.81 GB/s, time 1.0384 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 207.04 GB/s, time 2.0745 s, comm_vol 429.5 GB
+[[0, 1], [0, 1]]
+rank 0, SIZE 1 MB, REAL_BD 9.73 GB/s, time 0.0108 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 17.49 GB/s, time 0.012 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 30.25 GB/s, time 0.0139 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 47.68 GB/s, time 0.0176 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 66.95 GB/s, time 0.0251 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 83.4 GB/s, time 0.0402 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 95.27 GB/s, time 0.0704 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 180.25 GB/s, time 0.0745 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 235.59 GB/s, time 0.1139 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 248.24 GB/s, time 0.2163 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 254.84 GB/s, time 0.4213 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 257.14 GB/s, time 0.8351 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 261.03 GB/s, time 1.6454 s, comm_vol 429.5 GB
+[[0, 1], [0, 2], [0, 3]]
+rank 0, SIZE 1 MB, REAL_BD 11.4 GB/s, time 0.0138 s, comm_vol 157.29 MB
+rank 0, SIZE 2 MB, REAL_BD 26.12 GB/s, time 0.012 s, comm_vol 314.57 MB
+rank 0, SIZE 4 MB, REAL_BD 46.46 GB/s, time 0.0135 s, comm_vol 629.15 MB
+rank 0, SIZE 8 MB, REAL_BD 77.76 GB/s, time 0.0162 s, comm_vol 1.26 GB
+rank 0, SIZE 16 MB, REAL_BD 118.24 GB/s, time 0.0213 s, comm_vol 2.52 GB
+rank 0, SIZE 32 MB, REAL_BD 159.03 GB/s, time 0.0316 s, comm_vol 5.03 GB
+rank 0, SIZE 64 MB, REAL_BD 192.11 GB/s, time 0.0524 s, comm_vol 10.07 GB
+rank 0, SIZE 128 MB, REAL_BD 227.61 GB/s, time 0.0885 s, comm_vol 20.13 GB
+rank 0, SIZE 256 MB, REAL_BD 245.19 GB/s, time 0.1642 s, comm_vol 40.27 GB
+rank 0, SIZE 512 MB, REAL_BD 254.39 GB/s, time 0.3166 s, comm_vol 80.53 GB
+rank 0, SIZE 1 GB, REAL_BD 258.67 GB/s, time 0.6226 s, comm_vol 161.06 GB
+rank 0, SIZE 2 GB, REAL_BD 261.64 GB/s, time 1.2311 s, comm_vol 322.12 GB
+rank 0, SIZE 4 GB, REAL_BD 262.79 GB/s, time 2.4515 s, comm_vol 644.25 GB
+[[0, 3], [1, 3], [2, 3]]
+rank 0, SIZE 1 MB, REAL_BD 12.54 GB/s, time 0.0125 s, comm_vol 157.29 MB
+rank 0, SIZE 2 MB, REAL_BD 29.26 GB/s, time 0.0107 s, comm_vol 314.57 MB
+rank 0, SIZE 4 MB, REAL_BD 52.15 GB/s, time 0.0121 s, comm_vol 629.15 MB
+rank 0, SIZE 8 MB, REAL_BD 86.22 GB/s, time 0.0146 s, comm_vol 1.26 GB
+rank 0, SIZE 16 MB, REAL_BD 128.46 GB/s, time 0.0196 s, comm_vol 2.52 GB
+rank 0, SIZE 32 MB, REAL_BD 171.17 GB/s, time 0.0294 s, comm_vol 5.03 GB
+rank 0, SIZE 64 MB, REAL_BD 202.77 GB/s, time 0.0496 s, comm_vol 10.07 GB
+rank 0, SIZE 128 MB, REAL_BD 233.71 GB/s, time 0.0861 s, comm_vol 20.13 GB
+rank 0, SIZE 256 MB, REAL_BD 243.61 GB/s, time 0.1653 s, comm_vol 40.27 GB
+rank 0, SIZE 512 MB, REAL_BD 252.74 GB/s, time 0.3186 s, comm_vol 80.53 GB
+rank 0, SIZE 1 GB, REAL_BD 257.52 GB/s, time 0.6254 s, comm_vol 161.06 GB
+rank 0, SIZE 2 GB, REAL_BD 259.54 GB/s, time 1.2411 s, comm_vol 322.12 GB
+rank 0, SIZE 4 GB, REAL_BD 260.46 GB/s, time 2.4735 s, comm_vol 644.25 GB
+[[0, 2], [1, 3]]
+rank 0, SIZE 1 MB, REAL_BD 11.97 GB/s, time 0.0088 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 22.01 GB/s, time 0.0095 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 36.93 GB/s, time 0.0114 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 67.39 GB/s, time 0.0124 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 102.54 GB/s, time 0.0164 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 140.05 GB/s, time 0.024 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 170.78 GB/s, time 0.0393 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 303.38 GB/s, time 0.0442 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 433.32 GB/s, time 0.0619 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 473.97 GB/s, time 0.1133 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 498.36 GB/s, time 0.2155 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 506.24 GB/s, time 0.4242 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 518.37 GB/s, time 0.8286 s, comm_vol 429.5 GB
+[[0, 1], [1, 2]]
+rank 0, SIZE 1 MB, REAL_BD 10.69 GB/s, time 0.0098 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 19.28 GB/s, time 0.0109 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 33.72 GB/s, time 0.0124 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 52.91 GB/s, time 0.0159 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 74.06 GB/s, time 0.0227 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 91.3 GB/s, time 0.0368 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 103.59 GB/s, time 0.0648 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 196.05 GB/s, time 0.0685 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 341.93 GB/s, time 0.0785 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 378.97 GB/s, time 0.1417 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 392.97 GB/s, time 0.2732 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 396.5 GB/s, time 0.5416 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 401.97 GB/s, time 1.0685 s, comm_vol 429.5 GB
+[[0, 2], [3, 1]]
+rank 0, SIZE 1 MB, REAL_BD 11.8 GB/s, time 0.0089 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 22.39 GB/s, time 0.0094 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 40.23 GB/s, time 0.0104 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 67.51 GB/s, time 0.0124 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 102.51 GB/s, time 0.0164 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 138.36 GB/s, time 0.0243 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 169.26 GB/s, time 0.0396 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 328.33 GB/s, time 0.0409 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 423.75 GB/s, time 0.0633 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 466.76 GB/s, time 0.115 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 499.77 GB/s, time 0.2148 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 508.72 GB/s, time 0.4221 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 518.42 GB/s, time 0.8285 s, comm_vol 429.5 GB
+[[0, 4], [0, 4]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 10.12 GB/s, time 0.0104 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 18.8 GB/s, time 0.0112 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 32.07 GB/s, time 0.0131 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 49.9 GB/s, time 0.0168 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 63.35 GB/s, time 0.0265 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 73.97 GB/s, time 0.0454 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 94.24 GB/s, time 0.0712 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 182.55 GB/s, time 0.0735 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 237.64 GB/s, time 0.113 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 248.85 GB/s, time 0.2157 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 256.32 GB/s, time 0.4189 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 257.43 GB/s, time 0.8342 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 261.19 GB/s, time 1.6444 s, comm_vol 429.5 GB
+[[0, 4], [1, 4]]
+rank 0, SIZE 1 MB, REAL_BD 11.21 GB/s, time 0.0094 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 22.96 GB/s, time 0.0091 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 41.44 GB/s, time 0.0101 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 68.98 GB/s, time 0.0122 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 103.95 GB/s, time 0.0161 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 140.34 GB/s, time 0.0239 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 161.42 GB/s, time 0.0416 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 217.07 GB/s, time 0.0618 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 181.99 GB/s, time 0.1475 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 185.82 GB/s, time 0.2889 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 187.69 GB/s, time 0.5721 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 190.12 GB/s, time 1.1295 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 189.5 GB/s, time 2.2664 s, comm_vol 429.5 GB
+[[0, 4], [4, 1]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 11.24 GB/s, time 0.0093 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 19.74 GB/s, time 0.0106 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 37.16 GB/s, time 0.0113 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 63.35 GB/s, time 0.0132 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 97.63 GB/s, time 0.0172 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 134.65 GB/s, time 0.0249 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 166.3 GB/s, time 0.0404 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 309.15 GB/s, time 0.0434 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 391.99 GB/s, time 0.0685 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 426.96 GB/s, time 0.1257 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 447.34 GB/s, time 0.24 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 450.68 GB/s, time 0.4765 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 461.57 GB/s, time 0.9305 s, comm_vol 429.5 GB
+[[0, 4], [4, 1], [2, 3]]
+rank 0, SIZE 1 MB, REAL_BD 16.77 GB/s, time 0.0094 s, comm_vol 157.29 MB
+rank 0, SIZE 2 MB, REAL_BD 30.1 GB/s, time 0.0105 s, comm_vol 314.57 MB
+rank 0, SIZE 4 MB, REAL_BD 55.05 GB/s, time 0.0114 s, comm_vol 629.15 MB
+rank 0, SIZE 8 MB, REAL_BD 93.9 GB/s, time 0.0134 s, comm_vol 1.26 GB
+rank 0, SIZE 16 MB, REAL_BD 145.91 GB/s, time 0.0172 s, comm_vol 2.52 GB
+rank 0, SIZE 32 MB, REAL_BD 201.3 GB/s, time 0.025 s, comm_vol 5.03 GB
+rank 0, SIZE 64 MB, REAL_BD 248.25 GB/s, time 0.0405 s, comm_vol 10.07 GB
+rank 0, SIZE 128 MB, REAL_BD 460.95 GB/s, time 0.0437 s, comm_vol 20.13 GB
+rank 0, SIZE 256 MB, REAL_BD 588.63 GB/s, time 0.0684 s, comm_vol 40.27 GB
+rank 0, SIZE 512 MB, REAL_BD 637.04 GB/s, time 0.1264 s, comm_vol 80.53 GB
+rank 0, SIZE 1 GB, REAL_BD 670.49 GB/s, time 0.2402 s, comm_vol 161.06 GB
+rank 0, SIZE 2 GB, REAL_BD 676.34 GB/s, time 0.4763 s, comm_vol 322.12 GB
+rank 0, SIZE 4 GB, REAL_BD 692.68 GB/s, time 0.9301 s, comm_vol 644.25 GB
+[[4, 2], [4, 3]]
+rank 0, SIZE 1 MB, REAL_BD 10.85 GB/s, time 0.0097 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 20.74 GB/s, time 0.0101 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 28.44 GB/s, time 0.0147 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 63.5 GB/s, time 0.0132 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 97.57 GB/s, time 0.0172 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 134.4 GB/s, time 0.025 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 166.2 GB/s, time 0.0404 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 212.87 GB/s, time 0.0631 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 237.07 GB/s, time 0.1132 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 250.78 GB/s, time 0.2141 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 256.83 GB/s, time 0.4181 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 259.4 GB/s, time 0.8279 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 261.21 GB/s, time 1.6443 s, comm_vol 429.5 GB
+[[5, 2], [4, 3]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 12.25 GB/s, time 0.0086 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 22.41 GB/s, time 0.0094 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 40.28 GB/s, time 0.0104 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 67.91 GB/s, time 0.0124 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 103.54 GB/s, time 0.0162 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 140.0 GB/s, time 0.024 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 169.95 GB/s, time 0.0395 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 331.92 GB/s, time 0.0404 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 432.95 GB/s, time 0.062 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 473.88 GB/s, time 0.1133 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 498.3 GB/s, time 0.2155 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 511.04 GB/s, time 0.4202 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 518.75 GB/s, time 0.828 s, comm_vol 429.5 GB
+[[6, 1], [5, 2], [4, 3]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 18.35 GB/s, time 0.0086 s, comm_vol 157.29 MB
+rank 0, SIZE 2 MB, REAL_BD 33.23 GB/s, time 0.0095 s, comm_vol 314.57 MB
+rank 0, SIZE 4 MB, REAL_BD 60.28 GB/s, time 0.0104 s, comm_vol 629.15 MB
+rank 0, SIZE 8 MB, REAL_BD 102.03 GB/s, time 0.0123 s, comm_vol 1.26 GB
+rank 0, SIZE 16 MB, REAL_BD 153.82 GB/s, time 0.0164 s, comm_vol 2.52 GB
+rank 0, SIZE 32 MB, REAL_BD 208.37 GB/s, time 0.0242 s, comm_vol 5.03 GB
+rank 0, SIZE 64 MB, REAL_BD 254.42 GB/s, time 0.0396 s, comm_vol 10.07 GB
+rank 0, SIZE 128 MB, REAL_BD 495.72 GB/s, time 0.0406 s, comm_vol 20.13 GB
+rank 0, SIZE 256 MB, REAL_BD 649.41 GB/s, time 0.062 s, comm_vol 40.27 GB
+rank 0, SIZE 512 MB, REAL_BD 681.01 GB/s, time 0.1183 s, comm_vol 80.53 GB
+rank 0, SIZE 1 GB, REAL_BD 745.05 GB/s, time 0.2162 s, comm_vol 161.06 GB
+rank 0, SIZE 2 GB, REAL_BD 766.1 GB/s, time 0.4205 s, comm_vol 322.12 GB
+rank 0, SIZE 4 GB, REAL_BD 777.81 GB/s, time 0.8283 s, comm_vol 644.25 GB
+[[4, 3], [6, 1]]
+rank 0, SIZE 1 MB, REAL_BD 12.58 GB/s, time 0.0083 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 23.0 GB/s, time 0.0091 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 41.46 GB/s, time 0.0101 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 69.31 GB/s, time 0.0121 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 105.23 GB/s, time 0.0159 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 141.4 GB/s, time 0.0237 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 171.27 GB/s, time 0.0392 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 333.18 GB/s, time 0.0403 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 435.38 GB/s, time 0.0617 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 453.1 GB/s, time 0.1185 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 499.23 GB/s, time 0.2151 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 511.22 GB/s, time 0.4201 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 518.94 GB/s, time 0.8276 s, comm_vol 429.5 GB
+[[4, 3], [1, 6]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 12.69 GB/s, time 0.0083 s, comm_vol 104.86 MB
+rank 0, SIZE 2 MB, REAL_BD 23.03 GB/s, time 0.0091 s, comm_vol 209.72 MB
+rank 0, SIZE 4 MB, REAL_BD 41.78 GB/s, time 0.01 s, comm_vol 419.43 MB
+rank 0, SIZE 8 MB, REAL_BD 70.11 GB/s, time 0.012 s, comm_vol 838.86 MB
+rank 0, SIZE 16 MB, REAL_BD 105.55 GB/s, time 0.0159 s, comm_vol 1.68 GB
+rank 0, SIZE 32 MB, REAL_BD 141.32 GB/s, time 0.0237 s, comm_vol 3.36 GB
+rank 0, SIZE 64 MB, REAL_BD 170.93 GB/s, time 0.0393 s, comm_vol 6.71 GB
+rank 0, SIZE 128 MB, REAL_BD 331.92 GB/s, time 0.0404 s, comm_vol 13.42 GB
+rank 0, SIZE 256 MB, REAL_BD 421.96 GB/s, time 0.0636 s, comm_vol 26.84 GB
+rank 0, SIZE 512 MB, REAL_BD 474.59 GB/s, time 0.1131 s, comm_vol 53.69 GB
+rank 0, SIZE 1 GB, REAL_BD 498.54 GB/s, time 0.2154 s, comm_vol 107.37 GB
+rank 0, SIZE 2 GB, REAL_BD 511.24 GB/s, time 0.4201 s, comm_vol 214.75 GB
+rank 0, SIZE 4 GB, REAL_BD 519.04 GB/s, time 0.8275 s, comm_vol 429.5 GB
+[[0, 1], [1, 2], [2, 3], [3, 0]]
+rank 0, SIZE 1 MB, REAL_BD 21.14 GB/s, time 0.0099 s, comm_vol 209.72 MB
+rank 0, SIZE 2 MB, REAL_BD 39.12 GB/s, time 0.0107 s, comm_vol 419.43 MB
+rank 0, SIZE 4 MB, REAL_BD 68.38 GB/s, time 0.0123 s, comm_vol 838.86 MB
+rank 0, SIZE 8 MB, REAL_BD 106.36 GB/s, time 0.0158 s, comm_vol 1.68 GB
+rank 0, SIZE 16 MB, REAL_BD 145.19 GB/s, time 0.0231 s, comm_vol 3.36 GB
+rank 0, SIZE 32 MB, REAL_BD 161.25 GB/s, time 0.0416 s, comm_vol 6.71 GB
+rank 0, SIZE 64 MB, REAL_BD 202.03 GB/s, time 0.0664 s, comm_vol 13.42 GB
+rank 0, SIZE 128 MB, REAL_BD 381.82 GB/s, time 0.0703 s, comm_vol 26.84 GB
+rank 0, SIZE 256 MB, REAL_BD 666.73 GB/s, time 0.0805 s, comm_vol 53.69 GB
+rank 0, SIZE 512 MB, REAL_BD 715.64 GB/s, time 0.15 s, comm_vol 107.37 GB
+rank 0, SIZE 1 GB, REAL_BD 742.29 GB/s, time 0.2893 s, comm_vol 214.75 GB
+rank 0, SIZE 2 GB, REAL_BD 752.19 GB/s, time 0.571 s, comm_vol 429.5 GB
+rank 0, SIZE 4 GB, REAL_BD 758.45 GB/s, time 1.1326 s, comm_vol 858.99 GB
+[[0, 2], [2, 0], [1, 3], [3, 1]]
+rank 0, SIZE 1 MB, REAL_BD 21.2 GB/s, time 0.0099 s, comm_vol 209.72 MB
+rank 0, SIZE 2 MB, REAL_BD 39.38 GB/s, time 0.0107 s, comm_vol 419.43 MB
+rank 0, SIZE 4 MB, REAL_BD 57.72 GB/s, time 0.0145 s, comm_vol 838.86 MB
+rank 0, SIZE 8 MB, REAL_BD 123.78 GB/s, time 0.0136 s, comm_vol 1.68 GB
+rank 0, SIZE 16 MB, REAL_BD 188.67 GB/s, time 0.0178 s, comm_vol 3.36 GB
+rank 0, SIZE 32 MB, REAL_BD 260.78 GB/s, time 0.0257 s, comm_vol 6.71 GB
+rank 0, SIZE 64 MB, REAL_BD 324.61 GB/s, time 0.0413 s, comm_vol 13.42 GB
+rank 0, SIZE 128 MB, REAL_BD 377.52 GB/s, time 0.0711 s, comm_vol 26.84 GB
+rank 0, SIZE 256 MB, REAL_BD 661.61 GB/s, time 0.0811 s, comm_vol 53.69 GB
+rank 0, SIZE 512 MB, REAL_BD 701.97 GB/s, time 0.153 s, comm_vol 107.37 GB
+rank 0, SIZE 1 GB, REAL_BD 737.98 GB/s, time 0.291 s, comm_vol 214.75 GB
+rank 0, SIZE 2 GB, REAL_BD 743.03 GB/s, time 0.578 s, comm_vol 429.5 GB
+rank 0, SIZE 4 GB, REAL_BD 747.62 GB/s, time 1.149 s, comm_vol 858.99 GB
+[[0, 3], [1, 0], [2, 1], [3, 2]]
+rank 0, SIZE 1 MB, REAL_BD 21.17 GB/s, time 0.0099 s, comm_vol 209.72 MB
+rank 0, SIZE 2 MB, REAL_BD 39.13 GB/s, time 0.0107 s, comm_vol 419.43 MB
+rank 0, SIZE 4 MB, REAL_BD 67.97 GB/s, time 0.0123 s, comm_vol 838.86 MB
+rank 0, SIZE 8 MB, REAL_BD 104.33 GB/s, time 0.0161 s, comm_vol 1.68 GB
+rank 0, SIZE 16 MB, REAL_BD 145.55 GB/s, time 0.0231 s, comm_vol 3.36 GB
+rank 0, SIZE 32 MB, REAL_BD 177.96 GB/s, time 0.0377 s, comm_vol 6.71 GB
+rank 0, SIZE 64 MB, REAL_BD 195.33 GB/s, time 0.0687 s, comm_vol 13.42 GB
+rank 0, SIZE 128 MB, REAL_BD 382.6 GB/s, time 0.0702 s, comm_vol 26.84 GB
+rank 0, SIZE 256 MB, REAL_BD 668.19 GB/s, time 0.0803 s, comm_vol 53.69 GB
+rank 0, SIZE 512 MB, REAL_BD 719.09 GB/s, time 0.1493 s, comm_vol 107.37 GB
+rank 0, SIZE 1 GB, REAL_BD 744.04 GB/s, time 0.2886 s, comm_vol 214.75 GB
+rank 0, SIZE 2 GB, REAL_BD 760.44 GB/s, time 0.5648 s, comm_vol 429.5 GB
+rank 0, SIZE 4 GB, REAL_BD 765.84 GB/s, time 1.1216 s, comm_vol 858.99 GB
+[[0, 1], [1, 0], [2, 3], [3, 2]]
+rank 0, SIZE 1 MB, REAL_BD 21.36 GB/s, time 0.0098 s, comm_vol 209.72 MB
+rank 0, SIZE 2 MB, REAL_BD 39.66 GB/s, time 0.0106 s, comm_vol 419.43 MB
+rank 0, SIZE 4 MB, REAL_BD 72.52 GB/s, time 0.0116 s, comm_vol 838.86 MB
+rank 0, SIZE 8 MB, REAL_BD 123.8 GB/s, time 0.0136 s, comm_vol 1.68 GB
+rank 0, SIZE 16 MB, REAL_BD 189.95 GB/s, time 0.0177 s, comm_vol 3.36 GB
+rank 0, SIZE 32 MB, REAL_BD 261.39 GB/s, time 0.0257 s, comm_vol 6.71 GB
+rank 0, SIZE 64 MB, REAL_BD 323.22 GB/s, time 0.0415 s, comm_vol 13.42 GB
+rank 0, SIZE 128 MB, REAL_BD 579.16 GB/s, time 0.0463 s, comm_vol 26.84 GB
+rank 0, SIZE 256 MB, REAL_BD 621.56 GB/s, time 0.0864 s, comm_vol 53.69 GB
+rank 0, SIZE 512 MB, REAL_BD 647.84 GB/s, time 0.1657 s, comm_vol 107.37 GB
+rank 0, SIZE 1 GB, REAL_BD 676.88 GB/s, time 0.3173 s, comm_vol 214.75 GB
+rank 0, SIZE 2 GB, REAL_BD 688.0 GB/s, time 0.6243 s, comm_vol 429.5 GB
+rank 0, SIZE 4 GB, REAL_BD 696.68 GB/s, time 1.233 s, comm_vol 858.99 GB
+[[0, 2], [2, 0], [1, 3], [3, 1]]
+rank 0, SIZE 1 MB, REAL_BD 21.0 GB/s, time 0.01 s, comm_vol 209.72 MB
+rank 0, SIZE 2 MB, REAL_BD 39.38 GB/s, time 0.0107 s, comm_vol 419.43 MB
+rank 0, SIZE 4 MB, REAL_BD 71.9 GB/s, time 0.0117 s, comm_vol 838.86 MB
+rank 0, SIZE 8 MB, REAL_BD 122.3 GB/s, time 0.0137 s, comm_vol 1.68 GB
+rank 0, SIZE 16 MB, REAL_BD 189.05 GB/s, time 0.0177 s, comm_vol 3.36 GB
+rank 0, SIZE 32 MB, REAL_BD 261.97 GB/s, time 0.0256 s, comm_vol 6.71 GB
+rank 0, SIZE 64 MB, REAL_BD 290.28 GB/s, time 0.0462 s, comm_vol 13.42 GB
+rank 0, SIZE 128 MB, REAL_BD 391.11 GB/s, time 0.0686 s, comm_vol 26.84 GB
+rank 0, SIZE 256 MB, REAL_BD 660.62 GB/s, time 0.0813 s, comm_vol 53.69 GB
+rank 0, SIZE 512 MB, REAL_BD 710.14 GB/s, time 0.1512 s, comm_vol 107.37 GB
+rank 0, SIZE 1 GB, REAL_BD 737.5 GB/s, time 0.2912 s, comm_vol 214.75 GB
+rank 0, SIZE 2 GB, REAL_BD 739.34 GB/s, time 0.5809 s, comm_vol 429.5 GB
+rank 0, SIZE 4 GB, REAL_BD 747.9 GB/s, time 1.1485 s, comm_vol 858.99 GB
+[[0, 3], [3, 0], [1, 2], [2, 1]]
+rank 0, SIZE 1 MB, REAL_BD 21.27 GB/s, time 0.0099 s, comm_vol 209.72 MB
+rank 0, SIZE 2 MB, REAL_BD 39.16 GB/s, time 0.0107 s, comm_vol 419.43 MB
+rank 0, SIZE 4 MB, REAL_BD 71.53 GB/s, time 0.0117 s, comm_vol 838.86 MB
+rank 0, SIZE 8 MB, REAL_BD 121.46 GB/s, time 0.0138 s, comm_vol 1.68 GB
+rank 0, SIZE 16 MB, REAL_BD 188.16 GB/s, time 0.0178 s, comm_vol 3.36 GB
+rank 0, SIZE 32 MB, REAL_BD 258.94 GB/s, time 0.0259 s, comm_vol 6.71 GB
+rank 0, SIZE 64 MB, REAL_BD 321.67 GB/s, time 0.0417 s, comm_vol 13.42 GB
+rank 0, SIZE 128 MB, REAL_BD 388.56 GB/s, time 0.0691 s, comm_vol 26.84 GB
+rank 0, SIZE 256 MB, REAL_BD 625.6 GB/s, time 0.0858 s, comm_vol 53.69 GB
+rank 0, SIZE 512 MB, REAL_BD 651.98 GB/s, time 0.1647 s, comm_vol 107.37 GB
+rank 0, SIZE 1 GB, REAL_BD 681.41 GB/s, time 0.3152 s, comm_vol 214.75 GB
+rank 0, SIZE 2 GB, REAL_BD 692.37 GB/s, time 0.6203 s, comm_vol 429.5 GB
+rank 0, SIZE 4 GB, REAL_BD 700.26 GB/s, time 1.2267 s, comm_vol 858.99 GB
+[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]]
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+[W ProcessGroupNCCL.cpp:1856] Warning: 0NCCL_AVOID_RECORD_STREAMS=1 has no effect for point-to-point collectives. (function operator())
+rank 0, SIZE 1 MB, REAL_BD 20.7 GB/s, time 0.0203 s, comm_vol 419.43 MB
+rank 0, SIZE 2 MB, REAL_BD 68.51 GB/s, time 0.0122 s, comm_vol 838.86 MB
+rank 0, SIZE 4 MB, REAL_BD 131.77 GB/s, time 0.0127 s, comm_vol 1.68 GB
+rank 0, SIZE 8 MB, REAL_BD 208.04 GB/s, time 0.0161 s, comm_vol 3.36 GB
+rank 0, SIZE 16 MB, REAL_BD 287.79 GB/s, time 0.0233 s, comm_vol 6.71 GB
+rank 0, SIZE 32 MB, REAL_BD 358.4 GB/s, time 0.0374 s, comm_vol 13.42 GB
+rank 0, SIZE 64 MB, REAL_BD 407.52 GB/s, time 0.0659 s, comm_vol 26.84 GB
+rank 0, SIZE 128 MB, REAL_BD 754.99 GB/s, time 0.0711 s, comm_vol 53.69 GB
+rank 0, SIZE 256 MB, REAL_BD 1.34 TB/s, time 0.0801 s, comm_vol 107.37 GB
+rank 0, SIZE 512 MB, REAL_BD 1.45 TB/s, time 0.1486 s, comm_vol 214.75 GB
+rank 0, SIZE 1 GB, REAL_BD 1.51 TB/s, time 0.2853 s, comm_vol 429.5 GB
+rank 0, SIZE 2 GB, REAL_BD 1.51 TB/s, time 0.5697 s, comm_vol 858.99 GB
+rank 0, SIZE 4 GB, REAL_BD 1.52 TB/s, time 1.1304 s, comm_vol 1.72 TB
+[[0, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7], [6, 0], [7, 1]]
+rank 0, SIZE 1 MB, REAL_BD 23.83 GB/s, time 0.0176 s, comm_vol 419.43 MB
+rank 0, SIZE 2 MB, REAL_BD 73.33 GB/s, time 0.0114 s, comm_vol 838.86 MB
+rank 0, SIZE 4 MB, REAL_BD 132.17 GB/s, time 0.0127 s, comm_vol 1.68 GB
+rank 0, SIZE 8 MB, REAL_BD 155.22 GB/s, time 0.0216 s, comm_vol 3.36 GB
+rank 0, SIZE 16 MB, REAL_BD 288.8 GB/s, time 0.0232 s, comm_vol 6.71 GB
+rank 0, SIZE 32 MB, REAL_BD 359.24 GB/s, time 0.0374 s, comm_vol 13.42 GB
+rank 0, SIZE 64 MB, REAL_BD 409.81 GB/s, time 0.0655 s, comm_vol 26.84 GB
+rank 0, SIZE 128 MB, REAL_BD 736.12 GB/s, time 0.0729 s, comm_vol 53.69 GB
+rank 0, SIZE 256 MB, REAL_BD 1.34 TB/s, time 0.0801 s, comm_vol 107.37 GB
+rank 0, SIZE 512 MB, REAL_BD 1.39 TB/s, time 0.1549 s, comm_vol 214.75 GB
+rank 0, SIZE 1 GB, REAL_BD 1.5 TB/s, time 0.2857 s, comm_vol 429.5 GB
+rank 0, SIZE 2 GB, REAL_BD 1.51 TB/s, time 0.5707 s, comm_vol 858.99 GB
+rank 0, SIZE 4 GB, REAL_BD 1.52 TB/s, time 1.13 s, comm_vol 1.72 TB
+[[0, 3], [1, 4], [2, 5], [3, 6], [4, 7], [5, 0], [6, 1], [7, 2]]
+rank 0, SIZE 1 MB, REAL_BD 41.26 GB/s, time 0.0102 s, comm_vol 419.43 MB
+rank 0, SIZE 2 MB, REAL_BD 69.9 GB/s, time 0.012 s, comm_vol 838.86 MB
+rank 0, SIZE 4 MB, REAL_BD 131.1 GB/s, time 0.0128 s, comm_vol 1.68 GB
+rank 0, SIZE 8 MB, REAL_BD 207.35 GB/s, time 0.0162 s, comm_vol 3.36 GB
+rank 0, SIZE 16 MB, REAL_BD 286.21 GB/s, time 0.0234 s, comm_vol 6.71 GB
+rank 0, SIZE 32 MB, REAL_BD 296.77 GB/s, time 0.0452 s, comm_vol 13.42 GB
+rank 0, SIZE 64 MB, REAL_BD 408.11 GB/s, time 0.0658 s, comm_vol 26.84 GB
+rank 0, SIZE 128 MB, REAL_BD 757.78 GB/s, time 0.0708 s, comm_vol 53.69 GB
+rank 0, SIZE 256 MB, REAL_BD 1.34 TB/s, time 0.0803 s, comm_vol 107.37 GB
+rank 0, SIZE 512 MB, REAL_BD 1.44 TB/s, time 0.1488 s, comm_vol 214.75 GB
+rank 0, SIZE 1 GB, REAL_BD 1.5 TB/s, time 0.2872 s, comm_vol 429.5 GB
+rank 0, SIZE 2 GB, REAL_BD 1.51 TB/s, time 0.5683 s, comm_vol 858.99 GB
+rank 0, SIZE 4 GB, REAL_BD 1.52 TB/s, time 1.1268 s, comm_vol 1.72 TB
+[[0, 4], [1, 5], [2, 6], [3, 7], [4, 0], [5, 1], [6, 2], [7, 3]]
+rank 0, SIZE 1 MB, REAL_BD 17.2 GB/s, time 0.0244 s, comm_vol 419.43 MB
+rank 0, SIZE 2 MB, REAL_BD 64.81 GB/s, time 0.0129 s, comm_vol 838.86 MB
+rank 0, SIZE 4 MB, REAL_BD 131.2 GB/s, time 0.0128 s, comm_vol 1.68 GB
+rank 0, SIZE 8 MB, REAL_BD 207.16 GB/s, time 0.0162 s, comm_vol 3.36 GB
+rank 0, SIZE 16 MB, REAL_BD 285.56 GB/s, time 0.0235 s, comm_vol 6.71 GB
+rank 0, SIZE 32 MB, REAL_BD 357.06 GB/s, time 0.0376 s, comm_vol 13.42 GB
+rank 0, SIZE 64 MB, REAL_BD 396.21 GB/s, time 0.0678 s, comm_vol 26.84 GB
+rank 0, SIZE 128 MB, REAL_BD 756.98 GB/s, time 0.0709 s, comm_vol 53.69 GB
+rank 0, SIZE 256 MB, REAL_BD 1.34 TB/s, time 0.08 s, comm_vol 107.37 GB
+rank 0, SIZE 512 MB, REAL_BD 1.4 TB/s, time 0.1537 s, comm_vol 214.75 GB
+rank 0, SIZE 1 GB, REAL_BD 1.5 TB/s, time 0.2856 s, comm_vol 429.5 GB
+rank 0, SIZE 2 GB, REAL_BD 1.51 TB/s, time 0.5694 s, comm_vol 858.99 GB
+rank 0, SIZE 4 GB, REAL_BD 1.52 TB/s, time 1.1278 s, comm_vol 1.72 TB
+[[0, 5], [1, 4], [2, 7], [3, 6], [4, 1], [5, 0], [6, 3], [7, 2]]
+rank 0, SIZE 1 MB, REAL_BD 21.1 GB/s, time 0.0199 s, comm_vol 419.43 MB
+rank 0, SIZE 2 MB, REAL_BD 71.25 GB/s, time 0.0118 s, comm_vol 838.86 MB
+rank 0, SIZE 4 MB, REAL_BD 140.59 GB/s, time 0.0119 s, comm_vol 1.68 GB
+rank 0, SIZE 8 MB, REAL_BD 240.4 GB/s, time 0.014 s, comm_vol 3.36 GB
+rank 0, SIZE 16 MB, REAL_BD 370.13 GB/s, time 0.0181 s, comm_vol 6.71 GB
+rank 0, SIZE 32 MB, REAL_BD 510.99 GB/s, time 0.0263 s, comm_vol 13.42 GB
+rank 0, SIZE 64 MB, REAL_BD 636.89 GB/s, time 0.0421 s, comm_vol 26.84 GB
+rank 0, SIZE 128 MB, REAL_BD 764.6 GB/s, time 0.0702 s, comm_vol 53.69 GB
+rank 0, SIZE 256 MB, REAL_BD 1.32 TB/s, time 0.0815 s, comm_vol 107.37 GB
+rank 0, SIZE 512 MB, REAL_BD 1.37 TB/s, time 0.1564 s, comm_vol 214.75 GB
+rank 0, SIZE 1 GB, REAL_BD 1.47 TB/s, time 0.2927 s, comm_vol 429.5 GB
+rank 0, SIZE 2 GB, REAL_BD 1.48 TB/s, time 0.5796 s, comm_vol 858.99 GB
+rank 0, SIZE 4 GB, REAL_BD 1.49 TB/s, time 1.1561 s, comm_vol 1.72 TB
+[[0, 6], [1, 7], [2, 4], [3, 5], [4, 2], [5, 3], [6, 0], [7, 1]]
+rank 0, SIZE 1 MB, REAL_BD 21.28 GB/s, time 0.0197 s, comm_vol 419.43 MB
+rank 0, SIZE 2 MB, REAL_BD 71.91 GB/s, time 0.0117 s, comm_vol 838.86 MB
+rank 0, SIZE 4 MB, REAL_BD 139.21 GB/s, time 0.0121 s, comm_vol 1.68 GB
+rank 0, SIZE 8 MB, REAL_BD 238.4 GB/s, time 0.0141 s, comm_vol 3.36 GB
+rank 0, SIZE 16 MB, REAL_BD 367.71 GB/s, time 0.0183 s, comm_vol 6.71 GB
+rank 0, SIZE 32 MB, REAL_BD 513.98 GB/s, time 0.0261 s, comm_vol 13.42 GB
+rank 0, SIZE 64 MB, REAL_BD 636.21 GB/s, time 0.0422 s, comm_vol 26.84 GB
+rank 0, SIZE 128 MB, REAL_BD 757.57 GB/s, time 0.0709 s, comm_vol 53.69 GB
+rank 0, SIZE 256 MB, REAL_BD 1.21 TB/s, time 0.0886 s, comm_vol 107.37 GB
+rank 0, SIZE 512 MB, REAL_BD 1.41 TB/s, time 0.152 s, comm_vol 214.75 GB
+rank 0, SIZE 1 GB, REAL_BD 1.47 TB/s, time 0.2917 s, comm_vol 429.5 GB
+rank 0, SIZE 2 GB, REAL_BD 1.48 TB/s, time 0.5802 s, comm_vol 858.99 GB
+rank 0, SIZE 4 GB, REAL_BD 1.49 TB/s, time 1.1493 s, comm_vol 1.72 TB
+[[0, 7], [1, 6], [2, 5], [3, 4], [4, 3], [5, 2], [6, 1], [7, 0]]
+rank 0, SIZE 1 MB, REAL_BD 42.07 GB/s, time 0.01 s, comm_vol 419.43 MB
+rank 0, SIZE 2 MB, REAL_BD 74.27 GB/s, time 0.0113 s, comm_vol 838.86 MB
+rank 0, SIZE 4 MB, REAL_BD 140.6 GB/s, time 0.0119 s, comm_vol 1.68 GB
+rank 0, SIZE 8 MB, REAL_BD 241.68 GB/s, time 0.0139 s, comm_vol 3.36 GB
+rank 0, SIZE 16 MB, REAL_BD 370.79 GB/s, time 0.0181 s, comm_vol 6.71 GB
+rank 0, SIZE 32 MB, REAL_BD 515.43 GB/s, time 0.026 s, comm_vol 13.42 GB
+rank 0, SIZE 64 MB, REAL_BD 642.89 GB/s, time 0.0418 s, comm_vol 26.84 GB
+rank 0, SIZE 128 MB, REAL_BD 760.94 GB/s, time 0.0706 s, comm_vol 53.69 GB
+rank 0, SIZE 256 MB, REAL_BD 1.23 TB/s, time 0.0871 s, comm_vol 107.37 GB
+rank 0, SIZE 512 MB, REAL_BD 1.28 TB/s, time 0.1679 s, comm_vol 214.75 GB
+rank 0, SIZE 1 GB, REAL_BD 1.35 TB/s, time 0.3191 s, comm_vol 429.5 GB
+rank 0, SIZE 2 GB, REAL_BD 1.35 TB/s, time 0.6345 s, comm_vol 858.99 GB
+rank 0, SIZE 4 GB, REAL_BD 1.37 TB/s, time 1.2523 s, comm_vol 1.72 TB

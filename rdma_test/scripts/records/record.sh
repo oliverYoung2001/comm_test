@@ -20,6 +20,10 @@ cat /sys/bus/pci/devices/0000:19:00.0/current_link_speed
 cat /sys/bus/pci/devices/0000:19:00.0/current_link_width
 cat /sys/bus/pci/devices/0000:19:00.0/max_link_speed
 cat /sys/bus/pci/devices/0000:19:00.0/max_link_width
+#   8. HCA real bandwidth
+ib_write_bw -d mlx5_4 -p 10121 & pid0=$!    # server
+sleep 1
+ib_write_bw -d mlx5_3 -p 10121 127.0.0.1 & pid1=$!  # client
 
 # Install htop&lstopo
 spack install htop

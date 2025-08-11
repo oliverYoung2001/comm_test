@@ -1,0 +1,62 @@
+make -C csrc clean
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+make -C csrc coll_comm_bench
+make[1]: Entering directory '/home/yhy/llm/comm_test/csrc'
+nvcc coll_comm_bench.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o coll_comm_bench.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o comm.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_70,code=sm_70" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" coll_comm_bench.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/yhy/.local/nccl/build/lib -L/home/spack/spack/opt/spack/linux-debian12-cascadelake/gcc-12.2.0/cuda-12.0.1-34tfuheflqvthq3cikpjku6rigtpcsse/bin/../lib64 -lcudart -lnccl -Wall -o build/coll_comm_bench -Wl,-rpath=/home/yhy/.local/nccl/build/lib
+rm comm.o utils.o coll_comm_bench.o
+make[1]: Leaving directory '/home/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+HOST: nico1,nico2
+NNODES: 2
+NGPU_PER_NODE: 8
++ GPU_NUM=16
++ HOST_CONFIG=g4007:8,g4008:8
++ HOST_CONFIG=g3025:8,g3029:8
++ HOST_CONFIG=nico1:8,nico2:8
++++ which mpirun
+++ dirname /home/spack/spack/opt/spack/linux-debian12-cascadelake/gcc-12.2.0/openmpi-4.1.5-awa3vt54wrdwtnmig36yiumb346p5zu5/bin/mpirun
++ mpirun --prefix /home/spack/spack/opt/spack/linux-debian12-cascadelake/gcc-12.2.0/openmpi-4.1.5-awa3vt54wrdwtnmig36yiumb346p5zu5/bin/../ -x LD_LIBRARY_PATH -np 16 --host nico1:8,nico2:8 ./csrc/build/coll_comm_bench 16 NCCL
+--------------------------------------------------------------------------
+ORTE was unable to reliably start one or more daemons.
+This usually is caused by:
+
+* not finding the required libraries and/or binaries on
+  one or more nodes. Please check your PATH and LD_LIBRARY_PATH
+  settings, or configure OMPI with --enable-orterun-prefix-by-default
+
+* lack of authority to execute on one or more specified nodes.
+  Please verify your allocation and authorities.
+
+* the inability to write startup files into /tmp (--tmpdir/orte_tmpdir_base).
+  Please check with your sys admin to determine the correct location to use.
+
+*  compilation of the orted with dynamic libraries when static are required
+  (e.g., on Cray). Please check your configure cmd line and consider using
+  one of the contrib/platform definitions for your system type.
+
+* an inability to create a connection back to mpirun due to a
+  lack of common network interfaces and/or no route found between
+  them. Please check network connectivity (including firewalls
+  and network routing requirements).
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+ORTE does not know how to route a message to the specified daemon
+located on the indicated node:
+
+  my node:   nico0
+  target node:  nico2
+
+This is usually an internal programming error that should be
+reported to the developers. In the meantime, a workaround may
+be to set the MCA param routed=direct on the command line or
+in your environment. We apologize for the problem.
+--------------------------------------------------------------------------

@@ -1,0 +1,27 @@
+BACKEND: NCCL
+HOST: g4002,g4003
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -np 16 --host g4005:8,g4006:8,g4007:8,g4008:8 ./csrc/build/coll_comm_bench 16 NCCL
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[mngg001:3745606] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:3745606] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Comm_Op: ag
+msg_size 16384.000000 KB, time 0.142795 s, tput 37.597319 GB/s, busbw 35.247486 GB/s
+msg_size 65536.000000 KB, time 0.559024 s, tput 38.414874 GB/s, busbw 36.013944 GB/s
+msg_size 262144.000000 KB, time 2.231457 s, tput 38.494735 GB/s, busbw 36.088814 GB/s
+Comm_Op: rs
+msg_size 16384.000000 KB, time 0.150873 s, tput 35.584294 GB/s, busbw 33.360275 GB/s
+msg_size 65536.000000 KB, time 0.584651 s, tput 36.731035 GB/s, busbw 34.435346 GB/s
+msg_size 262144.000000 KB, time 2.330051 s, tput 36.865865 GB/s, busbw 34.561749 GB/s
+Comm_Op: ar
+msg_size 16384.000000 KB, time 0.302004 s, tput 35.553894 GB/s, busbw 33.331776 GB/s
+msg_size 65536.000000 KB, time 1.160189 s, tput 37.019549 GB/s, busbw 34.705827 GB/s
+msg_size 262144.000000 KB, time 4.596717 s, tput 37.374216 GB/s, busbw 35.038327 GB/s

@@ -1,5 +1,0 @@
-PARTITION: gpu4-low
-HOST: g4005,g4006,g4007
-GPU_NUM: 64
-+ srun -p gpu4-low -N 8 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g4005,g4006,g4007 ./scripts/executor.sh python coll_comm_bench.py --output ./prof_data/coll_comm_bench_64_g4005,g4006,g4007.json
-srun: job 22557 queued and waiting for resources

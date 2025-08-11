@@ -1,0 +1,13 @@
+PARTITION: gpu4-low
+HOST: None
+GPU_NUM: 16
++ srun -p gpu4-low -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K ./scripts/executor.sh python coll_comm_bench.py --output ./prof_data/coll_comm_bench_16_None.json
+srun: job 11099 queued and waiting for resources
+srun: job 11099 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: alltoall
+msg_size: 16 MB, t_d: 0.1264 s, tput: 2.654 GB/s, busbw: 2.488 GB/s
+msg_size: 64 MB, t_d: 0.9277 s, tput: 1.447 GB/s, busbw: 1.356 GB/s
+msg_size: 256 MB, t_d: 2.2921 s, tput: 2.342 GB/s, busbw: 2.196 GB/s
+msg_size: 4 GB, t_d: 28.2041 s, tput: 3.046 GB/s, busbw: 2.855 GB/s
+msg_size: 16 GB, t_d: 85.4186 s, tput: 4.023 GB/s, busbw: 3.771 GB/s

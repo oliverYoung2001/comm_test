@@ -1,0 +1,102 @@
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 24 --host g4005:8,g4007:8,g4008:8 ./csrc/build/conflict_allinone 24 NCCL ./scripts/configs/small.json
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+NCCL version 2.21.5+cuda11.8
+[mngg001:2467024] 23 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:2467024] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[[0,1]]
+time 0.006576 s, REAL_BD 228.102190 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.025410 s, REAL_BD 236.127509 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.007522 s, REAL_BD 398.830098 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.028627 s, REAL_BD 419.184686 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.083099 s, REAL_BD 18.050759 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.343182 s, REAL_BD 17.483434 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,9]]
+time 0.088316 s, REAL_BD 16.984465 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.355432 s, REAL_BD 16.880866 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,10]]
+time 0.082354 s, REAL_BD 18.214052 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.327603 s, REAL_BD 18.314851 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,11]]
+time 0.086859 s, REAL_BD 17.269368 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.347206 s, REAL_BD 17.280807 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,12]]
+time 0.082820 s, REAL_BD 18.111567 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.329684 s, REAL_BD 18.199245 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,13]]
+time 0.082014 s, REAL_BD 18.289560 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.327693 s, REAL_BD 18.309820 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,14]]
+time 0.090066 s, REAL_BD 16.654453 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.360365 s, REAL_BD 16.649786 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,15]]
+time 0.082949 s, REAL_BD 18.083401 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.330836 s, REAL_BD 18.135874 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.155950 s, REAL_BD 19.236935 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.625066 s, REAL_BD 19.197973 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.173379 s, REAL_BD 17.303134 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.694600 s, REAL_BD 17.276130 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.146748 s, REAL_BD 20.443209 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.584622 s, REAL_BD 20.526084 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.276207 s, REAL_BD 21.722838 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.104065 s, REAL_BD 21.737851 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.091710 s, REAL_BD 32.711809 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.338726 s, REAL_BD 35.426864 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[4,12]]
+time 0.085735 s, REAL_BD 34.991544 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.342946 s, REAL_BD 34.990932 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[8,0],[4,12],[12,4]]
+time 0.178628 s, REAL_BD 33.589359 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.715028 s, REAL_BD 33.565119 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[2,10],[4,12],[6,14]]
+time 0.135655 s, REAL_BD 44.229848 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.526506 s, REAL_BD 45.583526 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[0,8],[8,0],[2,10],[10,2],[4,12],[12,4],[6,14],[14,6]]
+time 0.240926 s, REAL_BD 49.807825 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.012457 s, REAL_BD 47.409421 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]]
+time 0.266354 s, REAL_BD 45.052824 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.083158 s, REAL_BD 44.314864 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[[0,8],[8,16],[16,0]]
+time 0.156821 s, REAL_BD 28.695136 GB/s, SIZE 524288.000000 KB, comm_vol 4718592.000000 KB
+time 0.633338 s, REAL_BD 28.420843 GB/s, SIZE 2097152.000000 KB, comm_vol 18874368.000000 KB
+--------------------------------------------------------------------------
+mpirun has exited due to process rank 15 with PID 28791 on
+node g4007 exiting improperly. There are three reasons this could occur:
+
+1. this process did not call "init" before exiting, but others in
+the job did. This can cause a job to hang indefinitely while it waits
+for all processes to call "init". By rule, if one process calls "init",
+then ALL processes must call "init" prior to termination.
+
+2. this process called "init", but exited without calling "finalize".
+By rule, all processes that call "init" MUST call "finalize" prior to
+exiting or it will be considered an "abnormal termination"
+
+3. this process called "MPI_Abort" or "orte_abort" and the mca parameter
+orte_create_session_dirs is set to false. In this case, the run-time cannot
+detect that the abort call was an abnormal termination. Hence, the only
+error message you will receive is this one.
+
+This may have caused other processes in the application to be
+terminated by signals sent by mpirun (as reported here).
+
+You can avoid this message by specifying -quiet on the mpirun command line.
+--------------------------------------------------------------------------

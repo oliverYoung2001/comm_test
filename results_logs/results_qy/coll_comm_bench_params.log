@@ -1,0 +1,13 @@
+PARTITION: gpu3-2-low
+HOST: None
+GPU_NUM: 16
++ srun -p gpu3-2-low -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K ./scripts/executor.sh python coll_comm_bench.py --output ./prof_data/coll_comm_bench_16_None.json
+srun: job 11328 queued and waiting for resources
+srun: job 11328 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 797 MB, t_d: 78.4035 s, tput: 3.412 GB/s, busbw: 3.199 GB/s
+COLL_COMM: reducescatter
+msg_size: 797 MB, t_d: 79.8806 s, tput: 3.349 GB/s, busbw: 3.14 GB/s
+COLL_COMM: allreduce
+msg_size: 797 MB, t_d: 90.0902 s, tput: 5.939 GB/s, busbw: 5.568 GB/s

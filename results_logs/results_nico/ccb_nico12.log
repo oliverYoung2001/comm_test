@@ -1,0 +1,17 @@
+PARTITION: Mix
+HOST: nico1,nico2
+GPU_NUM: 16
++ srun -p Mix -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w nico1,nico2 ./scripts/executor.sh python coll_comm_bench.py --output ./prof_data/coll_comm_bench_16_nico1,nico2.json
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 16 MB, t_d: 0.8433 s, t_d/r: 0.0843, tput: 3.183 GB/s, busbw: 2.984 GB/s
+msg_size: 64 MB, t_d: 3.3248 s, t_d/r: 0.3325, tput: 3.23 GB/s, busbw: 3.028 GB/s
+msg_size: 256 MB, t_d: 13.2477 s, t_d/r: 1.3248, tput: 3.242 GB/s, busbw: 3.039 GB/s
+COLL_COMM: reducescatter
+msg_size: 16 MB, t_d: 0.8737 s, t_d/r: 0.0874, tput: 3.072 GB/s, busbw: 2.88 GB/s
+msg_size: 64 MB, t_d: 3.4442 s, t_d/r: 0.3444, tput: 3.118 GB/s, busbw: 2.923 GB/s
+msg_size: 256 MB, t_d: 13.7019 s, t_d/r: 1.3702, tput: 3.135 GB/s, busbw: 2.939 GB/s
+COLL_COMM: allreduce
+msg_size: 16 MB, t_d: 1.6856 s, t_d/r: 0.1686, tput: 3.185 GB/s, busbw: 2.986 GB/s
+msg_size: 64 MB, t_d: 6.6925 s, t_d/r: 0.6693, tput: 3.209 GB/s, busbw: 3.008 GB/s
+msg_size: 256 MB, t_d: 26.7204 s, t_d/r: 2.672, tput: 3.215 GB/s, busbw: 3.014 GB/s

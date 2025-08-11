@@ -1,0 +1,644 @@
+HOST: g40,g42
+CP_FILE_NAME: small
+HOST: g40,g42
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 16
+PROC_NUM: 16
+NNODES: 2
+NTASK_PER_NODE: 8
+COMM_MODULE: raw-nccl
++ srun -p h01 -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g40,g42 -c 13 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_16.json --comm-module raw-nccl
+NCCL version 2.21.5+cuda12.4
+[INFO]: Cluster init done !!!
+[[0, 1]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 988.769 MB/s, BD/PAIR 988.769 MB/s, time 8.285e-04 s, time/iter 8.285e-06, comm_vol 819.2 KB
+SIZE 16 KB, REAL_BD 1.795 GB/s, BD/PAIR 1.795 GB/s, time 9.129e-04 s, time/iter 9.129e-06, comm_vol 1.638 MB
+SIZE 32 KB, REAL_BD 3.342 GB/s, BD/PAIR 3.342 GB/s, time 9.806e-04 s, time/iter 9.806e-06, comm_vol 3.277 MB
+SIZE 64 KB, REAL_BD 6.148 GB/s, BD/PAIR 6.148 GB/s, time 1.066e-03 s, time/iter 1.066e-05, comm_vol 6.554 MB
+SIZE 128 KB, REAL_BD 12.109 GB/s, BD/PAIR 12.109 GB/s, time 1.082e-03 s, time/iter 1.082e-05, comm_vol 13.107 MB
+SIZE 256 KB, REAL_BD 23.474 GB/s, BD/PAIR 23.474 GB/s, time 1.117e-03 s, time/iter 1.117e-05, comm_vol 26.214 MB
+SIZE 512 KB, REAL_BD 42.127 GB/s, BD/PAIR 42.127 GB/s, time 1.245e-03 s, time/iter 1.245e-05, comm_vol 52.429 MB
+SIZE 1 MB, REAL_BD 65.928 GB/s, BD/PAIR 65.928 GB/s, time 1.590e-03 s, time/iter 1.590e-05, comm_vol 104.858 MB
+SIZE 2 MB, REAL_BD 93.745 GB/s, BD/PAIR 93.745 GB/s, time 2.237e-03 s, time/iter 2.237e-05, comm_vol 209.715 MB
+SIZE 4 MB, REAL_BD 119.164 GB/s, BD/PAIR 119.164 GB/s, time 3.520e-03 s, time/iter 3.520e-05, comm_vol 419.43 MB
+SIZE 8 MB, REAL_BD 138.14 GB/s, BD/PAIR 138.14 GB/s, time 6.073e-03 s, time/iter 6.073e-05, comm_vol 838.861 MB
+SIZE 16 MB, REAL_BD 150.373 GB/s, BD/PAIR 150.373 GB/s, time 1.116e-02 s, time/iter 1.116e-04, comm_vol 1.678 GB
+SIZE 32 MB, REAL_BD 157.064 GB/s, BD/PAIR 157.064 GB/s, time 2.136e-02 s, time/iter 2.136e-04, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 159.242 GB/s, BD/PAIR 159.242 GB/s, time 4.214e-02 s, time/iter 4.214e-04, comm_vol 6.711 GB
+SIZE 128 MB, REAL_BD 162.024 GB/s, BD/PAIR 162.024 GB/s, time 8.284e-02 s, time/iter 8.284e-04, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 165.81 GB/s, BD/PAIR 165.81 GB/s, time 1.619e-01 s, time/iter 1.619e-03, comm_vol 26.844 GB
+SIZE 512 MB, REAL_BD 166.669 GB/s, BD/PAIR 166.669 GB/s, time 3.221e-01 s, time/iter 3.221e-03, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 167.032 GB/s, BD/PAIR 167.032 GB/s, time 6.428e-01 s, time/iter 6.428e-03, comm_vol 107.374 GB
+[[0, 1], [1, 0]]
+SIZE 8 KB, REAL_BD 878.766 MB/s, BD/PAIR 439.383 MB/s, time 1.864e-03 s, time/iter 1.864e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.811 GB/s, BD/PAIR 905.276 MB/s, time 1.810e-03 s, time/iter 1.810e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.593 GB/s, BD/PAIR 1.797 GB/s, time 1.824e-03 s, time/iter 1.824e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 7.224 GB/s, BD/PAIR 3.612 GB/s, time 1.814e-03 s, time/iter 1.814e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 14.109 GB/s, BD/PAIR 7.054 GB/s, time 1.858e-03 s, time/iter 1.858e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 26.491 GB/s, BD/PAIR 13.246 GB/s, time 1.979e-03 s, time/iter 1.979e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 47.862 GB/s, BD/PAIR 23.931 GB/s, time 2.191e-03 s, time/iter 2.191e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 95.423 GB/s, BD/PAIR 47.712 GB/s, time 2.198e-03 s, time/iter 2.198e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 178.619 GB/s, BD/PAIR 89.31 GB/s, time 2.348e-03 s, time/iter 2.348e-05, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 223.762 GB/s, BD/PAIR 111.881 GB/s, time 3.749e-03 s, time/iter 3.749e-05, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 265.894 GB/s, BD/PAIR 132.947 GB/s, time 6.310e-03 s, time/iter 6.310e-05, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 289.893 GB/s, BD/PAIR 144.947 GB/s, time 1.157e-02 s, time/iter 1.157e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 307.002 GB/s, BD/PAIR 153.501 GB/s, time 2.186e-02 s, time/iter 2.186e-04, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 315.53 GB/s, BD/PAIR 157.765 GB/s, time 4.254e-02 s, time/iter 4.254e-04, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 320.543 GB/s, BD/PAIR 160.271 GB/s, time 8.374e-02 s, time/iter 8.374e-04, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 324.453 GB/s, BD/PAIR 162.227 GB/s, time 1.655e-01 s, time/iter 1.655e-03, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 321.278 GB/s, BD/PAIR 160.639 GB/s, time 3.342e-01 s, time/iter 3.342e-03, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 327.414 GB/s, BD/PAIR 163.707 GB/s, time 6.559e-01 s, time/iter 6.559e-03, comm_vol 214.748 GB
+[[0, 8]]
+SIZE 8 KB, REAL_BD 564.849 MB/s, BD/PAIR 564.849 MB/s, time 1.450e-03 s, time/iter 1.450e-05, comm_vol 819.2 KB
+SIZE 16 KB, REAL_BD 978.492 MB/s, BD/PAIR 978.492 MB/s, time 1.674e-03 s, time/iter 1.674e-05, comm_vol 1.638 MB
+SIZE 32 KB, REAL_BD 1.852 GB/s, BD/PAIR 1.852 GB/s, time 1.770e-03 s, time/iter 1.770e-05, comm_vol 3.277 MB
+SIZE 64 KB, REAL_BD 2.682 GB/s, BD/PAIR 2.682 GB/s, time 2.444e-03 s, time/iter 2.444e-05, comm_vol 6.554 MB
+SIZE 128 KB, REAL_BD 4.514 GB/s, BD/PAIR 4.514 GB/s, time 2.904e-03 s, time/iter 2.904e-05, comm_vol 13.107 MB
+SIZE 256 KB, REAL_BD 8.951 GB/s, BD/PAIR 8.951 GB/s, time 2.929e-03 s, time/iter 2.929e-05, comm_vol 26.214 MB
+SIZE 512 KB, REAL_BD 12.095 GB/s, BD/PAIR 12.095 GB/s, time 4.335e-03 s, time/iter 4.335e-05, comm_vol 52.429 MB
+SIZE 1 MB, REAL_BD 14.973 GB/s, BD/PAIR 14.973 GB/s, time 7.003e-03 s, time/iter 7.003e-05, comm_vol 104.858 MB
+SIZE 2 MB, REAL_BD 20.377 GB/s, BD/PAIR 20.377 GB/s, time 1.029e-02 s, time/iter 1.029e-04, comm_vol 209.715 MB
+SIZE 4 MB, REAL_BD 21.828 GB/s, BD/PAIR 21.828 GB/s, time 1.921e-02 s, time/iter 1.921e-04, comm_vol 419.43 MB
+SIZE 8 MB, REAL_BD 22.678 GB/s, BD/PAIR 22.678 GB/s, time 3.699e-02 s, time/iter 3.699e-04, comm_vol 838.861 MB
+SIZE 16 MB, REAL_BD 23.092 GB/s, BD/PAIR 23.092 GB/s, time 7.265e-02 s, time/iter 7.265e-04, comm_vol 1.678 GB
+SIZE 32 MB, REAL_BD 23.325 GB/s, BD/PAIR 23.325 GB/s, time 1.439e-01 s, time/iter 1.439e-03, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 23.477 GB/s, BD/PAIR 23.477 GB/s, time 2.859e-01 s, time/iter 2.859e-03, comm_vol 6.711 GB
+SIZE 128 MB, REAL_BD 23.529 GB/s, BD/PAIR 23.529 GB/s, time 5.704e-01 s, time/iter 5.704e-03, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 23.549 GB/s, BD/PAIR 23.549 GB/s, time 1.140e+00 s, time/iter 1.140e-02, comm_vol 26.844 GB
+SIZE 512 MB, REAL_BD 23.588 GB/s, BD/PAIR 23.588 GB/s, time 2.276e+00 s, time/iter 2.276e-02, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 23.573 GB/s, BD/PAIR 23.573 GB/s, time 4.555e+00 s, time/iter 4.555e-02, comm_vol 107.374 GB
+[[0, 8], [8, 0]]
+SIZE 8 KB, REAL_BD 1.031 GB/s, BD/PAIR 515.293 MB/s, time 1.590e-03 s, time/iter 1.590e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.788 GB/s, BD/PAIR 894.203 MB/s, time 1.832e-03 s, time/iter 1.832e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.597 GB/s, BD/PAIR 1.799 GB/s, time 1.822e-03 s, time/iter 1.822e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.138 GB/s, BD/PAIR 2.569 GB/s, time 2.551e-03 s, time/iter 2.551e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 8.881 GB/s, BD/PAIR 4.44 GB/s, time 2.952e-03 s, time/iter 2.952e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 16.449 GB/s, BD/PAIR 8.224 GB/s, time 3.187e-03 s, time/iter 3.187e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 22.883 GB/s, BD/PAIR 11.441 GB/s, time 4.582e-03 s, time/iter 4.582e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 27.459 GB/s, BD/PAIR 13.73 GB/s, time 7.637e-03 s, time/iter 7.637e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 37.255 GB/s, BD/PAIR 18.628 GB/s, time 1.126e-02 s, time/iter 1.126e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 40.934 GB/s, BD/PAIR 20.467 GB/s, time 2.049e-02 s, time/iter 2.049e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 41.737 GB/s, BD/PAIR 20.869 GB/s, time 4.020e-02 s, time/iter 4.020e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 42.448 GB/s, BD/PAIR 21.224 GB/s, time 7.905e-02 s, time/iter 7.905e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 43.632 GB/s, BD/PAIR 21.816 GB/s, time 1.538e-01 s, time/iter 1.538e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 43.932 GB/s, BD/PAIR 21.966 GB/s, time 3.055e-01 s, time/iter 3.055e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 44.038 GB/s, BD/PAIR 22.019 GB/s, time 6.096e-01 s, time/iter 6.096e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 44.477 GB/s, BD/PAIR 22.239 GB/s, time 1.207e+00 s, time/iter 1.207e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 44.394 GB/s, BD/PAIR 22.197 GB/s, time 2.419e+00 s, time/iter 2.419e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 44.809 GB/s, BD/PAIR 22.405 GB/s, time 4.793e+00 s, time/iter 4.793e-02, comm_vol 214.748 GB
+[[0, 15], [15, 0]]
+SIZE 8 KB, REAL_BD 789.788 MB/s, BD/PAIR 394.894 MB/s, time 2.074e-03 s, time/iter 2.074e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.786 GB/s, BD/PAIR 893.041 MB/s, time 1.835e-03 s, time/iter 1.835e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.442 GB/s, BD/PAIR 1.721 GB/s, time 1.904e-03 s, time/iter 1.904e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.038 GB/s, BD/PAIR 2.519 GB/s, time 2.602e-03 s, time/iter 2.602e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 8.456 GB/s, BD/PAIR 4.228 GB/s, time 3.100e-03 s, time/iter 3.100e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 16.31 GB/s, BD/PAIR 8.155 GB/s, time 3.215e-03 s, time/iter 3.215e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 22.096 GB/s, BD/PAIR 11.048 GB/s, time 4.745e-03 s, time/iter 4.745e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 27.709 GB/s, BD/PAIR 13.854 GB/s, time 7.569e-03 s, time/iter 7.569e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 39.014 GB/s, BD/PAIR 19.507 GB/s, time 1.075e-02 s, time/iter 1.075e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 40.227 GB/s, BD/PAIR 20.113 GB/s, time 2.085e-02 s, time/iter 2.085e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 41.948 GB/s, BD/PAIR 20.974 GB/s, time 4.000e-02 s, time/iter 4.000e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 42.658 GB/s, BD/PAIR 21.329 GB/s, time 7.866e-02 s, time/iter 7.866e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 43.949 GB/s, BD/PAIR 21.974 GB/s, time 1.527e-01 s, time/iter 1.527e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 43.911 GB/s, BD/PAIR 21.956 GB/s, time 3.057e-01 s, time/iter 3.057e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 44.692 GB/s, BD/PAIR 22.346 GB/s, time 6.006e-01 s, time/iter 6.006e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 44.399 GB/s, BD/PAIR 22.2 GB/s, time 1.209e+00 s, time/iter 1.209e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 44.647 GB/s, BD/PAIR 22.324 GB/s, time 2.405e+00 s, time/iter 2.405e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 44.742 GB/s, BD/PAIR 22.371 GB/s, time 4.800e+00 s, time/iter 4.800e-02, comm_vol 214.748 GB
+[[0, 8], [0, 15]]
+SIZE 8 KB, REAL_BD 651.987 MB/s, BD/PAIR 325.994 MB/s, time 2.513e-03 s, time/iter 2.513e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.292 GB/s, BD/PAIR 646.103 MB/s, time 2.536e-03 s, time/iter 2.536e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 2.517 GB/s, BD/PAIR 1.259 GB/s, time 2.603e-03 s, time/iter 2.603e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 3.845 GB/s, BD/PAIR 1.923 GB/s, time 3.409e-03 s, time/iter 3.409e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 7.075 GB/s, BD/PAIR 3.538 GB/s, time 3.705e-03 s, time/iter 3.705e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 13.529 GB/s, BD/PAIR 6.765 GB/s, time 3.875e-03 s, time/iter 3.875e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 17.95 GB/s, BD/PAIR 8.975 GB/s, time 5.842e-03 s, time/iter 5.842e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 21.41 GB/s, BD/PAIR 10.705 GB/s, time 9.795e-03 s, time/iter 9.795e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 24.34 GB/s, BD/PAIR 12.17 GB/s, time 1.723e-02 s, time/iter 1.723e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 23.828 GB/s, BD/PAIR 11.914 GB/s, time 3.520e-02 s, time/iter 3.520e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 23.731 GB/s, BD/PAIR 11.865 GB/s, time 7.070e-02 s, time/iter 7.070e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 23.688 GB/s, BD/PAIR 11.844 GB/s, time 1.417e-01 s, time/iter 1.417e-03, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 23.659 GB/s, BD/PAIR 11.829 GB/s, time 2.837e-01 s, time/iter 2.837e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 23.634 GB/s, BD/PAIR 11.817 GB/s, time 5.679e-01 s, time/iter 5.679e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 23.625 GB/s, BD/PAIR 11.813 GB/s, time 1.136e+00 s, time/iter 1.136e-02, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 23.615 GB/s, BD/PAIR 11.808 GB/s, time 2.273e+00 s, time/iter 2.273e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 23.603 GB/s, BD/PAIR 11.802 GB/s, time 4.549e+00 s, time/iter 4.549e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 23.544 GB/s, BD/PAIR 11.772 GB/s, time 9.121e+00 s, time/iter 9.121e-02, comm_vol 214.748 GB
+[[0, 8], [0, 15], [8, 0], [15, 0]]
+SIZE 8 KB, REAL_BD 1.255 GB/s, BD/PAIR 313.702 MB/s, time 2.611e-03 s, time/iter 2.611e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 2.51 GB/s, BD/PAIR 627.403 MB/s, time 2.611e-03 s, time/iter 2.611e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 4.842 GB/s, BD/PAIR 1.211 GB/s, time 2.707e-03 s, time/iter 2.707e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 7.51 GB/s, BD/PAIR 1.877 GB/s, time 3.491e-03 s, time/iter 3.491e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 13.72 GB/s, BD/PAIR 3.43 GB/s, time 3.821e-03 s, time/iter 3.821e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 26.002 GB/s, BD/PAIR 6.501 GB/s, time 4.033e-03 s, time/iter 4.033e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 33.749 GB/s, BD/PAIR 8.437 GB/s, time 6.214e-03 s, time/iter 6.214e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 40.609 GB/s, BD/PAIR 10.152 GB/s, time 1.033e-02 s, time/iter 1.033e-04, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 43.042 GB/s, BD/PAIR 10.76 GB/s, time 1.949e-02 s, time/iter 1.949e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 41.075 GB/s, BD/PAIR 10.269 GB/s, time 4.084e-02 s, time/iter 4.084e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 42.732 GB/s, BD/PAIR 10.683 GB/s, time 7.852e-02 s, time/iter 7.852e-04, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 43.955 GB/s, BD/PAIR 10.989 GB/s, time 1.527e-01 s, time/iter 1.527e-03, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 43.682 GB/s, BD/PAIR 10.921 GB/s, time 3.073e-01 s, time/iter 3.073e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 44.212 GB/s, BD/PAIR 11.053 GB/s, time 6.072e-01 s, time/iter 6.072e-03, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 44.231 GB/s, BD/PAIR 11.058 GB/s, time 1.214e+00 s, time/iter 1.214e-02, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 44.328 GB/s, BD/PAIR 11.082 GB/s, time 2.422e+00 s, time/iter 2.422e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 44.374 GB/s, BD/PAIR 11.094 GB/s, time 4.839e+00 s, time/iter 4.839e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 44.554 GB/s, BD/PAIR 11.139 GB/s, time 9.640e+00 s, time/iter 9.640e-02, comm_vol 429.497 GB
+[[7, 8], [15, 0]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 1.042 GB/s, BD/PAIR 520.997 MB/s, time 1.572e-03 s, time/iter 1.572e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.904 GB/s, BD/PAIR 951.793 MB/s, time 1.721e-03 s, time/iter 1.721e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.187 GB/s, BD/PAIR 1.594 GB/s, time 2.056e-03 s, time/iter 2.056e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.252 GB/s, BD/PAIR 2.626 GB/s, time 2.496e-03 s, time/iter 2.496e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 9.254 GB/s, BD/PAIR 4.627 GB/s, time 2.833e-03 s, time/iter 2.833e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 17.686 GB/s, BD/PAIR 8.843 GB/s, time 2.964e-03 s, time/iter 2.964e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 24.626 GB/s, BD/PAIR 12.313 GB/s, time 4.258e-03 s, time/iter 4.258e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 30.638 GB/s, BD/PAIR 15.319 GB/s, time 6.845e-03 s, time/iter 6.845e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 40.714 GB/s, BD/PAIR 20.357 GB/s, time 1.030e-02 s, time/iter 1.030e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 43.721 GB/s, BD/PAIR 21.861 GB/s, time 1.919e-02 s, time/iter 1.919e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 45.328 GB/s, BD/PAIR 22.664 GB/s, time 3.701e-02 s, time/iter 3.701e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 45.59 GB/s, BD/PAIR 22.795 GB/s, time 7.360e-02 s, time/iter 7.360e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 46.649 GB/s, BD/PAIR 23.325 GB/s, time 1.439e-01 s, time/iter 1.439e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 46.939 GB/s, BD/PAIR 23.47 GB/s, time 2.859e-01 s, time/iter 2.859e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 46.702 GB/s, BD/PAIR 23.351 GB/s, time 5.748e-01 s, time/iter 5.748e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 46.864 GB/s, BD/PAIR 23.432 GB/s, time 1.146e+00 s, time/iter 1.146e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 47.036 GB/s, BD/PAIR 23.518 GB/s, time 2.283e+00 s, time/iter 2.283e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 46.866 GB/s, BD/PAIR 23.433 GB/s, time 4.582e+00 s, time/iter 4.582e-02, comm_vol 214.748 GB
+[[0, 8], [2, 10]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 1.045 GB/s, BD/PAIR 522.502 MB/s, time 1.568e-03 s, time/iter 1.568e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.959 GB/s, BD/PAIR 979.747 MB/s, time 1.672e-03 s, time/iter 1.672e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.74 GB/s, BD/PAIR 1.87 GB/s, time 1.752e-03 s, time/iter 1.752e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.376 GB/s, BD/PAIR 2.688 GB/s, time 2.438e-03 s, time/iter 2.438e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 9.425 GB/s, BD/PAIR 4.712 GB/s, time 2.781e-03 s, time/iter 2.781e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 17.721 GB/s, BD/PAIR 8.861 GB/s, time 2.959e-03 s, time/iter 2.959e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 24.924 GB/s, BD/PAIR 12.462 GB/s, time 4.207e-03 s, time/iter 4.207e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 30.359 GB/s, BD/PAIR 15.179 GB/s, time 6.908e-03 s, time/iter 6.908e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 40.85 GB/s, BD/PAIR 20.425 GB/s, time 1.027e-02 s, time/iter 1.027e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 43.759 GB/s, BD/PAIR 21.879 GB/s, time 1.917e-02 s, time/iter 1.917e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 45.17 GB/s, BD/PAIR 22.585 GB/s, time 3.714e-02 s, time/iter 3.714e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 46.142 GB/s, BD/PAIR 23.071 GB/s, time 7.272e-02 s, time/iter 7.272e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 46.49 GB/s, BD/PAIR 23.245 GB/s, time 1.444e-01 s, time/iter 1.444e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 46.423 GB/s, BD/PAIR 23.212 GB/s, time 2.891e-01 s, time/iter 2.891e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 46.521 GB/s, BD/PAIR 23.261 GB/s, time 5.770e-01 s, time/iter 5.770e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 46.17 GB/s, BD/PAIR 23.085 GB/s, time 1.163e+00 s, time/iter 1.163e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 45.988 GB/s, BD/PAIR 22.994 GB/s, time 2.335e+00 s, time/iter 2.335e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 46.037 GB/s, BD/PAIR 23.019 GB/s, time 4.665e+00 s, time/iter 4.665e-02, comm_vol 214.748 GB
+[[0, 8], [8, 0], [2, 10], [10, 2]]
+SIZE 8 KB, REAL_BD 2.101 GB/s, BD/PAIR 525.218 MB/s, time 1.560e-03 s, time/iter 1.560e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 3.689 GB/s, BD/PAIR 922.162 MB/s, time 1.777e-03 s, time/iter 1.777e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 7.137 GB/s, BD/PAIR 1.784 GB/s, time 1.837e-03 s, time/iter 1.837e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 10.263 GB/s, BD/PAIR 2.566 GB/s, time 2.554e-03 s, time/iter 2.554e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 17.557 GB/s, BD/PAIR 4.389 GB/s, time 2.986e-03 s, time/iter 2.986e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 32.792 GB/s, BD/PAIR 8.198 GB/s, time 3.198e-03 s, time/iter 3.198e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 45.217 GB/s, BD/PAIR 11.304 GB/s, time 4.638e-03 s, time/iter 4.638e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 54.055 GB/s, BD/PAIR 13.514 GB/s, time 7.759e-03 s, time/iter 7.759e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 74.519 GB/s, BD/PAIR 18.63 GB/s, time 1.126e-02 s, time/iter 1.126e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 80.736 GB/s, BD/PAIR 20.184 GB/s, time 2.078e-02 s, time/iter 2.078e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 83.067 GB/s, BD/PAIR 20.767 GB/s, time 4.039e-02 s, time/iter 4.039e-04, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 85.503 GB/s, BD/PAIR 21.376 GB/s, time 7.849e-02 s, time/iter 7.849e-04, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 86.818 GB/s, BD/PAIR 21.704 GB/s, time 1.546e-01 s, time/iter 1.546e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 87.083 GB/s, BD/PAIR 21.771 GB/s, time 3.083e-01 s, time/iter 3.083e-03, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 87.697 GB/s, BD/PAIR 21.924 GB/s, time 6.122e-01 s, time/iter 6.122e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 87.746 GB/s, BD/PAIR 21.936 GB/s, time 1.224e+00 s, time/iter 1.224e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 87.976 GB/s, BD/PAIR 21.994 GB/s, time 2.441e+00 s, time/iter 2.441e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 88.241 GB/s, BD/PAIR 22.06 GB/s, time 4.867e+00 s, time/iter 4.867e-02, comm_vol 429.497 GB
+[[0, 8], [4, 12]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 976.545 MB/s, BD/PAIR 488.273 MB/s, time 1.678e-03 s, time/iter 1.678e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.794 GB/s, BD/PAIR 897.238 MB/s, time 1.826e-03 s, time/iter 1.826e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.446 GB/s, BD/PAIR 1.723 GB/s, time 1.902e-03 s, time/iter 1.902e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.066 GB/s, BD/PAIR 2.533 GB/s, time 2.587e-03 s, time/iter 2.587e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 8.975 GB/s, BD/PAIR 4.487 GB/s, time 2.921e-03 s, time/iter 2.921e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 17.16 GB/s, BD/PAIR 8.58 GB/s, time 3.055e-03 s, time/iter 3.055e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 24.107 GB/s, BD/PAIR 12.053 GB/s, time 4.350e-03 s, time/iter 4.350e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 29.291 GB/s, BD/PAIR 14.646 GB/s, time 7.160e-03 s, time/iter 7.160e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 40.466 GB/s, BD/PAIR 20.233 GB/s, time 1.037e-02 s, time/iter 1.037e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 43.355 GB/s, BD/PAIR 21.678 GB/s, time 1.935e-02 s, time/iter 1.935e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 45.233 GB/s, BD/PAIR 22.616 GB/s, time 3.709e-02 s, time/iter 3.709e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 45.888 GB/s, BD/PAIR 22.944 GB/s, time 7.312e-02 s, time/iter 7.312e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 46.3 GB/s, BD/PAIR 23.15 GB/s, time 1.449e-01 s, time/iter 1.449e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 46.064 GB/s, BD/PAIR 23.032 GB/s, time 2.914e-01 s, time/iter 2.914e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 46.256 GB/s, BD/PAIR 23.128 GB/s, time 5.803e-01 s, time/iter 5.803e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 46.257 GB/s, BD/PAIR 23.129 GB/s, time 1.161e+00 s, time/iter 1.161e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 46.153 GB/s, BD/PAIR 23.077 GB/s, time 2.326e+00 s, time/iter 2.326e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 46.093 GB/s, BD/PAIR 23.047 GB/s, time 4.659e+00 s, time/iter 4.659e-02, comm_vol 214.748 GB
+[[0, 8], [8, 0], [4, 12], [12, 4]]
+SIZE 8 KB, REAL_BD 1.941 GB/s, BD/PAIR 485.17 MB/s, time 1.688e-03 s, time/iter 1.688e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 3.482 GB/s, BD/PAIR 870.418 MB/s, time 1.882e-03 s, time/iter 1.882e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 6.665 GB/s, BD/PAIR 1.666 GB/s, time 1.966e-03 s, time/iter 1.966e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 9.868 GB/s, BD/PAIR 2.467 GB/s, time 2.656e-03 s, time/iter 2.656e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 16.795 GB/s, BD/PAIR 4.199 GB/s, time 3.122e-03 s, time/iter 3.122e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 31.316 GB/s, BD/PAIR 7.829 GB/s, time 3.348e-03 s, time/iter 3.348e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 43.175 GB/s, BD/PAIR 10.794 GB/s, time 4.857e-03 s, time/iter 4.857e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 53.55 GB/s, BD/PAIR 13.387 GB/s, time 7.833e-03 s, time/iter 7.833e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 74.188 GB/s, BD/PAIR 18.547 GB/s, time 1.131e-02 s, time/iter 1.131e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 79.71 GB/s, BD/PAIR 19.927 GB/s, time 2.105e-02 s, time/iter 2.105e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 82.674 GB/s, BD/PAIR 20.669 GB/s, time 4.059e-02 s, time/iter 4.059e-04, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 85.512 GB/s, BD/PAIR 21.378 GB/s, time 7.848e-02 s, time/iter 7.848e-04, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 86.22 GB/s, BD/PAIR 21.555 GB/s, time 1.557e-01 s, time/iter 1.557e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 86.781 GB/s, BD/PAIR 21.695 GB/s, time 3.093e-01 s, time/iter 3.093e-03, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 87.502 GB/s, BD/PAIR 21.875 GB/s, time 6.136e-01 s, time/iter 6.136e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 87.331 GB/s, BD/PAIR 21.833 GB/s, time 1.230e+00 s, time/iter 1.230e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 87.551 GB/s, BD/PAIR 21.888 GB/s, time 2.453e+00 s, time/iter 2.453e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 87.656 GB/s, BD/PAIR 21.914 GB/s, time 4.900e+00 s, time/iter 4.900e-02, comm_vol 429.497 GB
+[[0, 8], [2, 10], [4, 12], [6, 14]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 1.923 GB/s, BD/PAIR 480.69 MB/s, time 1.704e-03 s, time/iter 1.704e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 3.603 GB/s, BD/PAIR 900.767 MB/s, time 1.819e-03 s, time/iter 1.819e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 6.887 GB/s, BD/PAIR 1.722 GB/s, time 1.903e-03 s, time/iter 1.903e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 10.123 GB/s, BD/PAIR 2.531 GB/s, time 2.590e-03 s, time/iter 2.590e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 17.934 GB/s, BD/PAIR 4.483 GB/s, time 2.923e-03 s, time/iter 2.923e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 34.25 GB/s, BD/PAIR 8.563 GB/s, time 3.062e-03 s, time/iter 3.062e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 48.029 GB/s, BD/PAIR 12.007 GB/s, time 4.366e-03 s, time/iter 4.366e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 59.943 GB/s, BD/PAIR 14.986 GB/s, time 6.997e-03 s, time/iter 6.997e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 81.117 GB/s, BD/PAIR 20.279 GB/s, time 1.034e-02 s, time/iter 1.034e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 87.026 GB/s, BD/PAIR 21.757 GB/s, time 1.928e-02 s, time/iter 1.928e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 90.629 GB/s, BD/PAIR 22.657 GB/s, time 3.702e-02 s, time/iter 3.702e-04, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 92.193 GB/s, BD/PAIR 23.048 GB/s, time 7.279e-02 s, time/iter 7.279e-04, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 93.228 GB/s, BD/PAIR 23.307 GB/s, time 1.440e-01 s, time/iter 1.440e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 93.738 GB/s, BD/PAIR 23.434 GB/s, time 2.864e-01 s, time/iter 2.864e-03, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 93.884 GB/s, BD/PAIR 23.471 GB/s, time 5.718e-01 s, time/iter 5.718e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 93.981 GB/s, BD/PAIR 23.495 GB/s, time 1.143e+00 s, time/iter 1.143e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 94.074 GB/s, BD/PAIR 23.518 GB/s, time 2.283e+00 s, time/iter 2.283e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 94.08 GB/s, BD/PAIR 23.52 GB/s, time 4.565e+00 s, time/iter 4.565e-02, comm_vol 429.497 GB
+[[0, 8], [8, 0], [2, 10], [10, 2], [4, 12], [12, 4], [6, 14], [14, 6]]
+SIZE 8 KB, REAL_BD 3.817 GB/s, BD/PAIR 477.152 MB/s, time 1.717e-03 s, time/iter 1.717e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 7.002 GB/s, BD/PAIR 875.296 MB/s, time 1.872e-03 s, time/iter 1.872e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 13.266 GB/s, BD/PAIR 1.658 GB/s, time 1.976e-03 s, time/iter 1.976e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 19.617 GB/s, BD/PAIR 2.452 GB/s, time 2.673e-03 s, time/iter 2.673e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 32.853 GB/s, BD/PAIR 4.107 GB/s, time 3.192e-03 s, time/iter 3.192e-05, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 62.181 GB/s, BD/PAIR 7.773 GB/s, time 3.373e-03 s, time/iter 3.373e-05, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 85.374 GB/s, BD/PAIR 10.672 GB/s, time 4.913e-03 s, time/iter 4.913e-05, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 106.378 GB/s, BD/PAIR 13.297 GB/s, time 7.886e-03 s, time/iter 7.886e-05, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 148.888 GB/s, BD/PAIR 18.611 GB/s, time 1.127e-02 s, time/iter 1.127e-04, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 162.712 GB/s, BD/PAIR 20.339 GB/s, time 2.062e-02 s, time/iter 2.062e-04, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 169.858 GB/s, BD/PAIR 21.232 GB/s, time 3.951e-02 s, time/iter 3.951e-04, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 173.786 GB/s, BD/PAIR 21.723 GB/s, time 7.723e-02 s, time/iter 7.723e-04, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 175.876 GB/s, BD/PAIR 21.984 GB/s, time 1.526e-01 s, time/iter 1.526e-03, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 177.44 GB/s, BD/PAIR 22.18 GB/s, time 3.026e-01 s, time/iter 3.026e-03, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 178.031 GB/s, BD/PAIR 22.254 GB/s, time 6.031e-01 s, time/iter 6.031e-03, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 178.519 GB/s, BD/PAIR 22.315 GB/s, time 1.203e+00 s, time/iter 1.203e-02, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 178.82 GB/s, BD/PAIR 22.353 GB/s, time 2.402e+00 s, time/iter 2.402e-02, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 178.88 GB/s, BD/PAIR 22.36 GB/s, time 4.802e+00 s, time/iter 4.802e-02, comm_vol 858.993 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15]]
+NCCL version 2.21.5+cuda12.4
+NCCL version 2.21.5+cuda12.4
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 3.859 GB/s, BD/PAIR 482.377 MB/s, time 1.698e-03 s, time/iter 1.698e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 6.611 GB/s, BD/PAIR 826.353 MB/s, time 1.983e-03 s, time/iter 1.983e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 13.342 GB/s, BD/PAIR 1.668 GB/s, time 1.965e-03 s, time/iter 1.965e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 19.964 GB/s, BD/PAIR 2.495 GB/s, time 2.626e-03 s, time/iter 2.626e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 35.125 GB/s, BD/PAIR 4.391 GB/s, time 2.985e-03 s, time/iter 2.985e-05, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 67.688 GB/s, BD/PAIR 8.461 GB/s, time 3.098e-03 s, time/iter 3.098e-05, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 92.139 GB/s, BD/PAIR 11.517 GB/s, time 4.552e-03 s, time/iter 4.552e-05, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 114.276 GB/s, BD/PAIR 14.284 GB/s, time 7.341e-03 s, time/iter 7.341e-05, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 162.593 GB/s, BD/PAIR 20.324 GB/s, time 1.032e-02 s, time/iter 1.032e-04, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 177.578 GB/s, BD/PAIR 22.197 GB/s, time 1.890e-02 s, time/iter 1.890e-04, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 184.918 GB/s, BD/PAIR 23.115 GB/s, time 3.629e-02 s, time/iter 3.629e-04, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 188.83 GB/s, BD/PAIR 23.604 GB/s, time 7.108e-02 s, time/iter 7.108e-04, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 190.95 GB/s, BD/PAIR 23.869 GB/s, time 1.406e-01 s, time/iter 1.406e-03, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 192.097 GB/s, BD/PAIR 24.012 GB/s, time 2.795e-01 s, time/iter 2.795e-03, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 192.787 GB/s, BD/PAIR 24.098 GB/s, time 5.570e-01 s, time/iter 5.570e-03, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 192.915 GB/s, BD/PAIR 24.114 GB/s, time 1.113e+00 s, time/iter 1.113e-02, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 193.186 GB/s, BD/PAIR 24.148 GB/s, time 2.223e+00 s, time/iter 2.223e-02, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 193.206 GB/s, BD/PAIR 24.151 GB/s, time 4.446e+00 s, time/iter 4.446e-02, comm_vol 858.993 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15], [8, 0], [9, 1], [10, 2], [11, 3], [12, 4], [13, 5], [14, 6], [15, 7]]
+SIZE 8 KB, REAL_BD 4.476 GB/s, BD/PAIR 279.78 MB/s, time 2.928e-03 s, time/iter 2.928e-05, comm_vol 13.107 MB
+SIZE 16 KB, REAL_BD 13.409 GB/s, BD/PAIR 838.042 MB/s, time 1.955e-03 s, time/iter 1.955e-05, comm_vol 26.214 MB
+SIZE 32 KB, REAL_BD 26.176 GB/s, BD/PAIR 1.636 GB/s, time 2.003e-03 s, time/iter 2.003e-05, comm_vol 52.429 MB
+SIZE 64 KB, REAL_BD 38.668 GB/s, BD/PAIR 2.417 GB/s, time 2.712e-03 s, time/iter 2.712e-05, comm_vol 104.858 MB
+SIZE 128 KB, REAL_BD 64.36 GB/s, BD/PAIR 4.023 GB/s, time 3.258e-03 s, time/iter 3.258e-05, comm_vol 209.715 MB
+SIZE 256 KB, REAL_BD 124.23 GB/s, BD/PAIR 7.764 GB/s, time 3.376e-03 s, time/iter 3.376e-05, comm_vol 419.43 MB
+SIZE 512 KB, REAL_BD 168.419 GB/s, BD/PAIR 10.526 GB/s, time 4.981e-03 s, time/iter 4.981e-05, comm_vol 838.861 MB
+SIZE 1 MB, REAL_BD 210.527 GB/s, BD/PAIR 13.158 GB/s, time 7.969e-03 s, time/iter 7.969e-05, comm_vol 1.678 GB
+SIZE 2 MB, REAL_BD 303.91 GB/s, BD/PAIR 18.994 GB/s, time 1.104e-02 s, time/iter 1.104e-04, comm_vol 3.355 GB
+SIZE 4 MB, REAL_BD 333.948 GB/s, BD/PAIR 20.872 GB/s, time 2.010e-02 s, time/iter 2.010e-04, comm_vol 6.711 GB
+SIZE 8 MB, REAL_BD 349.567 GB/s, BD/PAIR 21.848 GB/s, time 3.840e-02 s, time/iter 3.840e-04, comm_vol 13.422 GB
+SIZE 16 MB, REAL_BD 359.521 GB/s, BD/PAIR 22.47 GB/s, time 7.466e-02 s, time/iter 7.466e-04, comm_vol 26.844 GB
+SIZE 32 MB, REAL_BD 364.123 GB/s, BD/PAIR 22.758 GB/s, time 1.474e-01 s, time/iter 1.474e-03, comm_vol 53.687 GB
+SIZE 64 MB, REAL_BD 367.191 GB/s, BD/PAIR 22.949 GB/s, time 2.924e-01 s, time/iter 2.924e-03, comm_vol 107.374 GB
+SIZE 128 MB, REAL_BD 369.075 GB/s, BD/PAIR 23.067 GB/s, time 5.819e-01 s, time/iter 5.819e-03, comm_vol 214.748 GB
+SIZE 256 MB, REAL_BD 369.177 GB/s, BD/PAIR 23.074 GB/s, time 1.163e+00 s, time/iter 1.163e-02, comm_vol 429.497 GB
+SIZE 512 MB, REAL_BD 369.769 GB/s, BD/PAIR 23.111 GB/s, time 2.323e+00 s, time/iter 2.323e-02, comm_vol 858.993 GB
+SIZE 1 GB, REAL_BD 369.853 GB/s, BD/PAIR 23.116 GB/s, time 4.645e+00 s, time/iter 4.645e-02, comm_vol 1.718 TB
++ set +x
+COMM_MODULE: torch-distributed
++ srun -p h01 -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g40,g42 -c 13 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_16.json --comm-module torch-distributed
+NCCL version 2.21.5+cuda12.4
+[INFO]: Cluster init done !!!
+[[0, 1]]
+SIZE 8 KB, REAL_BD 285.665 MB/s, BD/PAIR 285.665 MB/s, time 2.868e-03 s, time/iter 2.868e-05, comm_vol 819.2 KB
+SIZE 16 KB, REAL_BD 566.805 MB/s, BD/PAIR 566.805 MB/s, time 2.891e-03 s, time/iter 2.891e-05, comm_vol 1.638 MB
+SIZE 32 KB, REAL_BD 1.134 GB/s, BD/PAIR 1.134 GB/s, time 2.890e-03 s, time/iter 2.890e-05, comm_vol 3.277 MB
+SIZE 64 KB, REAL_BD 2.294 GB/s, BD/PAIR 2.294 GB/s, time 2.857e-03 s, time/iter 2.857e-05, comm_vol 6.554 MB
+SIZE 128 KB, REAL_BD 4.528 GB/s, BD/PAIR 4.528 GB/s, time 2.894e-03 s, time/iter 2.894e-05, comm_vol 13.107 MB
+SIZE 256 KB, REAL_BD 8.969 GB/s, BD/PAIR 8.969 GB/s, time 2.923e-03 s, time/iter 2.923e-05, comm_vol 26.214 MB
+SIZE 512 KB, REAL_BD 17.337 GB/s, BD/PAIR 17.337 GB/s, time 3.024e-03 s, time/iter 3.024e-05, comm_vol 52.429 MB
+SIZE 1 MB, REAL_BD 13.105 GB/s, BD/PAIR 13.105 GB/s, time 8.001e-03 s, time/iter 8.001e-05, comm_vol 104.858 MB
+SIZE 2 MB, REAL_BD 73.197 GB/s, BD/PAIR 73.197 GB/s, time 2.865e-03 s, time/iter 2.865e-05, comm_vol 209.715 MB
+SIZE 4 MB, REAL_BD 119.229 GB/s, BD/PAIR 119.229 GB/s, time 3.518e-03 s, time/iter 3.518e-05, comm_vol 419.43 MB
+SIZE 8 MB, REAL_BD 138.13 GB/s, BD/PAIR 138.13 GB/s, time 6.073e-03 s, time/iter 6.073e-05, comm_vol 838.861 MB
+SIZE 16 MB, REAL_BD 150.306 GB/s, BD/PAIR 150.306 GB/s, time 1.116e-02 s, time/iter 1.116e-04, comm_vol 1.678 GB
+SIZE 32 MB, REAL_BD 153.152 GB/s, BD/PAIR 153.152 GB/s, time 2.191e-02 s, time/iter 2.191e-04, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 150.361 GB/s, BD/PAIR 150.361 GB/s, time 4.463e-02 s, time/iter 4.463e-04, comm_vol 6.711 GB
+SIZE 128 MB, REAL_BD 162.301 GB/s, BD/PAIR 162.301 GB/s, time 8.270e-02 s, time/iter 8.270e-04, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 165.641 GB/s, BD/PAIR 165.641 GB/s, time 1.621e-01 s, time/iter 1.621e-03, comm_vol 26.844 GB
+SIZE 512 MB, REAL_BD 166.597 GB/s, BD/PAIR 166.597 GB/s, time 3.223e-01 s, time/iter 3.223e-03, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 167.005 GB/s, BD/PAIR 167.005 GB/s, time 6.429e-01 s, time/iter 6.429e-03, comm_vol 107.374 GB
+[[0, 1], [1, 0]]
+SIZE 8 KB, REAL_BD 435.733 MB/s, BD/PAIR 217.867 MB/s, time 3.760e-03 s, time/iter 3.760e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.107 GB/s, BD/PAIR 553.475 MB/s, time 2.960e-03 s, time/iter 2.960e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 2.222 GB/s, BD/PAIR 1.111 GB/s, time 2.949e-03 s, time/iter 2.949e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 4.456 GB/s, BD/PAIR 2.228 GB/s, time 2.942e-03 s, time/iter 2.942e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 8.561 GB/s, BD/PAIR 4.281 GB/s, time 3.062e-03 s, time/iter 3.062e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 16.901 GB/s, BD/PAIR 8.451 GB/s, time 3.102e-03 s, time/iter 3.102e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 31.469 GB/s, BD/PAIR 15.734 GB/s, time 3.332e-03 s, time/iter 3.332e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 18.78 GB/s, BD/PAIR 9.39 GB/s, time 1.117e-02 s, time/iter 1.117e-04, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 69.474 GB/s, BD/PAIR 34.737 GB/s, time 6.037e-03 s, time/iter 6.037e-05, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 86.802 GB/s, BD/PAIR 43.401 GB/s, time 9.664e-03 s, time/iter 9.664e-05, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 112.165 GB/s, BD/PAIR 56.082 GB/s, time 1.496e-02 s, time/iter 1.496e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 131.424 GB/s, BD/PAIR 65.712 GB/s, time 2.553e-02 s, time/iter 2.553e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 145.881 GB/s, BD/PAIR 72.941 GB/s, time 4.600e-02 s, time/iter 4.600e-04, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 154.809 GB/s, BD/PAIR 77.404 GB/s, time 8.670e-02 s, time/iter 8.670e-04, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 159.906 GB/s, BD/PAIR 79.953 GB/s, time 1.679e-01 s, time/iter 1.679e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 164.476 GB/s, BD/PAIR 82.238 GB/s, time 3.264e-01 s, time/iter 3.264e-03, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 165.914 GB/s, BD/PAIR 82.957 GB/s, time 6.472e-01 s, time/iter 6.472e-03, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 166.659 GB/s, BD/PAIR 83.329 GB/s, time 1.289e+00 s, time/iter 1.289e-02, comm_vol 214.748 GB
+[[0, 8]]
+SIZE 8 KB, REAL_BD 494.385 MB/s, BD/PAIR 494.385 MB/s, time 1.657e-03 s, time/iter 1.657e-05, comm_vol 819.2 KB
+SIZE 16 KB, REAL_BD 987.207 MB/s, BD/PAIR 987.207 MB/s, time 1.660e-03 s, time/iter 1.660e-05, comm_vol 1.638 MB
+SIZE 32 KB, REAL_BD 1.844 GB/s, BD/PAIR 1.844 GB/s, time 1.777e-03 s, time/iter 1.777e-05, comm_vol 3.277 MB
+SIZE 64 KB, REAL_BD 2.673 GB/s, BD/PAIR 2.673 GB/s, time 2.451e-03 s, time/iter 2.451e-05, comm_vol 6.554 MB
+SIZE 128 KB, REAL_BD 4.688 GB/s, BD/PAIR 4.688 GB/s, time 2.796e-03 s, time/iter 2.796e-05, comm_vol 13.107 MB
+SIZE 256 KB, REAL_BD 8.924 GB/s, BD/PAIR 8.924 GB/s, time 2.938e-03 s, time/iter 2.938e-05, comm_vol 26.214 MB
+SIZE 512 KB, REAL_BD 6.924 GB/s, BD/PAIR 6.924 GB/s, time 7.572e-03 s, time/iter 7.572e-05, comm_vol 52.429 MB
+SIZE 1 MB, REAL_BD 15.411 GB/s, BD/PAIR 15.411 GB/s, time 6.804e-03 s, time/iter 6.804e-05, comm_vol 104.858 MB
+SIZE 2 MB, REAL_BD 20.226 GB/s, BD/PAIR 20.226 GB/s, time 1.037e-02 s, time/iter 1.037e-04, comm_vol 209.715 MB
+SIZE 4 MB, REAL_BD 21.727 GB/s, BD/PAIR 21.727 GB/s, time 1.930e-02 s, time/iter 1.930e-04, comm_vol 419.43 MB
+SIZE 8 MB, REAL_BD 22.625 GB/s, BD/PAIR 22.625 GB/s, time 3.708e-02 s, time/iter 3.708e-04, comm_vol 838.861 MB
+SIZE 16 MB, REAL_BD 23.062 GB/s, BD/PAIR 23.062 GB/s, time 7.275e-02 s, time/iter 7.275e-04, comm_vol 1.678 GB
+SIZE 32 MB, REAL_BD 23.319 GB/s, BD/PAIR 23.319 GB/s, time 1.439e-01 s, time/iter 1.439e-03, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 23.488 GB/s, BD/PAIR 23.488 GB/s, time 2.857e-01 s, time/iter 2.857e-03, comm_vol 6.711 GB
+SIZE 128 MB, REAL_BD 23.558 GB/s, BD/PAIR 23.558 GB/s, time 5.697e-01 s, time/iter 5.697e-03, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 23.585 GB/s, BD/PAIR 23.585 GB/s, time 1.138e+00 s, time/iter 1.138e-02, comm_vol 26.844 GB
+SIZE 512 MB, REAL_BD 23.589 GB/s, BD/PAIR 23.589 GB/s, time 2.276e+00 s, time/iter 2.276e-02, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 23.554 GB/s, BD/PAIR 23.554 GB/s, time 4.559e+00 s, time/iter 4.559e-02, comm_vol 107.374 GB
+[[0, 8], [8, 0]]
+SIZE 8 KB, REAL_BD 351.776 MB/s, BD/PAIR 175.888 MB/s, time 4.658e-03 s, time/iter 4.658e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 646.467 MB/s, BD/PAIR 323.234 MB/s, time 5.069e-03 s, time/iter 5.069e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 1.219 GB/s, BD/PAIR 609.702 MB/s, time 5.374e-03 s, time/iter 5.374e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 1.924 GB/s, BD/PAIR 962.222 MB/s, time 6.811e-03 s, time/iter 6.811e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 2.013 GB/s, BD/PAIR 1.006 GB/s, time 1.303e-02 s, time/iter 1.303e-04, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 6.281 GB/s, BD/PAIR 3.141 GB/s, time 8.347e-03 s, time/iter 8.347e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 9.548 GB/s, BD/PAIR 4.774 GB/s, time 1.098e-02 s, time/iter 1.098e-04, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 12.972 GB/s, BD/PAIR 6.486 GB/s, time 1.617e-02 s, time/iter 1.617e-04, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 17.53 GB/s, BD/PAIR 8.765 GB/s, time 2.393e-02 s, time/iter 2.393e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 20.093 GB/s, BD/PAIR 10.047 GB/s, time 4.175e-02 s, time/iter 4.175e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 21.727 GB/s, BD/PAIR 10.864 GB/s, time 7.722e-02 s, time/iter 7.722e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 22.565 GB/s, BD/PAIR 11.283 GB/s, time 1.487e-01 s, time/iter 1.487e-03, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 23.042 GB/s, BD/PAIR 11.521 GB/s, time 2.912e-01 s, time/iter 2.912e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 23.33 GB/s, BD/PAIR 11.665 GB/s, time 5.753e-01 s, time/iter 5.753e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 23.477 GB/s, BD/PAIR 11.738 GB/s, time 1.143e+00 s, time/iter 1.143e-02, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 23.53 GB/s, BD/PAIR 11.765 GB/s, time 2.282e+00 s, time/iter 2.282e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 23.576 GB/s, BD/PAIR 11.788 GB/s, time 4.554e+00 s, time/iter 4.554e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 23.563 GB/s, BD/PAIR 11.782 GB/s, time 9.114e+00 s, time/iter 9.114e-02, comm_vol 214.748 GB
+[[0, 15], [15, 0]]
+SIZE 8 KB, REAL_BD 252.441 MB/s, BD/PAIR 126.22 MB/s, time 6.490e-03 s, time/iter 6.490e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 545.349 MB/s, BD/PAIR 272.675 MB/s, time 6.009e-03 s, time/iter 6.009e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 1.101 GB/s, BD/PAIR 550.35 MB/s, time 5.954e-03 s, time/iter 5.954e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 1.882 GB/s, BD/PAIR 940.912 MB/s, time 6.965e-03 s, time/iter 6.965e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 3.362 GB/s, BD/PAIR 1.681 GB/s, time 7.796e-03 s, time/iter 7.796e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 6.214 GB/s, BD/PAIR 3.107 GB/s, time 8.437e-03 s, time/iter 8.437e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 7.732 GB/s, BD/PAIR 3.866 GB/s, time 1.356e-02 s, time/iter 1.356e-04, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 13.008 GB/s, BD/PAIR 6.504 GB/s, time 1.612e-02 s, time/iter 1.612e-04, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 17.452 GB/s, BD/PAIR 8.726 GB/s, time 2.403e-02 s, time/iter 2.403e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 20.058 GB/s, BD/PAIR 10.029 GB/s, time 4.182e-02 s, time/iter 4.182e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 21.667 GB/s, BD/PAIR 10.833 GB/s, time 7.743e-02 s, time/iter 7.743e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 22.556 GB/s, BD/PAIR 11.278 GB/s, time 1.488e-01 s, time/iter 1.488e-03, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 23.058 GB/s, BD/PAIR 11.529 GB/s, time 2.910e-01 s, time/iter 2.910e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 23.33 GB/s, BD/PAIR 11.665 GB/s, time 5.753e-01 s, time/iter 5.753e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 23.479 GB/s, BD/PAIR 11.739 GB/s, time 1.143e+00 s, time/iter 1.143e-02, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 23.553 GB/s, BD/PAIR 11.776 GB/s, time 2.279e+00 s, time/iter 2.279e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 23.565 GB/s, BD/PAIR 11.782 GB/s, time 4.557e+00 s, time/iter 4.557e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 23.592 GB/s, BD/PAIR 11.796 GB/s, time 9.103e+00 s, time/iter 9.103e-02, comm_vol 214.748 GB
+[[0, 8], [0, 15]]
+SIZE 8 KB, REAL_BD 514.714 MB/s, BD/PAIR 257.357 MB/s, time 3.183e-03 s, time/iter 3.183e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.013 GB/s, BD/PAIR 506.37 MB/s, time 3.236e-03 s, time/iter 3.236e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 2.06 GB/s, BD/PAIR 1.03 GB/s, time 3.182e-03 s, time/iter 3.182e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 4.393 GB/s, BD/PAIR 2.197 GB/s, time 2.983e-03 s, time/iter 2.983e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 8.988 GB/s, BD/PAIR 4.494 GB/s, time 2.917e-03 s, time/iter 2.917e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 16.476 GB/s, BD/PAIR 8.238 GB/s, time 3.182e-03 s, time/iter 3.182e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 20.353 GB/s, BD/PAIR 10.176 GB/s, time 5.152e-03 s, time/iter 5.152e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 21.791 GB/s, BD/PAIR 10.896 GB/s, time 9.624e-03 s, time/iter 9.624e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 19.997 GB/s, BD/PAIR 9.999 GB/s, time 2.097e-02 s, time/iter 2.097e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 20.634 GB/s, BD/PAIR 10.317 GB/s, time 4.065e-02 s, time/iter 4.065e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 24.388 GB/s, BD/PAIR 12.194 GB/s, time 6.879e-02 s, time/iter 6.879e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 24.484 GB/s, BD/PAIR 12.242 GB/s, time 1.370e-01 s, time/iter 1.370e-03, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 24.514 GB/s, BD/PAIR 12.257 GB/s, time 2.738e-01 s, time/iter 2.738e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 24.561 GB/s, BD/PAIR 12.28 GB/s, time 5.465e-01 s, time/iter 5.465e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 24.535 GB/s, BD/PAIR 12.267 GB/s, time 1.094e+00 s, time/iter 1.094e-02, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 24.571 GB/s, BD/PAIR 12.285 GB/s, time 2.185e+00 s, time/iter 2.185e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 24.573 GB/s, BD/PAIR 12.287 GB/s, time 4.370e+00 s, time/iter 4.370e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 24.575 GB/s, BD/PAIR 12.287 GB/s, time 8.739e+00 s, time/iter 8.739e-02, comm_vol 214.748 GB
+[[0, 8], [0, 15], [8, 0], [15, 0]]
+SIZE 8 KB, REAL_BD 521.353 MB/s, BD/PAIR 130.338 MB/s, time 6.285e-03 s, time/iter 6.285e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 1.084 GB/s, BD/PAIR 270.965 MB/s, time 6.047e-03 s, time/iter 6.047e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 2.238 GB/s, BD/PAIR 559.582 MB/s, time 5.856e-03 s, time/iter 5.856e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 3.537 GB/s, BD/PAIR 884.278 MB/s, time 7.411e-03 s, time/iter 7.411e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 6.323 GB/s, BD/PAIR 1.581 GB/s, time 8.292e-03 s, time/iter 8.292e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 10.985 GB/s, BD/PAIR 2.746 GB/s, time 9.546e-03 s, time/iter 9.546e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 14.699 GB/s, BD/PAIR 3.675 GB/s, time 1.427e-02 s, time/iter 1.427e-04, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 16.149 GB/s, BD/PAIR 4.037 GB/s, time 2.597e-02 s, time/iter 2.597e-04, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 21.003 GB/s, BD/PAIR 5.251 GB/s, time 3.994e-02 s, time/iter 3.994e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 22.639 GB/s, BD/PAIR 5.66 GB/s, time 7.411e-02 s, time/iter 7.411e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 23.536 GB/s, BD/PAIR 5.884 GB/s, time 1.426e-01 s, time/iter 1.426e-03, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 23.902 GB/s, BD/PAIR 5.976 GB/s, time 2.808e-01 s, time/iter 2.808e-03, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 24.135 GB/s, BD/PAIR 6.034 GB/s, time 5.561e-01 s, time/iter 5.561e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 24.306 GB/s, BD/PAIR 6.077 GB/s, time 1.104e+00 s, time/iter 1.104e-02, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 24.415 GB/s, BD/PAIR 6.104 GB/s, time 2.199e+00 s, time/iter 2.199e-02, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 24.473 GB/s, BD/PAIR 6.118 GB/s, time 4.388e+00 s, time/iter 4.388e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 24.513 GB/s, BD/PAIR 6.128 GB/s, time 8.761e+00 s, time/iter 8.761e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 24.539 GB/s, BD/PAIR 6.135 GB/s, time 1.750e+01 s, time/iter 1.750e-01, comm_vol 429.497 GB
+[[7, 8], [15, 0]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 1.019 GB/s, BD/PAIR 509.335 MB/s, time 1.608e-03 s, time/iter 1.608e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.044 GB/s, BD/PAIR 522.184 MB/s, time 3.138e-03 s, time/iter 3.138e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.674 GB/s, BD/PAIR 1.837 GB/s, time 1.784e-03 s, time/iter 1.784e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.334 GB/s, BD/PAIR 2.667 GB/s, time 2.457e-03 s, time/iter 2.457e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 9.381 GB/s, BD/PAIR 4.69 GB/s, time 2.795e-03 s, time/iter 2.795e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 17.951 GB/s, BD/PAIR 8.976 GB/s, time 2.921e-03 s, time/iter 2.921e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 24.62 GB/s, BD/PAIR 12.31 GB/s, time 4.259e-03 s, time/iter 4.259e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 29.922 GB/s, BD/PAIR 14.961 GB/s, time 7.009e-03 s, time/iter 7.009e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 40.758 GB/s, BD/PAIR 20.379 GB/s, time 1.029e-02 s, time/iter 1.029e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 43.47 GB/s, BD/PAIR 21.735 GB/s, time 1.930e-02 s, time/iter 1.930e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 45.29 GB/s, BD/PAIR 22.645 GB/s, time 3.704e-02 s, time/iter 3.704e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 46.294 GB/s, BD/PAIR 23.147 GB/s, time 7.248e-02 s, time/iter 7.248e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 46.68 GB/s, BD/PAIR 23.34 GB/s, time 1.438e-01 s, time/iter 1.438e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 46.937 GB/s, BD/PAIR 23.468 GB/s, time 2.860e-01 s, time/iter 2.860e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 47.098 GB/s, BD/PAIR 23.549 GB/s, time 5.700e-01 s, time/iter 5.700e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 47.154 GB/s, BD/PAIR 23.577 GB/s, time 1.139e+00 s, time/iter 1.139e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 47.152 GB/s, BD/PAIR 23.576 GB/s, time 2.277e+00 s, time/iter 2.277e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 47.03 GB/s, BD/PAIR 23.515 GB/s, time 4.566e+00 s, time/iter 4.566e-02, comm_vol 214.748 GB
+[[0, 8], [2, 10]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 1.036 GB/s, BD/PAIR 517.934 MB/s, time 1.582e-03 s, time/iter 1.582e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.853 GB/s, BD/PAIR 926.263 MB/s, time 1.769e-03 s, time/iter 1.769e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.604 GB/s, BD/PAIR 1.802 GB/s, time 1.818e-03 s, time/iter 1.818e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.252 GB/s, BD/PAIR 2.626 GB/s, time 2.496e-03 s, time/iter 2.496e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 9.276 GB/s, BD/PAIR 4.638 GB/s, time 2.826e-03 s, time/iter 2.826e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 17.756 GB/s, BD/PAIR 8.878 GB/s, time 2.953e-03 s, time/iter 2.953e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 24.669 GB/s, BD/PAIR 12.335 GB/s, time 4.251e-03 s, time/iter 4.251e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 30.846 GB/s, BD/PAIR 15.423 GB/s, time 6.799e-03 s, time/iter 6.799e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 40.172 GB/s, BD/PAIR 20.086 GB/s, time 1.044e-02 s, time/iter 1.044e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 43.371 GB/s, BD/PAIR 21.686 GB/s, time 1.934e-02 s, time/iter 1.934e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 45.19 GB/s, BD/PAIR 22.595 GB/s, time 3.713e-02 s, time/iter 3.713e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 45.732 GB/s, BD/PAIR 22.866 GB/s, time 7.337e-02 s, time/iter 7.337e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 46.532 GB/s, BD/PAIR 23.266 GB/s, time 1.442e-01 s, time/iter 1.442e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 46.419 GB/s, BD/PAIR 23.21 GB/s, time 2.891e-01 s, time/iter 2.891e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 46.489 GB/s, BD/PAIR 23.244 GB/s, time 5.774e-01 s, time/iter 5.774e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 46.361 GB/s, BD/PAIR 23.181 GB/s, time 1.158e+00 s, time/iter 1.158e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 46.392 GB/s, BD/PAIR 23.196 GB/s, time 2.314e+00 s, time/iter 2.314e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 46.281 GB/s, BD/PAIR 23.141 GB/s, time 4.640e+00 s, time/iter 4.640e-02, comm_vol 214.748 GB
+[[0, 8], [8, 0], [2, 10], [10, 2]]
+SIZE 8 KB, REAL_BD 698.617 MB/s, BD/PAIR 174.654 MB/s, time 4.690e-03 s, time/iter 4.690e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 1.28 GB/s, BD/PAIR 319.893 MB/s, time 5.122e-03 s, time/iter 5.122e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 2.415 GB/s, BD/PAIR 603.809 MB/s, time 5.427e-03 s, time/iter 5.427e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 3.838 GB/s, BD/PAIR 959.468 MB/s, time 6.830e-03 s, time/iter 6.830e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 6.835 GB/s, BD/PAIR 1.709 GB/s, time 7.670e-03 s, time/iter 7.670e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 8.735 GB/s, BD/PAIR 2.184 GB/s, time 1.200e-02 s, time/iter 1.200e-04, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 18.773 GB/s, BD/PAIR 4.693 GB/s, time 1.117e-02 s, time/iter 1.117e-04, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 25.886 GB/s, BD/PAIR 6.471 GB/s, time 1.620e-02 s, time/iter 1.620e-04, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 35.059 GB/s, BD/PAIR 8.765 GB/s, time 2.393e-02 s, time/iter 2.393e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 36.328 GB/s, BD/PAIR 9.082 GB/s, time 4.618e-02 s, time/iter 4.618e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 43.428 GB/s, BD/PAIR 10.857 GB/s, time 7.727e-02 s, time/iter 7.727e-04, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 45.151 GB/s, BD/PAIR 11.288 GB/s, time 1.486e-01 s, time/iter 1.486e-03, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 46.081 GB/s, BD/PAIR 11.52 GB/s, time 2.913e-01 s, time/iter 2.913e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 46.582 GB/s, BD/PAIR 11.646 GB/s, time 5.763e-01 s, time/iter 5.763e-03, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 46.83 GB/s, BD/PAIR 11.708 GB/s, time 1.146e+00 s, time/iter 1.146e-02, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 46.894 GB/s, BD/PAIR 11.724 GB/s, time 2.290e+00 s, time/iter 2.290e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 46.806 GB/s, BD/PAIR 11.702 GB/s, time 4.588e+00 s, time/iter 4.588e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 46.762 GB/s, BD/PAIR 11.69 GB/s, time 9.185e+00 s, time/iter 9.185e-02, comm_vol 429.497 GB
+[[0, 8], [4, 12]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 992.053 MB/s, BD/PAIR 496.026 MB/s, time 1.652e-03 s, time/iter 1.652e-05, comm_vol 1.638 MB
+SIZE 16 KB, REAL_BD 1.794 GB/s, BD/PAIR 896.887 MB/s, time 1.827e-03 s, time/iter 1.827e-05, comm_vol 3.277 MB
+SIZE 32 KB, REAL_BD 3.383 GB/s, BD/PAIR 1.691 GB/s, time 1.937e-03 s, time/iter 1.937e-05, comm_vol 6.554 MB
+SIZE 64 KB, REAL_BD 5.029 GB/s, BD/PAIR 2.514 GB/s, time 2.606e-03 s, time/iter 2.606e-05, comm_vol 13.107 MB
+SIZE 128 KB, REAL_BD 8.915 GB/s, BD/PAIR 4.458 GB/s, time 2.940e-03 s, time/iter 2.940e-05, comm_vol 26.214 MB
+SIZE 256 KB, REAL_BD 17.23 GB/s, BD/PAIR 8.615 GB/s, time 3.043e-03 s, time/iter 3.043e-05, comm_vol 52.429 MB
+SIZE 512 KB, REAL_BD 23.973 GB/s, BD/PAIR 11.986 GB/s, time 4.374e-03 s, time/iter 4.374e-05, comm_vol 104.858 MB
+SIZE 1 MB, REAL_BD 28.527 GB/s, BD/PAIR 14.264 GB/s, time 7.351e-03 s, time/iter 7.351e-05, comm_vol 209.715 MB
+SIZE 2 MB, REAL_BD 40.54 GB/s, BD/PAIR 20.27 GB/s, time 1.035e-02 s, time/iter 1.035e-04, comm_vol 419.43 MB
+SIZE 4 MB, REAL_BD 43.364 GB/s, BD/PAIR 21.682 GB/s, time 1.934e-02 s, time/iter 1.934e-04, comm_vol 838.861 MB
+SIZE 8 MB, REAL_BD 42.713 GB/s, BD/PAIR 21.356 GB/s, time 3.928e-02 s, time/iter 3.928e-04, comm_vol 1.678 GB
+SIZE 16 MB, REAL_BD 45.712 GB/s, BD/PAIR 22.856 GB/s, time 7.340e-02 s, time/iter 7.340e-04, comm_vol 3.355 GB
+SIZE 32 MB, REAL_BD 46.299 GB/s, BD/PAIR 23.15 GB/s, time 1.449e-01 s, time/iter 1.449e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 46.446 GB/s, BD/PAIR 23.223 GB/s, time 2.890e-01 s, time/iter 2.890e-03, comm_vol 13.422 GB
+SIZE 128 MB, REAL_BD 46.408 GB/s, BD/PAIR 23.204 GB/s, time 5.784e-01 s, time/iter 5.784e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 46.266 GB/s, BD/PAIR 23.133 GB/s, time 1.160e+00 s, time/iter 1.160e-02, comm_vol 53.687 GB
+SIZE 512 MB, REAL_BD 46.293 GB/s, BD/PAIR 23.147 GB/s, time 2.319e+00 s, time/iter 2.319e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 46.263 GB/s, BD/PAIR 23.132 GB/s, time 4.642e+00 s, time/iter 4.642e-02, comm_vol 214.748 GB
+[[0, 8], [8, 0], [4, 12], [12, 4]]
+SIZE 8 KB, REAL_BD 658.706 MB/s, BD/PAIR 164.676 MB/s, time 4.975e-03 s, time/iter 4.975e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 1.187 GB/s, BD/PAIR 296.819 MB/s, time 5.520e-03 s, time/iter 5.520e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 2.27 GB/s, BD/PAIR 567.461 MB/s, time 5.774e-03 s, time/iter 5.774e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 3.639 GB/s, BD/PAIR 909.77 MB/s, time 7.204e-03 s, time/iter 7.204e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 6.553 GB/s, BD/PAIR 1.638 GB/s, time 8.000e-03 s, time/iter 8.000e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 12.231 GB/s, BD/PAIR 3.058 GB/s, time 8.573e-03 s, time/iter 8.573e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 18.709 GB/s, BD/PAIR 4.677 GB/s, time 1.121e-02 s, time/iter 1.121e-04, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 25.33 GB/s, BD/PAIR 6.332 GB/s, time 1.656e-02 s, time/iter 1.656e-04, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 34.843 GB/s, BD/PAIR 8.711 GB/s, time 2.408e-02 s, time/iter 2.408e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 40.061 GB/s, BD/PAIR 10.015 GB/s, time 4.188e-02 s, time/iter 4.188e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 43.208 GB/s, BD/PAIR 10.802 GB/s, time 7.766e-02 s, time/iter 7.766e-04, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 44.924 GB/s, BD/PAIR 11.231 GB/s, time 1.494e-01 s, time/iter 1.494e-03, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 45.915 GB/s, BD/PAIR 11.479 GB/s, time 2.923e-01 s, time/iter 2.923e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 46.377 GB/s, BD/PAIR 11.594 GB/s, time 5.788e-01 s, time/iter 5.788e-03, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 46.561 GB/s, BD/PAIR 11.64 GB/s, time 1.153e+00 s, time/iter 1.153e-02, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 46.591 GB/s, BD/PAIR 11.648 GB/s, time 2.305e+00 s, time/iter 2.305e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 46.426 GB/s, BD/PAIR 11.606 GB/s, time 4.626e+00 s, time/iter 4.626e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 46.441 GB/s, BD/PAIR 11.61 GB/s, time 9.248e+00 s, time/iter 9.248e-02, comm_vol 429.497 GB
+[[0, 8], [2, 10], [4, 12], [6, 14]]
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 1.926 GB/s, BD/PAIR 481.566 MB/s, time 1.701e-03 s, time/iter 1.701e-05, comm_vol 3.277 MB
+SIZE 16 KB, REAL_BD 3.501 GB/s, BD/PAIR 875.296 MB/s, time 1.872e-03 s, time/iter 1.872e-05, comm_vol 6.554 MB
+SIZE 32 KB, REAL_BD 6.77 GB/s, BD/PAIR 1.693 GB/s, time 1.936e-03 s, time/iter 1.936e-05, comm_vol 13.107 MB
+SIZE 64 KB, REAL_BD 10.048 GB/s, BD/PAIR 2.512 GB/s, time 2.609e-03 s, time/iter 2.609e-05, comm_vol 26.214 MB
+SIZE 128 KB, REAL_BD 17.763 GB/s, BD/PAIR 4.441 GB/s, time 2.952e-03 s, time/iter 2.952e-05, comm_vol 52.429 MB
+SIZE 256 KB, REAL_BD 34.285 GB/s, BD/PAIR 8.571 GB/s, time 3.058e-03 s, time/iter 3.058e-05, comm_vol 104.858 MB
+SIZE 512 KB, REAL_BD 33.774 GB/s, BD/PAIR 8.443 GB/s, time 6.209e-03 s, time/iter 6.209e-05, comm_vol 209.715 MB
+SIZE 1 MB, REAL_BD 58.617 GB/s, BD/PAIR 14.654 GB/s, time 7.155e-03 s, time/iter 7.155e-05, comm_vol 419.43 MB
+SIZE 2 MB, REAL_BD 81.033 GB/s, BD/PAIR 20.258 GB/s, time 1.035e-02 s, time/iter 1.035e-04, comm_vol 838.861 MB
+SIZE 4 MB, REAL_BD 87.356 GB/s, BD/PAIR 21.839 GB/s, time 1.921e-02 s, time/iter 1.921e-04, comm_vol 1.678 GB
+SIZE 8 MB, REAL_BD 90.759 GB/s, BD/PAIR 22.69 GB/s, time 3.697e-02 s, time/iter 3.697e-04, comm_vol 3.355 GB
+SIZE 16 MB, REAL_BD 92.613 GB/s, BD/PAIR 23.153 GB/s, time 7.246e-02 s, time/iter 7.246e-04, comm_vol 6.711 GB
+SIZE 32 MB, REAL_BD 93.492 GB/s, BD/PAIR 23.373 GB/s, time 1.436e-01 s, time/iter 1.436e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 93.874 GB/s, BD/PAIR 23.468 GB/s, time 2.860e-01 s, time/iter 2.860e-03, comm_vol 26.844 GB
+SIZE 128 MB, REAL_BD 94.097 GB/s, BD/PAIR 23.524 GB/s, time 5.706e-01 s, time/iter 5.706e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 94.077 GB/s, BD/PAIR 23.519 GB/s, time 1.141e+00 s, time/iter 1.141e-02, comm_vol 107.374 GB
+SIZE 512 MB, REAL_BD 94.079 GB/s, BD/PAIR 23.52 GB/s, time 2.283e+00 s, time/iter 2.283e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 94.149 GB/s, BD/PAIR 23.537 GB/s, time 4.562e+00 s, time/iter 4.562e-02, comm_vol 429.497 GB
+[[0, 8], [8, 0], [2, 10], [10, 2], [4, 12], [12, 4], [6, 14], [14, 6]]
+SIZE 8 KB, REAL_BD 1.287 GB/s, BD/PAIR 160.823 MB/s, time 5.094e-03 s, time/iter 5.094e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 2.019 GB/s, BD/PAIR 252.339 MB/s, time 6.493e-03 s, time/iter 6.493e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 4.464 GB/s, BD/PAIR 558.014 MB/s, time 5.872e-03 s, time/iter 5.872e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 7.257 GB/s, BD/PAIR 907.158 MB/s, time 7.224e-03 s, time/iter 7.224e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 7.968 GB/s, BD/PAIR 995.989 MB/s, time 1.316e-02 s, time/iter 1.316e-04, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 20.125 GB/s, BD/PAIR 2.516 GB/s, time 1.042e-02 s, time/iter 1.042e-04, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 36.32 GB/s, BD/PAIR 4.54 GB/s, time 1.155e-02 s, time/iter 1.155e-04, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 50.947 GB/s, BD/PAIR 6.368 GB/s, time 1.647e-02 s, time/iter 1.647e-04, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 69.925 GB/s, BD/PAIR 8.741 GB/s, time 2.399e-02 s, time/iter 2.399e-04, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 80.318 GB/s, BD/PAIR 10.04 GB/s, time 4.178e-02 s, time/iter 4.178e-04, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 86.562 GB/s, BD/PAIR 10.82 GB/s, time 7.753e-02 s, time/iter 7.753e-04, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 90.107 GB/s, BD/PAIR 11.263 GB/s, time 1.490e-01 s, time/iter 1.490e-03, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 91.773 GB/s, BD/PAIR 11.472 GB/s, time 2.925e-01 s, time/iter 2.925e-03, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 92.713 GB/s, BD/PAIR 11.589 GB/s, time 5.791e-01 s, time/iter 5.791e-03, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 93.031 GB/s, BD/PAIR 11.629 GB/s, time 1.154e+00 s, time/iter 1.154e-02, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 93.115 GB/s, BD/PAIR 11.639 GB/s, time 2.306e+00 s, time/iter 2.306e-02, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 93.058 GB/s, BD/PAIR 11.632 GB/s, time 4.615e+00 s, time/iter 4.615e-02, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 93.108 GB/s, BD/PAIR 11.639 GB/s, time 9.226e+00 s, time/iter 9.226e-02, comm_vol 858.993 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15]]
+NCCL version 2.21.5+cuda12.4
+NCCL version 2.21.5+cuda12.4
+NCCL version 2.21.5+cuda12.4
+SIZE 8 KB, REAL_BD 2.21 GB/s, BD/PAIR 276.27 MB/s, time 2.965e-03 s, time/iter 2.965e-05, comm_vol 6.554 MB
+SIZE 16 KB, REAL_BD 4.54 GB/s, BD/PAIR 567.554 MB/s, time 2.887e-03 s, time/iter 2.887e-05, comm_vol 13.107 MB
+SIZE 32 KB, REAL_BD 9.026 GB/s, BD/PAIR 1.128 GB/s, time 2.904e-03 s, time/iter 2.904e-05, comm_vol 26.214 MB
+SIZE 64 KB, REAL_BD 18.879 GB/s, BD/PAIR 2.36 GB/s, time 2.777e-03 s, time/iter 2.777e-05, comm_vol 52.429 MB
+SIZE 128 KB, REAL_BD 35.145 GB/s, BD/PAIR 4.393 GB/s, time 2.984e-03 s, time/iter 2.984e-05, comm_vol 104.858 MB
+SIZE 256 KB, REAL_BD 67.678 GB/s, BD/PAIR 8.46 GB/s, time 3.099e-03 s, time/iter 3.099e-05, comm_vol 209.715 MB
+SIZE 512 KB, REAL_BD 93.765 GB/s, BD/PAIR 11.721 GB/s, time 4.473e-03 s, time/iter 4.473e-05, comm_vol 419.43 MB
+SIZE 1 MB, REAL_BD 113.74 GB/s, BD/PAIR 14.218 GB/s, time 7.375e-03 s, time/iter 7.375e-05, comm_vol 838.861 MB
+SIZE 2 MB, REAL_BD 162.316 GB/s, BD/PAIR 20.289 GB/s, time 1.034e-02 s, time/iter 1.034e-04, comm_vol 1.678 GB
+SIZE 4 MB, REAL_BD 155.48 GB/s, BD/PAIR 19.435 GB/s, time 2.158e-02 s, time/iter 2.158e-04, comm_vol 3.355 GB
+SIZE 8 MB, REAL_BD 184.832 GB/s, BD/PAIR 23.104 GB/s, time 3.631e-02 s, time/iter 3.631e-04, comm_vol 6.711 GB
+SIZE 16 MB, REAL_BD 189.016 GB/s, BD/PAIR 23.627 GB/s, time 7.101e-02 s, time/iter 7.101e-04, comm_vol 13.422 GB
+SIZE 32 MB, REAL_BD 191.004 GB/s, BD/PAIR 23.875 GB/s, time 1.405e-01 s, time/iter 1.405e-03, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 192.043 GB/s, BD/PAIR 24.005 GB/s, time 2.796e-01 s, time/iter 2.796e-03, comm_vol 53.687 GB
+SIZE 128 MB, REAL_BD 192.768 GB/s, BD/PAIR 24.096 GB/s, time 5.570e-01 s, time/iter 5.570e-03, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 192.886 GB/s, BD/PAIR 24.111 GB/s, time 1.113e+00 s, time/iter 1.113e-02, comm_vol 214.748 GB
+SIZE 512 MB, REAL_BD 193.082 GB/s, BD/PAIR 24.135 GB/s, time 2.224e+00 s, time/iter 2.224e-02, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 193.16 GB/s, BD/PAIR 24.145 GB/s, time 4.447e+00 s, time/iter 4.447e-02, comm_vol 858.993 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15], [8, 0], [9, 1], [10, 2], [11, 3], [12, 4], [13, 5], [14, 6], [15, 7]]
+SIZE 8 KB, REAL_BD 2.595 GB/s, BD/PAIR 162.174 MB/s, time 5.051e-03 s, time/iter 5.051e-05, comm_vol 13.107 MB
+SIZE 16 KB, REAL_BD 3.772 GB/s, BD/PAIR 235.761 MB/s, time 6.949e-03 s, time/iter 6.949e-05, comm_vol 26.214 MB
+SIZE 32 KB, REAL_BD 8.953 GB/s, BD/PAIR 559.537 MB/s, time 5.856e-03 s, time/iter 5.856e-05, comm_vol 52.429 MB
+SIZE 64 KB, REAL_BD 14.453 GB/s, BD/PAIR 903.342 MB/s, time 7.255e-03 s, time/iter 7.255e-05, comm_vol 104.858 MB
+SIZE 128 KB, REAL_BD 25.967 GB/s, BD/PAIR 1.623 GB/s, time 8.076e-03 s, time/iter 8.076e-05, comm_vol 209.715 MB
+SIZE 256 KB, REAL_BD 39.425 GB/s, BD/PAIR 2.464 GB/s, time 1.064e-02 s, time/iter 1.064e-04, comm_vol 419.43 MB
+SIZE 512 KB, REAL_BD 73.689 GB/s, BD/PAIR 4.606 GB/s, time 1.138e-02 s, time/iter 1.138e-04, comm_vol 838.861 MB
+SIZE 1 MB, REAL_BD 101.012 GB/s, BD/PAIR 6.313 GB/s, time 1.661e-02 s, time/iter 1.661e-04, comm_vol 1.678 GB
+SIZE 2 MB, REAL_BD 138.554 GB/s, BD/PAIR 8.66 GB/s, time 2.422e-02 s, time/iter 2.422e-04, comm_vol 3.355 GB
+SIZE 4 MB, REAL_BD 163.016 GB/s, BD/PAIR 10.189 GB/s, time 4.117e-02 s, time/iter 4.117e-04, comm_vol 6.711 GB
+SIZE 8 MB, REAL_BD 171.124 GB/s, BD/PAIR 10.695 GB/s, time 7.843e-02 s, time/iter 7.843e-04, comm_vol 13.422 GB
+SIZE 16 MB, REAL_BD 182.998 GB/s, BD/PAIR 11.437 GB/s, time 1.467e-01 s, time/iter 1.467e-03, comm_vol 26.844 GB
+SIZE 32 MB, REAL_BD 186.114 GB/s, BD/PAIR 11.632 GB/s, time 2.885e-01 s, time/iter 2.885e-03, comm_vol 53.687 GB
+SIZE 64 MB, REAL_BD 187.802 GB/s, BD/PAIR 11.738 GB/s, time 5.717e-01 s, time/iter 5.717e-03, comm_vol 107.374 GB
+SIZE 128 MB, REAL_BD 188.511 GB/s, BD/PAIR 11.782 GB/s, time 1.139e+00 s, time/iter 1.139e-02, comm_vol 214.748 GB
+SIZE 256 MB, REAL_BD 188.786 GB/s, BD/PAIR 11.799 GB/s, time 2.275e+00 s, time/iter 2.275e-02, comm_vol 429.497 GB
+SIZE 512 MB, REAL_BD 189.976 GB/s, BD/PAIR 11.873 GB/s, time 4.522e+00 s, time/iter 4.522e-02, comm_vol 858.993 GB
+SIZE 1 GB, REAL_BD 189.541 GB/s, BD/PAIR 11.846 GB/s, time 9.064e+00 s, time/iter 9.064e-02, comm_vol 1.718 TB
++ set +x
+./scripts/wrapper_conflict_bench.sh: line 286: Warning: command not found
+./scripts/wrapper_conflict_bench.sh: line 288: syntax error near unexpected token `done'
+./scripts/wrapper_conflict_bench.sh: line 288: `done'

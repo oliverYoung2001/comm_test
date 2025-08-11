@@ -1,0 +1,46 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc coll_comm_bench
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc coll_comm_bench.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o coll_comm_bench.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" coll_comm_bench.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/coll_comm_bench -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o utils.o coll_comm_bench.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+HOST: None
+NNODES: 2
+NGPU_PER_NODE: 8
++ GPU_NUM=8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -np 8 --host g4005:8 ./csrc/build/coll_comm_bench 8 NCCL
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[mngg001:1858605] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1858605] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Comm_Op: ag
+msg_size 16384.000000 KB, time 0.002433 s, tput 165.496582 GB/s, busbw 144.809509 GB/s
+msg_size 65536.000000 KB, time 0.016227 s, tput 99.255114 GB/s, busbw 86.848225 GB/s
+msg_size 262144.000000 KB, time 0.029078 s, tput 221.557567 GB/s, busbw 193.862871 GB/s
+Comm_Op: rs
+msg_size 16384.000000 KB, time 0.002425 s, tput 166.042550 GB/s, busbw 145.287231 GB/s
+msg_size 65536.000000 KB, time 0.008479 s, tput 189.953147 GB/s, busbw 166.209004 GB/s
+msg_size 262144.000000 KB, time 0.028657 s, tput 224.812470 GB/s, busbw 196.710911 GB/s
+Comm_Op: ar
+msg_size 16384.000000 KB, time 0.004337 s, tput 185.682815 GB/s, busbw 162.472463 GB/s
+msg_size 65536.000000 KB, time 0.014571 s, tput 221.070995 GB/s, busbw 193.437121 GB/s
+msg_size 262144.000000 KB, time 0.049372 s, tput 260.975895 GB/s, busbw 228.353908 GB/s

@@ -1,0 +1,92 @@
+HOST: g4004,g4006
+CP_FILE_NAME: small
+HOST: g4004,g4006
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 16
+PROC_NUM: 16
+NNODES: 2
+NTASK_PER_NODE: 8
++ srun -p hit -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g4004,g4006 -c 16 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_16.json
+NCCL version 2.18.6+cuda11.8
+[INFO]: Cluster init done !!!
+[[0, 1]]
+SIZE 16 MB, REAL_BD 102.414 GB/s, time 0.0016 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 207.44 GB/s, time 0.0032 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 239.773 GB/s, time 0.0112 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 255.095 GB/s, time 0.0421 s, comm_vol 10.737 GB
+[[0, 1], [1, 0]]
+SIZE 16 MB, REAL_BD 156.236 GB/s, time 0.0021 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 309.619 GB/s, time 0.0043 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 369.626 GB/s, time 0.0145 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 460.246 GB/s, time 0.0467 s, comm_vol 21.475 GB
+[[0, 8]]
+SIZE 16 MB, REAL_BD 22.088 GB/s, time 0.0076 s, comm_vol 167.772 MB
+SIZE 64 MB, REAL_BD 23.092 GB/s, time 0.0291 s, comm_vol 671.089 MB
+SIZE 256 MB, REAL_BD 22.643 GB/s, time 0.1186 s, comm_vol 2.684 GB
+SIZE 1 GB, REAL_BD 22.041 GB/s, time 0.4872 s, comm_vol 10.737 GB
+[[0, 8], [8, 0]]
+SIZE 16 MB, REAL_BD 37.958 GB/s, time 0.0088 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 40.282 GB/s, time 0.0333 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 40.75 GB/s, time 0.1317 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 40.923 GB/s, time 0.5248 s, comm_vol 21.475 GB
+[[0, 15], [15, 0]]
+SIZE 16 MB, REAL_BD 38.447 GB/s, time 0.0087 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 40.407 GB/s, time 0.0332 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 40.408 GB/s, time 0.1329 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 40.682 GB/s, time 0.5279 s, comm_vol 21.475 GB
+[[0, 8], [0, 15]]
+SIZE 16 MB, REAL_BD 23.491 GB/s, time 0.0143 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 24.285 GB/s, time 0.0553 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 24.274 GB/s, time 0.2212 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 24.256 GB/s, time 0.8854 s, comm_vol 21.475 GB
+[[0, 8], [0, 15], [8, 0], [15, 0]]
+SIZE 16 MB, REAL_BD 43.612 GB/s, time 0.0154 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 44.843 GB/s, time 0.0599 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 44.755 GB/s, time 0.2399 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 44.558 GB/s, time 0.9639 s, comm_vol 42.95 GB
+[[7, 8], [15, 0]]
+SIZE 16 MB, REAL_BD 39.691 GB/s, time 0.0085 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 41.107 GB/s, time 0.0327 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 41.735 GB/s, time 0.1286 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 41.122 GB/s, time 0.5222 s, comm_vol 21.475 GB
+[[0, 8], [2, 10]]
+SIZE 16 MB, REAL_BD 43.086 GB/s, time 0.0078 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 46.166 GB/s, time 0.0291 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 46.603 GB/s, time 0.1152 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 46.631 GB/s, time 0.4605 s, comm_vol 21.475 GB
+[[0, 8], [8, 0], [2, 10], [10, 2]]
+SIZE 16 MB, REAL_BD 75.493 GB/s, time 0.0089 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 80.826 GB/s, time 0.0332 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 81.894 GB/s, time 0.1311 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 82.258 GB/s, time 0.5221 s, comm_vol 42.95 GB
+[[0, 8], [4, 12]]
+SIZE 16 MB, REAL_BD 43.948 GB/s, time 0.0076 s, comm_vol 335.544 MB
+SIZE 64 MB, REAL_BD 46.032 GB/s, time 0.0292 s, comm_vol 1.342 GB
+SIZE 256 MB, REAL_BD 46.455 GB/s, time 0.1156 s, comm_vol 5.369 GB
+SIZE 1 GB, REAL_BD 46.555 GB/s, time 0.4613 s, comm_vol 21.475 GB
+[[0, 8], [8, 0], [4, 12], [12, 4]]
+SIZE 16 MB, REAL_BD 74.395 GB/s, time 0.009 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 80.198 GB/s, time 0.0335 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 81.522 GB/s, time 0.1317 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 81.63 GB/s, time 0.5261 s, comm_vol 42.95 GB
+[[0, 8], [2, 10], [4, 12], [6, 14]]
+SIZE 16 MB, REAL_BD 48.119 GB/s, time 0.0139 s, comm_vol 671.089 MB
+SIZE 64 MB, REAL_BD 48.951 GB/s, time 0.0548 s, comm_vol 2.684 GB
+SIZE 256 MB, REAL_BD 49.076 GB/s, time 0.2188 s, comm_vol 10.737 GB
+SIZE 1 GB, REAL_BD 49.119 GB/s, time 0.8744 s, comm_vol 42.95 GB
+[[0, 8], [8, 0], [2, 10], [10, 2], [4, 12], [12, 4], [6, 14], [14, 6]]
+SIZE 16 MB, REAL_BD 91.675 GB/s, time 0.0146 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 94.373 GB/s, time 0.0569 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 94.985 GB/s, time 0.2261 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 95.103 GB/s, time 0.9032 s, comm_vol 85.899 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15]]
+SIZE 16 MB, REAL_BD 48.811 GB/s, time 0.0275 s, comm_vol 1.342 GB
+SIZE 64 MB, REAL_BD 49.074 GB/s, time 0.1094 s, comm_vol 5.369 GB
+SIZE 256 MB, REAL_BD 49.109 GB/s, time 0.4373 s, comm_vol 21.475 GB
+SIZE 1 GB, REAL_BD 49.13 GB/s, time 1.7484 s, comm_vol 85.899 GB
+[[0, 8], [1, 9], [2, 10], [3, 11], [4, 12], [5, 13], [6, 14], [7, 15], [8, 0], [9, 1], [10, 2], [11, 3], [12, 4], [13, 5], [14, 6], [15, 7]]
+SIZE 16 MB, REAL_BD 95.994 GB/s, time 0.028 s, comm_vol 2.684 GB
+SIZE 64 MB, REAL_BD 97.199 GB/s, time 0.1105 s, comm_vol 10.737 GB
+SIZE 256 MB, REAL_BD 97.413 GB/s, time 0.4409 s, comm_vol 42.95 GB
+SIZE 1 GB, REAL_BD 97.326 GB/s, time 1.7652 s, comm_vol 171.799 GB
++ set +x

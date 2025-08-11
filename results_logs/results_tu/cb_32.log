@@ -1,0 +1,181 @@
+HOST: g3017
+CP_FILE_NAME: small
+HOST: g3017
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+COMM_MODULE: raw-nccl
+MASTER_ADDR: feng-wang-qcsleep2-worker-0
+MASTER_PORT: 10391
++ mpirun --allow-run-as-root --prefix /usr/local/bin/../ -x MASTER_ADDR -x MASTER_PORT -x LD_LIBRARY_PATH -x PATH -x TRACE_NAME -x NCCL_DEBUG -x NCCL_NET_GDR_LEVEL -x NCCL_DEBUG_SUBSYS -x NCCL_IB_DISABLE -x NCCL_SOCKET_IFNAME -x NCCL_IB_GID_INDEX --map-by ppr:4:numa --bind-to core --report-bindings -np 32 --host feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8,feng-wang-qcsleep2-worker-3:8 python conflict_bench.py --backend NCCL --config ./scripts/configs/small_32.json --comm-module raw-nccl
+NCCL version 2.18.1+cuda12.1
+[INFO]: Cluster init done !!!
+[[0, 8]]
+SIZE 16 MB, REAL_BD 22.774 GB/s, BD/PAIR 22.774 GB/s, time 7.367e-02 s, time/iter 7.367e-04, comm_vol 1.678 GB
+SIZE 64 MB, REAL_BD 22.807 GB/s, BD/PAIR 22.807 GB/s, time 2.942e-01 s, time/iter 2.942e-03, comm_vol 6.711 GB
+SIZE 256 MB, REAL_BD 22.837 GB/s, BD/PAIR 22.837 GB/s, time 1.175e+00 s, time/iter 1.175e-02, comm_vol 26.844 GB
+SIZE 1 GB, REAL_BD 22.947 GB/s, BD/PAIR 22.947 GB/s, time 4.679e+00 s, time/iter 4.679e-02, comm_vol 107.374 GB
+[[0, 8], [8, 16]]
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 41.522 GB/s, BD/PAIR 20.761 GB/s, time 8.081e-02 s, time/iter 8.081e-04, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 36.309 GB/s, BD/PAIR 18.154 GB/s, time 3.697e-01 s, time/iter 3.697e-03, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 36.749 GB/s, BD/PAIR 18.374 GB/s, time 1.461e+00 s, time/iter 1.461e-02, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 36.101 GB/s, BD/PAIR 18.05 GB/s, time 5.949e+00 s, time/iter 5.949e-02, comm_vol 214.748 GB
+[[0, 8], [8, 16], [16, 24]]
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 43.077 GB/s, BD/PAIR 14.359 GB/s, time 1.168e-01 s, time/iter 1.168e-03, comm_vol 5.033 GB
+SIZE 64 MB, REAL_BD 50.453 GB/s, BD/PAIR 16.818 GB/s, time 3.990e-01 s, time/iter 3.990e-03, comm_vol 20.133 GB
+SIZE 256 MB, REAL_BD 50.513 GB/s, BD/PAIR 16.838 GB/s, time 1.594e+00 s, time/iter 1.594e-02, comm_vol 80.531 GB
+SIZE 1 GB, REAL_BD 49.267 GB/s, BD/PAIR 16.422 GB/s, time 6.538e+00 s, time/iter 6.538e-02, comm_vol 322.123 GB
+[[0, 8], [8, 16], [16, 24], [24, 0]]
+SIZE 16 MB, REAL_BD 75.022 GB/s, BD/PAIR 18.755 GB/s, time 8.945e-02 s, time/iter 8.945e-04, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 64.295 GB/s, BD/PAIR 16.074 GB/s, time 4.175e-01 s, time/iter 4.175e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 58.306 GB/s, BD/PAIR 14.576 GB/s, time 1.842e+00 s, time/iter 1.842e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 60.479 GB/s, BD/PAIR 15.12 GB/s, time 7.102e+00 s, time/iter 7.102e-02, comm_vol 429.497 GB
+[[0, 8], [8, 16], [16, 24], [24, 0], [2, 10], [10, 18], [18, 26], [26, 2]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 106.369 GB/s, BD/PAIR 13.296 GB/s, time 1.262e-01 s, time/iter 1.262e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 114.46 GB/s, BD/PAIR 14.307 GB/s, time 4.690e-01 s, time/iter 4.690e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 110.682 GB/s, BD/PAIR 13.835 GB/s, time 1.940e+00 s, time/iter 1.940e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 118.947 GB/s, BD/PAIR 14.868 GB/s, time 7.222e+00 s, time/iter 7.222e-02, comm_vol 858.993 GB
+[[0, 8], [8, 16], [16, 24], [24, 0], [4, 12], [12, 20], [20, 28], [28, 4]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 95.421 GB/s, BD/PAIR 11.928 GB/s, time 1.407e-01 s, time/iter 1.407e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 120.077 GB/s, BD/PAIR 15.01 GB/s, time 4.471e-01 s, time/iter 4.471e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 115.46 GB/s, BD/PAIR 14.433 GB/s, time 1.860e+00 s, time/iter 1.860e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 112.01 GB/s, BD/PAIR 14.001 GB/s, time 7.669e+00 s, time/iter 7.669e-02, comm_vol 858.993 GB
+[[0, 8], [8, 16], [16, 24], [24, 0], [2, 10], [10, 18], [18, 26], [26, 0], [4, 12], [12, 20], [20, 28], [28, 4], [6, 14], [14, 22], [22, 30], [30, 6]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 152.539 GB/s, BD/PAIR 9.534 GB/s, time 1.760e-01 s, time/iter 1.760e-03, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 104.937 GB/s, BD/PAIR 6.559 GB/s, time 1.023e+00 s, time/iter 1.023e-02, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 123.905 GB/s, BD/PAIR 7.744 GB/s, time 3.466e+00 s, time/iter 3.466e-02, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 119.799 GB/s, BD/PAIR 7.487 GB/s, time 1.434e+01 s, time/iter 1.434e-01, comm_vol 1.718 TB
+[[0, 8], [8, 16], [16, 24], [24, 0], [2, 10], [10, 18], [18, 26], [26, 0], [4, 12], [12, 20], [20, 28], [28, 4], [6, 14], [14, 22], [22, 30], [30, 6], [1, 9], [9, 17], [17, 25], [25, 1], [3, 11], [11, 19], [19, 27], [27, 3], [5, 13], [13, 21], [21, 29], [29, 5], [7, 15], [15, 23], [23, 31], [31, 7]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 225.017 GB/s, BD/PAIR 7.032 GB/s, time 2.386e-01 s, time/iter 2.386e-03, comm_vol 53.687 GB
+SIZE 64 MB, REAL_BD 181.823 GB/s, BD/PAIR 5.682 GB/s, time 1.181e+00 s, time/iter 1.181e-02, comm_vol 214.748 GB
+SIZE 256 MB, REAL_BD 183.371 GB/s, BD/PAIR 5.73 GB/s, time 4.684e+00 s, time/iter 4.684e-02, comm_vol 858.993 GB
+SIZE 1 GB, REAL_BD 186.93 GB/s, BD/PAIR 5.842 GB/s, time 1.838e+01 s, time/iter 1.838e-01, comm_vol 3.436 TB
++ for COMM_MODULE in $COMM_MODULEs
++ echo 'COMM_MODULE: torch-distributed'
+COMM_MODULE: torch-distributed
++ GPU_NUM=32
++ HOST_CONFIG=g4005:8,g4006:8,g4007:8,g4008:8
++ HOST_CONFIG=g3021:8,g3022:8,g3023:8,g3024:8
++ HOST_CONFIG=g3011:8,g3017:8,g3018:8,g3022:8
++ GPU_NUM=2
++ HOST_CONFIG=g3017:2
++ ALLOW_ROOT=
++ GPU_NUM=8
++ HOST_CONFIG=10.21.74.94:8
++ HOST_CONFIG=10.21.77.110:8
++ HOST_CONFIG=feng-wang-qcsleep2-worker-0:8
++ GPU_NUM=32
++ HOST_CONFIG=feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8,feng-wang-qcsleep2-worker-3:8
++ ALLOW_ROOT=--allow-run-as-root
+++ echo feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8,feng-wang-qcsleep2-worker-3:8
+++ cut -d, -f1
+++ cut -d: -f1
++ export MASTER_ADDR=feng-wang-qcsleep2-worker-0
++ MASTER_ADDR=feng-wang-qcsleep2-worker-0
+++ echo feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8,feng-wang-qcsleep2-worker-3:8
+++ awk -F, '{print $1}'
+++ awk -F: '{print $1}'
++ export MASTER_ADDR=feng-wang-qcsleep2-worker-0
++ MASTER_ADDR=feng-wang-qcsleep2-worker-0
++ echo 'MASTER_ADDR: feng-wang-qcsleep2-worker-0'
+MASTER_ADDR: feng-wang-qcsleep2-worker-0
++ echo 'MASTER_PORT: 10391'
+MASTER_PORT: 10391
++++ which mpirun
+++ dirname /usr/local/bin/mpirun
++ RUNNER_CMD='mpirun --allow-run-as-root --prefix /usr/local/bin/../     -x MASTER_ADDR -x MASTER_PORT     -x LD_LIBRARY_PATH -x PATH     -x TRACE_NAME     -x NCCL_DEBUG     -x NCCL_NET_GDR_LEVEL     -x NCCL_DEBUG_SUBSYS     -x NCCL_IB_DISABLE     -x NCCL_SOCKET_IFNAME     -x NCCL_IB_GID_INDEX     --map-by ppr:4:numa --bind-to core --report-bindings     -np 32 --host feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8,feng-wang-qcsleep2-worker-3:8'
+++ date +%Y%m%d-%H%M%S
++ NSIGHT_CMD='nsys profile --mpi-impl=openmpi -o /qy_small_w32_20240914-190839'
++ NSIGHT_CMD=
++ set -x
++ mpirun --allow-run-as-root --prefix /usr/local/bin/../ -x MASTER_ADDR -x MASTER_PORT -x LD_LIBRARY_PATH -x PATH -x TRACE_NAME -x NCCL_DEBUG -x NCCL_NET_GDR_LEVEL -x NCCL_DEBUG_SUBSYS -x NCCL_IB_DISABLE -x NCCL_SOCKET_IFNAME -x NCCL_IB_GID_INDEX --map-by ppr:4:numa --bind-to core --report-bindings -np 32 --host feng-wang-qcsleep2-worker-0:8,feng-wang-qcsleep2-worker-1:8,feng-wang-qcsleep2-worker-2:8,feng-wang-qcsleep2-worker-3:8 python conflict_bench.py --backend NCCL --config ./scripts/configs/small_32.json --comm-module torch-distributed
+NCCL version 2.18.1+cuda12.1
+[INFO]: Cluster init done !!!
+[[0, 8]]
+SIZE 16 MB, REAL_BD 21.5 GB/s, BD/PAIR 21.5 GB/s, time 7.803e-02 s, time/iter 7.803e-04, comm_vol 1.678 GB
+SIZE 64 MB, REAL_BD 20.842 GB/s, BD/PAIR 20.842 GB/s, time 3.220e-01 s, time/iter 3.220e-03, comm_vol 6.711 GB
+SIZE 256 MB, REAL_BD 22.141 GB/s, BD/PAIR 22.141 GB/s, time 1.212e+00 s, time/iter 1.212e-02, comm_vol 26.844 GB
+SIZE 1 GB, REAL_BD 22.498 GB/s, BD/PAIR 22.498 GB/s, time 4.773e+00 s, time/iter 4.773e-02, comm_vol 107.374 GB
+[[0, 8], [8, 16]]
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 40.83 GB/s, BD/PAIR 20.415 GB/s, time 8.218e-02 s, time/iter 8.218e-04, comm_vol 3.355 GB
+SIZE 64 MB, REAL_BD 36.625 GB/s, BD/PAIR 18.312 GB/s, time 3.665e-01 s, time/iter 3.665e-03, comm_vol 13.422 GB
+SIZE 256 MB, REAL_BD 31.181 GB/s, BD/PAIR 15.591 GB/s, time 1.722e+00 s, time/iter 1.722e-02, comm_vol 53.687 GB
+SIZE 1 GB, REAL_BD 30.76 GB/s, BD/PAIR 15.38 GB/s, time 6.981e+00 s, time/iter 6.981e-02, comm_vol 214.748 GB
+[[0, 8], [8, 16], [16, 24]]
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 29.968 GB/s, BD/PAIR 9.989 GB/s, time 1.679e-01 s, time/iter 1.679e-03, comm_vol 5.033 GB
+SIZE 64 MB, REAL_BD 27.984 GB/s, BD/PAIR 9.328 GB/s, time 7.194e-01 s, time/iter 7.194e-03, comm_vol 20.133 GB
+SIZE 256 MB, REAL_BD 37.265 GB/s, BD/PAIR 12.422 GB/s, time 2.161e+00 s, time/iter 2.161e-02, comm_vol 80.531 GB
+SIZE 1 GB, REAL_BD 37.579 GB/s, BD/PAIR 12.526 GB/s, time 8.572e+00 s, time/iter 8.572e-02, comm_vol 322.123 GB
+[[0, 8], [8, 16], [16, 24], [24, 0]]
+SIZE 16 MB, REAL_BD 45.495 GB/s, BD/PAIR 11.374 GB/s, time 1.475e-01 s, time/iter 1.475e-03, comm_vol 6.711 GB
+SIZE 64 MB, REAL_BD 34.721 GB/s, BD/PAIR 8.68 GB/s, time 7.731e-01 s, time/iter 7.731e-03, comm_vol 26.844 GB
+SIZE 256 MB, REAL_BD 35.318 GB/s, BD/PAIR 8.829 GB/s, time 3.040e+00 s, time/iter 3.040e-02, comm_vol 107.374 GB
+SIZE 1 GB, REAL_BD 41.49 GB/s, BD/PAIR 10.373 GB/s, time 1.035e+01 s, time/iter 1.035e-01, comm_vol 429.497 GB
+[[0, 8], [8, 16], [16, 24], [24, 0], [2, 10], [10, 18], [18, 26], [26, 2]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 62.474 GB/s, BD/PAIR 7.809 GB/s, time 2.148e-01 s, time/iter 2.148e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 68.795 GB/s, BD/PAIR 8.599 GB/s, time 7.804e-01 s, time/iter 7.804e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 78.874 GB/s, BD/PAIR 9.859 GB/s, time 2.723e+00 s, time/iter 2.723e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 82.98 GB/s, BD/PAIR 10.373 GB/s, time 1.035e+01 s, time/iter 1.035e-01, comm_vol 858.993 GB
+[[0, 8], [8, 16], [16, 24], [24, 0], [4, 12], [12, 20], [20, 28], [28, 4]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 65.23 GB/s, BD/PAIR 8.154 GB/s, time 2.058e-01 s, time/iter 2.058e-03, comm_vol 13.422 GB
+SIZE 64 MB, REAL_BD 84.427 GB/s, BD/PAIR 10.553 GB/s, time 6.359e-01 s, time/iter 6.359e-03, comm_vol 53.687 GB
+SIZE 256 MB, REAL_BD 72.482 GB/s, BD/PAIR 9.06 GB/s, time 2.963e+00 s, time/iter 2.963e-02, comm_vol 214.748 GB
+SIZE 1 GB, REAL_BD 80.861 GB/s, BD/PAIR 10.108 GB/s, time 1.062e+01 s, time/iter 1.062e-01, comm_vol 858.993 GB
+[[0, 8], [8, 16], [16, 24], [24, 0], [2, 10], [10, 18], [18, 26], [26, 0], [4, 12], [12, 20], [20, 28], [28, 4], [6, 14], [14, 22], [22, 30], [30, 6]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 60.652 GB/s, BD/PAIR 3.791 GB/s, time 4.426e-01 s, time/iter 4.426e-03, comm_vol 26.844 GB
+SIZE 64 MB, REAL_BD 93.495 GB/s, BD/PAIR 5.843 GB/s, time 1.148e+00 s, time/iter 1.148e-02, comm_vol 107.374 GB
+SIZE 256 MB, REAL_BD 110.843 GB/s, BD/PAIR 6.928 GB/s, time 3.875e+00 s, time/iter 3.875e-02, comm_vol 429.497 GB
+SIZE 1 GB, REAL_BD 127.733 GB/s, BD/PAIR 7.983 GB/s, time 1.345e+01 s, time/iter 1.345e-01, comm_vol 1.718 TB
+[[0, 8], [8, 16], [16, 24], [24, 0], [2, 10], [10, 18], [18, 26], [26, 0], [4, 12], [12, 20], [20, 28], [28, 4], [6, 14], [14, 22], [22, 30], [30, 6], [1, 9], [9, 17], [17, 25], [25, 1], [3, 11], [11, 19], [19, 27], [27, 3], [5, 13], [13, 21], [21, 29], [29, 5], [7, 15], [15, 23], [23, 31], [31, 7]]
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+NCCL version 2.18.1+cuda12.1
+SIZE 16 MB, REAL_BD 89.383 GB/s, BD/PAIR 2.793 GB/s, time 6.006e-01 s, time/iter 6.006e-03, comm_vol 53.687 GB
+SIZE 64 MB, REAL_BD 160.241 GB/s, BD/PAIR 5.008 GB/s, time 1.340e+00 s, time/iter 1.340e-02, comm_vol 214.748 GB
+SIZE 256 MB, REAL_BD 163.597 GB/s, BD/PAIR 5.112 GB/s, time 5.251e+00 s, time/iter 5.251e-02, comm_vol 858.993 GB
+SIZE 1 GB, REAL_BD 179.507 GB/s, BD/PAIR 5.61 GB/s, time 1.914e+01 s, time/iter 1.914e-01, comm_vol 3.436 TB

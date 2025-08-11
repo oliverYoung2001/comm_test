@@ -1,0 +1,381 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc coll_comm_bench
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc coll_comm_bench.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o coll_comm_bench.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" coll_comm_bench.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/coll_comm_bench -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o utils.o coll_comm_bench.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+HOST: g4002,g4003
+NNODES: 2
+NGPU_PER_NODE: 8
++ srun -p gpu4-low -N 2 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g4002,g4003 ./scripts/executor.sh ./csrc/build/coll_comm_bench 16 NCCL
+srun: job 22168 queued and waiting for resources
+srun: job 22168 has been allocated resources
+[g4003:2824389] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4003:2824393] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4003:2824392] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4003:2824390] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4003:2824395] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4003:2824388] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4003:2824394] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4003:2824391] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824390] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824392] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824393] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824394] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824395] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824388] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824389] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4003:2824391] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+[g4002:3387639] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4002:3387632] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4002:3387637] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4002:3387633] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4002:3387634] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4002:3387636] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4002:3387638] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+[g4002:3387635] OPAL ERROR: Unreachable in file pmix3x_client.c at line 111
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387632] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387633] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387634] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387635] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387636] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387637] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387638] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+--------------------------------------------------------------------------
+The application appears to have been direct launched using "srun",
+but OMPI was not built with SLURM's PMI support and therefore cannot
+execute. There are several options for building PMI support under
+SLURM, depending upon the SLURM version you are using:
+
+  version 16.05 or later: you can use SLURM's PMIx support. This
+  requires that you configure and build SLURM --with-pmix.
+
+  Versions earlier than 16.05: you must use either SLURM's PMI-1 or
+  PMI-2 support. SLURM builds PMI-1 by default, or you can manually
+  install PMI-2. You must then build Open MPI using --with-pmi pointing
+  to the SLURM PMI library location.
+
+Please configure as appropriate and try again.
+--------------------------------------------------------------------------
+*** An error occurred in MPI_Init
+*** on a NULL communicator
+*** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+***    and potentially your MPI job)
+[g4002:3387639] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+srun: error: g4003: tasks 8-15: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=22168.0
+slurmstepd: error: *** STEP 22168.0 ON g4002 CANCELLED AT 2024-05-08T15:56:36 ***
+srun: error: g4002: tasks 0-7: Exited with exit code 1

@@ -1,0 +1,14 @@
+HOST: g4002
+CP_FILE_NAME: small
+HOST: g4002
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
+COMM_MODULE: raw-nccl
++ srun -p hit -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g4002 -c 16 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_8.json --comm-module raw-nccl
+NCCL version 2.18.6+cuda11.8
+[INFO]: Cluster init done !!!
+[[0, 1]]
+NCCL version 2.21.5+cuda11.8

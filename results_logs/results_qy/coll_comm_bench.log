@@ -1,0 +1,140 @@
+PARTITION: gpu4-low
+HOST: g4004
+GPU_NUM: 2
+srun: job 8460 queued and waiting for resources
+srun: job 8460 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 1 MB, t_d: 0.0047 s, tput: 8.92 GB/s, busbw: 4.46 GB/s
+msg_size: 2 MB, t_d: 0.0047 s, tput: 17.9 GB/s, busbw: 8.95 GB/s
+msg_size: 4 MB, t_d: 0.0048 s, tput: 34.99 GB/s, busbw: 17.5 GB/s
+msg_size: 8 MB, t_d: 0.0056 s, tput: 59.67 GB/s, busbw: 29.84 GB/s
+msg_size: 16 MB, t_d: 0.0075 s, tput: 89.97 GB/s, busbw: 44.98 GB/s
+msg_size: 32 MB, t_d: 0.0106 s, tput: 126.62 GB/s, busbw: 63.31 GB/s
+msg_size: 64 MB, t_d: 0.0174 s, tput: 154.14 GB/s, busbw: 77.07 GB/s
+msg_size: 128 MB, t_d: 0.029 s, tput: 184.96 GB/s, busbw: 92.48 GB/s
+msg_size: 256 MB, t_d: 0.0519 s, tput: 207.08 GB/s, busbw: 103.54 GB/s
+msg_size: 512 MB, t_d: 0.1 s, tput: 214.83 GB/s, busbw: 107.41 GB/s
+msg_size: 1 GB, t_d: 0.1877 s, tput: 228.87 GB/s, busbw: 114.44 GB/s
+msg_size: 2 GB, t_d: 0.3675 s, tput: 233.75 GB/s, busbw: 116.88 GB/s
+msg_size: 4 GB, t_d: 0.7295 s, tput: 235.51 GB/s, busbw: 117.75 GB/s
+COLL_COMM: reducescatter
+msg_size: 1 MB, t_d: 0.0048 s, tput: 8.78 GB/s, busbw: 4.39 GB/s
+msg_size: 2 MB, t_d: 0.0048 s, tput: 17.41 GB/s, busbw: 8.7 GB/s
+msg_size: 4 MB, t_d: 0.005 s, tput: 33.53 GB/s, busbw: 16.76 GB/s
+msg_size: 8 MB, t_d: 0.0055 s, tput: 60.71 GB/s, busbw: 30.35 GB/s
+msg_size: 16 MB, t_d: 0.0071 s, tput: 94.61 GB/s, busbw: 47.3 GB/s
+msg_size: 32 MB, t_d: 0.0098 s, tput: 136.99 GB/s, busbw: 68.5 GB/s
+msg_size: 64 MB, t_d: 0.0158 s, tput: 170.38 GB/s, busbw: 85.19 GB/s
+msg_size: 128 MB, t_d: 0.027 s, tput: 199.03 GB/s, busbw: 99.51 GB/s
+msg_size: 256 MB, t_d: 0.0501 s, tput: 214.52 GB/s, busbw: 107.26 GB/s
+msg_size: 512 MB, t_d: 0.0943 s, tput: 227.65 GB/s, busbw: 113.82 GB/s
+msg_size: 1 GB, t_d: 0.1824 s, tput: 235.41 GB/s, busbw: 117.71 GB/s
+msg_size: 2 GB, t_d: 0.3549 s, tput: 242.03 GB/s, busbw: 121.01 GB/s
+msg_size: 4 GB, t_d: 0.7104 s, tput: 241.84 GB/s, busbw: 120.92 GB/s
+COLL_COMM: alltoall
+msg_size: 1 MB, t_d: 0.0034 s, tput: 6.11 GB/s, busbw: 3.05 GB/s
+msg_size: 2 MB, t_d: 0.0036 s, tput: 11.77 GB/s, busbw: 5.88 GB/s
+msg_size: 4 MB, t_d: 0.0036 s, tput: 23.52 GB/s, busbw: 11.76 GB/s
+msg_size: 8 MB, t_d: 0.0038 s, tput: 44.34 GB/s, busbw: 22.17 GB/s
+msg_size: 16 MB, t_d: 0.0045 s, tput: 74.53 GB/s, busbw: 37.26 GB/s
+msg_size: 32 MB, t_d: 0.0056 s, tput: 120.68 GB/s, busbw: 60.34 GB/s
+msg_size: 64 MB, t_d: 0.0075 s, tput: 180.05 GB/s, busbw: 90.03 GB/s
+msg_size: 128 MB, t_d: 0.0113 s, tput: 237.08 GB/s, busbw: 118.54 GB/s
+msg_size: 256 MB, t_d: 0.0189 s, tput: 283.52 GB/s, busbw: 141.76 GB/s
+msg_size: 512 MB, t_d: 0.0332 s, tput: 323.71 GB/s, busbw: 161.86 GB/s
+msg_size: 1 GB, t_d: 0.0561 s, tput: 382.48 GB/s, busbw: 191.24 GB/s
+msg_size: 2 GB, t_d: 0.108 s, tput: 397.55 GB/s, busbw: 198.78 GB/s
+msg_size: 4 GB, t_d: 0.2215 s, tput: 387.78 GB/s, busbw: 193.89 GB/s
+GPU_NUM: 4
+srun: job 8461 queued and waiting for resources
+srun: job 8461 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 1 MB, t_d: 0.0071 s, tput: 11.84 GB/s, busbw: 8.88 GB/s
+msg_size: 2 MB, t_d: 0.0054 s, tput: 30.93 GB/s, busbw: 23.2 GB/s
+msg_size: 4 MB, t_d: 0.0063 s, tput: 53.51 GB/s, busbw: 40.13 GB/s
+msg_size: 8 MB, t_d: 0.0082 s, tput: 81.67 GB/s, busbw: 61.25 GB/s
+msg_size: 16 MB, t_d: 0.0121 s, tput: 111.24 GB/s, busbw: 83.43 GB/s
+msg_size: 32 MB, t_d: 0.019 s, tput: 140.92 GB/s, busbw: 105.69 GB/s
+msg_size: 64 MB, t_d: 0.0326 s, tput: 164.76 GB/s, busbw: 123.57 GB/s
+msg_size: 128 MB, t_d: 0.0591 s, tput: 181.58 GB/s, busbw: 136.19 GB/s
+msg_size: 256 MB, t_d: 0.1114 s, tput: 192.83 GB/s, busbw: 144.62 GB/s
+msg_size: 512 MB, t_d: 0.2147 s, tput: 200.01 GB/s, busbw: 150.01 GB/s
+msg_size: 1 GB, t_d: 0.4189 s, tput: 205.08 GB/s, busbw: 153.81 GB/s
+msg_size: 2 GB, t_d: 0.8296 s, tput: 207.09 GB/s, busbw: 155.32 GB/s
+msg_size: 4 GB, t_d: 1.6421 s, tput: 209.25 GB/s, busbw: 156.93 GB/s
+COLL_COMM: reducescatter
+msg_size: 1 MB, t_d: 0.0127 s, tput: 6.61 GB/s, busbw: 4.96 GB/s
+msg_size: 2 MB, t_d: 0.0155 s, tput: 10.79 GB/s, busbw: 8.09 GB/s
+msg_size: 4 MB, t_d: 0.0076 s, tput: 44.3 GB/s, busbw: 33.22 GB/s
+msg_size: 8 MB, t_d: 0.008 s, tput: 83.94 GB/s, busbw: 62.95 GB/s
+msg_size: 16 MB, t_d: 0.0116 s, tput: 115.35 GB/s, busbw: 86.51 GB/s
+msg_size: 32 MB, t_d: 0.0192 s, tput: 139.53 GB/s, busbw: 104.65 GB/s
+msg_size: 64 MB, t_d: 0.0315 s, tput: 170.45 GB/s, busbw: 127.84 GB/s
+msg_size: 128 MB, t_d: 0.0573 s, tput: 187.44 GB/s, busbw: 140.58 GB/s
+msg_size: 256 MB, t_d: 0.1105 s, tput: 194.29 GB/s, busbw: 145.72 GB/s
+msg_size: 512 MB, t_d: 0.2108 s, tput: 203.76 GB/s, busbw: 152.82 GB/s
+msg_size: 1 GB, t_d: 0.4101 s, tput: 209.44 GB/s, busbw: 157.08 GB/s
+msg_size: 2 GB, t_d: 0.8054 s, tput: 213.3 GB/s, busbw: 159.97 GB/s
+msg_size: 4 GB, t_d: 1.5904 s, tput: 216.04 GB/s, busbw: 162.03 GB/s
+COLL_COMM: alltoall
+msg_size: 1 MB, t_d: 0.0113 s, tput: 1.86 GB/s, busbw: 1.4 GB/s
+msg_size: 2 MB, t_d: 0.0096 s, tput: 4.36 GB/s, busbw: 3.27 GB/s
+msg_size: 4 MB, t_d: 0.0073 s, tput: 11.48 GB/s, busbw: 8.61 GB/s
+msg_size: 8 MB, t_d: 0.0049 s, tput: 33.9 GB/s, busbw: 25.43 GB/s
+msg_size: 16 MB, t_d: 0.0053 s, tput: 63.2 GB/s, busbw: 47.4 GB/s
+msg_size: 32 MB, t_d: 0.0064 s, tput: 105.45 GB/s, busbw: 79.09 GB/s
+msg_size: 64 MB, t_d: 0.0089 s, tput: 150.19 GB/s, busbw: 112.64 GB/s
+msg_size: 128 MB, t_d: 0.0137 s, tput: 196.51 GB/s, busbw: 147.38 GB/s
+msg_size: 256 MB, t_d: 0.0232 s, tput: 231.31 GB/s, busbw: 173.48 GB/s
+msg_size: 512 MB, t_d: 0.0418 s, tput: 256.79 GB/s, busbw: 192.59 GB/s
+msg_size: 1 GB, t_d: 0.0773 s, tput: 277.68 GB/s, busbw: 208.26 GB/s
+msg_size: 2 GB, t_d: 0.1498 s, tput: 286.72 GB/s, busbw: 215.04 GB/s
+msg_size: 4 GB, t_d: 0.2945 s, tput: 291.69 GB/s, busbw: 218.76 GB/s
+GPU_NUM: 8
+srun: job 8462 queued and waiting for resources
+srun: job 8462 has been allocated resources
+[INFO]: Cluster init done !!!
+COLL_COMM: allgather
+msg_size: 1 MB, t_d: 0.0123 s, tput: 13.69 GB/s, busbw: 11.98 GB/s
+msg_size: 2 MB, t_d: 0.0092 s, tput: 36.53 GB/s, busbw: 31.96 GB/s
+msg_size: 4 MB, t_d: 0.0109 s, tput: 61.72 GB/s, busbw: 54.01 GB/s
+msg_size: 8 MB, t_d: 0.0132 s, tput: 101.79 GB/s, busbw: 89.07 GB/s
+msg_size: 16 MB, t_d: 0.0213 s, tput: 125.83 GB/s, busbw: 110.1 GB/s
+msg_size: 32 MB, t_d: 0.0356 s, tput: 150.8 GB/s, busbw: 131.95 GB/s
+msg_size: 64 MB, t_d: 0.0628 s, tput: 170.87 GB/s, busbw: 149.51 GB/s
+msg_size: 128 MB, t_d: 0.1177 s, tput: 182.45 GB/s, busbw: 159.64 GB/s
+msg_size: 256 MB, t_d: 0.2294 s, tput: 187.19 GB/s, busbw: 163.79 GB/s
+msg_size: 512 MB, t_d: 0.449 s, tput: 191.32 GB/s, busbw: 167.41 GB/s
+msg_size: 1 GB, t_d: 0.8859 s, tput: 193.92 GB/s, busbw: 169.68 GB/s
+msg_size: 2 GB, t_d: 1.7457 s, tput: 196.83 GB/s, busbw: 172.22 GB/s
+msg_size: 4 GB, t_d: 3.4697 s, tput: 198.06 GB/s, busbw: 173.3 GB/s
+COLL_COMM: reducescatter
+msg_size: 1 MB, t_d: 0.0161 s, tput: 10.41 GB/s, busbw: 9.11 GB/s
+msg_size: 2 MB, t_d: 0.0152 s, tput: 22.07 GB/s, busbw: 19.31 GB/s
+msg_size: 4 MB, t_d: 0.0199 s, tput: 33.66 GB/s, busbw: 29.46 GB/s
+msg_size: 8 MB, t_d: 0.0132 s, tput: 101.42 GB/s, busbw: 88.74 GB/s
+msg_size: 16 MB, t_d: 0.0204 s, tput: 131.68 GB/s, busbw: 115.22 GB/s
+msg_size: 32 MB, t_d: 0.0337 s, tput: 159.32 GB/s, busbw: 139.4 GB/s
+msg_size: 64 MB, t_d: 0.0624 s, tput: 172.1 GB/s, busbw: 150.59 GB/s
+msg_size: 128 MB, t_d: 0.1173 s, tput: 183.15 GB/s, busbw: 160.25 GB/s
+msg_size: 256 MB, t_d: 0.2288 s, tput: 187.75 GB/s, busbw: 164.28 GB/s
+msg_size: 512 MB, t_d: 0.4475 s, tput: 191.95 GB/s, busbw: 167.96 GB/s
+msg_size: 1 GB, t_d: 0.8781 s, tput: 195.64 GB/s, busbw: 171.19 GB/s
+msg_size: 2 GB, t_d: 1.7372 s, tput: 197.79 GB/s, busbw: 173.07 GB/s
+msg_size: 4 GB, t_d: 3.4599 s, tput: 198.62 GB/s, busbw: 173.79 GB/s
+COLL_COMM: alltoall
+msg_size: 1 MB, t_d: 0.0127 s, tput: 1.65 GB/s, busbw: 1.44 GB/s
+msg_size: 2 MB, t_d: 0.0134 s, tput: 3.14 GB/s, busbw: 2.75 GB/s
+msg_size: 4 MB, t_d: 0.0127 s, tput: 6.58 GB/s, busbw: 5.76 GB/s
+msg_size: 8 MB, t_d: 0.0132 s, tput: 12.74 GB/s, busbw: 11.14 GB/s
+msg_size: 16 MB, t_d: 0.0083 s, tput: 40.57 GB/s, busbw: 35.5 GB/s
+msg_size: 32 MB, t_d: 0.0074 s, tput: 90.38 GB/s, busbw: 79.08 GB/s
+msg_size: 64 MB, t_d: 0.0099 s, tput: 136.07 GB/s, busbw: 119.06 GB/s
+msg_size: 128 MB, t_d: 0.0153 s, tput: 176.02 GB/s, busbw: 154.02 GB/s
+msg_size: 256 MB, t_d: 0.0262 s, tput: 204.88 GB/s, busbw: 179.27 GB/s
+msg_size: 512 MB, t_d: 0.0476 s, tput: 225.47 GB/s, busbw: 197.28 GB/s
+msg_size: 1 GB, t_d: 0.0884 s, tput: 243.02 GB/s, busbw: 212.64 GB/s
+msg_size: 2 GB, t_d: 0.1722 s, tput: 249.45 GB/s, busbw: 218.27 GB/s
+msg_size: 4 GB, t_d: 0.3404 s, tput: 252.38 GB/s, busbw: 220.83 GB/s

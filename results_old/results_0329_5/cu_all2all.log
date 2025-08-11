@@ -1,8 +1,0 @@
-make -C csrc clean
-make[1]: Entering directory '/home/yhy/fold/comm_test/csrc'
-rm all2all_test
-rm `ls *.o | grep -v jsoncpp.o`
-make[1]: Leaving directory '/home/yhy/fold/comm_test/csrc'
-make -C csrc
-make[1]: Entering directory '/home/yhy/fold/comm_test/csrc'
-nvcc all2all_test.cu -std=c++11 -Xcompiler -fopenmp -I/home/yhy/.local/nccl/build/include -L/home/yhy/.local/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o all2all_test.o

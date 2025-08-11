@@ -1,0 +1,117 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o conflict_allinone.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o utils.o conflict_allinone.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: NCCL
+CP_FILE_NAME: small
+NNODES: 2
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi/bin/../ -x LD_LIBRARY_PATH -np 16 --host g4007:8,g4008:8 ./csrc/build/conflict_allinone 16 NCCL ./scripts/configs/small.json
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4007
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+rank: 15, local_rank: 7, comm_size: 16, tasks_per_node: 8
+rank: 8, local_rank: 0, comm_size: 16, tasks_per_node: 8
+rank: 13, local_rank: 5, comm_size: 16, tasks_per_node: 8
+rank: 9, local_rank: 1, comm_size: 16, tasks_per_node: 8
+rank: 10, local_rank: 2, comm_size: 16, tasks_per_node: 8
+rank: 11, local_rank: 3, comm_size: 16, tasks_per_node: 8
+rank: 12, local_rank: 4, comm_size: 16, tasks_per_node: 8
+rank: 14, local_rank: 6, comm_size: 16, tasks_per_node: 8
+rank: 2, local_rank: 2, comm_size: 16, tasks_per_node: 8
+rank: 6, local_rank: 6, comm_size: 16, tasks_per_node: 8
+rank: 0, local_rank: 0, comm_size: 16, tasks_per_node: 8
+rank: 1, local_rank: 1, comm_size: 16, tasks_per_node: 8
+rank: 3, local_rank: 3, comm_size: 16, tasks_per_node: 8
+rank: 4, local_rank: 4, comm_size: 16, tasks_per_node: 8
+rank: 5, local_rank: 5, comm_size: 16, tasks_per_node: 8
+rank: 7, local_rank: 7, comm_size: 16, tasks_per_node: 8
+[mngg001:3582471] 15 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:3582471] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[[0,1]]
+time 0.000318 s, REAL_BD 9.212854 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.025365 s, REAL_BD 14.784151 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.098328 s, REAL_BD 15.255065 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.339084 s, REAL_BD 17.694731 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,1],[1,0]]
+time 0.000353 s, REAL_BD 16.598796 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.034339 s, REAL_BD 21.841055 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.137084 s, REAL_BD 21.884392 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.547421 s, REAL_BD 21.920971 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8]]
+time 0.000495 s, REAL_BD 5.918561 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.042565 s, REAL_BD 8.810055 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.141099 s, REAL_BD 10.630834 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.563596 s, REAL_BD 10.645924 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,15]]
+time 0.000524 s, REAL_BD 5.591007 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.047033 s, REAL_BD 7.973125 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.141020 s, REAL_BD 10.636789 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.565589 s, REAL_BD 10.608410 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[[0,8],[8,0]]
+time 0.000649 s, REAL_BD 9.028313 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.062570 s, REAL_BD 11.986575 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.247978 s, REAL_BD 12.097847 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.992543 s, REAL_BD 12.090156 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,15],[15,0]]
+time 0.000668 s, REAL_BD 8.771519 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.068883 s, REAL_BD 10.888028 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.250134 s, REAL_BD 11.993571 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 1.002714 s, REAL_BD 11.967520 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15]]
+time 0.000566 s, REAL_BD 10.352253 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.048880 s, REAL_BD 15.343699 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.195227 s, REAL_BD 15.366727 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.788017 s, REAL_BD 15.228098 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[[0,8],[0,15],[8,0],[15,0]]
+time 0.001009 s, REAL_BD 11.614222 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.106989 s, REAL_BD 14.020133 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.426036 s, REAL_BD 14.083317 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.711830 s, REAL_BD 14.020084 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[[7,8],[15,0]]
+time 0.000489 s, REAL_BD 11.982362 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.038014 s, REAL_BD 19.729573 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.139123 s, REAL_BD 21.563652 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.557394 s, REAL_BD 21.528757 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+--------------------------------------------------------------------------
+mpirun has exited due to process rank 13 with PID 44624 on
+node g4008 exiting improperly. There are three reasons this could occur:
+
+1. this process did not call "init" before exiting, but others in
+the job did. This can cause a job to hang indefinitely while it waits
+for all processes to call "init". By rule, if one process calls "init",
+then ALL processes must call "init" prior to termination.
+
+2. this process called "init", but exited without calling "finalize".
+By rule, all processes that call "init" MUST call "finalize" prior to
+exiting or it will be considered an "abnormal termination"
+
+3. this process called "MPI_Abort" or "orte_abort" and the mca parameter
+orte_create_session_dirs is set to false. In this case, the run-time cannot
+detect that the abort call was an abnormal termination. Hence, the only
+error message you will receive is this one.
+
+This may have caused other processes in the application to be
+terminated by signals sent by mpirun (as reported here).
+
+You can avoid this message by specifying -quiet on the mpirun command line.
+--------------------------------------------------------------------------

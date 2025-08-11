@@ -1,7 +1,0 @@
-PARTITION: gpu4-low
-HOST: None
-GPU_NUM: 64
-MASTER_ADDR: g3021
-+++ which mpirun
-++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/mpirun
-+ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda-ucx-gdrcopy/bin/../ -x MASTER_ADDR -x MASTER_PORT -x PATH -x LD_LIBRARY_PATH -x NCCL_DEBUG -x NCCL_NET_GDR_LEVEL -x NCCL_DEBUG_SUBSYS -x NCCL_IB_DISABLE -np 32 --host g3021:8,g3022:8,g3023:8,g3024:8 --map-by ppr:4:numa --bind-to core --report-bindings python coll_comm_bench.py --output ./prof_data/coll_comm_bench_64_None.json

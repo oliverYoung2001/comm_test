@@ -1,0 +1,137 @@
+HOST: g3017
+CP_FILE_NAME: small
+HOST: g3017
+CUDA_VISIBLE_DEVICES: 
+GPU_NUM: 8
+PROC_NUM: 8
+NNODES: 1
+NTASK_PER_NODE: 8
++ srun -p rag -N 1 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3017 -c 16 ./scripts/executor.sh python conflict_bench.py --backend UCC --config ./scripts/configs/small_8.json
+srun: job 2983 queued and waiting for resources
+srun: job 2983 has been allocated resources
+cpu-bind=MASK - g3017, task  0  0 [2799262]: mask 0xff00000000000000ff set
+cpu-bind=MASK - g3017, task  1  1 [2799263]: mask 0xff00000000000000ff00000000 set
+cpu-bind=MASK - g3017, task  2  2 [2799264]: mask 0xff00000000000000ff00 set
+cpu-bind=MASK - g3017, task  3  3 [2799265]: mask 0xff00000000000000ff0000000000 set
+cpu-bind=MASK - g3017, task  4  4 [2799266]: mask 0xff00000000000000ff0000 set
+cpu-bind=MASK - g3017, task  5  5 [2799267]: mask 0xff00000000000000ff000000000000 set
+cpu-bind=MASK - g3017, task  6  6 [2799268]: mask 0xff00000000000000ff000000 set
+cpu-bind=MASK - g3017, task  7  7 [2799269]: mask 0xff00000000000000ff00000000000000 set
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+Traceback (most recent call last):
+  File "conflict_bench.py", line 195, in <module>
+    main()
+  File "conflict_bench.py", line 97, in main
+    init_cluster(PROC_INFO, MASTER_ADDR, MASTER_PORT, backend=args.backend)
+  File "/home/zhaijidong/yhy/llm/comm_test/utils/common.py", line 109, in init_cluster
+    dist.init_process_group(backend=backend, init_method=init_method, world_size=PROC_INFO['world_size'], 
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/c10d_logger.py", line 74, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1148, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/zhaijidong/.local/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1289, in _new_process_group_helper
+    assert backend_str.upper() in Backend._plugins, (
+AssertionError: Unknown c10d backend type UCC
+srun: error: g3017: task 6: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=2983.0
+slurmstepd: error: *** STEP 2983.0 ON g3017 CANCELLED AT 2024-06-17T23:19:07 ***
+srun: error: g3017: tasks 0-5,7: Terminated
+srun: Force Terminated StepId=2983.0
++ set +x

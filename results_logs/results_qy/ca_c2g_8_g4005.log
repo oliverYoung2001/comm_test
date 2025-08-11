@@ -1,0 +1,179 @@
+make -C csrc clean
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+rm -f `ls *.o | grep -v jsoncpp.o`
+ls: cannot access '*.o': No such file or directory
+rm -f all2all_test net_test net_test_cuda conflict_test_cuda net_test_mpi conflict_allinone net_test_cpu nccl_test cpu2gpu \
+   benchmark_p2p ring_patterns all2all_baseline single_turn mixed_p2p netflow all2allv_MPI all2allv_allinone
+rm -rf build
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+make -C csrc conflict_allinone_c2g
+make[1]: Entering directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+nvcc conflict_allinone_c2g.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o conflict_allinone_c2g.o
+nvcc comm.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o comm.o
+gcc jsoncpp.cpp -std=c++11 -c -o jsoncpp.o
+nvcc utils.cu -std=c++11 -Xcompiler -fopenmp -I/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/include -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib/ "-gencode=arch=compute_80,code=sm_80" -lnccl -lcudart -c -o utils.o
+mkdir -p build
+"`which mpicxx`" conflict_allinone_c2g.o comm.o jsoncpp.o utils.o -no-pie -std=c++11 -fopenmp -L/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib -L/data/apps/tools/spack/opt/spack/linux-ubuntu20.04-icelake/gcc-9.4.0/cuda-11.8.0-rqw2h4odyk5x2hyrawxblsmj5yxmka6e/bin/../lib64 -lcudart -lnccl -Wall -o build/conflict_allinone_c2g -Wl,-rpath=/home/zhaijidong/yhy/llm/comm_test/third_party/nccl/build/lib
+rm jsoncpp.o comm.o conflict_allinone_c2g.o utils.o
+make[1]: Leaving directory '/home/zhaijidong/yhy/llm/comm_test/csrc'
+BACKEND: MPI
+CP_FILE_NAME: c2g
+DIR_MODE: 0
+NNODES: 1
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4005:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 0
+[g4005:07482] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07482] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07482] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07482] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07482] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07482] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07482] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07482] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[0]
+time 0.000503 s, REAL_BD 5.824428 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.040311 s, REAL_BD 9.302672 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.160141 s, REAL_BD 9.366746 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+[mngg001:1467369] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1467369] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 0.638310 s, REAL_BD 9.399821 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[0,1]
+time 0.000592 s, REAL_BD 9.897593 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.044568 s, REAL_BD 16.828218 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.160055 s, REAL_BD 18.743557 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.638728 s, REAL_BD 18.787340 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,4]
+time 0.000496 s, REAL_BD 11.813256 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.040095 s, REAL_BD 18.705574 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.159886 s, REAL_BD 18.763369 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.639728 s, REAL_BD 18.757972 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,1,2,3]
+time 0.000620 s, REAL_BD 18.901210 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.040704 s, REAL_BD 36.851415 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.160264 s, REAL_BD 37.438227 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.682659 s, REAL_BD 35.156645 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,2,4,6]
+time 0.000506 s, REAL_BD 23.159585 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.040109 s, REAL_BD 37.398090 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.159974 s, REAL_BD 37.506095 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.682738 s, REAL_BD 35.152577 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,1,2,3,4,5,6,7]
+time 0.000846 s, REAL_BD 27.703901 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.040534 s, REAL_BD 74.011941 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.161301 s, REAL_BD 74.395075 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.644122 s, REAL_BD 74.520044 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
++ set +x
+DIR_MODE: 1
+NNODES: 1
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4005:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 1
+[g4005:07652] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07652] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07652] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07652] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07652] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07652] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07652] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07652] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[0]
+time 0.000312 s, REAL_BD 9.390024 GB/s, SIZE 1024.000000 KB, comm_vol 3072.000000 KB
+time 0.018177 s, REAL_BD 20.630467 GB/s, SIZE 131072.000000 KB, comm_vol 393216.000000 KB
+time 0.071961 s, REAL_BD 20.844624 GB/s, SIZE 524288.000000 KB, comm_vol 1572864.000000 KB
+time 0.287083 s, REAL_BD 20.899879 GB/s, SIZE 2097152.000000 KB, comm_vol 6291456.000000 KB
+[0,1]
+time 0.003296 s, REAL_BD 1.777723 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.033157 s, REAL_BD 22.619658 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.131859 s, REAL_BD 22.751576 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+[mngg001:1469043] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1469043] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 0.527057 s, REAL_BD 22.767936 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,4]
+time 0.003298 s, REAL_BD 1.776645 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.018119 s, REAL_BD 41.393013 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.072058 s, REAL_BD 41.633129 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+time 0.287814 s, REAL_BD 41.693594 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,1,2,3]
+time 0.003301 s, REAL_BD 3.550061 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.033802 s, REAL_BD 44.376072 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.134966 s, REAL_BD 44.455641 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.539440 s, REAL_BD 44.490583 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,2,4,6]
+time 0.003297 s, REAL_BD 3.554368 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.018550 s, REAL_BD 80.862534 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.073610 s, REAL_BD 81.510664 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.294440 s, REAL_BD 81.510664 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,1,2,3,4,5,6,7]
+time 0.003295 s, REAL_BD 7.113050 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.034180 s, REAL_BD 87.770626 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.134684 s, REAL_BD 89.097443 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.539041 s, REAL_BD 89.047030 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
++ set +x
+DIR_MODE: 2
+NNODES: 1
+NGPU_PER_NODE: 8
++++ which mpirun
+++ dirname /home/zhaijidong/yhy/.local/openmpi-cuda/bin/mpirun
++ mpirun --prefix /home/zhaijidong/yhy/.local/openmpi-cuda/bin/../ -x LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -np 8 --host g4005:8 --map-by ppr:4:numa --bind-to core --report-bindings ./csrc/build/conflict_allinone_c2g 8 MPI ./scripts/configs/c2g_8.json 2
+[g4005:07831] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07831] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07831] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07831] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07831] MCW rank 4 bound to socket 1[core 32[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07831] MCW rank 5 bound to socket 1[core 33[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07831] MCW rank 6 bound to socket 1[core 34[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+[g4005:07831] MCW rank 7 bound to socket 1[core 35[hwt 0-1]]: [../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../..][../../../BB/../../../../../../../../../../../../../../../../../../../../../../../../../../../..]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   g4005
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+[0]
+time 0.000792 s, REAL_BD 7.398201 GB/s, SIZE 1024.000000 KB, comm_vol 6144.000000 KB
+time 0.058382 s, REAL_BD 12.846425 GB/s, SIZE 131072.000000 KB, comm_vol 786432.000000 KB
+time 0.232380 s, REAL_BD 12.909889 GB/s, SIZE 524288.000000 KB, comm_vol 3145728.000000 KB
+[mngg001:1471800] 7 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[mngg001:1471800] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+time 0.973099 s, REAL_BD 12.331736 GB/s, SIZE 2097152.000000 KB, comm_vol 12582912.000000 KB
+[0,1]
+time 0.003292 s, REAL_BD 3.559766 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.073223 s, REAL_BD 20.485367 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.291776 s, REAL_BD 20.563720 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 1.183622 s, REAL_BD 20.276744 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,4]
+time 0.003300 s, REAL_BD 3.551136 GB/s, SIZE 1024.000000 KB, comm_vol 12288.000000 KB
+time 0.058239 s, REAL_BD 25.755937 GB/s, SIZE 131072.000000 KB, comm_vol 1572864.000000 KB
+time 0.231902 s, REAL_BD 25.872998 GB/s, SIZE 524288.000000 KB, comm_vol 6291456.000000 KB
+time 0.927571 s, REAL_BD 25.874030 GB/s, SIZE 2097152.000000 KB, comm_vol 25165824.000000 KB
+[0,1,2,3]
+time 0.003448 s, REAL_BD 6.797419 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.085087 s, REAL_BD 35.258030 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.294901 s, REAL_BD 40.691622 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 1.177820 s, REAL_BD 40.753256 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[0,2,4,6]
+time 0.003303 s, REAL_BD 7.095822 GB/s, SIZE 1024.000000 KB, comm_vol 24576.000000 KB
+time 0.058682 s, REAL_BD 51.123002 GB/s, SIZE 131072.000000 KB, comm_vol 3145728.000000 KB
+time 0.233754 s, REAL_BD 51.336020 GB/s, SIZE 524288.000000 KB, comm_vol 12582912.000000 KB
+time 0.969902 s, REAL_BD 49.489536 GB/s, SIZE 2097152.000000 KB, comm_vol 50331648.000000 KB
+[0,1,2,3,4,5,6,7]
+time 0.003852 s, REAL_BD 12.169003 GB/s, SIZE 1024.000000 KB, comm_vol 49152.000000 KB
+time 0.073815 s, REAL_BD 81.284292 GB/s, SIZE 131072.000000 KB, comm_vol 6291456.000000 KB
+time 0.295449 s, REAL_BD 81.232294 GB/s, SIZE 524288.000000 KB, comm_vol 25165824.000000 KB
+time 1.179567 s, REAL_BD 81.385797 GB/s, SIZE 2097152.000000 KB, comm_vol 100663296.000000 KB
++ set +x

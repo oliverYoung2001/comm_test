@@ -1,9 +1,0 @@
-HOST: g3023,g3024,g3025,g3026,g3027,g3028
-CP_FILE_NAME: small
-HOST: g3023,g3024,g3025,g3026,g3027,g3028
-CUDA_VISIBLE_DEVICES: 
-GPU_NUM: 48
-PROC_NUM: 48
-NNODES: 6
-NTASK_PER_NODE: 8
-+ srun -p arch -N 6 --ntasks-per-node 8 --gres=gpu:8 --mem 256G -K -w g3023,g3024,g3025,g3026,g3027,g3028 -c 16 ./scripts/executor.sh python conflict_bench.py --backend NCCL --config ./scripts/configs/small_48.json
