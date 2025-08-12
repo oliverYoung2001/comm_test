@@ -13,7 +13,7 @@ CP_FILE_NAMEs="small"
 # bx
 CLUSTER_NAME=bx
 GPU_NUMs="8"
-# GPU_NUMs="16"
+GPU_NUMs="16"
 # GPU_NUMs="24"
 # GPU_NUMs="32"
 # GPU_NUMs="48"
@@ -72,11 +72,11 @@ if [ "$HOST" != "None" ]; then
         -w $HOST \
     "
 fi
-if [ ! -z "$CPU_PER_TASK" ]; then
-    SLURM_ARGS="$SLURM_ARGS \
-        --cpus-per-task=$CPU_PER_TASK \
-    "
-fi
+# if [ ! -z "$CPU_PER_TASK" ]; then
+#     SLURM_ARGS="$SLURM_ARGS \
+#         --cpus-per-task=$CPU_PER_TASK \
+#     "
+# fi
 
 # # Run with Slurm
 # export SLURM_CPU_BIND=verbose

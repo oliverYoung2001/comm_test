@@ -40,7 +40,8 @@ fi
 # else
 #     export NVSHMEM_HCA_LIST=mlx5_0,mlx5_1,mlx5_3,mlx5_4
 # fi
-# export NCCL_IB_HCA=$NVSHMEM_HCA_LIST
+export NVSHMEM_HCA_LIST="mlx5_0:1,mlx5_1:1,mlx5_2:1,mlx5_3:1,mlx5_4:1,mlx5_7:1,mlx5_8:1,mlx5_9:1"
+export NCCL_IB_HCA=$NVSHMEM_HCA_LIST
 
 # Bind core
 if [ "$LOCAL_RANK" -le 3 ]; then numa=0; else numa=1; fi
@@ -67,6 +68,6 @@ fi
 
 echo "LOCAL_RANK: $LOCAL_RANK, cpus: $cpus, numa: $numa $(cat /proc/self/status | grep Cpus_allowed_list)"
 
-# set -x
-numactl --physcpubind=$cpus --membind=$numa \
-$@
+# # set -x
+# numactl --physcpubind=$cpus --membind=$numa \
+# $@
