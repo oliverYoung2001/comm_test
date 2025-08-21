@@ -1,0 +1,53 @@
++ srun --mpi=pmi2 -p H100 -N 2 --ntasks-per-node=8 --gres=gpu:8 -K --cpu-bind=none --cpus-per-task=22 ./scripts/executor.sh ./third_party/nccl-tests/build/all_reduce_perf -b 8M -e 1G -f 2 -g 1
+HostName: g0275, LOCAL_RANK: 4, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0275, LOCAL_RANK: 6, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0275, LOCAL_RANK: 0, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+HostName: g0275, LOCAL_RANK: 5, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0275, LOCAL_RANK: 1, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+HostName: g0275, LOCAL_RANK: 2, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+HostName: g0275, LOCAL_RANK: 7, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0275, LOCAL_RANK: 3, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 4, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 7, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 5, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 3, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 2, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 6, cpus: 44-87,132-175, numa: 1 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 0, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+HostName: g0276, LOCAL_RANK: 1, cpus: 0-43,88-131, numa: 0 Cpus_allowed_list:	0-175
+# nThread 1 nGpus 1 minBytes 8388608 maxBytes 1073741824 step: 2(factor) warmup iters: 5 iters: 20 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 1045542 on      g0275 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 1045544 on      g0275 device  1 [0x3a] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 1045545 on      g0275 device  2 [0x4c] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 1045547 on      g0275 device  3 [0x5d] NVIDIA H100 80GB HBM3
+#  Rank  4 Group  0 Pid 1045536 on      g0275 device  4 [0x9a] NVIDIA H100 80GB HBM3
+#  Rank  5 Group  0 Pid 1045543 on      g0275 device  5 [0xba] NVIDIA H100 80GB HBM3
+#  Rank  6 Group  0 Pid 1045541 on      g0275 device  6 [0xcb] NVIDIA H100 80GB HBM3
+#  Rank  7 Group  0 Pid 1045546 on      g0275 device  7 [0xdb] NVIDIA H100 80GB HBM3
+#  Rank  8 Group  0 Pid 1928397 on      g0276 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  9 Group  0 Pid 1928396 on      g0276 device  1 [0x3a] NVIDIA H100 80GB HBM3
+#  Rank 10 Group  0 Pid 1928394 on      g0276 device  2 [0x4c] NVIDIA H100 80GB HBM3
+#  Rank 11 Group  0 Pid 1928393 on      g0276 device  3 [0x5d] NVIDIA H100 80GB HBM3
+#  Rank 12 Group  0 Pid 1928390 on      g0276 device  4 [0x9a] NVIDIA H100 80GB HBM3
+#  Rank 13 Group  0 Pid 1928392 on      g0276 device  5 [0xba] NVIDIA H100 80GB HBM3
+#  Rank 14 Group  0 Pid 1928395 on      g0276 device  6 [0xcb] NVIDIA H100 80GB HBM3
+#  Rank 15 Group  0 Pid 1928391 on      g0276 device  7 [0xdb] NVIDIA H100 80GB HBM3
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+     8388608       2097152     float     sum      -1    146.1   57.42  107.66      0    142.9   58.72  110.09      0
+    16777216       4194304     float     sum      -1    174.3   96.25  180.47      0    172.1   97.50  182.82      0
+    33554432       8388608     float     sum      -1    259.9  129.08  242.03      0    260.0  129.07  242.01      0
+    67108864      16777216     float     sum      -1    450.3  149.03  279.43      0    455.9  147.19  275.98      0
+   134217728      33554432     float     sum      -1    844.8  158.87  297.89      0    843.1  159.20  298.51      0
+   268435456      67108864     float     sum      -1   1554.0  172.74  323.89      0   1556.1  172.51  323.45      0
+   536870912     134217728     float     sum      -1   3041.1  176.54  331.01      0   3045.0  176.31  330.59      0
+  1073741824     268435456     float     sum      -1   6055.8  177.31  332.45      0   6068.0  176.95  331.78      0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 261.879 
+#
+
++ set +x

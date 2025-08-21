@@ -23,8 +23,8 @@ popd
 # build nccl-tests
 NCCL_TESTS_PATH=./third_party/nccl-tests
 pushd $NCCL_TESTS_PATH
-make -j NCCL_HOME=${ROOT_PATH}/third_party/nccl/build # CUDA_HOME=/path/to/cuda
-export LD_LIBRARY_PATH=${ROOT_PATH}/third_party/nccl/build/lib:$LD_LIBRARY_PATH
+make -j MPI=1 MPI_HOME=$(dirname `which mpicxx`)/.. NCCL_HOME=${ROOT_PATH}/third_party/nccl/build CUDA_HOME=$(dirname `which nvcc`)/..  # aim to find .so
+export LD_LIBRARY_PATH=${ROOT_PATH}/third_party/nccl/build/lib:$(dirname `which mpicxx`)/../lib:$(dirname `which nvcc`)/../targets/x86_64-linux/lib:$LD_LIBRARY_PATH
 popd
 
 # Q: how to build openmpi with cuda support? 

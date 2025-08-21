@@ -1,11 +1,11 @@
 #!/bin/bash
 
 PARTITION="H100"
-NNODES=2
+NNODES=${NNODES:-2}
 NPROC_PER_NODE=8
 GPUS_PER_NODE=8
-# CPUS=176
-# CPU_PER_TASK=$((CPUS / NPROC_PER_NODE ))   # [NOTE]: Unnecessary for performance.
+CPUS=176
+CPU_PER_TASK=$((CPUS / NPROC_PER_NODE ))   # [NOTE]: Unnecessary for performance.
 HOST=""
 # HOST="g[0290,0291]"
 
@@ -38,7 +38,7 @@ export NCCL_SOCKET_IFNAME=bond0
 export NCCL_NVLS_ENABLE=0
 # export NCCL_DEBUG=INFO
 
-RUNNER_CMD="srun $SLURM_ARGS"
+RUNNER_CMD="srun --mpi=pmi2 --exclude=g[0278,0297] $SLURM_ARGS"
 
 EXECUTABLE="./scripts/executor.sh \
     ./third_party/nccl-tests/build/all_reduce_perf -b 8M -e 1G -f 2 -g 1

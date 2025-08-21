@@ -16,5 +16,7 @@ spack load mpich@4.3.1
 #   NVSHMEM
 # spack install nvshmem@3.3.9 cuda_arch=90 ^mpich@4.3.1 ^cuda@12.8.1     # set `cuda_arch` is necesssary !!!
 spack load nvshmem@3.3.9
+#   numactl
+spack load numactl
 
 # GCC 12.3.0 (default)
