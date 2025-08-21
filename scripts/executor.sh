@@ -42,6 +42,7 @@ fi
 # fi
 export NVSHMEM_HCA_LIST="mlx5_0:1,mlx5_1:1,mlx5_2:1,mlx5_3:1,mlx5_4:1,mlx5_7:1,mlx5_8:1,mlx5_9:1"
 export NCCL_IB_HCA=$NVSHMEM_HCA_LIST
+export UCX_NET_DEVICES=$NVSHMEM_HCA_LIST
 
 # Bind core
 if [ "$LOCAL_RANK" -le 3 ]; then numa=0; else numa=1; fi

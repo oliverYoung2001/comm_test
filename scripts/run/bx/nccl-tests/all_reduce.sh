@@ -38,7 +38,9 @@ export NCCL_SOCKET_IFNAME=bond0
 export NCCL_NVLS_ENABLE=0
 # export NCCL_DEBUG=INFO
 
-RUNNER_CMD="srun --mpi=pmi2 --exclude=g[0278,0297] $SLURM_ARGS"
+RUNNER_CMD="srun --mpi=pmi2 --exclude=g[0278,0297,0292] \
+--export=ALL,OMPI_MCA_pml=ucx,OMPI_MCA_osc=ucx,OMPI_MCA_btl=\^openib \
+$SLURM_ARGS"
 
 EXECUTABLE="./scripts/executor.sh \
     ./third_party/nccl-tests/build/all_reduce_perf -b 8M -e 1G -f 2 -g 1
