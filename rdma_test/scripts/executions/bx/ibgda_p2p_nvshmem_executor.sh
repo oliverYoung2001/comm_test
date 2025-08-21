@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "NVSHMEM_IBGDA: $NVSHMEM_IBGDA"
+echo "UCX_RC_FC_WND: $UCX_RC_FC_WND"

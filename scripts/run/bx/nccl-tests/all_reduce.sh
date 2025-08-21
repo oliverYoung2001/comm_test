@@ -4,9 +4,10 @@ PARTITION="H100"
 NNODES=2
 NPROC_PER_NODE=8
 GPUS_PER_NODE=8
-CPUS=176
-CPU_PER_TASK=$((CPUS / NPROC_PER_NODE ))   # [NOTE]: Unnecessary for performance.
+# CPUS=176
+# CPU_PER_TASK=$((CPUS / NPROC_PER_NODE ))   # [NOTE]: Unnecessary for performance.
 HOST=""
+# HOST="g[0290,0291]"
 
 SLURM_ARGS="
 -p $PARTITION \
@@ -18,7 +19,7 @@ SLURM_ARGS="
 "
 # --exclusive \
 # --cpu-bind=none \
-if [ "$HOST" != "None" ]; then
+if [ ! -z "$HOST" ]; then
     SLURM_ARGS="$SLURM_ARGS \
         -w $HOST \
     "
@@ -35,11 +36,12 @@ export NCCL_IB_DISABLE=0
 export NCCL_IB_QPS_PER_CONNECTION=4
 export NCCL_SOCKET_IFNAME=bond0
 export NCCL_NVLS_ENABLE=0
+# export NCCL_DEBUG=INFO
 
 RUNNER_CMD="srun $SLURM_ARGS"
 
 EXECUTABLE="./scripts/executor.sh \
-    ./third_party/nccl-tests/build/all_reduce_perf -b 8 -e 16G -f 2 -g 1
+    ./third_party/nccl-tests/build/all_reduce_perf -b 8M -e 1G -f 2 -g 1
 "
 
 set -x

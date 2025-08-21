@@ -21,6 +21,30 @@ rdma_p2p_claude: build_dir
 topo_discover: build_dir
 	nvcc topo_discover.cpp -o build/topo_discover -libverbs -lrdmacm
 
+NVSHMEM_HOME ?= $(shell dirname $(shell which nvshmem-info))/..
+MPI_HOME ?= $(shell dirname $(shell which mpicxx))/..
+
+ibgda_p2p_nvshmem: build_dir
+	nvcc -O3 -std=c++17 -arch=sm_90 -rdc=true -ccbin=mpicxx \
+	-I"${NVSHMEM_HOME}/include" \
+	$@.cu \
+	-L"${NVSHMEM_HOME}/lib" -lnvshmem_host -lnvshmem_device \
+	-Xlinker -rpath -Xlinker "${NVSHMEM_HOME}/lib" \
+	-o build/$@
+
+shift_mpi: build_dir
+	nvcc -O3 -std=c++17 -arch=sm_90 -rdc=true -ccbin=mpicxx \
+	-I"${NVSHMEM_HOME}/include" \
+	$@.cu \
+	-L"${NVSHMEM_HOME}/lib" -lnvshmem_host -lnvshmem_device \
+	-Xlinker -rpath -Xlinker "${NVSHMEM_HOME}/lib" \
+	-o build/$@
+
+mpi_test: build_dir
+	nvcc -O3 -std=c++17 -arch=sm_90 -rdc=true -ccbin=mpicxx \
+	$@.cu \
+	-o build/$@
+
 %_clean:
 	rm -f $*.o
 	rm -f build/$*

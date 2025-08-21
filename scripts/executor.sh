@@ -66,8 +66,8 @@ fi
 # fi
 # Conclusion: Method1~3 are the same for performance.
 
-echo "LOCAL_RANK: $LOCAL_RANK, cpus: $cpus, numa: $numa $(cat /proc/self/status | grep Cpus_allowed_list)"
+echo "HostName: $(hostname), LOCAL_RANK: $LOCAL_RANK, cpus: $cpus, numa: $numa $(cat /proc/self/status | grep Cpus_allowed_list)"
 
 # # set -x
 # numactl --physcpubind=$cpus --membind=$numa \
-# $@
+$@

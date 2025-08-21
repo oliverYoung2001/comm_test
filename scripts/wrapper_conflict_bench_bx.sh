@@ -57,6 +57,9 @@ source ./scripts/task_configs/cb_${GPU_NUM}.sh
 
 # [TODO]: Check NUMA affinity
 
+#   --het-group=0 --nodes=1 --nodelist="${NODES[0]}" --ntasks-per-node=1 --cpus-per-task="$CPUS0" \
+# : --het-group=1 --nodes=1 --nodelist="${NODES[1]}" --ntasks-per-node=1 --cpus-per-task="$CPUS1" \
+
 SLURM_ARGS="
 -p $PARTITION \
 -N $NNODES \
@@ -72,11 +75,11 @@ if [ "$HOST" != "None" ]; then
         -w $HOST \
     "
 fi
-# if [ ! -z "$CPU_PER_TASK" ]; then
-#     SLURM_ARGS="$SLURM_ARGS \
-#         --cpus-per-task=$CPU_PER_TASK \
-#     "
-# fi
+if [ ! -z "$CPU_PER_TASK" ]; then
+    SLURM_ARGS="$SLURM_ARGS \
+        --cpus-per-task=$CPU_PER_TASK \
+    "
+fi
 
 # # Run with Slurm
 # export SLURM_CPU_BIND=verbose
